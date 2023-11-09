@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Services/text_editor_provider.dart';
 
 class terminalViewer extends StatefulWidget {
-  terminalViewer({
+  const terminalViewer({
     //required this.textList,
     super.key,
   });
