@@ -42,6 +42,13 @@ Widget terminalSide(BuildContext context) {
             },
           ),
           const Expanded(child: SizedBox()),
+          Text(
+            'Τερματικό Εκτός Λειτουργίας',
+            style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).colorScheme.onBackground),
+          ),
+          const Expanded(child: SizedBox()),
         ],
       ),
     );
