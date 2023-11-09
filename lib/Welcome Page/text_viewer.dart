@@ -22,14 +22,13 @@ class _terminalViewerState extends State<terminalViewer> {
           String textList = ref.watch(textProvider);
           return Column(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: <Widget>[
                     const Expanded(
                       child: Text('Περιεχόμενο Αρχείου TXT'),
                     ),
-                    //Delete, clear textlist provider
                     IconButton(
                       icon: const Icon(Icons.delete_outline),
                       onPressed: () =>
@@ -54,12 +53,10 @@ class _terminalViewerState extends State<terminalViewer> {
                   ),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Expanded(
-                  child: ListView(
-                    children: [
-                      Text(textList),
-                    ],
-                  ),
+                child: ListView(
+                  children: [
+                    Text(textList),
+                  ],
                 ),
               ),
             ],
