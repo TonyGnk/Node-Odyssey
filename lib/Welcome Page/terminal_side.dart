@@ -19,7 +19,7 @@ Widget terminalSide(BuildContext context) {
           const SizedBox(height: 20),
 
           //const Expanded(child: SizedBox()),
-          te,
+          //te,
           // ElevatedButton(
           //   onPressed: () => addText('Text2', ref),
           //   child: Text('Προσθήκη Νέου Κειμένου'),
