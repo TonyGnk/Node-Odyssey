@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:async';
 import '../../UI/screen/screen.dart';
 import '../../UI/screen/stab/stab.dart';
@@ -11,7 +13,7 @@ class BasicScreen extends StatelessWidget {
 
   @override
   RoutedScreen build(BuildContext context) => RoutedScreen(
-        mainChild: const SecondBasicScreen(),
+        mainChild: SecondBasicScreen(),
         label: 'Basic',
         appBar: Stab(true),
         filledIcon: Icons.calculate,
@@ -20,17 +22,22 @@ class BasicScreen extends StatelessWidget {
 }
 
 class SecondBasicScreen extends StatelessWidget {
-  const SecondBasicScreen({super.key});
+  SecondBasicScreen({super.key});
+
+  bool z = true;
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => showAlert(context, false));
+    z
+        ? Future.delayed(Duration.zero, () {
+            showAlert(context, true);
+            z = false;
+          })
+        : null;
     return Row(
       children: [
         Expanded(flex: 2, child: terminalSide(context)),
-        const Expanded(
-          child: ButtonsSide(),
-        )
+        const Expanded(child: ButtonsSide()),
       ],
     );
   }

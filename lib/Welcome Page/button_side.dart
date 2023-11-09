@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../UI/Components/Buttons/elevated_button.dart';
 import '../UI/Components/List Tiles/list_tile_modifier.dart';
+import '../UI/Routes/about_page.dart';
+import '../custom_list_tile.dart';
+import 'al1.dart';
 
 class ButtonsSide extends StatelessWidget {
   const ButtonsSide({super.key});
@@ -27,60 +30,116 @@ class ButtonsSide extends StatelessWidget {
           ],
         ),
       );
-}
 
 //Widget for the list buttons to go each algorithm screen
-Widget listButtons(BuildContext context) => Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(0),
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 245, 245, 255),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: Color.fromARGB(255, 220, 220, 255),
-          width: 1,
+  Widget listButtons(BuildContext context) => Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(0),
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 245, 245, 255),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: const Color.fromARGB(255, 220, 220, 255),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          ListTileModifier(
-            padding: const EdgeInsets.all(10),
-            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
-            onTap: () => log('h'),
-            cornerType: 'Top',
-            iconRight: const Icon(Icons.arrow_right),
-          ),
-          const Divider(
-            height: 1,
-            thickness: 1,
-          ),
-          ListTileModifier(
-            padding: const EdgeInsets.all(10),
-            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
-            onTap: () => log('h'),
-            cornerType: 'None',
-            iconRight: const Icon(Icons.arrow_right),
-          ),
-          const Divider(
-            height: 1,
-            thickness: 1,
-          ),
-          ListTileModifier(
-            padding: const EdgeInsets.all(10),
-            name: 'Μετάβαση σε άλλο Αλγόριθμο',
-            onTap: () => log('h'),
-            cornerType: 'Bottom',
-            iconRight: const Icon(Icons.arrow_right),
-          ),
-          const Expanded(child: SizedBox()),
-          ListTileModifier(
-            name: 'Μετάβαση σε άλλο Αλγόριθμο',
-            padding: const EdgeInsets.all(10),
-            onTap: () => log('h'),
-            cornerType: 'Bottom',
-            iconRight: const Icon(Icons.arrow_right),
-          ),
-        ],
-      ),
-    );
+        child: Column(
+          children: [
+            CustomListTile(
+              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
+              onTap: () async => Navigator.push(
+                context,
+                _customPageRouteBuilder(
+                  const Algo1(),
+                ),
+              ),
+              leftIcon: Icons.calculate_outlined,
+              type: Type.top,
+            ),
+            const Divider(
+              height: 1,
+              thickness: 1,
+            ),
+            CustomListTile(
+              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
+              onTap: () async => Navigator.push(
+                context,
+                _customPageRouteBuilder(
+                  const Algo1(),
+                ),
+              ),
+              leftIcon: Icons.calculate_outlined,
+              type: Type.none,
+            ),
+            const Divider(
+              height: 1,
+              thickness: 1,
+            ),
+            CustomListTile(
+              label: 'Μετάβαση σε άλλο Αλγόριθμο',
+              onTap: () async => Navigator.push(
+                context,
+                _customPageRouteBuilder(
+                  const Algo1(),
+                ),
+              ),
+              leftIcon: Icons.calculate_outlined,
+              type: Type.bottom,
+            ),
+            const Expanded(child: SizedBox()),
+            CustomListTile(
+              label: 'Μετάβαση σε άλλο Αλγόριθμο',
+              onTap: () async => Navigator.push(
+                context,
+                _customPageRouteBuilder(
+                  const Algo1(),
+                ),
+              ),
+              leftIcon: Icons.calculate_outlined,
+              type: Type.top,
+            ),
+          ],
+        ),
+      );
+
+  PageRouteBuilder _customPageRouteBuilder(Widget page) => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => page,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var slideAnimation =
+              Tween(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0))
+                  .animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+          );
+
+          var scaleAnimation = Tween(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+          );
+
+          // Add your new transition here
+          var rotateAnimation = Tween(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+          );
+
+          return SlideTransition(
+            position: slideAnimation,
+            child: ScaleTransition(
+              scale: scaleAnimation,
+              child: RotationTransition(
+                turns: rotateAnimation,
+                child: child,
+              ),
+            ),
+          );
+        },
+      );
+}
