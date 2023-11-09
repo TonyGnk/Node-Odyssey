@@ -19,7 +19,7 @@ Widget rootConfig(
       light: theme.light(),
       dark: theme.dark(),
       debugShowFloatingThemeButton: debugShowFloatingThemeButton,
-      initial: savedThemeMode ?? AdaptiveThemeMode.light,
+      initial: savedThemeMode ?? AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
         onGenerateTitle: (context) => appTitle,
         theme: theme,

@@ -9,7 +9,7 @@ import '../Themes/oneui_theme_data.dart';
 Future<String?> getPref() async {
   final prefs = await SharedPreferences.getInstance();
   final savedTheme = prefs.getString('UITHEME');
-  log('UI savedTheme2: $savedTheme');
+  //log('UI savedTheme2: $savedTheme');
   return savedTheme;
 }
 
@@ -26,7 +26,7 @@ Future<TotalTheme> getUITheme() async {
 //Create a function. Call getUiTheme. If the theme is material, return 0. If the theme is oneui, return 1.
 Future<int> getUiTheme() async {
   final savedTheme = await getPref();
-  log('---------------------UI savedTheme: $savedTheme');
+  //log('---------------------UI savedTheme: $savedTheme');
   if (savedTheme == null) {
     return 0;
   }

@@ -35,13 +35,14 @@ class SecondBasicScreen extends StatelessWidget {
           })
         : null;
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(25),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
       child: Row(
         children: [
           Expanded(flex: 2, child: terminalSide(context)),
+          const SizedBox(width: 25),
           const Expanded(child: ButtonsSide()),
         ],
       ),

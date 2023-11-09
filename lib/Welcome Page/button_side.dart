@@ -109,30 +109,9 @@ class ButtonsSide extends StatelessWidget {
             ),
           );
 
-          var scaleAnimation = Tween(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
-            ),
-          );
-
-          // Add your new transition here
-          var rotateAnimation = Tween(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
-            ),
-          );
-
           return SlideTransition(
             position: slideAnimation,
-            child: ScaleTransition(
-              scale: scaleAnimation,
-              child: RotationTransition(
-                turns: rotateAnimation,
-                child: child,
-              ),
-            ),
+            child: child,
           );
         },
       );
