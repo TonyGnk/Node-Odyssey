@@ -1,16 +1,66 @@
 import 'package:flutter/material.dart';
 
+import 'terminal_title.dart';
+import 'text_viewer.dart';
+
 Widget terminalSide(BuildContext context) => SizedBox(
       height: MediaQuery.of(context).size.height,
-      child: const Column(
+      child: Column(
         children: [
-          Text(
-            'Εργασία Αλγορίθμων 2023-2024',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          terminalTitle(context),
+          const Expanded(child: SizedBox()),
+          terminalViewer(
+            textList: const [
+              'Hello',
+              '2',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3',
+              '3'
+            ],
           ),
+          const Expanded(child: SizedBox()),
         ],
       ),
     );

@@ -30,15 +30,21 @@ class SecondBasicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     z
         ? Future.delayed(Duration.zero, () {
-            showAlert(context, true);
+            showAlert(context, false);
             z = false;
           })
         : null;
-    return Row(
-      children: [
-        Expanded(flex: 2, child: terminalSide(context)),
-        const Expanded(child: ButtonsSide()),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
+      child: Row(
+        children: [
+          Expanded(flex: 2, child: terminalSide(context)),
+          const Expanded(child: ButtonsSide()),
+        ],
+      ),
     );
   }
 }

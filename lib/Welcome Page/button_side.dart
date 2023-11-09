@@ -1,8 +1,4 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import '../UI/Components/Buttons/elevated_button.dart';
-import '../UI/Components/List Tiles/list_tile_modifier.dart';
-import '../UI/Routes/about_page.dart';
 import '../custom_list_tile.dart';
 import 'al1.dart';
 
@@ -12,14 +8,12 @@ class ButtonsSide extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //Create a large label with text 'Πανεπιστημιακή Εργασία Αλγορίθμων 2023-2024'
             const Text(
-              'Επιλέξτε τον επιθυμητό αλγόριθμο:',
+              'Επιλέξτε τον επιθυμητό αλγόριθμο',
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
@@ -37,10 +31,10 @@ class ButtonsSide extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 245, 245, 255),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: const Color.fromARGB(255, 220, 220, 255),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.4),
             width: 1,
           ),
         ),
@@ -54,7 +48,7 @@ class ButtonsSide extends StatelessWidget {
                   const Algo1(),
                 ),
               ),
-              leftIcon: Icons.calculate_outlined,
+              leftIcon: Icons.radar_outlined,
               type: Type.top,
             ),
             const Divider(
@@ -69,7 +63,7 @@ class ButtonsSide extends StatelessWidget {
                   const Algo1(),
                 ),
               ),
-              leftIcon: Icons.calculate_outlined,
+              leftIcon: Icons.grid_goldenratio,
               type: Type.none,
             ),
             const Divider(
@@ -84,19 +78,19 @@ class ButtonsSide extends StatelessWidget {
                   const Algo1(),
                 ),
               ),
-              leftIcon: Icons.calculate_outlined,
+              leftIcon: Icons.no_encryption_gmailerrorred_rounded,
               type: Type.bottom,
             ),
             const Expanded(child: SizedBox()),
             CustomListTile(
-              label: 'Μετάβαση σε άλλο Αλγόριθμο',
+              label: 'Σύγκριση Αλγορίθμων & Στατιστικά',
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
                   const Algo1(),
                 ),
               ),
-              leftIcon: Icons.calculate_outlined,
+              leftIcon: Icons.stacked_line_chart_sharp,
               type: Type.top,
             ),
           ],

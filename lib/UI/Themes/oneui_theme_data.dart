@@ -23,7 +23,8 @@ class OneUIThemeData extends TotalTheme {
         listTileTheme: const ListTileThemeData(
           tileColor: Color.fromARGB(255, 255, 255, 255),
         ),
-        secondaryHeaderColor: const Color.fromARGB(255, 232, 232, 232), 
+        secondaryHeaderColor: const Color.fromARGB(255, 232, 232, 232),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 243, 243, 243),
       );
 
   @override
@@ -45,7 +46,8 @@ class OneUIThemeData extends TotalTheme {
         listTileTheme: const ListTileThemeData(
           tileColor: Color.fromARGB(255, 37, 37, 37),
         ),
-        secondaryHeaderColor: Color.fromARGB(255, 54, 54, 54), 
+        secondaryHeaderColor: const Color.fromARGB(255, 54, 54, 54),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 32, 32, 32),
       );
 
   static ThemeData getLightTheme() => OneUIThemeData().light();
