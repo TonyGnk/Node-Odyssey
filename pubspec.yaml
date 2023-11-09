@@ -27,7 +27,7 @@ dependencies:
   adaptive_theme: ^3.4.0
   material_text_fields: ^1.0.3
   package_info_plus: ^4.2.0
-
+  flutter_animated_dialog: ^2.0.1
 
 dev_dependencies:
   flutter_test: 

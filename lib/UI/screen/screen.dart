@@ -3,12 +3,13 @@ import '../templates/settings_toggle.dart';
 import 'stab/stab.dart';
 import '../templates/custom_animated.dart';
 
-class RoutedScreen {
+class RoutedScreen extends StatelessWidget {
   /// A set of widgets that make up the screen.
   ///
   /// Each screen has a name and a outlined icon to display in the navigation bar/rail, essentially a not outlined icon when is selected.
 
   RoutedScreen({
+    super.key,
     required this.mainChild,
     required this.icon,
     this.appBar,
@@ -35,6 +36,7 @@ class RoutedScreen {
   /// The app bar of the screen. If null no app bar is displayed
   late Stab? appBar;
 
+  @override
   Widget build(BuildContext context) => customAnimatedBox(
       padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
       width: MediaQuery.of(context).size.width,

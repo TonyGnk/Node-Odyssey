@@ -1,9 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'UI/screen/screen.dart';
-import 'UI/screen/stab/stab.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
-import 'basic_screen.dart';
+import 'Welcome Page/basic_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +10,7 @@ void main() async {
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({
     required this.savedThemeMode,
     super.key,
@@ -21,12 +19,19 @@ class MyApp extends StatelessWidget {
   final AdaptiveThemeMode? savedThemeMode;
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //init state
+
+  @override
   Widget build(BuildContext context) => AdaptiveRoot(
-        savedThemeMode: savedThemeMode,
+        savedThemeMode: widget.savedThemeMode,
         appTitle: 'Algorithms',
         debugShowFloatingThemeButton: true,
         screens: [
-          basicScreen(context),
+          const BasicScreen().build(context),
         ],
       );
 }

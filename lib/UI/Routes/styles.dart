@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../basic_screen.dart';
+import '../../Welcome Page/basic_screen.dart';
 import '../Components/Buttons/segmented_button.dart';
 import '../screen/Settings Items/DropDown/dropdown_my.dart';
 import '../services/uiChange.dart';
@@ -70,8 +70,8 @@ class _StyleScreenState extends State<StyleScreen> {
                                     filterQuality: FilterQuality.high,
                                     alignment: Alignment.topLeft,
                                     scale: 0.6,
-                                    child: basicScreen(context)
-                                        .buildSmall(context, 366.0, 600.0),
+                                    child: const SizedBox(),
+                                    //BasicScreen.buildSmall(context, 366.0, 600.0),
                                   ),
                                 ],
                               ),
