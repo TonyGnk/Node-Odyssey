@@ -22,17 +22,21 @@ class _terminalViewerState extends State<terminalViewer> {
           String textList = ref.watch(textProvider);
           return Column(
             children: [
-              Row(
-                children: <Widget>[
-                  const Expanded(
-                    child: Text('Περιεχόμενο Αρχείου TXT'),
-                  ),
-                  //Delete, clear textlist provider
-                  IconButton(
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: () => ref.read(textProvider.notifier).state = '',
-                  ),
-                ],
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: <Widget>[
+                    const Expanded(
+                      child: Text('Περιεχόμενο Αρχείου TXT'),
+                    ),
+                    //Delete, clear textlist provider
+                    IconButton(
+                      icon: const Icon(Icons.delete_outline),
+                      onPressed: () =>
+                          ref.read(textProvider.notifier).state = '',
+                    ),
+                  ],
+                ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
