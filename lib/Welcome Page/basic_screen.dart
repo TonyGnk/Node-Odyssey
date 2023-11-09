@@ -24,20 +24,14 @@ class SecondBasicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => showAlert(context));
-    return RoutedScreen(
-      mainChild: Row(
-        children: [
-          Expanded(flex: 2, child: terminalSide(context)),
-          Expanded(
-            child: ButtonsSide(),
-          )
-        ],
-      ),
-      label: 'Basic',
-      appBar: Stab(true),
-      filledIcon: Icons.error,
-      icon: Icons.error_outline,
+    Future.delayed(Duration.zero, () => showAlert(context, false));
+    return Row(
+      children: [
+        Expanded(flex: 2, child: terminalSide(context)),
+        const Expanded(
+          child: ButtonsSide(),
+        )
+      ],
     );
   }
 }

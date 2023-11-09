@@ -32,15 +32,21 @@ class ButtonsSide extends StatelessWidget {
 //Widget for the list buttons to go each algorithm screen
 Widget listButtons(BuildContext context) => Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(0),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(220, 255, 255, 255),
+        color: Color.fromARGB(255, 245, 245, 255),
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: Color.fromARGB(255, 220, 220, 255),
+          width: 1,
+        ),
       ),
       child: Column(
         children: [
           ListTileModifier(
-            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
+            padding: const EdgeInsets.all(10),
+            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
             onTap: () => log('h'),
             cornerType: 'Top',
             iconRight: const Icon(Icons.arrow_right),
@@ -50,6 +56,7 @@ Widget listButtons(BuildContext context) => Container(
             thickness: 1,
           ),
           ListTileModifier(
+            padding: const EdgeInsets.all(10),
             name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
             onTap: () => log('h'),
             cornerType: 'None',
@@ -60,23 +67,16 @@ Widget listButtons(BuildContext context) => Container(
             thickness: 1,
           ),
           ListTileModifier(
-            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
+            padding: const EdgeInsets.all(10),
+            name: 'Μετάβαση σε άλλο Αλγόριθμο',
             onTap: () => log('h'),
             cornerType: 'Bottom',
             iconRight: const Icon(Icons.arrow_right),
           ),
-          AdaptElevatedButton(
-              onPressed: () => log('None'),
-              label: 'Αλγόριθμος Πρώτα σε Πλάτος'),
-          AdaptElevatedButton(
-              onPressed: () => log('None'),
-              label: 'Αλγόριθμος Πρώτα σε Πλάτος'),
-          AdaptElevatedButton(
-              onPressed: () => log('None'),
-              label: 'Αλγόριθμος Πρώτα σε Πλάτος'),
           const Expanded(child: SizedBox()),
           ListTileModifier(
-            name: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
+            name: 'Μετάβαση σε άλλο Αλγόριθμο',
+            padding: const EdgeInsets.all(10),
             onTap: () => log('h'),
             cornerType: 'Bottom',
             iconRight: const Icon(Icons.arrow_right),

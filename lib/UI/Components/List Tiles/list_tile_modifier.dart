@@ -5,6 +5,7 @@ import '../../services/ui_handler.dart';
 class ListTileModifier extends StatelessWidget {
   const ListTileModifier({
     required this.name,
+    this.padding = const EdgeInsets.all(0),
     this.subtitle,
     this.iconLeft,
     this.iconRight,
@@ -14,6 +15,7 @@ class ListTileModifier extends StatelessWidget {
   });
 
   final String name;
+  final EdgeInsets padding;
   final String? subtitle;
   final void Function()? onTap;
   final Icon? iconLeft;
@@ -25,6 +27,7 @@ class ListTileModifier extends StatelessWidget {
         oneUiListTile(
           context,
           name,
+          padding,
           subtitle,
           onTap,
           iconLeft,
@@ -34,6 +37,7 @@ class ListTileModifier extends StatelessWidget {
         materialUiListTile(
           context,
           name,
+          padding,
           subtitle,
           onTap,
           iconLeft,
@@ -64,6 +68,7 @@ class ListTileModifier extends StatelessWidget {
 Widget oneUiListTile(
   BuildContext context,
   String name,
+  EdgeInsets padding,
   String? subtitle,
   void Function()? onTap,
   Icon? iconLeft,
@@ -71,6 +76,7 @@ Widget oneUiListTile(
   ShapeBorder? shapeBorder,
 ) =>
     ListTile(
+      contentPadding: padding,
       leading: iconLeft,
       tileColor: Theme.of(context).listTileTheme.tileColor,
       trailing: iconRight,
@@ -92,12 +98,14 @@ Widget oneUiListTile(
 Widget materialUiListTile(
         BuildContext context,
         String name,
+        EdgeInsets padding,
         String? subtitle,
         void Function()? onTap,
         Icon? iconLeft,
         Icon? iconRight,
         ShapeBorder? shapeBorder) =>
     ListTile(
+      contentPadding: padding,
       leading: iconLeft,
       trailing: iconRight,
       shape: shapeBorder,
