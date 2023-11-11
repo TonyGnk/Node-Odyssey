@@ -27,7 +27,7 @@ class Selector extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             width: 200,
-            height: 50,
+            height: 40,
             child: TextField(
               controller: controller1,
               decoration: const InputDecoration(
@@ -43,7 +43,7 @@ class Selector extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             width: 200,
-            height: 50,
+            height: 40,
             child: TextField(
               controller: controller2,
               decoration: const InputDecoration(
@@ -56,11 +56,11 @@ class Selector extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
+          IconButton.filledTonal(
               onPressed: () => startCal(int.parse(controller1.text),
                   int.parse(controller2.text), ref),
               //submit icon
-              icon: const Icon(Icons.send))
+              icon: const Icon(Icons.send)),
         ]),
       );
 }
