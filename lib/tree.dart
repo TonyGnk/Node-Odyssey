@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'container_tree.dart';
 
 //Create a const variable width 30
-const double circleWidth = 40;
+const double circleWidth = 37;
 
 class Tree extends StatelessWidget {
   const Tree({super.key});
@@ -38,6 +38,9 @@ class Node extends StatelessWidget {
         ),
         Container(
           child: row6,
+        ),
+        Container(
+          child: row7,
         ),
       ]);
 }
@@ -180,36 +183,301 @@ Row row5(BuildContext context) => const Row(
       ],
     );
 
-Row row6 = Row(children: [
-  Container(
-    child: nRow1(),
-  ),
-  Container(
-    child: nRow1(),
-  ),
-  Container(
-    child: nRow1(),
-  ),
-  Container(
-    child: nRow1(),
-  ),
-  Container(
-    child: nRow1(),
-  ),
+Row row6 = const Row(children: [
+//-----------------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      leftSide: true,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  TreeBox(
+      width: circleWidth * 2, height: circleWidth, rightSide: true, number: 18),
+  //----------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  TreeBox(
+      width: circleWidth * 2, height: circleWidth, rightSide: true, number: 18),
+  //----------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  TreeBox(
+      width: circleWidth * 2, height: circleWidth, rightSide: true, number: 18),
+  //----------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  TreeBox(
+      width: circleWidth * 2, height: circleWidth, rightSide: true, number: 18),
+  //----------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  TreeBox(
+      width: circleWidth * 2, height: circleWidth, rightSide: true, number: 18),
+  //----------
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  TreeBox(
+      width: circleWidth + circleWidth / 4,
+      height: circleWidth,
+      rightSide: true,
+      topSide: true,
+      number: 18),
+  //+
+  //----------
 ]);
 
-Row nRow1() => Row(children: [
-      const TreeBox(width: circleWidth / 8, number: 20),
-      node,
-      const TreeBox(width: circleWidth / 4, number: 20),
-      node,
-      const TreeBox(width: circleWidth / 4, number: 20),
-      node,
-      const TreeBox(width: circleWidth, number: 20),
-      node,
-      const TreeBox(width: circleWidth / 4, number: 20),
-      node,
-      const TreeBox(width: circleWidth / 4, number: 20),
-      node,
-      const TreeBox(width: circleWidth / 8, number: 20),
-    ]);
+Row row7 = Row(children: [
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+// node
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+
+// node
+
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+// node,
+
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+// node,
+
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+
+// node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+
+// node,
+  const TreeBox(width: circleWidth / 8, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+  const TreeBox(width: circleWidth / 4, height: circleWidth, number: 20),
+  node,
+]);
