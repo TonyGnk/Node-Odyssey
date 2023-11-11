@@ -38,7 +38,7 @@ class RoutedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => customAnimatedBox(
-      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+      //padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: mainChild

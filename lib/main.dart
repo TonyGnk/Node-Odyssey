@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
+import 'Welcome Page/al1.dart';
 import 'Welcome Page/basic_screen.dart';
 
 void main() async {
@@ -31,7 +32,8 @@ class _MyAppState extends State<MyApp> {
         appTitle: 'Algorithms',
         debugShowFloatingThemeButton: true,
         screens: [
-          const BasicScreen().build(context),
+          Algo1().build(context),
+          //const BasicScreen().build(context),
         ],
       );
 }

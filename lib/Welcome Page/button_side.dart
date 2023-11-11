@@ -41,7 +41,7 @@ class ButtonsSide extends StatelessWidget {
         child: Column(
           children: [
             CustomListTile(
-              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
+              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
@@ -56,7 +56,7 @@ class ButtonsSide extends StatelessWidget {
               thickness: 1,
             ),
             CustomListTile(
-              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
+              label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(

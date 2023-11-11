@@ -30,7 +30,7 @@ class SecondBasicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     z
         ? Future.delayed(Duration.zero, () {
-            showAlert(context, true);
+            showAlert(context, false);
             z = false;
           })
         : null;
