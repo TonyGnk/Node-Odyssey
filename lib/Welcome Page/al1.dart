@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../UI/screen/screen.dart';
 import '../UI/screen/stab/stab.dart';
 import '../tree.dart';
+import 'logic/first.dart';
 
 class Algo1 extends StatelessWidget {
   const Algo1({super.key});
 
   @override
   RoutedScreen build(BuildContext context) => RoutedScreen(
-        mainChild: const Algo1z(),
+        mainChild: const TestAlg(),
         label: 'Basic',
         appBar: Stab(true),
         filledIcon: Icons.calculate,
@@ -21,14 +22,30 @@ class Algo1z extends StatelessWidget {
   const Algo1z({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => const Scaffold(
         // appBar: AppBar(
         //   title: const Text('Κατασκευή Δέντρου'),
         //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         // ),
-        body: const Row(
+        body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Tree()],
+        ),
+      );
+}
+
+class TestAlg extends StatelessWidget {
+  const TestAlg({super.key});
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Κατασκευή Δέντρου'),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [First()],
         ),
       );
 }
