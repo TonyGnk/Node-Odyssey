@@ -18,6 +18,19 @@ class Algo1 extends StatelessWidget {
       );
 }
 
+class Algo2 extends StatelessWidget {
+  const Algo2({super.key});
+
+  @override
+  RoutedScreen build(BuildContext context) => RoutedScreen(
+        mainChild: const Algo1z(),
+        label: 'Basic',
+        appBar: Stab(true),
+        filledIcon: Icons.calculate,
+        icon: Icons.calculate_outlined,
+      );
+}
+
 class Algo1z extends StatelessWidget {
   const Algo1z({super.key});
 

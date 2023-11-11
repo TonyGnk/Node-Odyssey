@@ -60,7 +60,7 @@ class ButtonsSide extends StatelessWidget {
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
-                  const Algo1(),
+                  const Algo2(),
                 ),
               ),
               leftIcon: Icons.grid_goldenratio,
