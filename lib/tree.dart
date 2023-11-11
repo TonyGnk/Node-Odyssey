@@ -57,23 +57,52 @@ Row row3(BuildContext context) => const Row(
           width: circleWidth * 6 + circleWidth,
           height: circleWidth,
           rightSide: true,
+          leftSide: true,
+          topSide: true,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          rightSide: true,
+          leftSide: true,
+          topSide: true,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
           height: circleWidth,
           leftSide: true,
           rightSide: true,
+          topSide: true,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
           height: circleWidth,
           leftSide: true,
+          rightSide: true,
+          topSide: true,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          rightSide: true,
+          leftSide: true,
+          topSide: true,
         ),
       ],
     );
 
 Row row4(BuildContext context) => Row(
       children: [
+        node,
+        const TreeBox(
+          width: circleWidth * 6,
+          height: circleWidth,
+        ),
+        node,
+        const TreeBox(
+          width: circleWidth * 6,
+          height: circleWidth,
+        ),
         node,
         const TreeBox(
           width: circleWidth * 6,
