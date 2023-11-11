@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'Welcome Page/logic/first.dart';
 
 class Selector extends StatelessWidget {
-  Selector({super.key});
+  Selector({super.key, required this.ref});
+
+  late WidgetRef ref;
 
   //controllers
   late TextEditingController controller1 = TextEditingController();
@@ -12,25 +15,24 @@ class Selector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.purple],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(50)),
+          color: Colors.grey.withOpacity(0.1),
+          // border: Border.all(
         ),
         // width: 90,
         // height: 50,
         child: Row(children: [
           //Insert two textfields here
-          SizedBox(
-            width: 80,
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: 200,
             height: 50,
             child: TextField(
               controller: controller1,
               decoration: const InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Enter a search term',
+                hintText: 'Εισάγεται Αρχική Τιμή',
               ),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -38,14 +40,15 @@ class Selector extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 80,
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: 200,
             height: 50,
             child: TextField(
               controller: controller2,
               decoration: const InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Enter a search term',
+                hintText: 'Εισάγεται Τελική Τιμή',
               ),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -53,10 +56,11 @@ class Selector extends StatelessWidget {
               ],
             ),
           ),
-          ElevatedButton(
-              onPressed: () => startCal(
-                  int.parse(controller1.text), int.parse(controller2.text)),
-              child: const Text('Button'))
+          IconButton(
+              onPressed: () => startCal(int.parse(controller1.text),
+                  int.parse(controller2.text), ref),
+              //submit icon
+              icon: const Icon(Icons.send))
         ]),
       );
 }

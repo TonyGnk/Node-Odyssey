@@ -36,6 +36,3 @@ Widget uiSelector(Widget oneUi, Widget material) => Consumer(
               ? oneUi
               : material,
     );
-
-   //Create a ui selector that takes 2 integer properties. One for each UI. Check for the current UI and return the correct one.
-

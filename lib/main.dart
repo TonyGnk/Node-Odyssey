@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
 import 'Welcome Page/al1.dart';
 import 'Welcome Page/basic_screen.dart';
@@ -8,7 +9,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   //print(savedThemeMode);
-  runApp(MyApp(savedThemeMode: savedThemeMode));
+  runApp(
+    ProviderScope(
+      child: MyApp(savedThemeMode: savedThemeMode),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -32,8 +37,9 @@ class _MyAppState extends State<MyApp> {
         appTitle: 'Algorithms',
         debugShowFloatingThemeButton: true,
         screens: [
-          Algo1().build(context),
-          //const BasicScreen().build(context),
+          //Algo1().build(context),
+
+          BasicScreen().build(context),
         ],
       );
 }

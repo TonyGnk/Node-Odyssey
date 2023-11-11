@@ -40,7 +40,7 @@ class TestAlg extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Κατασκευή Δέντρου'),
+          title: const Text('Δοκιμή'),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: Row(
