@@ -33,6 +33,9 @@ class Node extends StatelessWidget {
         Container(
           child: row4(context),
         ),
+        Container(
+          child: row5(context),
+        ),
       ]);
 }
 
@@ -42,11 +45,13 @@ Row row2(BuildContext context) => const Row(
           width: circleWidth / 2,
           height: circleWidth,
           rightSide: true,
+          number: 1,
         ),
         TreeBox(
           width: circleWidth / 2,
           height: circleWidth,
           leftSide: true,
+          number: 2,
         ),
       ],
     );
@@ -59,6 +64,7 @@ Row row3(BuildContext context) => const Row(
           rightSide: true,
           leftSide: true,
           topSide: true,
+          number: 3,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
@@ -66,6 +72,7 @@ Row row3(BuildContext context) => const Row(
           rightSide: true,
           leftSide: true,
           topSide: true,
+          number: 4,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
@@ -73,6 +80,7 @@ Row row3(BuildContext context) => const Row(
           leftSide: true,
           rightSide: true,
           topSide: true,
+          number: 5,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
@@ -80,6 +88,7 @@ Row row3(BuildContext context) => const Row(
           leftSide: true,
           rightSide: true,
           topSide: true,
+          number: 6,
         ),
         TreeBox(
           width: circleWidth * 6 + circleWidth,
@@ -87,6 +96,7 @@ Row row3(BuildContext context) => const Row(
           rightSide: true,
           leftSide: true,
           topSide: true,
+          number: 7,
         ),
       ],
     );
@@ -97,27 +107,72 @@ Row row4(BuildContext context) => Row(
         const TreeBox(
           width: circleWidth * 6,
           height: circleWidth,
+          number: 8,
         ),
         node,
         const TreeBox(
           width: circleWidth * 6,
           height: circleWidth,
+          number: 9,
         ),
         node,
         const TreeBox(
           width: circleWidth * 6,
           height: circleWidth,
+          number: 10,
         ),
         node,
         const TreeBox(
           width: circleWidth * 6,
           height: circleWidth,
+          number: 11,
         ),
         node,
         const TreeBox(
           width: circleWidth * 6,
           height: circleWidth,
+          number: 12,
         ),
         node,
+      ],
+    );
+
+Row row5(BuildContext context) => const Row(
+      children: [
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          rightSide: true,
+          leftSide: true,
+          number: 13,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          rightSide: true,
+          leftSide: true,
+          number: 14,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          leftSide: true,
+          rightSide: true,
+          number: 15,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          leftSide: true,
+          rightSide: true,
+          number: 16,
+        ),
+        TreeBox(
+          width: circleWidth * 6 + circleWidth,
+          height: circleWidth,
+          rightSide: true,
+          leftSide: true,
+          number: 17,
+        ),
       ],
     );

@@ -13,6 +13,7 @@ class TreeBox extends StatelessWidget {
     this.leftSide = false,
     this.bottomSide = false,
     this.rightSide = false,
+    required this.number,
   });
 
   final double width;
@@ -22,6 +23,7 @@ class TreeBox extends StatelessWidget {
   final bool leftSide;
   final bool bottomSide;
   final bool rightSide;
+  final int number;
 
   final double borderWidth = 2;
 
@@ -57,6 +59,11 @@ class TreeBox extends StatelessWidget {
                     width: borderWidth,
                   )
                 : BorderSide.none,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            number.toString(),
           ),
         ),
       );
