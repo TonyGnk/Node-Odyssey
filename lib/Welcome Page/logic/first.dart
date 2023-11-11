@@ -33,7 +33,8 @@ class FirstState extends State<First> {
               height: 600,
               width: MediaQuery.of(context).size.width * 0.6,
               child: ListView(children: [
-                Text(text),
+                SelectableText(text)
+                //Text(text),
               ]),
             ),
             const SizedBox(height: 20),
