@@ -22,10 +22,10 @@ class Algo1z extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Κατασκευή Δέντρου'),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Κατασκευή Δέντρου'),
+        //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // ),
         body: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Tree()],

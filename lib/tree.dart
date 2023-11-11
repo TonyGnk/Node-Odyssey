@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'container_tree.dart';
 
 //Create a const variable width 30
-const double circleWidth = 37;
+const double circleWidth = 39;
 
 class Tree extends StatelessWidget {
   const Tree({super.key});
