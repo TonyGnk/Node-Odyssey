@@ -10,9 +10,10 @@ import '../screen.dart';
 import '../../Routes/settings.dart';
 import '../../template.dart';
 
-class Stab {
-  Stab(
-    this.onlyAppBar, {
+class Stab extends StatelessWidget {
+  const Stab({
+    required this.appBar,
+    super.key,
     this.uiToggle = false,
     this.darkToggle = false,
     this.enable = true,
@@ -36,6 +37,8 @@ class Stab {
     this.menuScreen5,
   });
 
+  final AppBar appBar;
+
   final bool uiToggle;
   final bool darkToggle;
   final bool enable;
@@ -57,122 +60,128 @@ class Stab {
   final String? menuItemText5;
   final Function? menuItemFunction5;
   final RoutedScreen? menuScreen5;
-  final bool onlyAppBar;
 
   //create a getter for the enable
   bool get getEnable => enable;
 
-  Widget build(SettingsToggle toggles, BuildContext context) =>
-      Consumer(builder: (_, WidgetRef ref, __) {
-        Enum selected = ref.watch(selectedStateProviderType);
-        return Column(children: [
-          onlyAppBar
-              ? AppBar(
-                  actions: [
-                    Tooltip(
-                      message: 'Toggle Ui Theme',
-                      child: IconButton(
-                        isSelected: ref.watch(OneUi.notifier).state == true,
-                        onPressed: () async {
-                          ref
-                                      .read(selectedStateProviderType.notifier)
-                                      .state
-                                      .toString() ==
-                                  'StateProviderType.oneUi'
-                              ? {
-                                  ref
-                                      .read(selectedStateProviderType.notifier)
-                                      .state = StateProviderType.material,
-                                  toggleUI(context, 'material'),
-                                }
-                              : {
-                                  ref
-                                      .read(selectedStateProviderType.notifier)
-                                      .state = StateProviderType.oneUi,
-                                  toggleUI(context, 'oneUi'),
-                                };
-                        },
-                        icon: const Icon(Icons.science_outlined),
-                        selectedIcon: const Icon(Icons.science),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProviderScope(
-                              child: SettingsScreen(toggles: toggles),
-                            ),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.settings),
-                    ),
-                  ],
-                )
-              : SearchAnchor(
-                  viewHintText: 'Αναζήτηση στις επαφές',
-                  builder:
-                      (BuildContext context, SearchController controller) =>
-                          SearchBar(
-                    trailing: <Widget>[
-                      Row(
-                        children: [
-                          Tooltip(
-                            message: 'Toggle Ui Theme',
-                            child: IconButton(
-                              isSelected:
-                                  ref.watch(OneUi.notifier).state == true,
-                              onPressed: () async {
-                                ref
-                                            .read(selectedStateProviderType
-                                                .notifier)
-                                            .state
-                                            .toString() ==
-                                        'StateProviderType.oneUi'
-                                    ? {
-                                        ref
-                                            .read(selectedStateProviderType
-                                                .notifier)
-                                            .state = StateProviderType.material,
-                                        toggleUI(context, 'material'),
-                                      }
-                                    : {
-                                        ref
-                                            .read(selectedStateProviderType
-                                                .notifier)
-                                            .state = StateProviderType.oneUi,
-                                        toggleUI(context, 'oneUi'),
-                                      };
-                              },
-                              icon: const Icon(Icons.science_outlined),
-                              selectedIcon: const Icon(Icons.science),
-                            ),
-                          ),
-                          Tooltip(
-                            message: 'Enable/Disable Dark Mode',
-                            child: IconButton(
-                              isSelected:
-                                  AdaptiveTheme.of(context).mode.toString() ==
-                                      'AdaptiveThemeMode.dark',
-                              onPressed: () {
-                                AdaptiveTheme.of(context).mode.toString() ==
-                                        'AdaptiveThemeMode.dark'
-                                    ? {
-                                        AdaptiveTheme.of(context).setLight(),
-                                        AdaptiveTheme.of(context).updateState()
-                                      }
-                                    : {
-                                        AdaptiveTheme.of(context).setDark(),
-                                        AdaptiveTheme.of(context).updateState()
-                                      };
-                              },
-                              icon: const Icon(Icons.wb_sunny_outlined),
-                              selectedIcon:
-                                  const Icon(Icons.dark_mode_outlined),
-                            ),
-                          ),
+  @override
+  Widget build(BuildContext context) => appBar;
+}
+        
+        
+        
+        // Column(children: [
+          
+          
+          
+          
+        //   onlyAppBar
+        //       ? AppBar(
+        //           actions: [
+        //             Tooltip(
+        //               message: 'Toggle Ui Theme',
+        //               child: IconButton(
+        //                 isSelected: ref.watch(OneUi.notifier).state == true,
+        //                 onPressed: () async {
+        //                   ref
+        //                               .read(selectedStateProviderType.notifier)
+        //                               .state
+        //                               .toString() ==
+        //                           'StateProviderType.oneUi'
+        //                       ? {
+        //                           ref
+        //                               .read(selectedStateProviderType.notifier)
+        //                               .state = StateProviderType.material,
+        //                           toggleUI(context, 'material'),
+        //                         }
+        //                       : {
+        //                           ref
+        //                               .read(selectedStateProviderType.notifier)
+        //                               .state = StateProviderType.oneUi,
+        //                           toggleUI(context, 'oneUi'),
+        //                         };
+        //                 },
+        //                 icon: const Icon(Icons.science_outlined),
+        //                 selectedIcon: const Icon(Icons.science),
+        //               ),
+        //             ),
+        //             // IconButton(
+        //             //   onPressed: () async {
+        //             //     Navigator.push(
+        //             //       context,
+        //             //       MaterialPageRoute(
+        //             //         builder: (context) => ProviderScope(
+        //             //           child: SettingsScreen(toggles: toggles),
+        //             //         ),
+        //             //       ),
+        //             //     );
+        //             //   },
+        //             //   icon: const Icon(Icons.settings),
+        //             // ),
+        //           ],
+        //         )
+        //       : SearchAnchor(
+        //           viewHintText: 'Αναζήτηση στις επαφές',
+        //           builder:
+        //               (BuildContext context, SearchController controller) =>
+        //                   SearchBar(
+        //             trailing: <Widget>[
+        //               Row(
+        //                 children: [
+        //                   Tooltip(
+        //                     message: 'Toggle Ui Theme',
+        //                     child: IconButton(
+        //                       isSelected:
+        //                           ref.watch(OneUi.notifier).state == true,
+        //                       onPressed: () async {
+        //                         ref
+        //                                     .read(selectedStateProviderType
+        //                                         .notifier)
+        //                                     .state
+        //                                     .toString() ==
+        //                                 'StateProviderType.oneUi'
+        //                             ? {
+        //                                 ref
+        //                                     .read(selectedStateProviderType
+        //                                         .notifier)
+        //                                     .state = StateProviderType.material,
+        //                                 toggleUI(context, 'material'),
+        //                               }
+        //                             : {
+        //                                 ref
+        //                                     .read(selectedStateProviderType
+        //                                         .notifier)
+        //                                     .state = StateProviderType.oneUi,
+        //                                 toggleUI(context, 'oneUi'),
+        //                               };
+        //                       },
+        //                       icon: const Icon(Icons.science_outlined),
+        //                       selectedIcon: const Icon(Icons.science),
+        //                     ),
+        //                   ),
+        //                   Tooltip(
+        //                     message: 'Enable/Disable Dark Mode',
+        //                     child: IconButton(
+        //                       isSelected:
+        //                           AdaptiveTheme.of(context).mode.toString() ==
+        //                               'AdaptiveThemeMode.dark',
+        //                       onPressed: () {
+        //                         AdaptiveTheme.of(context).mode.toString() ==
+        //                                 'AdaptiveThemeMode.dark'
+        //                             ? {
+        //                                 AdaptiveTheme.of(context).setLight(),
+        //                                 AdaptiveTheme.of(context).updateState()
+        //                               }
+        //                             : {
+        //                                 AdaptiveTheme.of(context).setDark(),
+        //                                 AdaptiveTheme.of(context).updateState()
+        //                               };
+        //                       },
+        //                       icon: const Icon(Icons.wb_sunny_outlined),
+        //                       selectedIcon:
+        //                           const Icon(Icons.dark_mode_outlined),
+        //                     ),
+        //                   ),
 
                           // ? CustomPopupMenu(
                           //     menuItemText: [
@@ -243,47 +252,47 @@ class Stab {
                           //   )
                           //If there are no menu items then display an icon setting going to the settings screen using the push method
 
-                          IconButton(
-                            onPressed: () async {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProviderScope(
-                                    child: SettingsScreen(toggles: toggles),
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.settings),
-                          ),
-                        ],
-                      ),
-                    ],
-                    hintText: 'Αναζήτηση στις επαφές',
-                    controller: controller,
-                    padding: const MaterialStatePropertyAll<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 16.0)),
-                    onTap: () {
-                      controller.openView();
-                    },
-                    onChanged: (_) {
-                      controller.openView();
-                    },
-                    leading: const Icon(Icons.search),
-                  ),
-                  suggestionsBuilder:
-                      (BuildContext context, SearchController controller) =>
-                          List<ListTile>.generate(
-                    5,
-                    (int index) {
-                      final String item = 'item $index';
-                      return ListTile(
-                        title: Text(item),
-                        onTap: () {},
-                      );
-                    },
-                  ),
-                ),
+                          // IconButton(
+                          //   onPressed: () async {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) => ProviderScope(
+                          //           child: SettingsScreen(toggles: toggles),
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          //   icon: const Icon(Icons.settings),
+                          // ),
+                //         ],
+                //       ),
+                //     ],
+                //     hintText: 'Αναζήτηση στις επαφές',
+                //     controller: controller,
+                //     padding: const MaterialStatePropertyAll<EdgeInsets>(
+                //         EdgeInsets.symmetric(horizontal: 16.0)),
+                //     onTap: () {
+                //       controller.openView();
+                //     },
+                //     onChanged: (_) {
+                //       controller.openView();
+                //     },
+                //     leading: const Icon(Icons.search),
+                //   ),
+                //   suggestionsBuilder:
+                //       (BuildContext context, SearchController controller) =>
+                //           List<ListTile>.generate(
+                //     5,
+                //     (int index) {
+                //       final String item = 'item $index';
+                //       return ListTile(
+                //         title: Text(item),
+                //         onTap: () {},
+                //       );
+                //     },
+                //   ),
+                // ),
           // GestureDetector(
           //   onTap: () {
           //     null;
@@ -455,8 +464,8 @@ class Stab {
           //     ),
           //   ),
           // ),
-        ]);
-      });
+      //   ]);
+      // });
 
   // Future<void> toggleUI(BuildContext context, String action) async {
   //   final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -471,4 +480,4 @@ class Stab {
   //         dark: MaterialThemeData.getDarkTheme());
   //   }
   // }
-}
+

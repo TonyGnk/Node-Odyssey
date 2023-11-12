@@ -38,22 +38,28 @@ class RoutedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => customAnimatedBox(
-      //padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-      //width: MediaQuery.of(context).size.width - 80,
-      height: MediaQuery.of(context).size.height,
-      child: mainChild
-      //   Column(
-      //     children: [
-      //       //const SizedBox(height: 5),
-      //       appBar?.build(
-      //               const SettingsToggle(darkThemeSwitcher: true), context) ??
-      //           const SizedBox(),
-      //       //const SizedBox(height: 10),
-      //       mainChild,
-      //       // ),
-      //     ],
-      //   ),
+        //padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+        //width: MediaQuery.of(context).size.width - 80,
+        //height: MediaQuery.of(context).size.height,
 
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(label),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          ),
+          body: mainChild,
+          //   Column(
+          //     children: [
+          //       //const SizedBox(height: 5),
+          //       appBar?.build(
+          //               const SettingsToggle(darkThemeSwitcher: true), context) ??
+          //           const SizedBox(),
+          //       //const SizedBox(height: 10),
+          //       mainChild,
+          //       // ),
+          //     ],
+          //   ),
+        ),
       );
 
   Widget buildSmall(BuildContext context, double width, double height) =>
@@ -72,9 +78,7 @@ class RoutedScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 5),
-            appBar?.build(
-                    const SettingsToggle(darkThemeSwitcher: true), context) ??
-                const SizedBox(),
+            appBar?.build(context) ?? const SizedBox(),
 
             const SizedBox(height: 10),
             mainChild,
@@ -89,5 +93,5 @@ class RoutedScreen extends StatelessWidget {
   IconData get getIcon => icon;
   Widget get getMainChild => mainChild;
   Widget? get getSettingsPage => settingsPage;
-  Stab get getAppBar => appBar ?? Stab(true);
+  //Stab get getAppBar => appBar ?? Stab(appBar: AppBar());
 }

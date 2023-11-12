@@ -1,51 +1,60 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
-
-import '../../UI/screen/screen.dart';
-import '../../UI/screen/stab/stab.dart';
-import '../../tree.dart';
-import '../../logic/first.dart';
-
-class BreadthFirstAlg extends StatelessWidget {
-  const BreadthFirstAlg({super.key});
-
-  @override
-  RoutedScreen build(BuildContext context) => RoutedScreen(
-        mainChild: const Algo1z(),
-        label: 'Basic',
-        appBar: Stab(true),
-        filledIcon: Icons.calculate,
-        icon: Icons.calculate_outlined,
-      );
-}
-
-class Algo1z extends StatelessWidget {
-  const Algo1z({super.key});
-
-  @override
-  Widget build(BuildContext context) => const Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Κατασκευή Δέντρου'),
-        //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Tree()],
-        ),
-      );
-}
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../logic/second.dart';
+import '../../selector.dart';
 
 class TestAlg extends StatelessWidget {
   const TestAlg({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Δοκιμή'),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        ),
-        body: Row(
+  Widget build(BuildContext context) =>
+      Consumer(builder: (_, WidgetRef ref, __) {
+        String text = ref.watch(textProvider);
+        return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [First()],
-        ),
-      );
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+              ),
+              height: 600,
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: ListView(children: [
+                SelectableText(text)
+                //Text(text),
+              ]),
+            ),
+            const SizedBox(height: 20),
+            Selector(ref: ref),
+          ],
+        );
+      });
+}
+
+startCal(int start, int end, WidgetRef ref) async {
+  List<List<Node>> solutions = findSolutions(start, end);
+  clearText(ref);
+
+  if (solutions.isEmpty) {
+    log('Δεν υπάρχουν λύσεις.');
+    addText(ref, 'Δεν υπάρχουν λύσεις.');
+  } else {
+    for (List<Node> solution in solutions) {
+      log('Λύση:');
+      addText(ref, 'Λύση:');
+
+      for (Node node in solution) {
+        log('${node.operation} ${node.value}');
+        addText(ref, '${node.operation} ${node.value}');
+      }
+
+      log('Συνολικό Κόστος: ${solution.last.cost}');
+      addText(ref, 'Συνολικό Κόστος: ${solution.last.cost}');
+      log('\n');
+      addText(ref, '\n');
+    }
+  }
 }

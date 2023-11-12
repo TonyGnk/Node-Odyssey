@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../custom_list_tile.dart';
 import '../list.dart';
-import '../Breadth First Page/breadth_first_alg_page.dart';
 
 class ButtonsSide extends StatelessWidget {
   const ButtonsSide({super.key});
@@ -45,10 +44,9 @@ class ButtonsSide extends StatelessWidget {
               label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
               onTap: () async => Navigator.pushNamed(
                 context,
-                //The pushNamed asks for a String. I give a screen item type RootedScreen and asks for a method of the RootedScreen getLabelWithSlash that returns a String.
                 breadthFirstAlgPage(context).getLabelWithSlash,
               ),
-              leftIcon: Icons.radar_outlined,
+              leftIcon: breadthFirstAlgPage(context).getIcon,
               type: Type.top,
             ),
             const Divider(
@@ -57,12 +55,13 @@ class ButtonsSide extends StatelessWidget {
             ),
             CustomListTile(
               label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Βάθος',
-              onTap: () async => Navigator.push(
-                context,
-                _customPageRouteBuilder(
-                  const BreadthFirstAlg(),
-                ),
-              ),
+              onTap: () async {},
+              // Navigator.push(
+              //   context,
+              //   _customPageRouteBuilder(
+              //     const BreadthFirstAlg(),
+              //   ),
+              // ),
               leftIcon: Icons.grid_goldenratio,
               type: Type.none,
             ),
@@ -72,24 +71,14 @@ class ButtonsSide extends StatelessWidget {
             ),
             CustomListTile(
               label: 'Μετάβαση σε άλλο Αλγόριθμο',
-              onTap: () async => Navigator.push(
-                context,
-                _customPageRouteBuilder(
-                  const BreadthFirstAlg(),
-                ),
-              ),
+              onTap: () async => {},
               leftIcon: Icons.no_encryption_gmailerrorred_rounded,
               type: Type.bottom,
             ),
             const Expanded(child: SizedBox()),
             CustomListTile(
               label: 'Σύγκριση Αλγορίθμων & Στατιστικά',
-              onTap: () async => Navigator.push(
-                context,
-                _customPageRouteBuilder(
-                  const BreadthFirstAlg(),
-                ),
-              ),
+              onTap: () async => {},
               leftIcon: Icons.stacked_line_chart_sharp,
               type: Type.top,
             ),
