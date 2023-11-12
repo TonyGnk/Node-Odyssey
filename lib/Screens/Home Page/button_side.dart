@@ -43,11 +43,10 @@ class ButtonsSide extends StatelessWidget {
           children: [
             CustomListTile(
               label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
-              onTap: () async => Navigator.push(
+              onTap: () async => Navigator.pushNamed(
                 context,
-                _customPageRouteBuilder(
-                  const BreadthFirstAlg(),
-                ),
+                //The pushNamed asks for a String. I give a screen item type RootedScreen and asks for a method of the RootedScreen getLabelWithSlash that returns a String.
+                breadthFirstAlgPage(context).getLabelWithSlash,
               ),
               leftIcon: Icons.radar_outlined,
               type: Type.top,
