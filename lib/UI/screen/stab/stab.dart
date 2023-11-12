@@ -6,7 +6,7 @@ import '../../Themes/oneui_theme_data.dart';
 import '../../services/uiChange.dart';
 import '../../services/ui_handler.dart';
 import '../../templates/settings_toggle.dart';
-import '../screen.dart';
+import '../routed_screen.dart';
 import '../../Routes/settings.dart';
 import '../../template.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../screen/screen.dart';
+import '../screen/routed_screen.dart';
 import '../templates/custom_animated.dart';
 import '../templates/nav_bar.dart';
 

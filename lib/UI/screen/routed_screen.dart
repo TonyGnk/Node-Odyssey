@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../templates/settings_toggle.dart';
 import 'stab/stab.dart';
 import '../templates/custom_animated.dart';
 
@@ -8,13 +7,12 @@ class RoutedScreen extends StatelessWidget {
   ///
   /// Each screen has a name and a outlined icon to display in the navigation bar/rail, essentially a not outlined icon when is selected.
 
-  RoutedScreen({
+  const RoutedScreen({
     required this.mainChild,
     required this.icon,
     super.key,
     this.appBar,
     this.filledIcon = Icons.error,
-    this.settingsPage,
     this.label = '',
   });
 
@@ -30,11 +28,8 @@ class RoutedScreen extends StatelessWidget {
   /// The main widget to display the content of the screen
   final Widget mainChild;
 
-  /// The custom settings page only for this screen different from the default
-  late Widget? settingsPage;
-
   /// The app bar of the screen. If null no app bar is displayed
-  late Stab? appBar;
+  final Stab? appBar;
 
   @override
   Widget build(BuildContext context) => customAnimatedBox(
@@ -92,6 +87,4 @@ class RoutedScreen extends StatelessWidget {
   IconData get getFilledIcon => filledIcon;
   IconData get getIcon => icon;
   Widget get getMainChild => mainChild;
-  Widget? get getSettingsPage => settingsPage;
-  //Stab get getAppBar => appBar ?? Stab(appBar: AppBar());
 }
