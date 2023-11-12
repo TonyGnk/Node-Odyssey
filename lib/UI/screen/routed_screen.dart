@@ -42,7 +42,10 @@ class RoutedScreen extends StatelessWidget {
             title: Text(label),
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           ),
-          body: mainChild,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: mainChild,
+          ),
           //   Column(
           //     children: [
           //       //const SizedBox(height: 5),
