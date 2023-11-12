@@ -63,16 +63,3 @@ class DD extends StatelessWidget {
         child: Text(text),
       );
 }
-
-final textProvider = StateProvider<String>(
-  (ref) => '',
-);
-
-//Create a function for adding a string in the provider
-void addText(WidgetRef ref, String text) {
-  ref.read(textProvider.notifier).state = ref.watch(textProvider) + '\n' + text;
-}
-
-void clearText(WidgetRef ref) {
-  ref.read(textProvider.notifier).state = '';
-}
