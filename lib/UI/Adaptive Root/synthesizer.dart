@@ -69,18 +69,18 @@ class _SynthesizerState extends State<Synthesizer> {
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
-              NavigationRail(
-                  onDestinationSelected: updateCurrentPageIndex,
-                  destinations: List.generate(
-                    widget.screens.length,
-                    (i) => NavigationRailDestination(
-                      icon: Icon(
-                        widget.screens[i].getIcon,
-                      ),
-                      label: Text(widget.screens[i].getLabel),
-                    ),
-                  ),
-                  selectedIndex: currentPageIndex),
+              // NavigationRail(
+              //     onDestinationSelected: updateCurrentPageIndex,
+              //     destinations: List.generate(
+              //       widget.screens.length,
+              //       (i) => NavigationRailDestination(
+              //         icon: Icon(
+              //           widget.screens[i].getIcon,
+              //         ),
+              //         label: Text(widget.screens[i].getLabel),
+              //       ),
+              //     ),
+              //     selectedIndex: currentPageIndex),
               widget.screens[currentPageIndex].build(context),
             ],
           ),

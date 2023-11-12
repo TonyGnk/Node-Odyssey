@@ -46,12 +46,12 @@ Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
       (BuildContext context) => const BasicScreen();
   routes['/settings/about'] = (BuildContext context) => const AboutScreen();
   //add /settings/customization
-  routes['/settings/customization'] = (BuildContext context) => StyleScreen();
+  routes['/settings/customization'] =
+      (BuildContext context) => const StyleScreen();
 
   return routes;
 }
 
-//Creaate a function for meging two lists of screens type
 List<RoutedScreen> mergeScreenLists(
     List<RoutedScreen> a, List<RoutedScreen> b) {
   List<RoutedScreen> c = [];

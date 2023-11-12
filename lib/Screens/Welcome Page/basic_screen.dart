@@ -1,37 +1,25 @@
-// This is the parent of home screen widgets.
-
-import 'dart:async';
-import '../../../UI/screen/screen.dart';
-import '../../../UI/screen/stab/stab.dart';
 import 'package:flutter/material.dart';
 import '../../Services & Providers/welcome_dialog.dart';
 import 'button_side.dart';
 import 'terminal_side.dart';
 
-class BasicScreen extends StatelessWidget {
-  const BasicScreen({super.key});
+class HomePageClass extends StatefulWidget {
+  /// Μια κλάση που ενώνει τα κομμάτια της αρχικής οθόνης [terminalSide] και [ButtonsSide]
+  const HomePageClass({super.key});
 
   @override
-  RoutedScreen build(BuildContext context) => RoutedScreen(
-        mainChild: SecondBasicScreen(),
-        label: 'Basic',
-        appBar: Stab(true),
-        filledIcon: Icons.calculate,
-        icon: Icons.calculate_outlined,
-      );
+  State<HomePageClass> createState() => _HomePageClassState();
 }
 
-class SecondBasicScreen extends StatelessWidget {
-  SecondBasicScreen({super.key});
-
-  bool z = true;
+class _HomePageClassState extends State<HomePageClass> {
+  bool isFirstRun = true;
 
   @override
   Widget build(BuildContext context) {
-    z
+    isFirstRun
         ? Future.delayed(Duration.zero, () {
             showAlert(context, false);
-            z = false;
+            isFirstRun = false;
           })
         : null;
     return Container(

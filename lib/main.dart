@@ -36,7 +36,6 @@ class _MyAppState extends State<MyApp> {
         appTitle: 'Algorithms',
         debugShowFloatingThemeButton: true,
         screens: [
-          //Algo1().build(context),
           homePage(context),
         ],
       );

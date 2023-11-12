@@ -2,7 +2,6 @@
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import '../../Screens/Welcome Page/basic_screen.dart';
 import 'root_config.dart';
 import '../screen/screen.dart';
 import '../services/circularProgressScreen.dart';
