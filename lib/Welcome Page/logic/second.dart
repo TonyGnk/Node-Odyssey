@@ -22,6 +22,9 @@ List<List<Node>> findSolutions(int start, int end) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
+    //Print the current node value
+    log('${current.value}');
+
     if (current.value == end) {
       solutions.add(List.from(currentPath));
       continue;
