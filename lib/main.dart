@@ -1,9 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'Screens/list.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
-import 'Welcome Page/al1.dart';
-import 'Welcome Page/basic_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +37,7 @@ class _MyAppState extends State<MyApp> {
         debugShowFloatingThemeButton: true,
         screens: [
           //Algo1().build(context),
-
-          BasicScreen().build(context),
+          homePage(context),
         ],
       );
 }

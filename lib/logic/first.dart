@@ -4,7 +4,7 @@ import 'dart:collection';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../selector.dart';
+import '../selector.dart';
 import 'second.dart';
 
 class First extends StatefulWidget {

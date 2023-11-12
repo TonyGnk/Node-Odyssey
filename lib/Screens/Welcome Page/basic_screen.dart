@@ -1,10 +1,10 @@
-// ignore_for_file: must_be_immutable
+// This is the parent of home screen widgets.
 
 import 'dart:async';
-import '../../UI/screen/screen.dart';
-import '../../UI/screen/stab/stab.dart';
+import '../../../UI/screen/screen.dart';
+import '../../../UI/screen/stab/stab.dart';
 import 'package:flutter/material.dart';
-import 'Services/welcome_dialog.dart';
+import '../../Services & Providers/welcome_dialog.dart';
 import 'button_side.dart';
 import 'terminal_side.dart';
 

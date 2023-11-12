@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Welcome Page/logic/first.dart';
+import 'logic/first.dart';
 
 class Selector extends StatelessWidget {
   Selector({super.key, required this.ref});

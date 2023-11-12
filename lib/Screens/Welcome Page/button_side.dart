@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../custom_list_tile.dart';
-import 'al1.dart';
+import '../../custom_list_tile.dart';
+import '../../logic/al1.dart';
 
 class ButtonsSide extends StatelessWidget {
   const ButtonsSide({super.key});

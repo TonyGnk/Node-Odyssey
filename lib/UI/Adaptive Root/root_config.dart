@@ -13,8 +13,9 @@ Widget rootConfig(
   AdaptiveThemeMode? savedThemeMode,
   String appTitle,
   bool debugShowFloatingThemeButton,
-  List<RoutedScreen> screens,
-) =>
+  List<RoutedScreen> screens, [
+  List<RoutedScreen>? nonNavigationScreens,
+]) =>
     AdaptiveTheme(
       light: theme.light(),
       dark: theme.dark(),
@@ -26,7 +27,8 @@ Widget rootConfig(
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
         home: Synthesizer(screens: screens),
-        routes: generateRoutes(screens),
+        routes: generateRoutes(
+            mergeScreenLists(screens, nonNavigationScreens ?? [])),
       ),
     );
 
@@ -47,4 +49,17 @@ Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
   routes['/settings/customization'] = (BuildContext context) => StyleScreen();
 
   return routes;
+}
+
+//Creaate a function for meging two lists of screens type
+List<RoutedScreen> mergeScreenLists(
+    List<RoutedScreen> a, List<RoutedScreen> b) {
+  List<RoutedScreen> c = [];
+  for (int i = 0; i < a.length; i++) {
+    c.add(a[i]);
+  }
+  for (int i = 0; i < b.length; i++) {
+    c.add(b[i]);
+  }
+  return c;
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../UI/screen/screen.dart';
 import '../UI/screen/stab/stab.dart';
 import '../tree.dart';
-import 'logic/first.dart';
+import 'first.dart';
 
 class Algo1 extends StatelessWidget {
   const Algo1({super.key});
