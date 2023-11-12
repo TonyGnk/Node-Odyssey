@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'breadth_first_alg_page.dart';
+import 'breadth_first_page.dart';
 
 class Selector extends StatelessWidget {
   Selector({required this.ref, super.key});

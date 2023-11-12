@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'second.dart';
 import 'selector.dart';
-import 'providers_breadth_alg.dart';
-import 'tracking.dart';
+import 'providers_bf.dart';
+import 'tracking_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
   const BreadthFirstAlg({super.key});
@@ -16,7 +16,11 @@ class BreadthFirstAlg extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            trackingListBF(),
+            Expanded(
+              flex: 1,
+              child: trackingListBF(),
+            ),
+            Expanded(flex: 2, child: const SizedBox())
           ],
         ),
       );
