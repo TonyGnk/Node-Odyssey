@@ -56,16 +56,16 @@ flutter_launcher_icons:
   background_color_ios: "#ffffff"
   web:
     generate: true
-    image_path: "assets/images/bluetr.png"
+    image_path: "assets/images/cratr.png"
     background_color: "#152C3E"
     theme_color: "#152C3E"
   windows:
       generate: true
-      image_path: "assets/images/bluetr.png"
+      image_path: "assets/images/cratr.png"
       icon_size: 48 # min:48, max:256, default: 48
   macos:
       generate: true
-      image_path: "assets/images/bluetr.png"
+      image_path: "assets/images/cratr.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
