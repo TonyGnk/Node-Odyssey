@@ -34,19 +34,27 @@ class Node {
 
 // Finally, the function returns the list of solutions, which are all the paths from start to end that were found.
 
-List<List<Node>> findBreadthSolutionUI(int start, int end, WidgetRef ref) {
+Future<List<List<Node>>> findBreadthSolutionUI(
+  int start,
+  int end,
+  int speed,
+  WidgetRef ref,
+) async {
   ListQueue<List<Node>> queue = ListQueue();
   List<List<Node>> solutions = [];
 
   queue.add([Node(start, 0, '')]);
 
   while (queue.isNotEmpty) {
+    await Future.delayed(Duration(milliseconds: speed));
+
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
     //Print the current node value
     log('${current.value}');
-    addTrackingContainer(ref, '${current.value}', Colors.green);
+    addTrackingContainer(ref, '${current.value}', Colors.transparent);
+    addTrackingContainerRolling(ref, '${current.value}', Colors.green);
 
     if (current.value == end) {
       solutions.add(List.from(currentPath));
@@ -54,14 +62,14 @@ List<List<Node>> findBreadthSolutionUI(int start, int end, WidgetRef ref) {
     }
 
     // Προσθήκη κόμβων μετά την πρόσθεση
-    if (current.value + 1 < 32) {
+    if (current.value + 1 < 51) {
       Node newNode = Node(current.value + 1, current.cost + 2, '+');
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
     }
 
     // Προσθήκη κόμβων μετά τον πολλαπλασιασμό
-    if (current.value * 2 < 32) {
+    if (current.value * 2 < 51) {
       Node newNode = Node(current.value * 2, current.cost + 4, '*');
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);

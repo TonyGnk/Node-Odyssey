@@ -31,8 +31,13 @@ class BreadthFirstAlg extends StatelessWidget {
       );
 }
 
-startCal(int start, int end, WidgetRef ref) async {
-  List<List<Node>> solutions = findBreadthSolutionUI(start, end, ref);
+startCal(int start, int end, int speed, WidgetRef ref) async {
+  List<List<Node>> solutions = await findBreadthSolutionUI(
+    start,
+    end,
+    speed,
+    ref,
+  );
   clearTrackingTextBF(ref);
 
   if (solutions.isEmpty) {
