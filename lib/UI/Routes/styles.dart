@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Screens/Welcome Page/basic_screen.dart';
+import '../../Screens/Home Page/home_page.dart';
 import '../Components/Buttons/segmented_button.dart';
 import '../screen/Settings Items/DropDown/dropdown_my.dart';
 import '../services/uiChange.dart';

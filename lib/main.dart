@@ -38,5 +38,6 @@ class _MyAppState extends State<MyApp> {
         screens: [
           homePage(context),
         ],
+        nonNavigationScreens: [breadthFirstAlgPage(context)],
       );
 }

@@ -9,9 +9,9 @@ class RoutedScreen extends StatelessWidget {
   /// Each screen has a name and a outlined icon to display in the navigation bar/rail, essentially a not outlined icon when is selected.
 
   RoutedScreen({
-    super.key,
     required this.mainChild,
     required this.icon,
+    super.key,
     this.appBar,
     this.filledIcon = Icons.error,
     this.settingsPage,

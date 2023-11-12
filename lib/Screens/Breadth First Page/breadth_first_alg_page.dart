@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../UI/screen/screen.dart';
-import '../UI/screen/stab/stab.dart';
-import '../tree.dart';
-import 'first.dart';
+import '../../UI/screen/screen.dart';
+import '../../UI/screen/stab/stab.dart';
+import '../../tree.dart';
+import '../../logic/first.dart';
 
-class Algo1 extends StatelessWidget {
-  const Algo1({super.key});
-
-  @override
-  RoutedScreen build(BuildContext context) => RoutedScreen(
-        mainChild: const TestAlg(),
-        label: 'Basic',
-        appBar: Stab(true),
-        filledIcon: Icons.calculate,
-        icon: Icons.calculate_outlined,
-      );
-}
-
-class Algo2 extends StatelessWidget {
-  const Algo2({super.key});
+class BreadthFirstAlg extends StatelessWidget {
+  const BreadthFirstAlg({super.key});
 
   @override
   RoutedScreen build(BuildContext context) => RoutedScreen(

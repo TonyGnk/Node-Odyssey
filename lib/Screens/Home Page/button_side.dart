@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../custom_list_tile.dart';
-import '../../logic/al1.dart';
+import '../list.dart';
+import '../Breadth First Page/breadth_first_alg_page.dart';
 
 class ButtonsSide extends StatelessWidget {
   const ButtonsSide({super.key});
@@ -45,7 +46,7 @@ class ButtonsSide extends StatelessWidget {
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
-                  const Algo1(),
+                  const BreadthFirstAlg(),
                 ),
               ),
               leftIcon: Icons.radar_outlined,
@@ -60,7 +61,7 @@ class ButtonsSide extends StatelessWidget {
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
-                  const Algo2(),
+                  const BreadthFirstAlg(),
                 ),
               ),
               leftIcon: Icons.grid_goldenratio,
@@ -75,7 +76,7 @@ class ButtonsSide extends StatelessWidget {
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
-                  const Algo1(),
+                  const BreadthFirstAlg(),
                 ),
               ),
               leftIcon: Icons.no_encryption_gmailerrorred_rounded,
@@ -87,7 +88,7 @@ class ButtonsSide extends StatelessWidget {
               onTap: () async => Navigator.push(
                 context,
                 _customPageRouteBuilder(
-                  const Algo1(),
+                  const BreadthFirstAlg(),
                 ),
               ),
               leftIcon: Icons.stacked_line_chart_sharp,

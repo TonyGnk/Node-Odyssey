@@ -3,15 +3,15 @@ import '../../Services & Providers/welcome_dialog.dart';
 import 'button_side.dart';
 import 'terminal_side.dart';
 
-class HomePageClass extends StatefulWidget {
+class Home extends StatefulWidget {
   /// Μια κλάση που ενώνει τα κομμάτια της αρχικής οθόνης [terminalSide] και [ButtonsSide]
-  const HomePageClass({super.key});
+  const Home({super.key});
 
   @override
-  State<HomePageClass> createState() => _HomePageClassState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageClassState extends State<HomePageClass> {
+class _HomeState extends State<Home> {
   bool isFirstRun = true;
 
   @override
