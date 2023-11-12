@@ -16,6 +16,7 @@ class Selector extends StatelessWidget {
   Widget build(BuildContext context) => Consumer(
         builder: (_, WidgetRef ref, __) => SizedBox(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 decoration: BoxDecoration(
