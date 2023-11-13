@@ -63,7 +63,6 @@ class RoutedScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-
                         fixedSize: MaterialStateProperty.all<Size>(
                           const Size(50, 50),
                         ),
@@ -71,7 +70,7 @@ class RoutedScreen extends StatelessWidget {
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.arrow_back_ios_new_outlined),
                     ),
-                    //name of the screen
+                    const SizedBox(width: 6),
                     Text(
                       label,
                       style: Theme.of(context).textTheme.headline6,

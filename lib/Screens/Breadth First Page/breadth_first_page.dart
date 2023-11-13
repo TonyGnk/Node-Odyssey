@@ -16,20 +16,46 @@ class BreadthFirstAlg extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 1,
-            child: trackingListBF(),
+            flex: 2,
+            child: c1(),
           ),
           Expanded(
-            flex: 2,
-            child: const SizedBox(),
+            flex: 6,
+            child: const DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(width: 1.0, color: Colors.black),
+                ),
+              ),
+            ),
           ),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Selector(),
           ),
         ],
       );
 }
+
+Container c1() => Container(
+      child: Column(
+        children: [
+          trackingListBF(),
+        ],
+      ),
+    );
+
+Column c2() => Column(
+      children: [
+        const SizedBox(height: 20),
+      ],
+    );
+
+Column c3() => Column(
+      children: [
+        const SizedBox(height: 20),
+      ],
+    );
 
 // startCal(int start, int end, int speed, WidgetRef ref) async {
 //   List<List<Node>> solutions = await findBreadthSolutionUI(
