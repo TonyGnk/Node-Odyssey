@@ -44,9 +44,9 @@ class ButtonsSide extends StatelessWidget {
               label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
               onTap: () async => Navigator.pushNamed(
                 context,
-                breadthFirstAlgScreen(context).getLabelWithSlash,
+                breadthFirstAlgScreen().getLabelWithSlash,
               ),
-              leftIcon: breadthFirstAlgScreen(context).getIcon,
+              leftIcon: breadthFirstAlgScreen().getIcon,
               type: Type.top,
             ),
             const Divider(

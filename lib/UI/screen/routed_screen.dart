@@ -10,6 +10,7 @@ class RoutedScreen extends StatelessWidget {
   const RoutedScreen({
     required this.mainChild,
     required this.icon,
+    this.labelRoute,
     super.key,
     this.appBar,
     this.filledIcon = Icons.error,
@@ -18,6 +19,9 @@ class RoutedScreen extends StatelessWidget {
 
   /// Label in the navigation bar/rail and URL path
   final String label;
+
+  /// The URL path of the screen
+  final String? labelRoute;
 
   /// The icon to display in the navigation bar/rail when the screen is selected
   final IconData filledIcon;
@@ -32,32 +36,64 @@ class RoutedScreen extends StatelessWidget {
   final Stab? appBar;
 
   @override
-  Widget build(BuildContext context) => customAnimatedBox(
-        //padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-        //width: MediaQuery.of(context).size.width - 80,
-        //height: MediaQuery.of(context).size.height,
+  Widget build(BuildContext context) => Scaffold(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    color: Theme.of(context).colorScheme.background),
+                child: Row(
+                  children: [
+                    //back button
+                    IconButton(
+                      tooltip: 'Πίσω',
+                      style: ButtonStyle(
+                        //large size
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
 
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(label),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                        fixedSize: MaterialStateProperty.all<Size>(
+                          const Size(50, 50),
+                        ),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                    ),
+                    //name of the screen
+                    Text(
+                      label,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(child: mainChild),
+            ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: mainChild,
-          ),
-          //   Column(
-          //     children: [
-          //       //const SizedBox(height: 5),
-          //       appBar?.build(
-          //               const SettingsToggle(darkThemeSwitcher: true), context) ??
-          //           const SizedBox(),
-          //       //const SizedBox(height: 10),
-          //       mainChild,
-          //       // ),
-          //     ],
-          //   ),
         ),
+        //   Column(
+        //     children: [
+        //       //const SizedBox(height: 5),
+        //       appBar?.build(
+        //               const SettingsToggle(darkThemeSwitcher: true), context) ??
+        //           const SizedBox(),
+        //       //const SizedBox(height: 10),
+        //       mainChild,
+        //       // ),
+        //     ],
+        //   ),
       );
 
   Widget buildSmall(BuildContext context, double width, double height) =>
@@ -86,7 +122,7 @@ class RoutedScreen extends StatelessWidget {
       );
 
   String get getLabel => label;
-  String get getLabelWithSlash => '/$label';
+  String get getLabelWithSlash => labelRoute ?? '/$label';
   IconData get getFilledIcon => filledIcon;
   IconData get getIcon => icon;
   Widget get getMainChild => mainChild;

@@ -36,8 +36,10 @@ class _MyAppState extends State<MyApp> {
         appTitle: 'Algorithms',
         debugShowFloatingThemeButton: true,
         screens: [
-          homeScreen(context),
+          homeScreen(),
         ],
-        nonNavigationScreens: [breadthFirstAlgScreen(context)],
+        nonNavigationScreens: [
+          breadthFirstAlgScreen(),
+        ],
       );
 }
