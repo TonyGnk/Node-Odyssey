@@ -31,8 +31,37 @@ class BreadthFirstAlg extends StatelessWidget {
       );
 }
 
+// startCal(int start, int end, int speed, WidgetRef ref) async {
+//   List<List<Node>> solutions = await findBreadthSolutionUI(
+//     start,
+//     end,
+//     speed,
+//     ref,
+//   );
+//   clearTrackingTextBF(ref);
+
+//   if (solutions.isEmpty) {
+//     log('Δεν υπάρχουν λύσεις.');
+//     addTrackingTextBF(ref, 'Δεν υπάρχουν λύσεις.');
+//   } else {
+//     for (List<Node> solution in solutions) {
+//       log('Λύση:');
+//       addTrackingTextBF(ref, 'Λύση:');
+
+//       for (Node node in solution) {
+//         log('${node.operation} ${node.value}');
+//         addTrackingTextBF(ref, '${node.operation} ${node.value}');
+//       }
+
+//       log('Συνολικό Κόστος: ${solution.last.cost}');
+//       addTrackingTextBF(ref, 'Συνολικό Κόστος: ${solution.last.cost}');
+//       log('\n');
+//       addTrackingTextBF(ref, '\n');
+//     }
+//   }
+// }
 startCal(int start, int end, int speed, WidgetRef ref) async {
-  List<List<Node>> solutions = await findBreadthSolutionUI(
+  List<Node>? solution = await findBreadthSolutionUI(
     start,
     end,
     speed,
@@ -40,23 +69,21 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
   );
   clearTrackingTextBF(ref);
 
-  if (solutions.isEmpty) {
+  if (solution == null) {
     log('Δεν υπάρχουν λύσεις.');
     addTrackingTextBF(ref, 'Δεν υπάρχουν λύσεις.');
   } else {
-    for (List<Node> solution in solutions) {
-      log('Λύση:');
-      addTrackingTextBF(ref, 'Λύση:');
+    log('Λύση:');
+    addTrackingTextBF(ref, 'Λύση:');
 
-      for (Node node in solution) {
-        log('${node.operation} ${node.value}');
-        addTrackingTextBF(ref, '${node.operation} ${node.value}');
-      }
-
-      log('Συνολικό Κόστος: ${solution.last.cost}');
-      addTrackingTextBF(ref, 'Συνολικό Κόστος: ${solution.last.cost}');
-      log('\n');
-      addTrackingTextBF(ref, '\n');
+    for (Node node in solution) {
+      log('${node.operation} ${node.value}');
+      addTrackingTextBF(ref, '${node.operation} ${node.value}');
     }
+
+    log('Συνολικό Κόστος: ${solution.last.cost}');
+    addTrackingTextBF(ref, 'Συνολικό Κόστος: ${solution.last.cost}');
+    log('\n');
+    addTrackingTextBF(ref, '\n');
   }
 }

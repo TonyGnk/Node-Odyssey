@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'tracking_tiles.dart';
@@ -42,10 +40,5 @@ final trackUpdater = StateProvider<TrackingTiles>(
 
 void addTrackingContainerRolling(WidgetRef ref, String text, Color color) {
   ref.read(trackUpdater.notifier).state =
-      TrackingTiles(text: text, color: randomColor());
+      TrackingTiles(text: text, color: Colors.black);
 }
-
-//Create a getter random color
-Color randomColor() =>
-    Color((0x00FFFFFF & DateTime.now().millisecondsSinceEpoch) |
-        0xFF000000); //0xFFFFFFFF

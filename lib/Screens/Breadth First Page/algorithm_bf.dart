@@ -34,14 +34,62 @@ class Node {
 
 // Finally, the function returns the list of solutions, which are all the paths from start to end that were found.
 
-Future<List<List<Node>>> findBreadthSolutionUI(
+// Future<List<List<Node>>> findBreadthSolutionUI(
+//   int start,
+//   int end,
+//   int speed,
+//   WidgetRef ref,
+// ) async {
+//   ListQueue<List<Node>> queue = ListQueue();
+//   List<List<Node>> solutions = [];
+
+//   queue.add([Node(start, 0, '')]);
+
+//   while (queue.isNotEmpty) {
+//     await Future.delayed(Duration(milliseconds: speed));
+
+//     List<Node> currentPath = queue.removeFirst();
+//     Node current = currentPath.last;
+
+//     //Print the current node value
+//     log('${current.value}');
+//     //For printing the ui only
+//     addTrackingContainer(ref, '${current.value}', Colors.transparent);
+//     addTrackingContainerRolling(ref, '${current.value}', Colors.green);
+
+//     if (current.value == end) {
+//       solutions.add(List.from(currentPath));
+//       continue;
+//     }
+
+//     // Προσθήκη κόμβων μετά την πρόσθεση
+//     if (current.value + 1 < 51) {
+//       Node newNode = Node(current.value + 1, current.cost + 2, '+');
+//       List<Node> newPath = List.from(currentPath)..add(newNode);
+//       queue.add(newPath);
+//     }
+
+//     // Προσθήκη κόμβων μετά τον πολλαπλασιασμό
+//     if (current.value * 2 < 51) {
+//       Node newNode = Node(current.value * 2, current.cost + 4, '*');
+//       List<Node> newPath = List.from(currentPath)..add(newNode);
+//       queue.add(newPath);
+//     }
+//   }
+
+//   return solutions;
+// }
+
+//
+
+Future<List<Node>?> findBreadthSolutionUI(
   int start,
   int end,
   int speed,
   WidgetRef ref,
 ) async {
   ListQueue<List<Node>> queue = ListQueue();
-  List<List<Node>> solutions = [];
+  List<bool> visited = List.filled(9951, false); // Initialize visited list
 
   queue.add([Node(start, 0, '')]);
 
@@ -51,33 +99,43 @@ Future<List<List<Node>>> findBreadthSolutionUI(
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    //Print the current node value
+    // If the node has been visited before, skip it
+    if (visited[current.value]) continue;
+
+    // Mark the node as visited
+    visited[current.value] = true;
+
+    // Print the current node value
     log('${current.value}');
+    // For printing the ui only
     addTrackingContainer(ref, '${current.value}', Colors.transparent);
     addTrackingContainerRolling(ref, '${current.value}', Colors.green);
 
     if (current.value == end) {
-      solutions.add(List.from(currentPath));
-      continue;
+      return currentPath;
     }
 
     // Προσθήκη κόμβων μετά την πρόσθεση
-    if (current.value + 1 < 51) {
+    if (current.value + 1 < 9951) {
       Node newNode = Node(current.value + 1, current.cost + 2, '+');
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
     }
 
     // Προσθήκη κόμβων μετά τον πολλαπλασιασμό
-    if (current.value * 2 < 51) {
+    if (current.value * 2 < 9951) {
       Node newNode = Node(current.value * 2, current.cost + 4, '*');
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
     }
   }
 
-  return solutions;
+  return null;
 }
+
+//
+
+//
 
 List<List<Node>> findBreadthSolutionCmd(int start, int end) {
   ListQueue<List<Node>> queue = ListQueue();
