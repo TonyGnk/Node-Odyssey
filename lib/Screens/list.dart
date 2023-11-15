@@ -11,7 +11,9 @@ RoutedScreen homeScreen() => const RoutedScreen(
       labelRoute: '/Home',
       icon: Icons.home_outlined,
       filledIcon: Icons.home,
-      appBar: AdaptAppBar(label: 'Αρχική'),
+      appBar: AdaptAppBar(
+        enable: false,
+      ),
     );
 
 // The Breadth First Algorithm page.

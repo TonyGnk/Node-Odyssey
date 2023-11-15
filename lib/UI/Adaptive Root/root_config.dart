@@ -44,7 +44,7 @@ Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
   // Manually specify routes
   routes['/settings/appearance'] =
       (BuildContext context) => const BasicScreen();
-  routes['/settings/about'] = (BuildContext context) => const AboutScreen();
+  routes['/about'] = (BuildContext context) => const AboutScreen();
   //add /settings/customization
   routes['/settings/customization'] =
       (BuildContext context) => const StyleScreen();

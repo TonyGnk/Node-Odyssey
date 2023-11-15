@@ -1,10 +1,14 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import '../../Services & Providers/constants.dart';
+import 'app_bar_icon.dart';
+import 'info_icon.dart';
+import 'theme_icon.dart';
 
 class AdaptAppBar extends StatelessWidget {
   const AdaptAppBar({
     this.showThemeIcon = false,
+    this.showInfoIcon = false,
     this.label,
     this.enable = true,
     super.key,
@@ -15,80 +19,43 @@ class AdaptAppBar extends StatelessWidget {
   ///The label at the top left corner of the app bar. If null rooted screen sets to label of the screen.
   final String? label;
 
-  //create a getter for the enable
   bool get getEnable => enable;
 
   final bool showThemeIcon;
+  final bool showInfoIcon;
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            width: 1,
+  Widget build(BuildContext context) => enable
+      ? DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(cornerSize),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
           ),
-          borderRadius: BorderRadius.circular(cornerSize),
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        ),
-        child: row(context),
-      );
+          child: row(context),
+        )
+      : const SizedBox();
 
   Row row(BuildContext context) => Row(
         children: [
           //back button
-          IconButton(
+          AppBarIcon(
             tooltip: 'Πίσω',
-            style: ButtonStyle(
-              //large size
-              shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              fixedSize: MaterialStateProperty.all<Size>(
-                const Size(50, 50),
-              ),
-            ),
-            onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios_new_outlined),
+            onPressed: () => Navigator.pop(context),
           ),
           const SizedBox(width: 6),
           Text(
             label ?? '',
           ),
           const Expanded(child: SizedBox()),
-          themeIcon(context)
+          themeIcon(context, showThemeIcon),
+          infoIcon(context, enable)
         ],
       );
-
-  Widget themeIcon(BuildContext context) {
-    String mode = AdaptiveTheme.of(context).mode.toString();
-    return showThemeIcon
-        ? IconButton(
-            tooltip: mode == 'AdaptiveThemeMode.dark'
-                ? 'Είσαι dark. Αλλαγή σε σύστημα θέμα'
-                : mode == 'AdaptiveThemeMode.system'
-                    ? 'Είσαι σύστημα. Αλλαγή σε φωτεινό θέμα'
-                    : 'Είσαι φωτεινός. Αλλαγή σε σκοτεινό θέμα.',
-            //if mode is dark or mode is system
-            isSelected: mode == 'AdaptiveThemeMode.dark' ||
-                mode == 'AdaptiveThemeMode.system',
-            onPressed: () {
-              AdaptiveTheme.of(context).toggleThemeMode();
-              AdaptiveTheme.of(context).updateState();
-            },
-            icon: Icon(Icons.wb_sunny_outlined,
-                color: Theme.of(context).colorScheme.onBackground),
-            selectedIcon: mode == 'AdaptiveThemeMode.dark'
-                ? Icon(Icons.dark_mode_outlined,
-                    color: Theme.of(context).colorScheme.onBackground)
-                :
-                //Icon for system theme
-                Icon(Icons.contrast_outlined,
-                    color: Theme.of(context).colorScheme.onBackground),
-          )
-        : const SizedBox();
-  }
 }
 
 
