@@ -7,7 +7,7 @@ import 'Services/List Panel/result_providers.dart';
 import 'algorithm_bf.dart';
 import 'center_column_bf.dart';
 import 'left_column_bf.dart';
-import 'selector.dart';
+import 'right_column_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
   const BreadthFirstAlg({super.key});
@@ -26,17 +26,11 @@ class BreadthFirstAlg extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: Selector(),
+            child: c3(context),
           ),
         ],
       );
 }
-
-Column c3() => Column(
-      children: [
-        const SizedBox(height: 20),
-      ],
-    );
 
 // startCal(int start, int end, int speed, WidgetRef ref) async {
 //   List<List<Node>> solutions = await findBreadthSolutionUI(
