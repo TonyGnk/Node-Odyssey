@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import '../../Services & Providers/constants.dart';
 import 'app_bar_icon.dart';
@@ -9,47 +8,57 @@ class AdaptAppBar extends StatelessWidget {
   const AdaptAppBar({
     this.showThemeIcon = false,
     this.showInfoIcon = false,
+    this.showBackButton = true,
+    this.filled = true,
     this.label,
     this.enable = true,
     super.key,
   });
 
   final bool enable;
+  final bool filled;
 
   ///The label at the top left corner of the app bar. If null rooted screen sets to label of the screen.
   final String? label;
 
-  bool get getEnable => enable;
-
   final bool showThemeIcon;
   final bool showInfoIcon;
+  final bool showBackButton;
 
+  bool get getEnable => enable;
   @override
   Widget build(BuildContext context) => enable
       ? DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(cornerSize),
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-          ),
+          decoration: filled
+              ? BoxDecoration(
+                  border: Border.all(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(cornerSize),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                )
+              : BoxDecoration(
+                  borderRadius: BorderRadius.circular(cornerSize),
+                ),
           child: row(context),
         )
       : const SizedBox();
 
   Row row(BuildContext context) => Row(
         children: [
-          //back button
-          AppBarIcon(
-            tooltip: 'Πίσω',
-            icon: const Icon(Icons.arrow_back_ios_new_outlined),
-            onPressed: () => Navigator.pop(context),
-          ),
+          showBackButton
+              ? AppBarIcon(
+                  tooltip: 'Πίσω',
+                  icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                  onPressed: () => Navigator.pop(context),
+                )
+              : const SizedBox(),
           const SizedBox(width: 6),
           Text(
             label ?? '',
+            style: const TextStyle(fontSize: 16),
           ),
           const Expanded(child: SizedBox()),
           themeIcon(context, showThemeIcon),
