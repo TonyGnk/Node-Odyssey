@@ -11,16 +11,33 @@ Widget resultPanel(BuildContext context) =>
       return Container(
           //height: 300,
           //height: MediaQuery.of(context).size.height - 86,
+          margin: const EdgeInsets.symmetric(horizontal: 0),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               bottomRight: Radius.circular(cornerSize),
-              bottomLeft: Radius.circular(cornerSize),
+              //bottomLeft: Radius.circular(cornerSize),
+              //topLeft: Radius.circular(cornerSize),
+              topRight: Radius.circular(cornerSize),
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            border: Border(
+              top: BorderSide(
+                  width: 1.0,
+                  color:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.1)),
+              bottom: BorderSide(
+                width: 1.0,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              ),
+              left: BorderSide(
+                  width: 1.0,
+                  color:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.1)),
+              right: BorderSide(
+                width: 1.0,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              ),
             ),
           ),
           child: listView(context, stringResult));

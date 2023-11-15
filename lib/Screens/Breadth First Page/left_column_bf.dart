@@ -8,7 +8,7 @@ Container c1(BuildContext context) => Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(cornerSize),
+          //bottomRight: Radius.circular(cornerSize),
           bottomLeft: Radius.circular(cornerSize),
         ),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
