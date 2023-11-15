@@ -47,6 +47,7 @@ class RoutedScreen extends StatelessWidget {
   Column col(BuildContext context) => Column(
         children: [
           appBar,
+          const SizedBox(height: 8),
           Expanded(child: mainChild),
         ],
       );

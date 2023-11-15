@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../custom_list_tile.dart';
 import '../Components/Buttons/elevated_button.dart';
 import '../Services2/ui_handler.dart';
 
@@ -108,21 +109,27 @@ Widget scaffoldAboutScreenType2(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('h1'),
-          // ListTile(
-          //   title: const Text('App Version'),
-          //   subtitle: Text('${_defaultApplicationName(context)} $version'),
-          //   leading: const Icon(Icons.description_outlined),
-          //   onTap: () => log('App Version: $version'),
-          // ),
-          // const Divider(),
-          // ListTile(
-          //   title: const Text('Operating System'),
-          //   subtitle: Text(Platform.operatingSystem),
-          //   leading: getIconPlatform(Platform.operatingSystem),
-          //   onTap: () => log(Platform.operatingSystem),
-          // ),
-          // const Divider(),
+          CustomListTile(
+            label: 'App Version: ${_defaultApplicationName(context)} $version',
+            leftIcon: Icons.description_outlined,
+            type: Type.top,
+            onTap: () => log('App Version: $version'),
+          ),
+          CustomListTile(
+            label: 'Operating System: ${Platform.operatingSystem}',
+            leftIcon: getIconPlatform(Platform.operatingSystem),
+            type: Type.none,
+            onTap: () => log(Platform.operatingSystem),
+          ),
+          CustomListTile(
+            label: 'Open Source Licenses',
+            leftIcon: Icons.description_outlined,
+            type: Type.bottom,
+            onTap: () => showLicensePage(
+              context: context,
+            ),
+          )
+
           // ListTile(
           //   title: const Text('Open Source Licenses'),
           //   leading: const Icon(Icons.description_outlined),
@@ -164,16 +171,16 @@ String _defaultApplicationName(BuildContext context) {
 getIconPlatform(String operatingSystem) {
   log(operatingSystem);
   if (operatingSystem == 'android') {
-    return const Icon(Icons.android_outlined);
+    return Icons.android_outlined;
   } else if (operatingSystem == 'ios') {
-    return const Icon(Icons.phone_iphone_outlined);
+    return Icons.phone_iphone_outlined;
   } else if (operatingSystem == 'linux') {
-    return const Icon(Icons.laptop_outlined);
+    return Icons.laptop_outlined;
   } else if (operatingSystem == 'macos') {
-    return const Icon(Icons.desktop_mac_outlined);
+    return Icons.desktop_mac_outlined;
   } else if (operatingSystem == 'windows') {
-    return const Icon(Icons.desktop_windows_outlined);
+    return Icons.desktop_windows_outlined;
   } else {
-    return const Icon(Icons.device_unknown_outlined);
+    return Icons.device_unknown_outlined;
   }
 }
