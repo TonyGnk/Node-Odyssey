@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../template.dart';
+import '../../template.dart';
 import '../templates/custom_animated.dart';
 import '../templates/custom_text.dart';
 

@@ -4,8 +4,8 @@ import '../Routes/styles.dart';
 import '../Themes/material_theme_data.dart';
 import 'synthesizer.dart';
 import '../Routes/about_page.dart';
-import '../screen/Settings Items/ap.dart';
-import '../screen/routed_screen.dart';
+import '../Archive/screen/Settings Items/ap.dart';
+import '../routed_screen.dart';
 
 Widget rootConfig(
   BuildContext context,

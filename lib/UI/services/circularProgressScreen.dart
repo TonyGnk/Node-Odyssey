@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../templates/custom_animated.dart';
+import '../Archive/templates/custom_animated.dart';
 
 Widget circularProgressScreen(BuildContext context, String snackBarMessage) =>
     MaterialApp(

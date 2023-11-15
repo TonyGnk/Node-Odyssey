@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'stab/stab.dart';
-import '../templates/custom_animated.dart';
+import 'stab.dart';
+import 'Archive/templates/custom_animated.dart';
 
 class RoutedScreen extends StatelessWidget {
   /// A set of widgets that make up the screen.

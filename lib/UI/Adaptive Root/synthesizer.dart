@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../screen/routed_screen.dart';
-import '../templates/custom_animated.dart';
-import '../templates/nav_bar.dart';
+import '../routed_screen.dart';
+import '../Archive/templates/custom_animated.dart';
+import '../Archive/templates/nav_bar.dart';
 
 class Synthesizer extends StatefulWidget {
   const Synthesizer({

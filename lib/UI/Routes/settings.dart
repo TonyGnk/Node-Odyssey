@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Components/List Tiles/list_tile_modifier.dart';
-import '../templates/settings_toggle.dart';
+import '../Archive/templates/settings_toggle.dart';
 import 'about_page.dart';
 import 'styles.dart';
 
