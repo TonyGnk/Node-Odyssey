@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../Services & Providers/constants.dart';
+
 class AppBarIcon extends StatelessWidget {
   const AppBarIcon({
     required this.tooltip,
@@ -8,6 +10,7 @@ class AppBarIcon extends StatelessWidget {
     super.key,
     this.isSelected,
     this.selectedIcon,
+    this.noBottomLeftCorner = false,
   });
 
   final String? tooltip;
@@ -15,6 +18,7 @@ class AppBarIcon extends StatelessWidget {
   final bool? isSelected;
   final void Function()? onPressed;
   final Widget? selectedIcon;
+  final bool noBottomLeftCorner;
 
   @override
   Widget build(BuildContext context) => IconButton(
@@ -22,7 +26,13 @@ class AppBarIcon extends StatelessWidget {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.only(
+                bottomLeft:
+                    Radius.circular(noBottomLeftCorner ? 0 : cornerSize),
+                topLeft: const Radius.circular(cornerSize),
+                topRight: const Radius.circular(cornerSize),
+                bottomRight: const Radius.circular(cornerSize),
+              ),
             ),
           ),
           fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),

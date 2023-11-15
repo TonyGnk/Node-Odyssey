@@ -14,6 +14,7 @@ class RoutedScreen extends StatelessWidget {
     super.key,
     this.filledIcon = Icons.error,
     this.label = '',
+    this.noMargin = false,
   });
 
   /// Label in the navigation bar/rail and URL path
@@ -34,6 +35,8 @@ class RoutedScreen extends StatelessWidget {
   /// The app bar of the screen. If null no app bar is displayed
   final AdaptAppBar appBar;
 
+  final bool noMargin;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Container(
@@ -47,7 +50,7 @@ class RoutedScreen extends StatelessWidget {
   Column col(BuildContext context) => Column(
         children: [
           appBar,
-          const SizedBox(height: 8),
+          noMargin ? const SizedBox() : const SizedBox(height: 8),
           Expanded(child: mainChild),
         ],
       );

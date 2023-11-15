@@ -14,6 +14,9 @@ class AdaptAppBar extends StatelessWidget {
     this.label,
     this.enable = true,
     super.key,
+    this.leftBottomCorner = true,
+    this.rightBottomCorner = true,
+    this.noTopLeftCornerBack = false,
   });
 
   final bool enable;
@@ -26,6 +29,11 @@ class AdaptAppBar extends StatelessWidget {
   final bool showInfoIcon;
   final bool showBackButton;
 
+  final bool leftBottomCorner;
+  final bool rightBottomCorner;
+
+  final bool noTopLeftCornerBack;
+
   bool get getEnable => enable;
   @override
   Widget build(BuildContext context) => enable
@@ -37,7 +45,14 @@ class AdaptAppBar extends StatelessWidget {
                         Theme.of(context).colorScheme.primary.withOpacity(0.2),
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.circular(cornerSize),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft:
+                        Radius.circular(leftBottomCorner ? cornerSize : 0),
+                    bottomRight:
+                        Radius.circular(rightBottomCorner ? cornerSize : 0),
+                    topLeft: const Radius.circular(cornerSize),
+                    topRight: const Radius.circular(cornerSize),
+                  ),
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 )
               : BoxDecoration(
@@ -54,6 +69,7 @@ class AdaptAppBar extends StatelessWidget {
                   tooltip: 'Πίσω',
                   icon: const Icon(Icons.arrow_back_ios_new_outlined),
                   onPressed: () async => navigateBack(context),
+                  noBottomLeftCorner: noTopLeftCornerBack,
                 )
               : const SizedBox(),
           const SizedBox(width: 6),
