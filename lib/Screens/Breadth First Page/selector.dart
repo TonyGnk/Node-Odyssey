@@ -94,8 +94,20 @@ class _SelectorState extends State<Selector> {
           label: const Text('Εκτέλεση'),
           onPressed: () {
             clearTrackingContainer(ref);
-            startCal(int.parse(controller1.text), int.parse(controller2.text),
-                speedToMillisecond(currentSliderValue), ref);
+            currentSliderValue2 == 1.0
+                ? startCal(
+                    int.parse(controller1.text),
+                    int.parse(controller2.text),
+                    speedToMillisecond(currentSliderValue),
+                    ref,
+                  )
+                : startCal2(
+                    int.parse(controller1.text),
+                    int.parse(controller2.text),
+                    speedToMillisecond(currentSliderValue),
+                    ref,
+                    currentSliderValue2.toInt(),
+                  );
           },
           //submit icon
           icon: const Icon(Icons.send));

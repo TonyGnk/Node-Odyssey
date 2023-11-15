@@ -87,5 +87,39 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
   }
 }
 
+startCal2(int start, int end, int speed, WidgetRef ref, int sol) async {
+  List<List<Node>>? solutions = sol == 2
+      ? await findBreadthSolutionsUI2(
+          start,
+          end,
+          speed,
+          ref,
+        )
+      : await findBreadthSolutionsUI3(
+          start,
+          end,
+          speed,
+          ref,
+        );
+  clearResultPanelList(ref);
+
+  if (solutions == null || solutions.isEmpty) {
+    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.', '', '', true);
+  } else {
+    for (int i = 0; i < solutions.length; i++) {
+      String solutionTitle = 'Λύση ${i + 1}';
+      String solutionText = '';
+      String solutionCost = '';
+
+      for (Node node in solutions[i]) {
+        solutionText += '${node.operation} ${node.value} ';
+      }
+
+      solutionCost += '${solutions[i].last.cost}';
+      addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
+    }
+  }
+}
+
 
 //Create a function take a String 

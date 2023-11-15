@@ -15,7 +15,7 @@ Container c3(BuildContext context) => Container(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
         ),
       ),
-      child: Column(
+      child: const Column(
         children: [
           Expanded(
             flex: 4,
