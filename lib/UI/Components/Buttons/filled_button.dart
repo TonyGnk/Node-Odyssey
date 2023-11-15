@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/ui_handler.dart';
+import '../../Services/ui_handler.dart';
 
 class AdaptFilledButton extends StatelessWidget {
   /// A filled button widget that adapts to the current UI theme.

@@ -4,8 +4,8 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'root_config.dart';
 import '../routed_screen.dart';
-import '../services/circularProgressScreen.dart';
-import '../services/uiChange.dart';
+import '../Services/circularProgressScreen.dart';
+import '../Services/uiChange.dart';
 import '../Themes/material_theme_data.dart';
 
 class AdaptiveRoot extends StatefulWidget {

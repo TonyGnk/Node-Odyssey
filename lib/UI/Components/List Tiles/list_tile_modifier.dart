@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/ui_handler.dart';
+import '../../Services/ui_handler.dart';
 
 class ListTileModifier extends StatelessWidget {
   const ListTileModifier({

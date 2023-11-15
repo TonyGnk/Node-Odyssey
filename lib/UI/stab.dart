@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Themes/oneui_theme_data.dart';
-import 'services/uiChange.dart';
-import 'services/ui_handler.dart';
+import 'Services/uiChange.dart';
+import 'Services/ui_handler.dart';
 import 'Archive/templates/settings_toggle.dart';
 import 'routed_screen.dart';
-import 'Routes/settings.dart';
+import 'Screens/settings.dart';
 import 'template.dart';
 
 class Stab extends StatelessWidget {

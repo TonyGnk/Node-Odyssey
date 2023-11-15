@@ -1,9 +1,9 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import '../Routes/styles.dart';
+import '../Screens/styles.dart';
 import '../Themes/material_theme_data.dart';
 import 'synthesizer.dart';
-import '../Routes/about_page.dart';
+import '../Screens/about_page.dart';
 import '../Archive/screen/Settings Items/ap.dart';
 import '../routed_screen.dart';
 
