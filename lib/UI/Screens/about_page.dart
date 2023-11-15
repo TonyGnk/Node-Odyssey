@@ -98,38 +98,32 @@ Widget scaffoldAboutScreenType1(
 
 Widget scaffoldAboutScreenType2(
         BuildContext context, String title, String version) =>
-    Scaffold(
-        appBar:
-            AppBar(title: Text('About $title'), actions: [aboutAppIconButton]),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ListTile(
-                title: const Text('App Version'),
-                subtitle: Text('${_defaultApplicationName(context)} $version'),
-                leading: const Icon(Icons.description_outlined),
-                onTap: () => log('App Version: $version'),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Operating System'),
-                subtitle: Text(Platform.operatingSystem),
-                leading: getIconPlatform(Platform.operatingSystem),
-                onTap: () => log(Platform.operatingSystem),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Operating System'),
-                subtitle: Text(Platform.operatingSystem),
-                leading: getIconPlatform(Platform.operatingSystem),
-                onTap: () => showLicensePage(
-                  context: context,
-                ),
-              ),
-            ],
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ListTile(
+          title: const Text('App Version'),
+          subtitle: Text('${_defaultApplicationName(context)} $version'),
+          leading: const Icon(Icons.description_outlined),
+          onTap: () => log('App Version: $version'),
+        ),
+        const Divider(),
+        ListTile(
+          title: const Text('Operating System'),
+          subtitle: Text(Platform.operatingSystem),
+          leading: getIconPlatform(Platform.operatingSystem),
+          onTap: () => log(Platform.operatingSystem),
+        ),
+        const Divider(),
+        ListTile(
+          title: const Text('Open Source Licenses'),
+          leading: const Icon(Icons.description_outlined),
+          onTap: () => showLicensePage(
+            context: context,
           ),
-        ));
+        ),
+      ],
+    );
 
 Widget licensesButton(BuildContext context) => AdaptElevatedButton(
       label: 'Open Source Licenses',

@@ -11,7 +11,6 @@ RoutedScreen aboutScreen() => const RoutedScreen(
       icon: Icons.home_outlined,
       filledIcon: Icons.home,
       appBar: AdaptAppBar(
-        showBackButton: false,
         filled: false,
       ),
     );
