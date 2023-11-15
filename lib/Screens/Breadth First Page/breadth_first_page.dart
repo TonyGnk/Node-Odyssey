@@ -75,30 +75,23 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
     ref,
   );
   clearResultPanelList(ref);
+  String solutionTitle = '';
+  String solutionText = '';
+  String solutionCost = '';
 
   if (solution == null) {
-    log('Δεν υπάρχουν λύσεις.');
-    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.');
+    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.', '', '');
   } else {
-    log('Λύση:');
-    addResultPanelList(
-      ref,
-      'Λύση:',
-    );
+    solutionTitle += 'Λύση';
 
     for (Node node in solution) {
-      log('${node.operation} ${node.value}');
-      addResultPanelList(
-        ref,
-        '${node.operation} ${node.value}',
-      );
+      solutionText += '${node.operation} ${node.value}';
     }
 
-    log('Συνολικό Κόστος: ${solution.last.cost}');
-    addResultPanelList(
-      ref,
-      'Συνολικό Κόστος: ${solution.last.cost}',
-    );
-    log('\n');
+    solutionCost += '${solution.last.cost}';
+    addResultPanelList(ref, solutionTitle, solutionText, solutionCost);
   }
 }
+
+
+//Create a function take a String 

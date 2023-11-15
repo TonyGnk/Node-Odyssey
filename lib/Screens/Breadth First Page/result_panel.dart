@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services & Providers/constants.dart';
 import 'Services/List Panel/result_providers.dart';
-import 'Services/tracking_tiles.dart';
+import 'result_box_bf.dart';
 
 Widget resultPanel(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
@@ -43,7 +43,7 @@ Widget resultPanel(BuildContext context) =>
           child: listView(context, stringResult));
     });
 
-ListView listView(BuildContext context, List<TrackingTiles> trackingTiles) =>
+ListView listView(BuildContext context, List<ResultBoxBf> trackingTiles) =>
     ListView(
       reverse: true,
       children: [

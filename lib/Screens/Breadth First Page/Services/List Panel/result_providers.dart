@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../tracking_tiles.dart';
+import '../../result_box_bf.dart';
 
-final resultPanelList = StateProvider<List<TrackingTiles>>(
+final resultPanelList = StateProvider<List<ResultBoxBf>>(
   (ref) => [],
 );
 
@@ -10,34 +9,15 @@ void clearResultPanelList(WidgetRef ref) {
   ref.read(resultPanelList.notifier).state = [];
 }
 
-void addResultPanelList(
-  WidgetRef ref,
-  String text,
-) {
-  List<TrackingTiles>? list = ref.watch(resultPanelList);
+void addResultPanelList(WidgetRef ref, String title, String text, String cost) {
+  List<ResultBoxBf>? list = ref.watch(resultPanelList);
   if (list == null) {
     ref.read(resultPanelList.notifier).state = [
-      TrackingTiles(
-        text: text,
-      ),
+      ResultBoxBf(text: text, title: title, cost: cost),
     ];
   } else {
     ref.read(resultPanelList.notifier).state.add(
-          TrackingTiles(
-            text: text,
-          ),
+          ResultBoxBf(text: text, title: title, cost: cost),
         );
   }
-}
-
-final resultPanelListUpdater = StateProvider<TrackingTiles>(
-  (ref) => TrackingTiles(
-    text: '',
-  ),
-);
-
-void addResultPanelListRolling(WidgetRef ref, String text, Color color) {
-  ref.read(resultPanelListUpdater.notifier).state = TrackingTiles(
-    text: text,
-  );
 }
