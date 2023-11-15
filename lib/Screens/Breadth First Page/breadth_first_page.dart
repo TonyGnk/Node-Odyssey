@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Services/providers_bf.dart';
 import 'algorithm_bf.dart';
+import 'left_column_bf.dart';
 import 'selector.dart';
-import 'tracking_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
   const BreadthFirstAlg({super.key});
@@ -17,7 +17,7 @@ class BreadthFirstAlg extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: c1(),
+            child: c1(context),
           ),
           Expanded(
             flex: 6,
@@ -36,14 +36,6 @@ class BreadthFirstAlg extends StatelessWidget {
         ],
       );
 }
-
-Container c1() => Container(
-      child: Column(
-        children: [
-          trackingListBF(),
-        ],
-      ),
-    );
 
 Column c2() => Column(
       children: [

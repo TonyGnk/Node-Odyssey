@@ -6,14 +6,10 @@ import 'Services/tracking_tiles.dart';
 Widget trackingListBF() => Consumer(builder: (context, ref, _) {
       final trackingTiles = ref.watch(trackingContainer);
       final tr1 = ref.watch(trackUpdater); // ignore: unused_local_variable
-      return Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
-          ),
-          height: MediaQuery.of(context).size.height - 86,
-          child: Container(child: listView(context, trackingTiles)));
+      return listView(
+        context,
+        trackingTiles,
+      );
     });
 
 ListView listView(BuildContext context, List<TrackingTiles> trackingTiles) =>
