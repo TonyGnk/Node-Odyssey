@@ -80,7 +80,7 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
   String solutionCost = '';
 
   if (solution == null) {
-    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.', '', '');
+    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.', '', '', true);
   } else {
     solutionTitle += 'Λύση';
 
@@ -89,7 +89,7 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
     }
 
     solutionCost += '${solution.last.cost}';
-    addResultPanelList(ref, solutionTitle, solutionText, solutionCost);
+    addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
   }
 }
 

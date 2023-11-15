@@ -3,14 +3,16 @@ import '../../../Services & Providers/constants.dart';
 
 class ResultBoxBf {
   ResultBoxBf({
-    required this.text,
-    required this.title,
-    required this.cost,
+    this.text = '',
+    this.title = '',
+    this.cost = '',
+    this.error = false,
   });
 
   final String title;
   final String text;
   final String cost;
+  final bool error;
 
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
@@ -24,7 +26,7 @@ class ResultBoxBf {
             Expanded(
               child: SizedBox(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -34,9 +36,11 @@ class ResultBoxBf {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    Text(
-                      text,
-                    ),
+                    error
+                        ? const SizedBox()
+                        : Text(
+                            text,
+                          ),
                   ],
                 ),
               ),

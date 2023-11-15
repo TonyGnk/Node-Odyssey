@@ -89,7 +89,7 @@ Future<List<Node>?> findBreadthSolutionUI(
 ) async {
   ListQueue<List<Node>> queue = ListQueue();
   // Initialize visited list
-  List<bool> visited = List.filled(9951, false);
+  List<bool> visited = List.filled(99999, false);
 
   queue.add([Node(start, 0, '')]);
 
@@ -100,7 +100,7 @@ Future<List<Node>?> findBreadthSolutionUI(
     Node current = currentPath.last;
 
     // If the node has been visited before, skip it
-    if (visited[current.value]) continue;
+    if (current.value >= visited.length || visited[current.value]) continue;
 
     // Mark the node as visited
     visited[current.value] = true;
@@ -186,7 +186,22 @@ Future<List<Node>?> findBreadthSolutionUI(
       queue.add(newPath);
     }
 
-    //
+    // Τετραγωνική ρίζα sqrt(x)
+    // Κόστος: (x-sqrt(x))/4+1
+    // Προϋπόθεση x>1 AND X perfect of sqrt(x).
+    if (current.value > 1) {
+      double sqrtValue = math.sqrt(current.value);
+      if (sqrtValue.toInt() == sqrtValue &&
+          sqrtValue * sqrtValue == current.value) {
+        Node newNode = Node(
+          sqrtValue.toInt(),
+          current.cost + (current.value - sqrtValue.toInt()) ~/ 4 + 1,
+          '√',
+        );
+        List<Node> newPath = List.from(currentPath)..add(newNode);
+        queue.add(newPath);
+      }
+    }
   }
 
   return null;
