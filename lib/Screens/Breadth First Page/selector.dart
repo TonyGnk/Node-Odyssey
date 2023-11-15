@@ -15,7 +15,7 @@ class _SelectorState extends State<Selector> {
   late TextEditingController controller1 = TextEditingController();
   late TextEditingController controller2 = TextEditingController();
 
-  double currentSliderValue = 20;
+  double currentSliderValue = 100;
 
   @override
   Widget build(BuildContext context) => Consumer(
