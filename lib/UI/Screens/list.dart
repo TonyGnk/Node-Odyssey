@@ -6,9 +6,9 @@ import 'about_page.dart';
 // The home page for the app. This is the first page the user sees.
 RoutedScreen aboutScreen() => const RoutedScreen(
       mainChild: AboutScreen(),
-      label: 'Αρχική',
-      labelRoute: '/Home',
-      icon: Icons.home_outlined,
-      filledIcon: Icons.home,
+      label: 'Πληροφορίες Εφαρμογής',
+      labelRoute: 'about',
+      icon: Icons.info_outline,
+      filledIcon: Icons.info,
       appBar: AdaptAppBar(label: 'Πληροφορίες Εφαρμογής'),
     );
