@@ -3,8 +3,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'Services/providers_bf.dart';
+import 'Services/List Panel/result_providers.dart';
 import 'algorithm_bf.dart';
+import 'center_column_bf.dart';
 import 'left_column_bf.dart';
 import 'selector.dart';
 
@@ -16,18 +17,12 @@ class BreadthFirstAlg extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 2,
+            flex: 4,
             child: c1(context),
           ),
           Expanded(
-            flex: 6,
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(width: 1.0, color: Colors.black),
-                ),
-              ),
-            ),
+            flex: 15,
+            child: c2(context),
           ),
           Expanded(
             flex: 3,
@@ -36,12 +31,6 @@ class BreadthFirstAlg extends StatelessWidget {
         ],
       );
 }
-
-Column c2() => Column(
-      children: [
-        const SizedBox(height: 20),
-      ],
-    );
 
 Column c3() => Column(
       children: [
@@ -85,23 +74,31 @@ startCal(int start, int end, int speed, WidgetRef ref) async {
     speed,
     ref,
   );
-  clearTrackingTextBF(ref);
+  clearResultPanelList(ref);
 
   if (solution == null) {
     log('Δεν υπάρχουν λύσεις.');
-    addTrackingTextBF(ref, 'Δεν υπάρχουν λύσεις.');
+    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.');
   } else {
     log('Λύση:');
-    addTrackingTextBF(ref, 'Λύση:');
+    addResultPanelList(
+      ref,
+      'Λύση:',
+    );
 
     for (Node node in solution) {
       log('${node.operation} ${node.value}');
-      addTrackingTextBF(ref, '${node.operation} ${node.value}');
+      addResultPanelList(
+        ref,
+        '${node.operation} ${node.value}',
+      );
     }
 
     log('Συνολικό Κόστος: ${solution.last.cost}');
-    addTrackingTextBF(ref, 'Συνολικό Κόστος: ${solution.last.cost}');
+    addResultPanelList(
+      ref,
+      'Συνολικό Κόστος: ${solution.last.cost}',
+    );
     log('\n');
-    addTrackingTextBF(ref, '\n');
   }
 }

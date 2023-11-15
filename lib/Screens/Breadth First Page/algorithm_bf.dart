@@ -1,10 +1,8 @@
 import 'dart:collection';
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Services/providers_bf.dart';
+import 'Services/List Panel/list_provider.dart';
 
 class Node {
   Node(this.value, this.cost, this.operation);
@@ -108,8 +106,14 @@ Future<List<Node>?> findBreadthSolutionUI(
     // Print the current node value
     log('${current.value}');
     // For printing the ui only
-    addTrackingContainer(ref, '${current.value}', Colors.transparent);
-    addTrackingContainerRolling(ref, '${current.value}', Colors.green);
+    addTrackingContainer(
+      ref,
+      '${current.value}',
+    );
+    addTrackingContainerRolling(
+      ref,
+      '${current.value}',
+    );
 
     if (current.value == end) {
       return currentPath;
