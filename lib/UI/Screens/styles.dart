@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Components/Buttons/segmented_button.dart';
 import '../Archive/screen/Settings Items/DropDown/dropdown_my.dart';
-import '../Services/uiChange.dart';
+import '../Services2/uiChange.dart';
 import '../Archive/templates/custom_animated.dart';
 
 class StyleScreen extends StatefulWidget {

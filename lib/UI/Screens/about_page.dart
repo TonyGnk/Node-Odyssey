@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../Components/Buttons/elevated_button.dart';
-import '../Services/ui_handler.dart';
+import '../Services2/ui_handler.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({
