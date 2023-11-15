@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Services & Providers/constants.dart';
+import '../Services2/navigator_fun.dart';
 import 'app_bar_icon.dart';
 import 'info_icon.dart';
 import 'theme_icon.dart';
@@ -52,7 +53,7 @@ class AdaptAppBar extends StatelessWidget {
               ? AppBarIcon(
                   tooltip: 'Πίσω',
                   icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () async => navigateBack(context),
                 )
               : const SizedBox(),
           const SizedBox(width: 6),
@@ -62,7 +63,7 @@ class AdaptAppBar extends StatelessWidget {
           ),
           const Expanded(child: SizedBox()),
           themeIcon(context, showThemeIcon),
-          infoIcon(context, enable)
+          infoIcon(context, showInfoIcon)
         ],
       );
 }

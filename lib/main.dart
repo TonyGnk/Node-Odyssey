@@ -1,7 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'Screens/list.dart';
+import 'Screens/screen_list.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
 
 void main() async {

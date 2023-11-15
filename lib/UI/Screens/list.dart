@@ -10,7 +10,5 @@ RoutedScreen aboutScreen() => const RoutedScreen(
       labelRoute: '/Home',
       icon: Icons.home_outlined,
       filledIcon: Icons.home,
-      appBar: AdaptAppBar(
-        filled: false,
-      ),
+      appBar: AdaptAppBar(label: 'Πληροφορίες Εφαρμογής'),
     );

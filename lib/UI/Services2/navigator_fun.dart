@@ -6,3 +6,8 @@ Future<void> navigateToScreen(BuildContext context, String rootName) async {
   await Future.delayed(const Duration(milliseconds: 200));
   Navigator.pushNamed(context, rootName);
 }
+
+Future<void> navigateBack(BuildContext context) async {
+  await Future.delayed(const Duration(milliseconds: 100));
+  Navigator.pop(context);
+}

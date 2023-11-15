@@ -14,6 +14,8 @@ RoutedScreen homeScreen() => const RoutedScreen(
       appBar: AdaptAppBar(
         showBackButton: false,
         filled: false,
+        showInfoIcon: true,
+        showThemeIcon: true,
       ),
     );
 
@@ -27,5 +29,6 @@ RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       appBar: AdaptAppBar(
         label: 'Αλγόριθμος Πρώτα σε Βάθος',
         showThemeIcon: true,
+        showInfoIcon: true,
       ),
     );
