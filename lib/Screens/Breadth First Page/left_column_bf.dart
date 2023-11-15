@@ -28,7 +28,7 @@ Container c1(BuildContext context) => Container(
             flex: 1,
             child: SizedBox(),
           ),
-          const Text('Κάτι για τον Χρόνο...'),
+          const Text('Κάτι για τους Χρόνους Εκτέλεσης...'),
           const Expanded(
             flex: 1,
             child: SizedBox(),

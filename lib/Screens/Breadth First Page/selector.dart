@@ -102,22 +102,6 @@ class Selector extends StatelessWidget {
                   //submit icon
                   icon: const Icon(Icons.send)),
               const SizedBox(height: 60),
-              Icon(
-                Icons.warning,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-              ),
-              const SizedBox(height: 4),
-              const Text('Μέγιστη Τελική Τιμή 50'),
-              const SizedBox(height: 4),
-              Text(
-                'Κίνδυνος-Θάνατος',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              //add an icon with a warning message
             ],
           ),
         ),

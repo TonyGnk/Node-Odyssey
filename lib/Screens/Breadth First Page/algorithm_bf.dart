@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:developer';
+import 'dart:math' as math;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'Services/List Panel/list_provider.dart';
@@ -87,7 +88,8 @@ Future<List<Node>?> findBreadthSolutionUI(
   WidgetRef ref,
 ) async {
   ListQueue<List<Node>> queue = ListQueue();
-  List<bool> visited = List.filled(9951, false); // Initialize visited list
+  // Initialize visited list
+  List<bool> visited = List.filled(9951, false);
 
   queue.add([Node(start, 0, '')]);
 
@@ -119,19 +121,72 @@ Future<List<Node>?> findBreadthSolutionUI(
       return currentPath;
     }
 
-    // Προσθήκη κόμβων μετά την πρόσθεση
-    if (current.value + 1 < 9951) {
-      Node newNode = Node(current.value + 1, current.cost + 2, '+');
+    // Πρόσθεση x+1
+    //Κόστος:2
+    //Προϋπόθεση x<10^9
+    if (current.value + 1 < math.pow(10, 9)) {
+      Node newNode = Node(
+        current.value + 1,
+        current.cost + 2,
+        '+',
+      );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
     }
 
-    // Προσθήκη κόμβων μετά τον πολλαπλασιασμό
-    if (current.value * 2 < 9951) {
-      Node newNode = Node(current.value * 2, current.cost + 4, '*');
+    // Αφαίρεση x-1
+    // Κόστος:2
+    // Προϋπόθεση x>0
+    if (current.value > 0) {
+      Node newNode = Node(
+        current.value - 1,
+        current.cost + 2,
+        '-',
+      );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
     }
+
+    // Διπλασιασμός *2
+    // Κόστος: floor(x/2)+1
+    // Προϋπόθεση x>0 AND 2*x<10^9
+    if (current.value > 0 && 2 * current.value < math.pow(10, 9)) {
+      Node newNode = Node(
+        current.value * 2,
+        current.cost + (current.value / 2).ceil() + 1,
+        '*',
+      );
+      List<Node> newPath = List.from(currentPath)..add(newNode);
+      queue.add(newPath);
+    }
+
+    // Υποδιπλασιασμός floor(x/2)]
+    // Κόστος: floor(x/4)+1
+    // Προϋπόθεση x>0
+    if (current.value > 0) {
+      Node newNode = Node(
+        (current.value / 2).floor(),
+        current.cost + (current.value / 4).ceil() + 1,
+        '/',
+      );
+      List<Node> newPath = List.from(currentPath)..add(newNode);
+      queue.add(newPath);
+    }
+
+    // Τετράγωνο x^2
+    // Κόστος: (x^2-x)/4+1
+    // Προϋπόθεση x^2<=10^9
+    if (current.value * current.value <= math.pow(10, 9)) {
+      Node newNode = Node(
+        current.value * current.value,
+        current.cost + (current.value * current.value - current.value) ~/ 4 + 1,
+        '^',
+      );
+      List<Node> newPath = List.from(currentPath)..add(newNode);
+      queue.add(newPath);
+    }
+
+    //
   }
 
   return null;
