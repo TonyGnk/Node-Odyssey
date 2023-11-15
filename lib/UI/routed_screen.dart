@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stab.dart';
-import 'Archive/templates/custom_animated.dart';
+import 'app_bar.dart';
 
 class RoutedScreen extends StatelessWidget {
   /// A set of widgets that make up the screen.
@@ -10,9 +9,9 @@ class RoutedScreen extends StatelessWidget {
   const RoutedScreen({
     required this.mainChild,
     required this.icon,
+    required this.appBar,
     this.labelRoute,
     super.key,
-    this.appBar,
     this.filledIcon = Icons.error,
     this.label = '',
   });
@@ -33,7 +32,7 @@ class RoutedScreen extends StatelessWidget {
   final Widget mainChild;
 
   /// The app bar of the screen. If null no app bar is displayed
-  final Stab? appBar;
+  final AdaptAppBar appBar;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -41,58 +40,15 @@ class RoutedScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    color: Theme.of(context).colorScheme.background),
-                child: Row(
-                  children: [
-                    //back button
-                    IconButton(
-                      tooltip: 'Πίσω',
-                      style: ButtonStyle(
-                        //large size
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                        fixedSize: MaterialStateProperty.all<Size>(
-                          const Size(50, 50),
-                        ),
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      label,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(child: mainChild),
-            ],
-          ),
+          child: col(context),
         ),
-        //   Column(
-        //     children: [
-        //       //const SizedBox(height: 5),
-        //       appBar?.build(
-        //               const SettingsToggle(darkThemeSwitcher: true), context) ??
-        //           const SizedBox(),
-        //       //const SizedBox(height: 10),
-        //       mainChild,
-        //       // ),
-        //     ],
-        //   ),
+      );
+
+  Column col(BuildContext context) => Column(
+        children: [
+          appBar,
+          Expanded(child: mainChild),
+        ],
       );
 
   Widget buildSmall(BuildContext context, double width, double height) =>

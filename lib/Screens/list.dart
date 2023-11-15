@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../UI/app_bar.dart';
 import '../UI/routed_screen.dart';
 import 'Breadth First Page/breadth_first_page.dart';
 import 'Home Page/home_page.dart';
@@ -10,6 +11,7 @@ RoutedScreen homeScreen() => const RoutedScreen(
       labelRoute: '/Home',
       icon: Icons.home_outlined,
       filledIcon: Icons.home,
+      appBar: AdaptAppBar(label: 'Αρχική'),
     );
 
 // The Breadth First Algorithm page.
@@ -19,4 +21,7 @@ RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       labelRoute: '/BreadthFirstAlgorithm',
       icon: Icons.radar_outlined,
       filledIcon: Icons.radar,
+      appBar: AdaptAppBar(
+        label: 'Αλγόριθμος Πρώτα σε Βάθος',
+      ),
     );
