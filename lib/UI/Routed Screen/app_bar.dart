@@ -1,7 +1,10 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import '../../Services & Providers/constants.dart';
 
 class AdaptAppBar extends StatelessWidget {
   const AdaptAppBar({
+    this.showThemeIcon = false,
     this.label,
     this.enable = true,
     super.key,
@@ -15,15 +18,17 @@ class AdaptAppBar extends StatelessWidget {
   //create a getter for the enable
   bool get getEnable => enable;
 
+  final bool showThemeIcon;
+
   @override
   Widget build(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.black,
-            width: 2,
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            width: 1,
           ),
-          borderRadius: BorderRadius.circular(16),
-          color: Theme.of(context).colorScheme.background,
+          borderRadius: BorderRadius.circular(cornerSize),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
         ),
         child: row(context),
       );
@@ -51,9 +56,45 @@ class AdaptAppBar extends StatelessWidget {
           Text(
             label ?? '',
           ),
+          const Expanded(child: SizedBox()),
+          themeIcon(context)
         ],
       );
+
+  Widget themeIcon(BuildContext context) {
+    String mode = AdaptiveTheme.of(context).mode.toString();
+    return showThemeIcon
+        ? IconButton(
+            tooltip: mode == 'AdaptiveThemeMode.dark'
+                ? 'Είσαι dark. Αλλαγή σε σύστημα θέμα'
+                : mode == 'AdaptiveThemeMode.system'
+                    ? 'Είσαι σύστημα. Αλλαγή σε φωτεινό θέμα'
+                    : 'Είσαι φωτεινός. Αλλαγή σε σκοτεινό θέμα.',
+            //if mode is dark or mode is system
+            isSelected: mode == 'AdaptiveThemeMode.dark' ||
+                mode == 'AdaptiveThemeMode.system',
+            onPressed: () {
+              AdaptiveTheme.of(context).toggleThemeMode();
+              AdaptiveTheme.of(context).updateState();
+            },
+            icon: Icon(Icons.wb_sunny_outlined,
+                color: Theme.of(context).colorScheme.onBackground),
+            selectedIcon: mode == 'AdaptiveThemeMode.dark'
+                ? Icon(Icons.dark_mode_outlined,
+                    color: Theme.of(context).colorScheme.onBackground)
+                :
+                //Icon for system theme
+                Icon(Icons.contrast_outlined,
+                    color: Theme.of(context).colorScheme.onBackground),
+          )
+        : const SizedBox();
+  }
 }
+
+
+
+
+
 
 // Column(children: [
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../UI/app_bar.dart';
-import '../UI/routed_screen.dart';
+import '../UI/Routed Screen/app_bar.dart';
+import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/breadth_first_page.dart';
 import 'Home Page/home_page.dart';
 
@@ -23,5 +23,6 @@ RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       filledIcon: Icons.radar,
       appBar: AdaptAppBar(
         label: 'Αλγόριθμος Πρώτα σε Βάθος',
+        showThemeIcon: true,
       ),
     );
