@@ -41,21 +41,19 @@ class ResultBoxBf {
                 ),
               ),
             ),
-            Container(
-                //color: Colors.black,
-                child: Column(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  '🪙',
-                  style: TextStyle(fontSize: 30),
-                ),
                 Text(
                   cost,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 24),
+                ),
+                const Text(
+                  '⚡',
+                  style: TextStyle(fontSize: 24),
                 ),
               ],
-            ))
+            )
           ],
         ),
       );

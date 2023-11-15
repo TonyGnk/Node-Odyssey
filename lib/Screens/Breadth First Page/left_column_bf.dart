@@ -19,12 +19,20 @@ Container c1(BuildContext context) => Container(
       ),
       child: Column(
         children: [
-          Expanded(child: trackingListBF()),
-          const Divider(
-            color: Colors.black,
+          Expanded(
+            flex: 4,
+            child: trackingListBF(),
           ),
-          const Text('Χρόνος'),
-          const SizedBox(height: 120),
+          const Divider(),
+          const Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
+          const Text('Κάτι για τον Χρόνο...'),
+          const Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
         ],
       ),
     );
