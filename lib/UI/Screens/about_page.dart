@@ -47,20 +47,26 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => ProviderScope(
-        child: uiSelector(
-          scaffoldAboutScreenType1(
-            context,
-            _defaultApplicationName(context),
-            version ?? 'Loading',
-          ),
-          scaffoldAboutScreenType2(
-            context,
-            _defaultApplicationName(context),
-            version ?? 'Loading',
-          ),
-        ),
+  Widget build(BuildContext context) => scaffoldAboutScreenType2(
+        context,
+        _defaultApplicationName(context),
+        version ?? 'Loading',
       );
+
+  // ProviderScope(
+  //       child: uiSelector(
+  //         scaffoldAboutScreenType1(
+  //           context,
+  //           _defaultApplicationName(context),
+  //           version ?? 'Loading',
+  //         ),
+  //         scaffoldAboutScreenType2(
+  //           context,
+  //           _defaultApplicationName(context),
+  //           version ?? 'Loading',
+  //         ),
+  //       ),
+  //     );
 }
 
 Widget scaffoldAboutScreenType1(
@@ -99,6 +105,8 @@ Widget scaffoldAboutScreenType1(
 Widget scaffoldAboutScreenType2(
         BuildContext context, String title, String version) =>
     SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
