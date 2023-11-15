@@ -16,6 +16,7 @@ class _SelectorState extends State<Selector> {
   late TextEditingController controller2 = TextEditingController();
 
   double currentSliderValue = 100;
+  double currentSliderValue2 = 1.0;
 
   @override
   Widget build(BuildContext context) => Consumer(
@@ -24,8 +25,9 @@ class _SelectorState extends State<Selector> {
           children: [
             container1(context),
             container2(context),
-            slider(context),
+            speedSlider(context),
             const SizedBox(height: 2),
+            solutionSlider(context),
             submit(context, ref),
             const SizedBox(height: 60),
           ],
@@ -98,7 +100,7 @@ class _SelectorState extends State<Selector> {
           //submit icon
           icon: const Icon(Icons.send));
 
-  Widget slider(BuildContext context) => Column(
+  Widget speedSlider(BuildContext context) => Column(
         children: [
           const Text('Ταχύτητα Εκτέλεσης'),
           Slider(
@@ -109,6 +111,25 @@ class _SelectorState extends State<Selector> {
             onChanged: (double value) {
               setState(() {
                 currentSliderValue = value;
+              });
+            },
+          ),
+        ],
+      );
+
+  Widget solutionSlider(BuildContext context) => Column(
+        children: [
+          const Text('Πλήθος Λύσεων'),
+          const Text('Μη διαθέσιμο'),
+          Slider(
+            value: currentSliderValue2,
+            min: 1,
+            max: 3,
+            divisions: 2,
+            label: currentSliderValue2.toInt().toString(),
+            onChanged: (double value) {
+              setState(() {
+                currentSliderValue2 = value;
               });
             },
           ),
