@@ -1,10 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../Screens/list.dart';
 import '../Screens/styles.dart';
 import '../Themes/material_theme_data.dart';
 import 'synthesizer.dart';
-import '../Screens/about_page.dart';
 import '../Archive/screen/Settings Items/ap.dart';
 import '../Routed Screen/routed_screen.dart';
 
@@ -29,7 +29,11 @@ Widget rootConfig(
         debugShowCheckedModeBanner: false,
         home: Synthesizer(screens: screens),
         routes: generateRoutes(
-            mergeScreenLists(screens, nonNavigationScreens ?? [])),
+          mergeScreenLists(screens, nonNavigationScreens ?? []),
+        ),
+        // scrollBehavior: const MaterialScrollBehavior().copyWith(
+        //   dragDevices: {PointerDeviceKind.mouse},
+        // ),
       ),
     );
 
