@@ -55,8 +55,7 @@ Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
           scrollDirection: Axis.horizontal,
           child: Container(
             child: Row(children: [
-              for (int i = 0; i < boxList.length; i++)
-                boxList[i].build(context),
+              for (int i = 0; i < boxList.length; i++) boxList[i],
             ]),
           ),
         ),

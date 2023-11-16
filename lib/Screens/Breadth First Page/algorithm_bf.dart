@@ -44,6 +44,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       ref,
       '${current.value}',
       current.value,
+      end,
     );
     addTrackingContainerRolling(
       ref,
@@ -176,6 +177,7 @@ Future<List<List<Node>>?> findBreadthSolutionsUI2(
       ref,
       '${current.value}',
       current.value,
+      end,
     );
     addTrackingContainerRolling(
       ref,
@@ -309,6 +311,7 @@ Future<List<List<Node>>?> findBreadthSolutionsUI3(
       ref,
       '${current.value}',
       current.value,
+      end,
     );
     addTrackingContainerRolling(
       ref,

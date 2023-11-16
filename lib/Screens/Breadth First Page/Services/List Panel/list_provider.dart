@@ -23,17 +23,37 @@ void addTrackingContainer(
   WidgetRef ref,
   String text,
   int width,
+  int target,
 ) {
   ref.read(trackingContainer.notifier).state.add(
         TrackingTiles(
           text: text,
         ),
       );
-  ref.read(trackingBox.notifier).state.add(Container(
-        width: 2,
-        height: width.toDouble(),
-        color: Colors.grey.withOpacity(0.2),
-      ));
+  double a = width / target * 10;
+  double bc = (10 - a) / 2;
+  ref.read(trackingBox.notifier).state.add(
+        Column(
+          children: [
+            Expanded(
+              child: Container(
+                width: 10,
+                color: Color.fromARGB(255, 231, 77, 77).withOpacity(0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(flex: bc.toInt(), child: const SizedBox()),
+                    Expanded(
+                        flex: a.toInt(),
+                        child: Container(color: Colors.grey.withOpacity(0.4))),
+                    Expanded(flex: bc.toInt(), child: const SizedBox()),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
 }
 
 final trackUpdater = StateProvider<TrackingTiles>(
@@ -51,6 +71,6 @@ void addTrackingContainerRolling(
   );
 }
 
-final trackingBox = StateProvider<List<Container>>(
+final trackingBox = StateProvider<List<Column>>(
   (ref) => [],
 );
