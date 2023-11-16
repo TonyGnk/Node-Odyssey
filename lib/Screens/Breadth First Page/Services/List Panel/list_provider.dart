@@ -30,8 +30,8 @@ void addTrackingContainer(
         ),
       );
   ref.read(trackingBox.notifier).state.add(Container(
-        width: 6,
-        height: width.toDouble() / 2,
+        width: 2,
+        height: width.toDouble(),
         color: Colors.grey.withOpacity(0.2),
       ));
 }

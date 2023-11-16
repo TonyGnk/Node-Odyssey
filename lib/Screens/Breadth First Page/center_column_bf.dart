@@ -43,13 +43,15 @@ Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
       return Listener(
         onPointerSignal: (event) {
           if (event is PointerScrollEvent) {
-            final offset = event.scrollDelta.dy;
+            final offset = event.scrollDelta.dy / 2;
             innercontroller.jumpTo(innercontroller.offset + offset);
             outercontroller.jumpTo(outercontroller.offset - offset);
           }
         },
         child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: innercontroller,
+          reverse: true,
           scrollDirection: Axis.horizontal,
           child: Container(
             child: Row(children: [
