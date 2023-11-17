@@ -31,14 +31,20 @@ void addTrackingContainer(
         ),
       );
   double a = width / target * 10;
-  double bc = (10 - a) / 2;
+  double bc = 10 - a;
   ref.read(trackingBox.notifier).state.add(
         Column(
           children: [
             Expanded(
               child: Container(
                 width: 10,
-                color: Color.fromARGB(255, 231, 77, 77).withOpacity(0),
+                color: Color.fromARGB(255, 73, 67, 67).withOpacity(1),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                width: 10,
+                color: Color.fromARGB(255, 231, 77, 77).withOpacity(1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -46,7 +52,7 @@ void addTrackingContainer(
                     Expanded(
                         flex: a.toInt(),
                         child: Container(color: Colors.grey.withOpacity(0.4))),
-                    Expanded(flex: bc.toInt(), child: const SizedBox()),
+                    //Expanded(flex: bc.toInt(), child: const SizedBox()),
                   ],
                 ),
               ),

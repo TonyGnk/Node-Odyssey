@@ -28,9 +28,7 @@ RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       filledIcon: Icons.radar,
       noMargin: true,
       appBar: AdaptAppBar(
-        noTopLeftCornerBack: true,
-        leftBottomCorner: false,
-        rightBottomCorner: false,
+        filled: false,
         label: 'Αλγόριθμος Πρώτα σε Βάθος',
         showThemeIcon: true,
         showInfoIcon: true,

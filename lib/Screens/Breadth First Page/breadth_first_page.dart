@@ -21,7 +21,7 @@ class BreadthFirstAlg extends StatelessWidget {
             child: c1(context),
           ),
           Expanded(
-            flex: 15,
+            flex: 14,
             child: c2(context),
           ),
           Expanded(

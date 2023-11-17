@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
@@ -18,7 +17,7 @@ void showAlert(BuildContext context, bool disable) {
                   maxWidth: 450,
                 ),
                 child: const Text(
-                    "Εκτελέστε τον αλγόριθμο που επιθυμείτε πληκτρολογόντας τον στο τερματικό ή προβάλεται τον σε γραφική κλίμακα!"),
+                    'Εκτελέστε τον αλγόριθμο που επιθυμείτε πληκτρολογώντας τον στο τερματικό ή προβάλλεται τον σε γραφική κλίμακα!'),
               ),
               actions: <Widget>[
                 TextButton(
@@ -34,5 +33,5 @@ void showAlert(BuildContext context, bool disable) {
             duration: const Duration(milliseconds: 500),
           ),
         )
-      : SizedBox();
+      : const SizedBox();
 }
