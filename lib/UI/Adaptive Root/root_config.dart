@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Screens/list.dart';
 import '../Screens/styles.dart';
 import '../Themes/material_theme_data.dart';
@@ -13,9 +14,7 @@ Widget rootConfig(
   AdaptiveThemeMode? savedThemeMode,
   String appTitle,
   bool debugShowFloatingThemeButton,
-  List<RoutedScreen> screens, [
-  List<RoutedScreen>? nonNavigationScreens,
-]) =>
+) =>
     AdaptiveTheme(
       light: theme.light(),
       dark: theme.dark(),
@@ -26,10 +25,10 @@ Widget rootConfig(
         theme: theme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: Synthesizer(screens: screens),
-        routes: generateRoutes(
-          mergeScreenLists(screens, nonNavigationScreens ?? []),
-        ),
+        home: Synthesizer(),
+        // routes: generateRoutes(
+        //   mergeScreenLists(screens,),
+        // ),
       ),
     );
 

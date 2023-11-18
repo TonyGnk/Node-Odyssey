@@ -5,6 +5,13 @@ import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/breadth_first_page.dart';
 import 'Home Page/home_page.dart';
 
+final screensProvider = StateProvider<List<RoutedScreen>>(
+  (ref) => [
+    homeScreen(),
+    breadthFirstAlgScreen(),
+  ],
+);
+
 // The home page for the app. This is the first page the user sees.
 RoutedScreen homeScreen() => const RoutedScreen(
       mainChild: Home(),
@@ -22,16 +29,6 @@ RoutedScreen homeScreen() => const RoutedScreen(
 
 final resultPanelList = StateProvider<List<Container>>(
   (ref) => [],
-);
-
-//Create a provider for appBar with include in the name the breadthFirstAlgScreen
-final appBarBreadthFirstAlgScreen = Provider<AdaptAppBar>(
-  (ref) => const AdaptAppBar(
-    filled: false,
-    label: 'Αλγόριθμος Πρώτα σε Βάθος',
-    showThemeIcon: true,
-    showInfoIcon: true,
-  ),
 );
 
 // The Breadth First Algorithm page.

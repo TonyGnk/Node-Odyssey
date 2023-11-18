@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../Screens/screen_list.dart';
 import '../Routed Screen/routed_screen.dart';
 import '../Archive/templates/custom_animated.dart';
 import '../Archive/templates/nav_bar.dart';
 
 class Synthesizer extends StatefulWidget {
   const Synthesizer({
-    required this.screens,
     super.key,
   });
-
-  final List<RoutedScreen> screens;
 
   @override
   State<Synthesizer> createState() => _SynthesizerState();
@@ -27,44 +25,47 @@ class _SynthesizerState extends State<Synthesizer> {
 
   @override
   Widget build(BuildContext context) => ProviderScope(
-        child: widget.screens.length == 1
-            ? MediaQuery.of(context).size.width < 700
-                ? singleScreenTab()
-                : singleScreen()
-            : MediaQuery.of(context).size.width < 700
-                ? multiScreen()
-                : multiScreenTab(),
+        child: Consumer(builder: (context, ref, _) {
+          final screenList = ref.watch(screensProvider);
+          return screenList.length == 1
+              ? MediaQuery.of(context).size.width < 700
+                  ? singleScreenTab(screenList[0])
+                  : singleScreen(screenList[0])
+              : MediaQuery.of(context).size.width < 700
+                  ? multiScreen(screenList)
+                  : multiScreenTab(screenList);
+        }),
       );
 
-  Scaffold singleScreen() => Scaffold(
-        body: widget.screens[0].build(context),
+  Scaffold singleScreen(RoutedScreen screen) => Scaffold(
+        body: screen.build(context),
       );
 
-  Scaffold singleScreenTab() => Scaffold(
-        body: widget.screens[0].build(context),
+  Scaffold singleScreenTab(RoutedScreen screen) => Scaffold(
+        body: screen.build(context),
       );
 
-  Scaffold multiScreen() => Scaffold(
+  Scaffold multiScreen(List<RoutedScreen> screenList) => Scaffold(
         bottomNavigationBar: BottomNavBar(
           index: currentPageIndex,
           onTap: updateCurrentPageIndex,
           labels: List.generate(
-            widget.screens.length,
-            (i) => widget.screens[i].getLabel,
+            screenList.length,
+            (i) => screenList[i].getLabel,
           ),
           icons: List.generate(
-            widget.screens.length,
-            (i) => widget.screens[i].getFilledIcon,
+            screenList.length,
+            (i) => screenList[i].getFilledIcon,
           ),
           iconsOutlined: List.generate(
-            widget.screens.length,
-            (i) => widget.screens[i].getIcon,
+            screenList.length,
+            (i) => screenList[i].getIcon,
           ),
         ).build(currentPageIndex),
-        body: widget.screens[currentPageIndex].build(context),
+        body: screenList[currentPageIndex].build(context),
       );
 
-  Scaffold multiScreenTab() => Scaffold(
+  Scaffold multiScreenTab(List<RoutedScreen> screenList) => Scaffold(
         body: customAnimatedBox(
           width: MediaQuery.of(context).size.width,
           child: Row(
@@ -81,7 +82,7 @@ class _SynthesizerState extends State<Synthesizer> {
               //       ),
               //     ),
               //     selectedIndex: currentPageIndex),
-              widget.screens[currentPageIndex].build(context),
+              screenList[currentPageIndex].build(context),
             ],
           ),
         ),

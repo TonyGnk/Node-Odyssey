@@ -2,6 +2,7 @@
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'root_config.dart';
 import '../Routed Screen/routed_screen.dart';
 import '../Services2/circularProgressScreen.dart';
@@ -11,21 +12,13 @@ import '../Themes/material_theme_data.dart';
 class AdaptiveRoot extends StatefulWidget {
   const AdaptiveRoot({
     required this.appTitle,
-    required this.screens,
     this.savedThemeMode,
     super.key,
     this.debugShowFloatingThemeButton = false,
-    this.nonNavigationScreens,
-  }) : assert(screens.length >= 1);
+  });
 
   /// The title of the app in recent apps, tittle bar, etc
   final String appTitle;
-
-  /// The list of screens to be used in the app.
-  final List<RoutedScreen> screens;
-
-  /// The list of screens that are not navigation screens. These screens will be loaded in the background and will not be shown to the user.
-  final List<RoutedScreen>? nonNavigationScreens;
 
   final AdaptiveThemeMode? savedThemeMode;
 
@@ -60,8 +53,6 @@ class _AdaptiveRootState extends State<AdaptiveRoot> {
           widget.savedThemeMode,
           widget.appTitle,
           widget.debugShowFloatingThemeButton,
-          widget.screens,
-          widget.nonNavigationScreens,
         )
       : circularProgressScreen(context, 'Loading Theme...');
 }
