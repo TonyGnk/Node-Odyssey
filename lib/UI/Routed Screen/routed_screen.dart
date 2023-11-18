@@ -38,20 +38,25 @@ class RoutedScreen extends StatelessWidget {
   final bool noMargin;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          padding: const EdgeInsets.all(16.0),
-          child: col(context),
-        ),
-      );
+  Widget build(BuildContext context) => col(context);
 
   Column col(BuildContext context) => Column(
         children: [
           appBar,
+          //Container(width: 40, height: 40, color: Colors.red),
           noMargin ? const SizedBox() : const SizedBox(height: 8),
-          Expanded(child: mainChild),
+          //Expanded(child: Container(width: 40, height: 40, color: Colors.pink)),
+          // Expanded(
+          //   child: Container(
+          //     height: MediaQuery.of(context).size.height,
+          //     child: Column(
+          //       children: [
+          //         Expanded(child: mainChild),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          mainChild,
         ],
       );
 

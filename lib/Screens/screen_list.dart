@@ -38,7 +38,6 @@ RoutedScreen breadthFirstAlgScreen() => RoutedScreen(
       labelRoute: 'BreadthFirstAlgorithm',
       icon: Icons.radar_outlined,
       filledIcon: Icons.radar,
-      noMargin: true,
       appBar: const AdaptAppBar(
         filled: false,
         label: 'Αλγόριθμος Πρώτα σε Βάθος',

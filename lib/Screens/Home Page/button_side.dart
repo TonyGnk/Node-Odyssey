@@ -42,9 +42,12 @@ class ButtonsSide extends StatelessWidget {
           children: [
             CustomListTile(
               label: 'Μετάβαση στον Αλγόριθμο Πρώτα σε Πλάτος',
-              onTap: () async => Navigator.pushNamed(
+              onTap: () async => Navigator.push(
                 context,
-                breadthFirstAlgScreen().getLabelWithSlash,
+                // push breadthFirstAlgScreen(),
+                MaterialPageRoute(
+                  builder: (context) => breadthFirstAlgScreen(),
+                ),
               ),
               leftIcon: breadthFirstAlgScreen().getIcon,
               type: Type.top,
