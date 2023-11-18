@@ -251,10 +251,7 @@ class _Label extends StatelessWidget {
     )!;
 
     return MediaQuery(
-      data: mediaQueryData.copyWith(
-        textScaler:
-            TextScaler.linear(math.min(1.0, mediaQueryData.textScaleFactor)),
-      ),
+      data: mediaQueryData.copyWith(),
       child: Align(
         alignment: Alignment.center,
         // heightFactor: 1.0, top 2
