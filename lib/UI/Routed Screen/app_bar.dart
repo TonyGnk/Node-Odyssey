@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../Screens/Breadth First Page/Services/List Panel/result_providers.dart';
 import '../../Services & Providers/constants.dart';
 import '../Services2/navigator_fun.dart';
 import 'app_bar_icon.dart';
@@ -14,8 +16,6 @@ class AdaptAppBar extends StatelessWidget {
     this.label,
     this.enable = true,
     super.key,
-    this.leftBottomCorner = true,
-    this.rightBottomCorner = true,
     this.noTopLeftCornerBack = false,
   });
 
@@ -29,12 +29,10 @@ class AdaptAppBar extends StatelessWidget {
   final bool showInfoIcon;
   final bool showBackButton;
 
-  final bool leftBottomCorner;
-  final bool rightBottomCorner;
-
   final bool noTopLeftCornerBack;
 
   bool get getEnable => enable;
+
   @override
   Widget build(BuildContext context) => enable
       ? DecoratedBox(
@@ -45,13 +43,8 @@ class AdaptAppBar extends StatelessWidget {
                         Theme.of(context).colorScheme.primary.withOpacity(0.2),
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft:
-                        Radius.circular(leftBottomCorner ? cornerSize : 0),
-                    bottomRight:
-                        Radius.circular(rightBottomCorner ? cornerSize : 0),
-                    topLeft: const Radius.circular(cornerSize),
-                    topRight: const Radius.circular(cornerSize),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(cornerSize),
                   ),
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 )
@@ -62,25 +55,31 @@ class AdaptAppBar extends StatelessWidget {
         )
       : const SizedBox();
 
-  Row row(BuildContext context) => Row(
-        children: [
-          showBackButton
-              ? AppBarIcon(
-                  tooltip: 'Πίσω',
-                  icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                  onPressed: () async => navigateBack(context),
-                  noBottomLeftCorner: noTopLeftCornerBack,
-                )
-              : const SizedBox(),
-          const SizedBox(width: 6),
-          Text(
-            label ?? '',
-            style: const TextStyle(fontSize: 16),
-          ),
-          const Expanded(child: SizedBox()),
-          themeIcon(context, showThemeIcon),
-          infoIcon(context, showInfoIcon)
-        ],
+  Widget row(BuildContext context) => Consumer(
+        builder: (context, ref, _) {
+          final textButton = ref.watch(textButtonProviderR);
+          return Row(
+            children: [
+              showBackButton
+                  ? AppBarIcon(
+                      tooltip: 'Πίσω',
+                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                      onPressed: () async => navigateBack(context),
+                      noBottomLeftCorner: noTopLeftCornerBack,
+                    )
+                  : const SizedBox(),
+              const SizedBox(width: 6),
+              Text(
+                label ?? '',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const Expanded(child: SizedBox()),
+              textButton,
+              themeIcon(context, showThemeIcon),
+              infoIcon(context, showInfoIcon)
+            ],
+          );
+        },
       );
 }
 

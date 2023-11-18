@@ -6,7 +6,7 @@ class ButtonsSide extends StatelessWidget {
   const ButtonsSide({super.key});
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -84,24 +84,5 @@ class ButtonsSide extends StatelessWidget {
             ),
           ],
         ),
-      );
-
-  PageRouteBuilder _customPageRouteBuilder(Widget page) => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => page,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var slideAnimation =
-              Tween(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0))
-                  .animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
-            ),
-          );
-
-          return SlideTransition(
-            position: slideAnimation,
-            child: child,
-          );
-        },
       );
 }

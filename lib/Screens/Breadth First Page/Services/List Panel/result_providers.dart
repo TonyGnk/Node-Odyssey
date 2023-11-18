@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../result_box_bf.dart';
 
@@ -27,3 +28,8 @@ void addResultPanelList(
         );
   }
 }
+
+//Create an empty provider for a TextButton
+final textButtonProviderR = StateProvider<Widget>(
+  (ref) => const SizedBox(),
+);

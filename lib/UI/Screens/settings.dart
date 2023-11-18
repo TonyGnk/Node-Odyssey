@@ -28,35 +28,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: const Text('Settings'),
         ),
         body: MediaQuery.of(context).size.width > 800
-            ? Container(
+            ? SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        child: ListView(
-                          children: [
-                            ListTileModifier(
-                              name: 'Customization',
-                              cornerType: 'Both',
-                              onTap: () => setState(() {
-                                child = const StyleScreen();
-                              }),
-                            ),
-                            //const MyDropdownWidget(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ListTileModifier(
-                              name: 'About ${_defaultApplicationName(context)}',
-                              cornerType: 'Both',
-                              //onTap setState and set in child the StyleScreen widget
-                              onTap: () => setState(() {
-                                child = const AboutScreen();
-                              }),
-                            ),
-                          ],
-                        ),
+                      child: ListView(
+                        children: [
+                          ListTileModifier(
+                            name: 'Customization',
+                            cornerType: 'Both',
+                            onTap: () => setState(() {
+                              child = const StyleScreen();
+                            }),
+                          ),
+                          //const MyDropdownWidget(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ListTileModifier(
+                            name: 'About ${_defaultApplicationName(context)}',
+                            cornerType: 'Both',
+                            //onTap setState and set in child the StyleScreen widget
+                            onTap: () => setState(() {
+                              child = const AboutScreen();
+                            }),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(

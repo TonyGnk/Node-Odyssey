@@ -6,10 +6,10 @@ class terminalTitle extends StatefulWidget {
   BuildContext context;
 
   @override
-  State<terminalTitle> createState() => _terminalTitleState();
+  State<terminalTitle> createState() => _TerminalTitleState();
 }
 
-class _terminalTitleState extends State<terminalTitle> {
+class _TerminalTitleState extends State<terminalTitle> {
   Color? color;
   bool z = true;
 

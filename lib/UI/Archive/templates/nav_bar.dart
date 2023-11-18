@@ -23,32 +23,28 @@ class BottomNavBar {
       Consumer(builder: (_, WidgetRef ref, __) {
         final selectedType = ref.watch(selectedStateProviderType);
 
-        if (selectedType != null) {
-          return selectedType == StateProviderType.oneUi
-              ? OneUIBottomNavigationBar(
-                  currentIndex: index,
-                  onTap: onTap,
-                  items: [
-                    OneUIBottomNavigationBarItem(
-                      label: labels[0],
-                    ),
-                    OneUIBottomNavigationBarItem(
-                      label: labels[1] ?? '1',
-                    ),
-                    OneUIBottomNavigationBarItem(
-                      label: labels[1],
-                    ),
-                  ],
-                )
-              : MaterialNavBar(
-                  currentIndex: index,
-                  onTap: onTap,
-                  labels: labels,
-                  icons: icons,
-                  iconsOutlined: iconsOutlined,
-                );
-        } else {
-          return SizedBox();
-        }
+        return selectedType == StateProviderType.oneUi
+            ? OneUIBottomNavigationBar(
+                currentIndex: index,
+                onTap: onTap,
+                items: [
+                  OneUIBottomNavigationBarItem(
+                    label: labels[0],
+                  ),
+                  OneUIBottomNavigationBarItem(
+                    label: labels[1],
+                  ),
+                  OneUIBottomNavigationBarItem(
+                    label: labels[1],
+                  ),
+                ],
+              )
+            : MaterialNavBar(
+                currentIndex: index,
+                onTap: onTap,
+                labels: labels,
+                icons: icons,
+                iconsOutlined: iconsOutlined,
+              );
       });
 }

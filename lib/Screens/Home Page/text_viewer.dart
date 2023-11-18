@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/text_editor_provider.dart';
 
-class terminalViewer extends StatefulWidget {
-  const terminalViewer({
+class TerminalViewer extends StatefulWidget {
+  const TerminalViewer({
     //required this.textList,
     super.key,
   });
@@ -12,10 +12,10 @@ class terminalViewer extends StatefulWidget {
   //List<String> textList;
 
   @override
-  State<terminalViewer> createState() => _terminalViewerState();
+  State<TerminalViewer> createState() => _TerminalViewerState();
 }
 
-class _terminalViewerState extends State<terminalViewer> {
+class _TerminalViewerState extends State<TerminalViewer> {
   @override
   Widget build(BuildContext context) => Consumer(
         builder: (_, WidgetRef ref, __) {
@@ -64,5 +64,3 @@ class _terminalViewerState extends State<terminalViewer> {
         },
       );
 }
-
-//This is a terminal, is a listview of all Text table. Has a method to add a new text widget and then setState and vouala 

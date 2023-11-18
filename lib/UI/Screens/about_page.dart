@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../custom_list_tile.dart';
 import '../Components/Buttons/elevated_button.dart';
-import '../Services2/ui_handler.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({

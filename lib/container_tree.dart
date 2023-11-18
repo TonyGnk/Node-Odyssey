@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
 import 'tree.dart';
 
 class TreeBox extends StatelessWidget {
   const TreeBox({
     required this.width,
+    required this.number,
     this.height,
     this.child = const SizedBox.shrink(),
     super.key,
@@ -13,7 +13,6 @@ class TreeBox extends StatelessWidget {
     this.leftSide = false,
     this.bottomSide = false,
     this.rightSide = false,
-    required this.number,
   });
 
   final double width;

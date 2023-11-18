@@ -1,34 +1,53 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables,
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Services/List Panel/result_providers.dart';
+import 'Services/create_dialog.dart';
 import 'algorithm_bf.dart';
 import 'center_column_bf.dart';
 import 'left_column_bf.dart';
 import 'right_column_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
-  const BreadthFirstAlg({super.key});
+  BreadthFirstAlg({super.key});
+
+  final TextButton textbutton =
+      TextButton(onPressed: () {}, child: const Text('Κλείσιμο'));
+
+  //getter for the textbutton
+  TextButton get gettextbutton => textbutton;
 
   @override
-  Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 4,
-            child: c1(context),
-          ),
-          Expanded(
-            flex: 14,
-            child: c2(context),
-          ),
-          Expanded(
-            flex: 3,
-            child: c3(context),
-          ),
-        ],
+  Widget build(BuildContext context) => Consumer(
+        builder: (context, ref, _) {
+          //add a delay
+          Future.delayed(const Duration(milliseconds: 50), () {
+            ref.read(textButtonProviderR.notifier).state = TextButton(
+              onPressed: () {
+                createDialog(context, true);
+              },
+              child: const Text('Νέα Αναζήτηση'),
+            );
+          });
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 4,
+                child: c1(context),
+              ),
+              Expanded(
+                flex: 14,
+                child: c2(context),
+              ),
+              Expanded(
+                flex: 3,
+                child: c3(context),
+              ),
+            ],
+          );
+        },
       );
 }
 
@@ -121,5 +140,4 @@ startCal2(int start, int end, int speed, WidgetRef ref, int sol) async {
   }
 }
 
-
-//Create a function take a String 
+//Create a function take a String

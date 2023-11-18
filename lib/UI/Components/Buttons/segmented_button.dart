@@ -1,10 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services2/uiChange.dart';
-import '../../Services2/ui_handler.dart';
 
 class AdaptSegmentedButtons extends StatefulWidget {
   const AdaptSegmentedButtons({

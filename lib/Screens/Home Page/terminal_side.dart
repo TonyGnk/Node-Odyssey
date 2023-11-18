@@ -6,11 +6,12 @@ import 'terminal_title.dart';
 import 'text_viewer.dart';
 
 Widget terminalSide(BuildContext context) {
-  terminalViewer te = terminalViewer();
+  TerminalViewer te = const TerminalViewer();
   TextEditingController controller = TextEditingController();
+  // ignore: prefer_expression_function_bodies
   return Consumer(builder: (_, WidgetRef ref, __) {
     //watch the list provider
-    final textList = ref.watch(textProvider);
+    //final textList = ref.watch(textProvider);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -29,16 +30,16 @@ Widget terminalSide(BuildContext context) {
           const Text('Δοκιμαστικό Πεδίο'),
           TextField(
             controller: controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Προσθήκη Νέου Κειμένου στο TXT και Ender',
-              border: const OutlineInputBorder(),
+              border: OutlineInputBorder(),
             ),
             // addText και μηδενισμός του controller
             onSubmitted: (value) {
               addText(value, ref);
 
               controller.clear();
-              //Allso clear the provider
+              //Also clear the provider
             },
           ),
           const Expanded(child: SizedBox()),

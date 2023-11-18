@@ -45,7 +45,7 @@ class _StyleScreenState extends State<StyleScreen> {
                 clipBehavior: Clip.antiAlias,
                 padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(3, 59, 111, 255),
+                  color: const Color.fromARGB(3, 59, 111, 255),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 width: MediaQuery.of(context).size.width,
@@ -56,7 +56,7 @@ class _StyleScreenState extends State<StyleScreen> {
                     children: [
                       Center(
                         child: Container(
-                          color: Color.fromARGB(5, 255, 0, 0),
+                          color: const Color.fromARGB(5, 255, 0, 0),
                           width: 220,
                           height: 360,
                           child: Row(

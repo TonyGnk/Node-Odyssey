@@ -353,12 +353,9 @@ class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
   final TextDirection textDirection;
 
   @override
-  BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    // The menu can be at most the size of the overlay minus 8.0 pixels in each
-    // direction.
-    return BoxConstraints.loose(constraints.biggest)
-        .deflate(const EdgeInsets.all(_kMenuScreenPadding));
-  }
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      BoxConstraints.loose(constraints.biggest)
+          .deflate(const EdgeInsets.all(_kMenuScreenPadding));
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {

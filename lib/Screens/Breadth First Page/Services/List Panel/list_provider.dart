@@ -38,13 +38,13 @@ void addTrackingContainer(
             Expanded(
               child: Container(
                 width: 10,
-                color: Color.fromARGB(255, 73, 67, 67).withOpacity(1),
+                color: const Color.fromARGB(255, 73, 67, 67).withOpacity(1),
               ),
             ),
             Expanded(
               child: Container(
                 width: 10,
-                color: Color.fromARGB(255, 231, 77, 77).withOpacity(1),
+                color: const Color.fromARGB(255, 231, 77, 77).withOpacity(1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
