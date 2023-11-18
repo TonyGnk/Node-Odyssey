@@ -7,39 +7,50 @@ import 'UI/Adaptive Root/adaptive_root.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
-  //print(savedThemeMode);
   runApp(
     ProviderScope(
-      child: MyApp(savedThemeMode: savedThemeMode),
+      child: buildApp(savedThemeMode: savedThemeMode),
+      //MyApp(savedThemeMode: savedThemeMode),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({
-    required this.savedThemeMode,
-    super.key,
-  });
+Widget buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
+      savedThemeMode: savedThemeMode,
+      appTitle: 'Algorithms',
+      debugShowFloatingThemeButton: true,
+      screens: [
+        homeScreen(),
+      ],
+      nonNavigationScreens: [
+        breadthFirstAlgScreen(),
+      ],
+    );
 
-  final AdaptiveThemeMode? savedThemeMode;
+//Deprecated
+// class MyApp extends StatefulWidget {
+//   const MyApp({
+//     required this.savedThemeMode,
+//     super.key,
+//   });
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+//   final AdaptiveThemeMode? savedThemeMode;
 
-class _MyAppState extends State<MyApp> {
-  //init state
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
 
-  @override
-  Widget build(BuildContext context) => AdaptiveRoot(
-        savedThemeMode: widget.savedThemeMode,
-        appTitle: 'Algorithms',
-        debugShowFloatingThemeButton: true,
-        screens: [
-          homeScreen(),
-        ],
-        nonNavigationScreens: [
-          breadthFirstAlgScreen(),
-        ],
-      );
-}
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) => AdaptiveRoot(
+//         savedThemeMode: widget.savedThemeMode,
+//         appTitle: 'Algorithms',
+//         debugShowFloatingThemeButton: true,
+//         screens: [
+//           homeScreen(),
+//         ],
+//         nonNavigationScreens: [
+//           breadthFirstAlgScreen(),
+//         ],
+//       );
+// }
