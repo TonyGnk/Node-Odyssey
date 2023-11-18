@@ -30,9 +30,6 @@ Widget rootConfig(
         routes: generateRoutes(
           mergeScreenLists(screens, nonNavigationScreens ?? []),
         ),
-        // scrollBehavior: const MaterialScrollBehavior().copyWith(
-        //   dragDevices: {PointerDeviceKind.mouse},
-        // ),
       ),
     );
 
