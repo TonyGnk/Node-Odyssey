@@ -30,24 +30,22 @@ class BreadthFirstAlg extends StatelessWidget {
               child: const Text('Νέα Αναζήτηση'),
             );
           });
-          return Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: c1(context),
-                ),
-                Expanded(
-                  flex: 14,
-                  child: c2(context),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: c3(context),
-                ),
-              ],
-            ),
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 4,
+                child: c1(context),
+              ),
+              Expanded(
+                flex: 14,
+                child: c2(context),
+              ),
+              Expanded(
+                flex: 3,
+                child: c3(context),
+              ),
+            ],
           );
         },
       );

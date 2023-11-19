@@ -66,29 +66,27 @@ class _SynthesizerState extends State<Synthesizer> {
       );
 
   Scaffold multiScreenTab(List<RoutedScreen> screenList) => Scaffold(
-        body: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Row(
-            children: [
-              NavigationRail(
-                  onDestinationSelected: updateCurrentPageIndex,
-                  destinations: List.generate(
-                    screenList.length,
-                    (i) => NavigationRailDestination(
-                      icon: Icon(
-                        screenList[i].getIcon,
-                      ),
-                      label: Text(screenList[i].getLabel),
-                    ),
+        body: Row(
+          children: [
+            NavigationRail(
+              onDestinationSelected: updateCurrentPageIndex,
+              destinations: List.generate(
+                screenList.length,
+                (i) => NavigationRailDestination(
+                  icon: Icon(
+                    screenList[i].getIcon,
                   ),
-                  selectedIndex: currentPageIndex),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 80,
-                child: screenList[currentPageIndex].build(context),
+                  label: Text(
+                    screenList[i].getLabel,
+                  ),
+                ),
               ),
-            ],
-          ),
+              selectedIndex: currentPageIndex,
+            ),
+            Expanded(
+              child: screenList[currentPageIndex].build(context),
+            ),
+          ],
         ),
       );
 }

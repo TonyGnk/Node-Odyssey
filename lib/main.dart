@@ -2,9 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Screens/screen_list.dart';
 import 'UI/Adaptive Root/adaptive_root.dart';
-import 'UI/Routed Screen/routed_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

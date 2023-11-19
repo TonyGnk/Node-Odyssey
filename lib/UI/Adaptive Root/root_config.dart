@@ -1,6 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Screens/list.dart';
 import '../Screens/styles.dart';
 import '../Themes/material_theme_data.dart';
@@ -25,7 +24,7 @@ Widget rootConfig(
         theme: theme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: Synthesizer(),
+        home: Synthesizer(), //TheApp()
         // routes: generateRoutes(
         //   mergeScreenLists(screens,),
         // ),
@@ -62,3 +61,69 @@ List<RoutedScreen> mergeScreenLists(
   }
   return c;
 }
+
+//Create the app widget
+class TheApp extends StatelessWidget {
+  const TheApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Row(
+          children: [
+            Container(
+              width: 100,
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    color: Colors.pink,
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 60,
+                          color: Colors.green,
+                        ),
+                        Expanded(
+                          child: Container(
+                            color: Colors.lightBlue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    color: Colors.pink,
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          color: Colors.green,
+                        ),
+                        Expanded(
+                          child: Container(
+                            color: Colors.lightBlue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+//Create the app state

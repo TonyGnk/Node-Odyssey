@@ -56,7 +56,7 @@ class RoutedScreen extends StatelessWidget {
           //     ),
           //   ),
           // ),
-          mainChild,
+          Expanded(child: mainChild),
         ],
       );
 
