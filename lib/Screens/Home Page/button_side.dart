@@ -46,7 +46,9 @@ class ButtonsSide extends StatelessWidget {
                 context,
                 // push breadthFirstAlgScreen(),
                 MaterialPageRoute(
-                  builder: (context) => breadthFirstAlgScreen(),
+                  builder: (context) => Scaffold(
+                    body: breadthFirstAlgScreen(),
+                  ),
                 ),
               ),
               leftIcon: breadthFirstAlgScreen().getIcon,
