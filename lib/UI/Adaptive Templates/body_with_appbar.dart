@@ -7,6 +7,6 @@ Widget bodyWithAppBar({
     Column(
       children: [
         appBar,
-        body,
+        Expanded(child: body),
       ],
     );

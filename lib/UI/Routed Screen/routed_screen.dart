@@ -43,19 +43,7 @@ class RoutedScreen extends StatelessWidget {
   Column col(BuildContext context) => Column(
         children: [
           appBar,
-          //Container(width: 40, height: 40, color: Colors.red),
           noMargin ? const SizedBox() : const SizedBox(height: 8),
-          //Expanded(child: Container(width: 40, height: 40, color: Colors.pink)),
-          // Expanded(
-          //   child: Container(
-          //     height: MediaQuery.of(context).size.height,
-          //     child: Column(
-          //       children: [
-          //         Expanded(child: mainChild),
-          //       ],
-          //     ),
-          //   ),
-          // ),
           Expanded(child: mainChild),
         ],
       );
