@@ -1,11 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables,
-
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
-import 'Services/List Panel/result_providers.dart';
-import 'algorithm_bf.dart';
 import 'center_column_bf.dart';
 import 'left_column_bf.dart';
 import 'right_column_bf.dart';

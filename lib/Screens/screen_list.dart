@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/breadth_first_page.dart';
 import 'Home Page/home_page.dart';
@@ -7,6 +8,11 @@ import 'Home Page/home_page.dart';
 final screensProvider = StateProvider<List<RoutedScreen>>(
   (ref) => [
     homeScreen(),
+  ],
+);
+
+final destinationsProvider = StateProvider<List<RoutedScreen>>(
+  (ref) => [
     breadthFirstAlgScreen(),
   ],
 );

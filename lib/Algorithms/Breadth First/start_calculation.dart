@@ -30,7 +30,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Services/List Panel/result_providers.dart';
-import '../../Screens/Breadth First Page/algorithm_bf.dart';
+import 'algorithm_bf.dart';
 
 startCal(int start, int end, int speed, WidgetRef ref) async {
   List<Node>? solution = await findBreadthSolutionUI(
