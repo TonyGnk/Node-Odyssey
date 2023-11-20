@@ -24,6 +24,7 @@ class MaterialThemeData extends TotalTheme {
         ),
         secondaryHeaderColor: const Color.fromARGB(255, 232, 232, 232),
         scaffoldBackgroundColor: const Color.fromARGB(255, 243, 243, 243),
+        shadowColor: const Color.fromARGB(255, 255, 255, 255),
       );
 
   @override
@@ -47,6 +48,7 @@ class MaterialThemeData extends TotalTheme {
         ),
         secondaryHeaderColor: const Color.fromARGB(255, 56, 56, 56),
         scaffoldBackgroundColor: const Color.fromARGB(255, 32, 32, 32),
+        shadowColor: const Color.fromARGB(255, 45, 45, 45),
       );
 
   static ThemeData getLightTheme() => MaterialThemeData().light();
@@ -57,8 +59,6 @@ class MaterialThemeData extends TotalTheme {
     log('MaterialTheme');
   }
 
-  //Create a function for calculating the elevated/shadow color for light theme
-  //Gets a Color and return the convertion of the color any close to white
   Color getElevatedColor(Color color) {
     int red = (color.red + (255 - color.red) * 0.8).round();
     int green = (color.green + (255 - color.green) * 0.8).round();

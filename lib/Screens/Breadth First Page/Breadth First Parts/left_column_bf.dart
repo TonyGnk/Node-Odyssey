@@ -1,38 +1,41 @@
 import 'package:flutter/material.dart';
-import '../../../Services & Providers/constants.dart';
-import '../tracking_bf.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Services/List Panel/list_provider.dart';
+import '../Services/tracking_tiles.dart';
+//          color: Theme.of(context).shadowColor.withOpacity(0.2),
 
-Container c1(BuildContext context) => Container(
-      //height: 300,
-      //height: MediaQuery.of(context).size.height - 86,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          //bottomRight: Radius.circular(cornerSize),
-          bottomLeft: Radius.circular(cornerSize),
+Widget c1(BuildContext context) => Column(
+      children: [
+        Expanded(
+          flex: 4,
+          child: trackingListBF(),
         ),
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        border: Border.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+        const Divider(),
+        Expanded(
+          flex: 2,
+          child: times(),
         ),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 4,
-            child: trackingListBF(),
-          ),
-          const Divider(),
-          const Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-          const Text('Κάτι για τους Χρόνους Εκτέλεσης...'),
-          const Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-        ],
-      ),
+      ],
+    );
+
+Widget times() => const Center(
+      child: Text('Κάτι για τους Χρόνους Εκτέλεσης...'),
+    );
+
+Widget trackingListBF() => Consumer(builder: (context, ref, _) {
+      final trackingTiles = ref.watch(trackingContainer);
+      final tr1 = ref.watch(trackUpdater); // ignore: unused_local_variable
+      return listView(
+        context,
+        trackingTiles,
+      );
+    });
+
+ListView listView(BuildContext context, List<TrackingTiles> trackingTiles) =>
+    ListView(
+      reverse: true,
+      children: [
+        for (int i = trackingTiles.length - 1; i >= 0; i--)
+          trackingTiles[i].build(context),
+      ],
     );

@@ -29,10 +29,10 @@ class BreadthFirstAlg extends StatelessWidget {
             flex: 14,
             child: c2(context),
           ),
-          Expanded(
-            flex: 3,
-            child: c3(context),
-          ),
+          // Expanded(
+          //   flex: 3,
+          //   child: c3(context),
+          // ),
         ],
       );
 }
