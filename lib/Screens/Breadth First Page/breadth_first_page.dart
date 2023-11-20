@@ -23,11 +23,11 @@ class BreadthFirstAlg extends StatelessWidget {
         children: [
           Expanded(
             flex: 4,
-            child: c1(context),
+            child: leftColumnBf(context),
           ),
           Expanded(
             flex: 14,
-            child: c2(context),
+            child: centerColumnBf(context),
           ),
           // Expanded(
           //   flex: 3,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../Services & Providers/constants.dart';
 import '../selector.dart';
 
-Widget c3(BuildContext context) => Container(
+Widget rightColumnBf(BuildContext context) => Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
