@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
+import 'create_stage.dart';
+import 'list_and_button.dart';
 
 // This a the left column of the Breadth First Algorithm page.
 Widget leftColumnBf(BuildContext context) => Column(
       children: [
         Expanded(
-          child: trackingListConsumerBf(),
+          child: trackingListAndButton(context),
         ),
         const SizedBox(
           height: 10,
@@ -22,11 +24,9 @@ Widget leftColumnBf(BuildContext context) => Column(
       ],
     );
 
-// This is the left container displaying the tracking tiles.
-Widget trackingListConsumerBf() => Consumer(builder: (context, ref, _) {
-      //final trackingTiles = ref.watch(trackingContainer);
-      final trackingList = ref.watch(trackingListProvider);
-      final tr1 = ref.watch(trackUpdater); // ignore: unused_local_variable
+Widget trackingListAndButton(BuildContext context) =>
+    Consumer(builder: (context, ref, _) {
+      final isCreating = ref.watch(isCreatingProvider);
       return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerSize),
@@ -37,24 +37,39 @@ Widget trackingListConsumerBf() => Consumer(builder: (context, ref, _) {
             ),
           ),
           clipBehavior: Clip.antiAlias,
-          child: trackingList.build(context)
+          child: Stack(
+            children: <Widget>[
+              Container(
+                //  color: Colors.red,
+                child: trackingListConsumerBF(),
+              ),
+              // Transform(
+              //   transform: Matrix4.identity()
+              //     ..setEntry(3, 2, 0.001), // perspective
+              //   //..rotateX(0.01) // rotated around the x-axis a little
+              //   // ..translate(0.0, 20.0, 0.0), // moved up vertically
+              //   alignment: FractionalOffset.center,
+              //   child: Container(
+              //     color: isCreating
+              //         ? Colors.blue.withOpacity(0.4)
+              //         : Colors.blue.withOpacity(0),
+              //     //  child: Selector2(),
+              //   ),
+              // ),
+            ],
+          )
 
-          //     listView(
-          //   context,
-          //   trackingTiles,
+          // Column(
+          //   children: [
+          //     isCreating
+          //         ? const Expanded(child: Selector2())
+          //         : Expanded(child: trackingListConsumerBF()),
+          //     const SizedBox(height: 4),
+          //     isCreating ? const SizedBox() : buttonArea(context),
+          //   ],
           // ),
           );
     });
-
-// This is the list view of the tracking tiles.
-ListView listView(BuildContext context, List<TrackingTiles> trackingTiles) =>
-    ListView(
-      reverse: true,
-      children: [
-        for (int i = trackingTiles.length - 1; i >= 0; i--)
-          trackingTiles[i].build(context),
-      ],
-    );
 
 // This is is the left and bottom container counting the time of the algorithm.
 Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(

@@ -7,22 +7,31 @@ import '../Services/List Panel/list_provider.dart';
 import '../Services/List Panel/result_providers.dart';
 import '../result_box_bf.dart';
 
-Widget centerColumnBf(BuildContext context) => Column(
-      children: [
-        Expanded(
-          child: containerZ(context),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: 222,
-          child: resultPanel(
-            context,
+Widget centerColumnBf(BuildContext context) =>
+    Consumer(builder: (_, WidgetRef ref, __) {
+      final isCreating = ref.watch(isCreatingProvider);
+      return Column(
+        children: [
+          Expanded(
+            child: containerZ(context),
           ),
-        ),
-      ],
-    );
+          const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 222,
+            child: resultPanel(
+              context,
+            ),
+          ),
+          // IconButton(
+          //   onPressed: () => ref.read(isCreatingProvider.notifier).state =
+          //       ref.watch(isCreatingProvider) ? false : true,
+          //   icon: Icon(Icons.refresh),
+          // ),
+        ],
+      );
+    });
 
 Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
       final outercontroller = ScrollController();
