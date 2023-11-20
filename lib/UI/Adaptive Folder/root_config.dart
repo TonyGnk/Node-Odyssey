@@ -24,7 +24,7 @@ Widget rootConfig(
         theme: theme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: Synthesizer(), //TheApp()
+        home: const Synthesizer(), //TheApp()
         // routes: generateRoutes(
         //   mergeScreenLists(screens,),
         // ),
@@ -64,13 +64,13 @@ List<RoutedScreen> mergeScreenLists(
 
 //Create the app widget
 class TheApp extends StatelessWidget {
-  const TheApp({Key? key}) : super(key: key);
+  const TheApp({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Row(
           children: [
-            Container(
+            SizedBox(
               width: 100,
               child: Column(
                 children: [

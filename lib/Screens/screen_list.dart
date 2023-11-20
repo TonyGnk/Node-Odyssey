@@ -17,8 +17,9 @@ RoutedScreen homeScreen() => const RoutedScreen(
       mainChild: Home(),
       label: 'Αρχική',
       labelRoute: '/Home',
-      icon: Icons.home_outlined,
-      filledIcon: Icons.home,
+      //Add a stat icon
+      icon: Icons.auto_awesome_outlined,
+      filledIcon: Icons.auto_awesome,
       appBar: AdaptAppBar(
         showBackButton: false,
         filled: false,
