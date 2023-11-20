@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../tracking_tiles.dart';
+import '../../../../Services & Providers/constants.dart';
 
+//Create a
+
+//1
 final trackingContainer = StateProvider<List<TrackingTiles>>(
   (ref) => [
     TrackingTiles(
@@ -10,6 +13,7 @@ final trackingContainer = StateProvider<List<TrackingTiles>>(
   ],
 );
 
+//2
 void clearTrackingContainer(WidgetRef ref) {
   ref.read(trackingContainer.notifier).state = [
     TrackingTiles(
@@ -19,6 +23,7 @@ void clearTrackingContainer(WidgetRef ref) {
   ref.read(trackingBox.notifier).state = [];
 }
 
+//3
 void addTrackingContainer(
   WidgetRef ref,
   String text,
@@ -62,12 +67,32 @@ void addTrackingContainer(
       );
 }
 
+class TrackingTiles {
+  TrackingTiles({
+    required this.text,
+  });
+
+  final String text;
+
+  Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+        ),
+        margin: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(10),
+        child: Text(text),
+      );
+}
+
+//B
 final trackUpdater = StateProvider<TrackingTiles>(
   (ref) => TrackingTiles(
     text: '',
   ),
 );
 
+//B
 void addTrackingContainerRolling(
   WidgetRef ref,
   String text,

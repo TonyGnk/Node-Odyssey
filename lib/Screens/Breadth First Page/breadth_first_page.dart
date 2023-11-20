@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import 'Breadth First Parts/appbar_bf.dart';
 import 'Breadth First Parts/center_column_bf.dart';
-import 'Breadth First Parts/left_column_bf.dart';
+import 'Left Column BF/left_column_bf.dart';
 import 'Breadth First Parts/right_column_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
