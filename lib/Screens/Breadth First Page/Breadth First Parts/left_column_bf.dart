@@ -6,31 +6,28 @@ import '../Services/List Panel/list_provider.dart';
 import '../Services/tracking_tiles.dart';
 
 // This a the left column of the Breadth First Algorithm page.
-Widget leftColumnBf(BuildContext context) => Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Expanded(
-            child: trackingListConsumerBf(),
+Widget leftColumnBf(BuildContext context) => Column(
+      children: [
+        Expanded(
+          child: trackingListConsumerBf(),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 222,
+          child: algorithmTimeDisplay(
+            context,
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 222,
-            child: algorithmTimeDisplay(
-              context,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
 
 // This is the left container displaying the tracking tiles.
 Widget trackingListConsumerBf() => Consumer(builder: (context, ref, _) {
       final trackingTiles = ref.watch(trackingContainer);
       final tr1 = ref.watch(trackUpdater); // ignore: unused_local_variable
-      return DecoratedBox(
+      return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerSize),
           color: Theme.of(context).shadowColor.withOpacity(0.2),
@@ -39,6 +36,7 @@ Widget trackingListConsumerBf() => Consumer(builder: (context, ref, _) {
             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
           ),
         ),
+        clipBehavior: Clip.antiAlias,
         child: listView(
           context,
           trackingTiles,

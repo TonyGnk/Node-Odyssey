@@ -11,7 +11,10 @@ class BreadthFirstAlg extends StatelessWidget {
   @override
   Widget build(BuildContext context) => bodyWithAppBar(
         appBar: appBar(context),
-        body: body(context),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: body(context),
+        ),
       );
 
   Widget appBar(BuildContext context) => appBarBf(
@@ -25,13 +28,16 @@ class BreadthFirstAlg extends StatelessWidget {
             flex: 4,
             child: leftColumnBf(context),
           ),
+          const SizedBox(
+            width: 10,
+          ),
           Expanded(
             flex: 14,
             child: centerColumnBf(context),
           ),
           // Expanded(
           //   flex: 3,
-          //   child: c3(context),
+          //   child: rightColumnBf(context),
           // ),
         ],
       );
