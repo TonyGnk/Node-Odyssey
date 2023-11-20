@@ -5,9 +5,7 @@ import '../Routed Screen/routed_screen.dart';
 import '../Archive/templates/nav_bar.dart';
 
 class Synthesizer extends StatefulWidget {
-  const Synthesizer({
-    super.key,
-  });
+  const Synthesizer({super.key});
 
   @override
   State<Synthesizer> createState() => _SynthesizerState();

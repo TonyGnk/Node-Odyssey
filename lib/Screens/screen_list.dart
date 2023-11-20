@@ -22,7 +22,7 @@ RoutedScreen homeScreen() => const RoutedScreen(
       filledIcon: Icons.auto_awesome,
       appBar: AdaptAppBar(
         showBackButton: false,
-        filled: false,
+        filled: true,
         showInfoIcon: true,
         showThemeIcon: true,
       ),

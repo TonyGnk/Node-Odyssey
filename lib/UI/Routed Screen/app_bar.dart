@@ -35,8 +35,7 @@ class AdaptAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => enable
-      ? Container(
-          width: MediaQuery.of(context).size.width - 80,
+      ? DecoratedBox(
           decoration: filled
               ? BoxDecoration(
                   border: Border.all(
