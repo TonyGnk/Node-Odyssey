@@ -5,7 +5,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../custom_list_tile.dart';
+import '../../Arc/custom_list_tile.dart';
 import '../Components/Buttons/elevated_button.dart';
 
 class AboutScreen extends StatefulWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../Routed Screen/app_bar.dart';
 import '../Routed Screen/routed_screen.dart';
 import 'about_page.dart';
 
@@ -10,5 +9,4 @@ RoutedScreen aboutScreen() => const RoutedScreen(
       labelRoute: 'about',
       icon: Icons.info_outline,
       filledIcon: Icons.info,
-      appBar: AdaptAppBar(label: 'Πληροφορίες Εφαρμογής'),
     );

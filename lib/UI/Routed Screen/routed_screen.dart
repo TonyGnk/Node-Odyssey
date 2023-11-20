@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app_bar.dart';
 
 class RoutedScreen extends StatelessWidget {
   /// A set of widgets that make up the screen.
@@ -9,7 +8,6 @@ class RoutedScreen extends StatelessWidget {
   const RoutedScreen({
     required this.mainChild,
     required this.icon,
-    required this.appBar,
     this.labelRoute,
     super.key,
     this.filledIcon = Icons.error,
@@ -32,9 +30,6 @@ class RoutedScreen extends StatelessWidget {
   /// The main widget to display the content of the screen
   final Widget mainChild;
 
-  /// The app bar of the screen. If null no app bar is displayed
-  final AdaptAppBar appBar;
-
   final bool noMargin;
 
   @override
@@ -42,8 +37,6 @@ class RoutedScreen extends StatelessWidget {
 
   Column col(BuildContext context) => Column(
         children: [
-          appBar,
-          noMargin ? const SizedBox() : const SizedBox(height: 8),
           Expanded(child: mainChild),
         ],
       );
@@ -63,10 +56,8 @@ class RoutedScreen extends StatelessWidget {
         height: height,
         child: Column(
           children: [
-            const SizedBox(height: 5),
-            appBar.build(context),
-
             const SizedBox(height: 10),
+
             mainChild,
             // ),
           ],
