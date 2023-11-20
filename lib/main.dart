@@ -20,34 +20,3 @@ AdaptiveRoot buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
       appTitle: 'Algorithms',
       debugShowFloatingThemeButton: true,
     );
-
-
-
-
-//Deprecated
-// class MyApp extends StatefulWidget {
-//   const MyApp({
-//     required this.savedThemeMode,
-//     super.key,
-//   });
-
-//   final AdaptiveThemeMode? savedThemeMode;
-
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-// }
-
-// class _MyAppState extends State<MyApp> {
-//   @override
-//   Widget build(BuildContext context) => AdaptiveRoot(
-//         savedThemeMode: widget.savedThemeMode,
-//         appTitle: 'Algorithms',
-//         debugShowFloatingThemeButton: true,
-//         screens: [
-//           homeScreen(),
-//         ],
-//         nonNavigationScreens: [
-//           breadthFirstAlgScreen(),
-//         ],
-//       );
-// }

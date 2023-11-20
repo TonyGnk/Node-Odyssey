@@ -2,9 +2,7 @@
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'root_config.dart';
-import '../Routed Screen/routed_screen.dart';
 import '../Services2/circularProgressScreen.dart';
 import '../Services2/uiChange.dart';
 import '../Themes/material_theme_data.dart';
@@ -54,8 +52,24 @@ class _AdaptiveRootState extends State<AdaptiveRoot> {
           widget.appTitle,
           widget.debugShowFloatingThemeButton,
         )
-      : circularProgressScreen(context, 'Loading Theme...');
+      : circularProgressScreen();
 }
+
+Widget circularProgressScreen() => const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 20),
+              Text('Loading Theme...'),
+            ],
+          ),
+        ),
+      ),
+    );
 
 // const Spacer(),
 // const Text(
