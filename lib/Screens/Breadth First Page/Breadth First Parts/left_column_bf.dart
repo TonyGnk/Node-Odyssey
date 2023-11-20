@@ -11,14 +11,13 @@ Widget leftColumnBf(BuildContext context) => Padding(
       child: Column(
         children: [
           Expanded(
-            flex: 30,
             child: trackingListConsumerBf(),
           ),
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-            flex: 15,
+          SizedBox(
+            height: 222,
             child: algorithmTimeDisplay(
               context,
             ),
