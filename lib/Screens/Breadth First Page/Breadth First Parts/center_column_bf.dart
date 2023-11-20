@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'Services/List Panel/list_provider.dart';
-import 'result_panel.dart';
+import '../Services/List Panel/list_provider.dart';
+import '../result_panel.dart';
 
 Widget c2(BuildContext context) => Column(
       children: [
