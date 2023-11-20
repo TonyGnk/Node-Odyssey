@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:developer';
 import 'dart:math' as math;
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Services/List Panel/list_provider.dart';
@@ -39,7 +40,13 @@ Future<List<Node>?> findBreadthSolutionUI(
 
     // Print the current node value
     log('${current.value}');
-    // For printing the ui only
+    //I have a class TrackingList. The TrackingList class has a method addTile. I have a provider with name trackingListProvider. I want to call the method addTile from the provider trackingListProvider. How can I do that?
+    ref.watch(trackingListProvider).addTile(
+          current.value,
+          current.value.toString(),
+        );
+
+// For printing the ui only
     addTrackingContainer(
       ref,
       '${current.value}',

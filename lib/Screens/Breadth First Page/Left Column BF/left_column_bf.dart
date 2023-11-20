@@ -24,23 +24,26 @@ Widget leftColumnBf(BuildContext context) => Column(
 
 // This is the left container displaying the tracking tiles.
 Widget trackingListConsumerBf() => Consumer(builder: (context, ref, _) {
-      final trackingTiles = ref.watch(trackingContainer);
+      //final trackingTiles = ref.watch(trackingContainer);
+      final trackingList = ref.watch(trackingListProvider);
       final tr1 = ref.watch(trackUpdater); // ignore: unused_local_variable
       return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(cornerSize),
-          color: Theme.of(context).shadowColor.withOpacity(0.2),
-          border: Border.all(
-            width: 1,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(cornerSize),
+            color: Theme.of(context).shadowColor.withOpacity(0.2),
+            border: Border.all(
+              width: 1,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+            ),
           ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: listView(
-          context,
-          trackingTiles,
-        ),
-      );
+          clipBehavior: Clip.antiAlias,
+          child: trackingList.build(context)
+
+          //     listView(
+          //   context,
+          //   trackingTiles,
+          // ),
+          );
     });
 
 // This is the list view of the tracking tiles.

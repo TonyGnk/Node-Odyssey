@@ -77,40 +77,39 @@ class _SelectorState extends State<Selector> {
         ),
       );
 
-  Widget submit(
-    BuildContext context,
-    WidgetRef ref,
-  ) =>
-      ElevatedButton.icon(
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(const Size(200, 55)),
-            //corners
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
+  Widget submit(BuildContext context, WidgetRef ref) => ElevatedButton.icon(
+        style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(const Size(200, 55)),
+          //corners
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
-          label: const Text('Εκτέλεση'),
-          onPressed: () {
-            clearTrackingContainer(ref);
-            currentSliderValue2 == 1.0
-                ? startCal(
-                    int.parse(controller1.text),
-                    int.parse(controller2.text),
-                    speedToMillisecond(currentSliderValue),
-                    ref,
-                  )
-                : startCal2(
-                    int.parse(controller1.text),
-                    int.parse(controller2.text),
-                    speedToMillisecond(currentSliderValue),
-                    ref,
-                    currentSliderValue2.toInt(),
-                  );
-          },
-          //submit icon
-          icon: const Icon(Icons.send));
+        ),
+        label: const Text('Εκτέλεση'),
+        onPressed: () {
+          //ref.read(trackingListProvider.notifier).state.clear();
+          ref.read(trackingContainer).clear();
+          clearTrackingContainer(ref);
+          currentSliderValue2 == 1.0
+              ? startCal(
+                  int.parse(controller1.text),
+                  int.parse(controller2.text),
+                  speedToMillisecond(currentSliderValue),
+                  ref,
+                )
+              : startCal2(
+                  int.parse(controller1.text),
+                  int.parse(controller2.text),
+                  speedToMillisecond(currentSliderValue),
+                  ref,
+                  currentSliderValue2.toInt(),
+                );
+        },
+        //submit icon
+        icon: const Icon(Icons.send),
+      );
 
   Widget speedSlider(BuildContext context) => Column(
         children: [

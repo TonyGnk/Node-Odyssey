@@ -2,7 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../Services & Providers/constants.dart';
 
-//Create a
+final trackingListProvider = StateProvider<TrackingList>(
+  (ref) => TrackingList(),
+);
+
+class TrackingList extends StatelessWidget {
+  TrackingList({
+    super.key,
+    this.ref,
+    List<TrackingTiles>? trackingTiles,
+  }) : trackingTiles = trackingTiles ?? [];
+
+  final WidgetRef? ref;
+  final List<TrackingTiles> trackingTiles;
+
+  @override
+  ListView build(BuildContext context) => ListView(
+        reverse: true,
+        children: [
+          for (int i = trackingTiles.length - 1; i >= 0; i--)
+            trackingTiles[i].build(context),
+        ],
+      );
+
+  void clear() {
+    trackingTiles.clear();
+  }
+
+  void addTile(int value, String text) {
+    trackingTiles.add(
+      TrackingTiles(
+        text: text,
+      ),
+    );
+  }
+}
+
+//
+
+//
+
+//
+
+//
+
+//
 
 //1
 final trackingContainer = StateProvider<List<TrackingTiles>>(
@@ -49,7 +93,7 @@ void addTrackingContainer(
             Expanded(
               child: Container(
                 width: 10,
-                color: const Color.fromARGB(255, 231, 77, 77).withOpacity(1),
+                color: const Color.fromARGB(255, 73, 67, 67).withOpacity(1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
