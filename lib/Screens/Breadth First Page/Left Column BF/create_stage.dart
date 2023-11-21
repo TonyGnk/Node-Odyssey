@@ -8,14 +8,14 @@ import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
 
-class Selector2 extends StatefulWidget {
-  const Selector2({super.key});
+class SelectStage extends StatefulWidget {
+  const SelectStage({super.key});
 
   @override
-  State<Selector2> createState() => _SelectorState();
+  State<SelectStage> createState() => _SelectorState();
 }
 
-class _SelectorState extends State<Selector2> {
+class _SelectorState extends State<SelectStage> {
   late TextEditingController controller1 = TextEditingController();
   late TextEditingController controller2 = TextEditingController();
 
@@ -23,153 +23,67 @@ class _SelectorState extends State<Selector2> {
   double currentSliderValue2 = 1.0;
 
   @override
-  Widget build(BuildContext context) =>
-      Consumer(builder: (_, WidgetRef ref, __) {
-        final bfRunning = ref.watch(bfRunningProvider);
-        return Column(
+  Widget build(BuildContext context) => Consumer(
+      builder: (_, WidgetRef ref, __) => Column(
+            children: [
+              const SizedBox(height: 8),
+              const Text(
+                'Νέα Αναζήτηση',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+              customFieldBf(
+                controller1,
+                'Εισάγεται Αρχική Τιμή',
+              ),
+              customFieldBf(
+                controller2,
+                'Εισάγεται Τελική Τιμή',
+              ),
+
+              speedSlider(context),
+              const SizedBox(height: 2),
+              solutionSlider(context),
+              //submit(context, ref),
+              // createButtonArea(context),
+              Expanded(
+                child: Container(),
+              ),
+              newSubmit(context),
+            ],
+          ));
+
+  Widget newSubmit(BuildContext context) => Consumer(
+        builder: (_, WidgetRef ref, __) => Row(
           children: [
-            container1(context),
-            container2(context),
-            speedSlider(context),
-            const SizedBox(height: 2),
-            solutionSlider(context),
-            //submit(context, ref),
-            createButtonArea(context),
-            newSubmit(context, ref),
-          ],
-        );
-      });
-
-  Widget container1(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        margin: const EdgeInsets.all(2),
-        width: 200,
-        //height: 38,
-        child: TextField(
-          controller: controller1,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Εισάγεται Αρχική Τιμή',
-          ),
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly
-          ],
-        ),
-      );
-
-  Widget container2(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        margin: const EdgeInsets.all(2),
-        width: 200,
-        child: TextField(
-          controller: controller2,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Εισάγεται Τελική Τιμή',
-          ),
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly
-          ],
-        ),
-      );
-
-  Widget submit(BuildContext context, WidgetRef ref) => ElevatedButton.icon(
-        style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(const Size(200, 55)),
-          //corners
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ),
-        label: const Text('Εκτέλεση'),
-        onPressed: () {
-          ref.read(isCreatingProvider.notifier).state = false;
-          Future.delayed(const Duration(milliseconds: 100), () {
-            ref.read(trackingContainer).clear();
-            clearTrackingContainer(ref);
-            currentSliderValue2 == 1.0
-                ? startCal(
-                    int.parse(controller1.text),
-                    int.parse(controller2.text),
-                    speedToMillisecond(currentSliderValue),
-                    ref,
-                  )
-                : startCal2(
-                    int.parse(controller1.text),
-                    int.parse(controller2.text),
-                    speedToMillisecond(currentSliderValue),
-                    ref,
-                    currentSliderValue2.toInt(),
+            Expanded(
+              child: FilledButton.icon(
+                label: const Text('Εκτέλεση'),
+                icon: const Icon(Icons.auto_awesome_outlined),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.secondary,
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(cornerSize - 1),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  ref.watch(bfRunningProvider.notifier).state = BfRunning(
+                    startValue: int.parse(controller1.text),
+                    targetValue: int.parse(controller2.text),
                   );
-          });
-        },
-        icon: const Icon(Icons.send),
-      );
-
-  Widget newSubmit(BuildContext context, WidgetRef ref) => ElevatedButton(
-        child: const Text('Εκτέλεση'),
-        onPressed: () {
-          log('pressed');
-          // ref.watch(bfRunningProvider.notifier).state.setStartValue(
-          //       int.parse(controller1.text),
-          //     );
-
-          ref.watch(bfRunningProvider.notifier).state = BfRunning(
-            startValue: int.parse(controller1.text),
-            targetValue: int.parse(controller2.text),
-          );
-
-          //
-          ref.watch(isCreatingProvider.notifier).state = false;
-
-          //
-
-          //
-
-          ref.watch(bfRunningProviderUpdater.notifier).state =
-              !ref.watch(bfRunningProviderUpdater);
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          // ref.read(isCreatingProvider.notifier).state = false;
-
-          // ref.read(trackingContainer).clear();
-          // clearTrackingContainer(ref);
-          // currentSliderValue2 == 1.0
-          //     ? startCal(
-          //         int.parse(controller1.text),
-          //         int.parse(controller2.text),
-          //         speedToMillisecond(currentSliderValue),
-          //         ref,
-          //       )
-          //     : startCal2(
-          //         int.parse(controller1.text),
-          //         int.parse(controller2.text),
-          //         speedToMillisecond(currentSliderValue),
-          //         ref,
-          //         currentSliderValue2.toInt(),
-          //       );
-        },
+                  ref.watch(isCreatingProvider.notifier).state = false;
+                  ref.watch(bfRunningProviderUpdater.notifier).state =
+                      !ref.watch(bfRunningProviderUpdater);
+                },
+              ),
+            ),
+          ],
+        ),
       );
 
   Widget speedSlider(BuildContext context) => Column(
@@ -180,6 +94,8 @@ class _SelectorState extends State<Selector2> {
             max: 100,
             divisions: 10,
             label: speed(currentSliderValue),
+            thumbColor: Theme.of(context).colorScheme.secondary,
+            activeColor: Theme.of(context).colorScheme.secondary,
             onChanged: (double value) {
               setState(() {
                 currentSliderValue = value;
@@ -199,6 +115,8 @@ class _SelectorState extends State<Selector2> {
             max: 3,
             divisions: 2,
             label: currentSliderValue2.toInt().toString(),
+            thumbColor: Theme.of(context).colorScheme.secondary,
+            activeColor: Theme.of(context).colorScheme.secondary,
             onChanged: (double value) {
               setState(() {
                 currentSliderValue2 = value;
@@ -208,7 +126,6 @@ class _SelectorState extends State<Selector2> {
         ],
       );
 
-  //Create a function which returns a String. Takes a double. If 0 returns slow, 10 returns medium, 20 returns fast.
   String speed(double currentSliderValue) {
     if (currentSliderValue == 0) {
       return '1 sec';
@@ -261,54 +178,29 @@ class _SelectorState extends State<Selector2> {
     }
   }
 
-//Create Button Area
-  Widget createButtonArea(BuildContext context) => Consumer(
-        builder: (context, ref, _) => Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(cornerSize - 1),
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-            ),
+  Widget customFieldBf(
+    TextEditingController controller,
+    String message,
+  ) =>
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(cornerSize),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 6),
+        //margin: const EdgeInsets.all(2),
+        //width: 200,
+        //height: 38,
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: message,
           ),
-          clipBehavior: Clip.antiAlias,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    //update the final isCreating = ref.watch(isCreatingProvider); to false
-                    ref.watch(isCreatingProvider.notifier).state = false;
-
-                    ref.read(trackingContainer).clear();
-                    clearTrackingContainer(ref);
-                    currentSliderValue2 == 1.0
-                        ? startCal(
-                            int.parse(controller1.text),
-                            int.parse(controller2.text),
-                            speedToMillisecond(currentSliderValue),
-                            ref,
-                          )
-                        : startCal2(
-                            int.parse(controller1.text),
-                            int.parse(controller2.text),
-                            speedToMillisecond(currentSliderValue),
-                            ref,
-                            currentSliderValue2.toInt(),
-                          );
-                  },
-                  child: const Text(
-                    'Εκτέλεση',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
         ),
       );
 }

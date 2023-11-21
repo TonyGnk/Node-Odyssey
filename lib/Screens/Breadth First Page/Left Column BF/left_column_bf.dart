@@ -30,7 +30,7 @@ Widget trackingListAndButton(BuildContext context) =>
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerSize),
-          color: Theme.of(context).shadowColor.withOpacity(0.2),
+          color: Theme.of(context).shadowColor.withOpacity(1),
           border: Border.all(
             width: 1,
             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
@@ -38,10 +38,11 @@ Widget trackingListAndButton(BuildContext context) =>
         ),
         clipBehavior: Clip.antiAlias,
         child: isCreating
-            ? const Expanded(child: Selector2())
-            // : Expanded(child: trackingListConsumerBF()),
+            ? const Expanded(
+                child: SelectStage(),
+              )
             : Expanded(
-                child: TrackingListClass(
+                child: TrackingStage(
                 ref: ref,
               )),
       );
@@ -51,7 +52,7 @@ Widget trackingListAndButton(BuildContext context) =>
 Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.0),
         border: Border.all(
           width: 1,
           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
@@ -61,7 +62,7 @@ Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(
         child: Text(
           'Κάτι για τους Χρόνους Εκτέλεσης...',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.onBackground,
           ),
         ),
       ),
