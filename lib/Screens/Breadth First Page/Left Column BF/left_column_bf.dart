@@ -38,13 +38,10 @@ Widget trackingListAndButton(BuildContext context) =>
         ),
         clipBehavior: Clip.antiAlias,
         child: isCreating
-            ? const Expanded(
-                child: SelectStage(),
-              )
-            : Expanded(
-                child: TrackingStage(
+            ? const SelectStage()
+            : TrackingStage(
                 ref: ref,
-              )),
+              ),
       );
     });
 

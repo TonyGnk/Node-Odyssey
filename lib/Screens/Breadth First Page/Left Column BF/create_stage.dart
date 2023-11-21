@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
 
@@ -41,12 +38,9 @@ class _SelectorState extends State<SelectStage> {
                 controller2,
                 'Εισάγεται Τελική Τιμή',
               ),
-
               speedSlider(context),
               const SizedBox(height: 2),
               solutionSlider(context),
-              //submit(context, ref),
-              // createButtonArea(context),
               Expanded(
                 child: Container(),
               ),
