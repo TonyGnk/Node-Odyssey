@@ -42,6 +42,7 @@ final bfRunningProvider = StateProvider<BfRunning>(
   (ref) => BfRunning(
     startValue: 0,
     targetValue: 0,
+    speed: 1,
   ),
 );
 
@@ -53,6 +54,7 @@ class BfRunning {
   BfRunning({
     required this.startValue,
     required this.targetValue,
+    required this.speed,
   });
 
   //Αρχική Τιμή
@@ -75,8 +77,12 @@ class BfRunning {
   }
 
   int getSpeed() => speed;
-  void setSpeed(int speed) {
-    this.speed = speed;
+  void setSpeedFromSlider(double currentSliderValue) {
+    if (currentSliderValue >= 0 && currentSliderValue <= 90) {
+      speed = 1000 - (currentSliderValue.toInt() * 10);
+    } else {
+      speed = 1;
+    }
   }
 }
 

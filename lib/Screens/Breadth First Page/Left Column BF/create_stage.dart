@@ -65,20 +65,23 @@ class _SelectorState extends State<SelectStage> {
                     ),
                   ),
                 ),
-                onPressed: () {
-                  ref.watch(bfRunningProvider.notifier).state = BfRunning(
-                    startValue: int.parse(controller1.text),
-                    targetValue: int.parse(controller2.text),
-                  );
-                  ref.watch(isCreatingProvider.notifier).state = false;
-                  ref.watch(bfRunningProviderUpdater.notifier).state =
-                      !ref.watch(bfRunningProviderUpdater);
-                },
+                onPressed: () => onButtonPressed(ref),
               ),
             ),
           ],
         ),
       );
+
+  void onButtonPressed(WidgetRef ref) {
+    ref.watch(bfRunningProvider.notifier).state = BfRunning(
+      startValue: int.parse(controller1.text),
+      targetValue: int.parse(controller2.text),
+      speed: setSpeedFromSlider(currentSliderValue),
+    );
+    ref.watch(isCreatingProvider.notifier).state = false;
+    ref.watch(bfRunningProviderUpdater.notifier).state =
+        !ref.watch(bfRunningProviderUpdater);
+  }
 
   Widget speedSlider(BuildContext context) => Column(
         children: [
@@ -146,27 +149,9 @@ class _SelectorState extends State<SelectStage> {
     }
   }
 
-  int speedToMillisecond(double currentSliderValue) {
-    if (currentSliderValue == 0) {
-      return 1000;
-    } else if (currentSliderValue == 10) {
-      return 900;
-    } else if (currentSliderValue == 20) {
-      return 800;
-    } else if (currentSliderValue == 30) {
-      return 700;
-    } else if (currentSliderValue == 40) {
-      return 600;
-    } else if (currentSliderValue == 50) {
-      return 500;
-    } else if (currentSliderValue == 60) {
-      return 400;
-    } else if (currentSliderValue == 70) {
-      return 300;
-    } else if (currentSliderValue == 80) {
-      return 200;
-    } else if (currentSliderValue == 90) {
-      return 100;
+  int setSpeedFromSlider(double currentSliderValue) {
+    if (currentSliderValue >= 0 && currentSliderValue <= 90) {
+      return 1000 - (currentSliderValue.toInt() * 10);
     } else {
       return 1;
     }
