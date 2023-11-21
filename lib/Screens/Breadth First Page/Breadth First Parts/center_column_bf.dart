@@ -27,14 +27,14 @@ Widget centerColumnBf(BuildContext context) =>
               context,
             ),
           ),
-          Text('Start: ${bfRunning.startValue}'),
-          Text('Target: ${bfRunning.targetValue}'),
-          Text('Speed: ${bfRunning.speed} ms'),
-          IconButton(
-            onPressed: () => ref.read(isCreatingProvider.notifier).state =
-                ref.watch(isCreatingProvider) ? false : true,
-            icon: Icon(Icons.refresh),
-          ),
+          // Text('Start: ${bfRunning.startValue}'),
+          // Text('Target: ${bfRunning.targetValue}'),
+          // Text('Speed: ${bfRunning.speed} ms'),
+          // IconButton(
+          //   onPressed: () => ref.read(isCreatingProvider.notifier).state =
+          //       ref.watch(isCreatingProvider) ? false : true,
+          //   icon: const Icon(Icons.refresh),
+          // ),
         ],
       );
     });
