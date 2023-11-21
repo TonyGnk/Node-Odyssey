@@ -24,7 +24,7 @@ Future<List<Node>?> findBreadthSolutionUI(
   // Initialize visited list
   List<bool> visited = List.filled(99999, false);
 
-  queue.add([Node(start, 0, '')]);
+  queue.add([Node(start, 0, 'Αρχική Τιμή')]);
 
   while (queue.isNotEmpty) {
     await Future.delayed(Duration(milliseconds: speed));
@@ -40,9 +40,7 @@ Future<List<Node>?> findBreadthSolutionUI(
 
     // Print the current node value
     log('${current.value}');
-    ref
-        .watch(trackingListProvider)
-        .addTile(current.value, current.operation, current.cost);
+    ref.watch(trackingListProvider).addTile(current.value, current.operation);
 
 // For printing the ui only
     addTrackingContainerRolling(

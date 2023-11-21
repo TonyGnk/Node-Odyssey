@@ -22,8 +22,7 @@ class TrackingList extends StatelessWidget {
   ListView build(BuildContext context) => ListView(
         reverse: true,
         children: [
-          for (int i = trackingTiles.length - 1; i >= 0; i--)
-            trackingTiles[i].build(context),
+          for (int i = trackingTiles.length - 1; i >= 0; i--) trackingTiles[i],
         ],
       );
 
@@ -31,7 +30,7 @@ class TrackingList extends StatelessWidget {
     trackingTiles.clear();
   }
 
-  void addTile(int value, String operation, int cost) {
+  void addTile(int value, String operation) {
     trackingTiles.add(
       TrackingTiles(
         text: '$operation $value',
@@ -94,7 +93,7 @@ final isCreatingProvider = StateProvider<bool>(
   (ref) => true,
 );
 
-class TrackingTiles {
+class TrackingTiles extends StatefulWidget {
   TrackingTiles({
     required this.text,
     this.value = 0,
@@ -105,38 +104,53 @@ class TrackingTiles {
   final int value;
   final String operation;
 
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-        ),
-        margin: const EdgeInsets.all(5),
-        //padding: const EdgeInsets.all(10),
-        clipBehavior: Clip.antiAlias,
-        child: Row(
-          children: [
-            Expanded(
-              child: Text('  $operation'),
-            ),
-            Container(
-              width: 110,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(cornerSize),
+  @override
+  State<TrackingTiles> createState() => _TrackingTilesState();
+}
+
+class _TrackingTilesState extends State<TrackingTiles> {
+  bool _isHovering = false;
+
+  @override
+  Widget build(BuildContext context) => MouseRegion(
+        onHover: (event) => setState(() => _isHovering = true),
+        onExit: (event) => setState(() => _isHovering = false),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+            color: _isHovering
+                ? Theme.of(context).colorScheme.secondary.withOpacity(0.4)
+                : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+          ),
+          margin: const EdgeInsets.all(5),
+          clipBehavior: Clip.antiAlias,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text('  ${widget.operation}'),
+              ),
+              Container(
+                width: 110,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color:
+                      Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(cornerSize),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    getPreviousValue(widget.value, widget.operation) +
+                        (widget.operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                        widget.value.toString(),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              child: Center(
-                child: Text(
-                  getPreviousValue(value, operation) +
-                      ' 🡢 ' +
-                      value.toString(),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 
@@ -154,6 +168,8 @@ class TrackingTiles {
       return sqrt(value).toInt().toString();
     } else if (operation == 'Ρίζα') {
       return pow(value, 2).toInt().toString();
+    } else if (operation == 'Αρχική Τιμή') {
+      return '';
     } else {
       return 0.toString();
     }

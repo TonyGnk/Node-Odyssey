@@ -22,7 +22,7 @@ Widget centerColumnBf(BuildContext context) =>
             height: 10,
           ),
           SizedBox(
-            height: 222,
+            height: 200,
             child: resultPanel(
               context,
             ),

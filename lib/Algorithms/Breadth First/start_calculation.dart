@@ -34,6 +34,8 @@ import '../../Screens/Breadth First Page/Services/List Panel/result_providers.da
 import 'algorithm_bf.dart';
 
 startCalR(WidgetRef ref) async {
+//clear the
+  ref.watch(trackingListProvider).clear();
   BfRunning running = ref.read(bfRunningProvider.notifier).state;
   List<Node>? solution = await findBreadthSolutionUI(
     running.startValue,
