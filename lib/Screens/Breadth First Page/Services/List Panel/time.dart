@@ -1,0 +1,116 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../Services & Providers/constants.dart';
+import 'list_provider.dart';
+
+Widget algorithmTime(BuildContext context) =>
+    Consumer(builder: (context, ref, _) {
+      final isCreating = ref.watch(isCreatingProvider);
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(cornerSize),
+          color: Theme.of(context).shadowColor.withOpacity(1),
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: isCreating
+            ? const Center(child: SizedBox())
+            : Container(
+                child: const StopwatchWidget(),
+              ),
+      );
+    });
+
+class StopwatchWidget extends StatefulWidget {
+  const StopwatchWidget({super.key});
+
+  @override
+  _StopwatchWidgetState createState() => _StopwatchWidgetState();
+}
+
+class _StopwatchWidgetState extends State<StopwatchWidget> {
+  int milliseconds = 0;
+  int seconds = 0;
+  late Timer timer;
+  bool isRunning = true;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+      if (isRunning) {
+        setState(() {
+          milliseconds++;
+          if (milliseconds == 1000) {
+            milliseconds = 0;
+            seconds++;
+          }
+        });
+      }
+    });
+  }
+
+  void stopTimer() {
+    timer.cancel();
+  }
+
+  void resumeTimer() {
+    startTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$seconds:$milliseconds',
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      isRunning = !isRunning;
+                      if (!isRunning) {
+                        stopTimer();
+                      } else {
+                        resumeTimer();
+                      }
+                    });
+                  },
+                  label: Text(isRunning ? 'Stop' : 'Resume'),
+                  icon: Icon(isRunning ? Icons.pause : Icons.play_arrow),
+                ),
+                const SizedBox(width: 20),
+                //Reset stopwatch button
+
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      seconds = 0;
+                      milliseconds = 0;
+                    });
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Reset'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+}

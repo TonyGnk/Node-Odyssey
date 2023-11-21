@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
+import '../Services/List Panel/time.dart';
 import 'create_stage.dart';
 import 'list_and_button.dart';
 
@@ -55,12 +56,5 @@ Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(
           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
         ),
       ),
-      child: Center(
-        child: Text(
-          'Κάτι για τους Χρόνους Εκτέλεσης...',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
-        ),
-      ),
+      child: algorithmTime(context),
     );

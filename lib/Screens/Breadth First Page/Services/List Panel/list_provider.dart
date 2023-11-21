@@ -94,8 +94,9 @@ final isCreatingProvider = StateProvider<bool>(
 );
 
 class TrackingTiles extends StatefulWidget {
-  TrackingTiles({
+  const TrackingTiles({
     required this.text,
+    super.key,
     this.value = 0,
     this.operation = '',
   });

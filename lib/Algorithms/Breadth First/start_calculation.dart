@@ -60,6 +60,7 @@ startCalR(WidgetRef ref) async {
     solutionCost += '${solution.last.cost}';
     addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
   }
+  print('ΤΕΛΟΣ');
 }
 
 startCal(int start, int end, int speed, WidgetRef ref) async {
