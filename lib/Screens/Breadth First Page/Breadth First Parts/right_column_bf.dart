@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../Services & Providers/constants.dart';
-import '../selector.dart';
+import '../Left Column BF/create_stage.dart';
 
 Widget rightColumnBf(BuildContext context) => Container(
       padding: const EdgeInsets.all(20),
@@ -19,7 +19,7 @@ Widget rightColumnBf(BuildContext context) => Container(
         children: [
           Expanded(
             flex: 4,
-            child: Selector(),
+            child: SelectStage(),
           ),
         ],
       ),

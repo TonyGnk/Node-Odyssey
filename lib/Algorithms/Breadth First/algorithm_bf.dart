@@ -40,19 +40,11 @@ Future<List<Node>?> findBreadthSolutionUI(
 
     // Print the current node value
     log('${current.value}');
-    //I have a class TrackingList. The TrackingList class has a method addTile. I have a provider with name trackingListProvider. I want to call the method addTile from the provider trackingListProvider. How can I do that?
-    ref.watch(trackingListProvider).addTile(
-          current.value,
-          current.value.toString(),
-        );
+    ref
+        .watch(trackingListProvider)
+        .addTile(current.value, current.operation, current.cost);
 
 // For printing the ui only
-    addTrackingContainer(
-      ref,
-      '${current.value}',
-      current.value,
-      end,
-    );
     addTrackingContainerRolling(
       ref,
       '${current.value}',
@@ -69,7 +61,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       Node newNode = Node(
         current.value + 1,
         current.cost + 2,
-        '+',
+        'Πρόσθεση κατά 1',
       );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
@@ -82,7 +74,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       Node newNode = Node(
         current.value - 1,
         current.cost + 2,
-        '-',
+        'Αφαίρεση κατά 1',
       );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
@@ -95,7 +87,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       Node newNode = Node(
         current.value * 2,
         current.cost + (current.value / 2).ceil() + 1,
-        '*',
+        'Πολ/σιασμός επί 2',
       );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
@@ -108,7 +100,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       Node newNode = Node(
         (current.value / 2).floor(),
         current.cost + (current.value / 4).ceil() + 1,
-        '/',
+        'Διαίρεση με 2',
       );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
@@ -121,7 +113,7 @@ Future<List<Node>?> findBreadthSolutionUI(
       Node newNode = Node(
         current.value * current.value,
         current.cost + (current.value * current.value - current.value) ~/ 4 + 1,
-        '^',
+        'Τετράγωνο',
       );
       List<Node> newPath = List.from(currentPath)..add(newNode);
       queue.add(newPath);
@@ -137,7 +129,7 @@ Future<List<Node>?> findBreadthSolutionUI(
         Node newNode = Node(
           sqrtValue.toInt(),
           current.cost + (current.value - sqrtValue.toInt()) ~/ 4 + 1,
-          '√',
+          'Ρίζα',
         );
         List<Node> newPath = List.from(currentPath)..add(newNode);
         queue.add(newPath);
@@ -180,12 +172,6 @@ Future<List<List<Node>>?> findBreadthSolutionsUI2(
     // Print the current node value
     log('${current.value}');
     // For printing the ui only
-    addTrackingContainer(
-      ref,
-      '${current.value}',
-      current.value,
-      end,
-    );
     addTrackingContainerRolling(
       ref,
       '${current.value}',
@@ -314,12 +300,6 @@ Future<List<List<Node>>?> findBreadthSolutionsUI3(
     // Print the current node value
     log('${current.value}');
     // For printing the ui only
-    addTrackingContainer(
-      ref,
-      '${current.value}',
-      current.value,
-      end,
-    );
     addTrackingContainerRolling(
       ref,
       '${current.value}',

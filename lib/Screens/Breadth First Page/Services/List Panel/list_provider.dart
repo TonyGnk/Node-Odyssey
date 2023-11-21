@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../Services & Providers/constants.dart';
@@ -29,10 +31,12 @@ class TrackingList extends StatelessWidget {
     trackingTiles.clear();
   }
 
-  void addTile(int value, String text) {
+  void addTile(int value, String operation, int cost) {
     trackingTiles.add(
       TrackingTiles(
-        text: text,
+        text: '$operation $value',
+        value: value,
+        operation: operation,
       ),
     );
   }
@@ -90,47 +94,91 @@ final isCreatingProvider = StateProvider<bool>(
   (ref) => true,
 );
 
-//
+class TrackingTiles {
+  TrackingTiles({
+    required this.text,
+    this.value = 0,
+    this.operation = '',
+  });
 
-//
+  final String text;
+  final int value;
+  final String operation;
 
-//
+  Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+        ),
+        margin: const EdgeInsets.all(5),
+        //padding: const EdgeInsets.all(10),
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text('  $operation'),
+            ),
+            Container(
+              width: 110,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(cornerSize),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  getPreviousValue(value, operation) +
+                      ' 🡢 ' +
+                      value.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
 
-//
-
-//
-
-//1
-final trackingContainer = StateProvider<List<TrackingTiles>>(
-  (ref) => [
-    TrackingTiles(
-      text: '',
-    ),
-  ],
-);
-
-//2
-void clearTrackingContainer(WidgetRef ref) {
-  ref.read(trackingContainer.notifier).state = [
-    TrackingTiles(
-      text: '',
-    ),
-  ];
-  ref.read(trackingBox.notifier).state = [];
+  getPreviousValue(int value, String operation) {
+    //if (operation == 'Πρόσθεση κατά 1'
+    if (operation == 'Πρόσθεση κατά 1') {
+      return (value - 1).toString();
+    } else if (operation == 'Αφαίρεση κατά 1') {
+      return (value + 1).toString();
+    } else if (operation == 'Πολ/σιασμός επί 2') {
+      return (value ~/ 2).toString();
+    } else if (operation == 'Διαίρεση με 2') {
+      return (value * 2).toString();
+    } else if (operation == 'Τετράγωνο') {
+      return sqrt(value).toInt().toString();
+    } else if (operation == 'Ρίζα') {
+      return pow(value, 2).toInt().toString();
+    } else {
+      return 0.toString();
+    }
+  }
 }
 
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+
 //3
-void addTrackingContainer(
+void adddTrackingContainer(
   WidgetRef ref,
   String text,
   int width,
   int target,
 ) {
-  ref.read(trackingContainer.notifier).state.add(
-        TrackingTiles(
-          text: text,
-        ),
-      );
   double a = width / target * 10;
   double bc = 10 - a;
   ref.read(trackingBox.notifier).state.add(
@@ -160,24 +208,6 @@ void addTrackingContainer(
             ),
           ],
         ),
-      );
-}
-
-class TrackingTiles {
-  TrackingTiles({
-    required this.text,
-  });
-
-  final String text;
-
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-        ),
-        margin: const EdgeInsets.all(5),
-        padding: const EdgeInsets.all(10),
-        child: Text(text),
       );
 }
 
