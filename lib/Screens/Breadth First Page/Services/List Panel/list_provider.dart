@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../Services & Providers/constants.dart';
@@ -37,6 +35,48 @@ class TrackingList extends StatelessWidget {
         text: text,
       ),
     );
+  }
+}
+
+final bfRunningProvider = StateProvider<BfRunning>(
+  (ref) => BfRunning(
+    startValue: 0,
+    targetValue: 0,
+  ),
+);
+
+final bfRunningProviderUpdater = StateProvider<bool>(
+  (ref) => false,
+);
+
+class BfRunning {
+  BfRunning({
+    required this.startValue,
+    required this.targetValue,
+  });
+
+  //Αρχική Τιμή
+  int startValue;
+
+  //Τελική Τιμή
+  int targetValue;
+
+  // Speed of the algorithm
+  int speed = 1;
+
+  int getStartValue() => startValue;
+  void setStartValue(int startValue) {
+    this.startValue = startValue;
+  }
+
+  int getTargetValue() => targetValue;
+  void setTargetValue(int targetValue) {
+    this.targetValue = targetValue;
+  }
+
+  int getSpeed() => speed;
+  void setSpeed(int speed) {
+    this.speed = speed;
   }
 }
 

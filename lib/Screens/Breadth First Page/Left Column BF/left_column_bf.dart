@@ -28,47 +28,23 @@ Widget trackingListAndButton(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
       final isCreating = ref.watch(isCreatingProvider);
       return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(cornerSize),
-            color: Theme.of(context).shadowColor.withOpacity(0.2),
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-            ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(cornerSize),
+          color: Theme.of(context).shadowColor.withOpacity(0.2),
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
           ),
-          clipBehavior: Clip.antiAlias,
-          child: Stack(
-            children: <Widget>[
-              Container(
-                //  color: Colors.red,
-                child: trackingListConsumerBF(),
-              ),
-              // Transform(
-              //   transform: Matrix4.identity()
-              //     ..setEntry(3, 2, 0.001), // perspective
-              //   //..rotateX(0.01) // rotated around the x-axis a little
-              //   // ..translate(0.0, 20.0, 0.0), // moved up vertically
-              //   alignment: FractionalOffset.center,
-              //   child: Container(
-              //     color: isCreating
-              //         ? Colors.blue.withOpacity(0.4)
-              //         : Colors.blue.withOpacity(0),
-              //     //  child: Selector2(),
-              //   ),
-              // ),
-            ],
-          )
-
-          // Column(
-          //   children: [
-          //     isCreating
-          //         ? const Expanded(child: Selector2())
-          //         : Expanded(child: trackingListConsumerBF()),
-          //     const SizedBox(height: 4),
-          //     isCreating ? const SizedBox() : buttonArea(context),
-          //   ],
-          // ),
-          );
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: isCreating
+            ? const Expanded(child: Selector2())
+            // : Expanded(child: trackingListConsumerBF()),
+            : Expanded(
+                child: TrackingListClass(
+                ref: ref,
+              )),
+      );
     });
 
 // This is is the left and bottom container counting the time of the algorithm.

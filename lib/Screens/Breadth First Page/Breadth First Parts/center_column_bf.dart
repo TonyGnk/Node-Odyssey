@@ -10,6 +10,9 @@ import '../result_box_bf.dart';
 Widget centerColumnBf(BuildContext context) =>
     Consumer(builder: (_, WidgetRef ref, __) {
       final isCreating = ref.watch(isCreatingProvider);
+      final bfRunning = ref.read(bfRunningProvider.notifier).state;
+      final bfRunningUpdater = ref.watch(bfRunningProviderUpdater);
+      //final startValue = bfRunning.getStartValue;
       return Column(
         children: [
           Expanded(
@@ -24,11 +27,14 @@ Widget centerColumnBf(BuildContext context) =>
               context,
             ),
           ),
-          // IconButton(
-          //   onPressed: () => ref.read(isCreatingProvider.notifier).state =
-          //       ref.watch(isCreatingProvider) ? false : true,
-          //   icon: Icon(Icons.refresh),
-          // ),
+          Text('Start: ${bfRunning.startValue}'),
+          Text('Target: ${bfRunning.targetValue}'),
+          Text('Speed: ${bfRunning.speed} ms'),
+          IconButton(
+            onPressed: () => ref.read(isCreatingProvider.notifier).state =
+                ref.watch(isCreatingProvider) ? false : true,
+            icon: Icon(Icons.refresh),
+          ),
         ],
       );
     });

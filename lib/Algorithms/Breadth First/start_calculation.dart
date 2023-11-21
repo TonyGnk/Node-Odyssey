@@ -29,8 +29,36 @@
 // }
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Screens/Breadth First Page/Services/List Panel/list_provider.dart';
 import '../../Screens/Breadth First Page/Services/List Panel/result_providers.dart';
 import 'algorithm_bf.dart';
+
+startCalR(WidgetRef ref) async {
+  BfRunning running = ref.read(bfRunningProvider.notifier).state;
+  List<Node>? solution = await findBreadthSolutionUI(
+    running.startValue,
+    running.targetValue,
+    running.speed,
+    ref,
+  );
+  clearResultPanelList(ref);
+  String solutionTitle = '';
+  String solutionText = '';
+  String solutionCost = '';
+
+  if (solution == null) {
+    addResultPanelList(ref, 'Δεν υπάρχουν λύσεις.', '', '', true);
+  } else {
+    solutionTitle += 'Λύση';
+
+    for (Node node in solution) {
+      solutionText += '${node.operation} ${node.value}';
+    }
+
+    solutionCost += '${solution.last.cost}';
+    addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
+  }
+}
 
 startCal(int start, int end, int speed, WidgetRef ref) async {
   List<Node>? solution = await findBreadthSolutionUI(

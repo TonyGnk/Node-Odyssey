@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,19 +25,18 @@ class _SelectorState extends State<Selector2> {
   @override
   Widget build(BuildContext context) =>
       Consumer(builder: (_, WidgetRef ref, __) {
-        //  final isCreating = ref.watch(isCreatingProvider);
-        return Container(
-          child: Column(
-            children: [
-              container1(context),
-              container2(context),
-              speedSlider(context),
-              const SizedBox(height: 2),
-              solutionSlider(context),
-              submit(context, ref),
-              //createButtonArea(context),
-            ],
-          ),
+        final bfRunning = ref.watch(bfRunningProvider);
+        return Column(
+          children: [
+            container1(context),
+            container2(context),
+            speedSlider(context),
+            const SizedBox(height: 2),
+            solutionSlider(context),
+            //submit(context, ref),
+            createButtonArea(context),
+            newSubmit(context, ref),
+          ],
         );
       });
 
@@ -115,6 +116,60 @@ class _SelectorState extends State<Selector2> {
           });
         },
         icon: const Icon(Icons.send),
+      );
+
+  Widget newSubmit(BuildContext context, WidgetRef ref) => ElevatedButton(
+        child: const Text('Εκτέλεση'),
+        onPressed: () {
+          log('pressed');
+          // ref.watch(bfRunningProvider.notifier).state.setStartValue(
+          //       int.parse(controller1.text),
+          //     );
+
+          ref.watch(bfRunningProvider.notifier).state = BfRunning(
+            startValue: int.parse(controller1.text),
+            targetValue: int.parse(controller2.text),
+          );
+
+          //
+          ref.watch(isCreatingProvider.notifier).state = false;
+
+          //
+
+          //
+
+          ref.watch(bfRunningProviderUpdater.notifier).state =
+              !ref.watch(bfRunningProviderUpdater);
+
+          //
+
+          //
+
+          //
+
+          //
+
+          //
+
+          // ref.read(isCreatingProvider.notifier).state = false;
+
+          // ref.read(trackingContainer).clear();
+          // clearTrackingContainer(ref);
+          // currentSliderValue2 == 1.0
+          //     ? startCal(
+          //         int.parse(controller1.text),
+          //         int.parse(controller2.text),
+          //         speedToMillisecond(currentSliderValue),
+          //         ref,
+          //       )
+          //     : startCal2(
+          //         int.parse(controller1.text),
+          //         int.parse(controller2.text),
+          //         speedToMillisecond(currentSliderValue),
+          //         ref,
+          //         currentSliderValue2.toInt(),
+          //       );
+        },
       );
 
   Widget speedSlider(BuildContext context) => Column(
