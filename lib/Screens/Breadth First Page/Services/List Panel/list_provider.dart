@@ -131,7 +131,7 @@ class _TrackingTilesState extends State<TrackingTiles> {
                 child: Text('  ${widget.operation}'),
               ),
               Container(
-                width: 110,
+                width: 135,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color:
