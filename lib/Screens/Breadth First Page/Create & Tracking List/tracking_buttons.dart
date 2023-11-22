@@ -33,12 +33,17 @@ Widget buttonArea(BuildContext context) => Consumer(
 //       ),
 //     );
 
-Widget miniAppBar(BuildContext context) => Consumer(
-      builder: (context, ref, _) => Row(
+Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
+      final startValue =
+          ref.read(bfRunningProvider.notifier).state.startValue.toString();
+      final targetValue =
+          ref.read(bfRunningProvider.notifier).state.targetValue.toString();
+      return Row(
         children: [
           //Create an icon button with reset icon
           const SizedBox(width: 8),
-          const Expanded(child: Text('Αναζήτηση από το Χ στο Ψ')),
+          Expanded(
+              child: Text('Αναζήτηση από το $startValue στο $targetValue')),
           IconButton(
             onPressed: () {
               startCalR(ref);
@@ -54,5 +59,5 @@ Widget miniAppBar(BuildContext context) => Consumer(
             icon: const Icon(Icons.restart_alt_outlined),
           ),
         ],
-      ),
-    );
+      );
+    });
