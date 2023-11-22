@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Screens/Breadth First Page/Services/List Panel/result_providers.dart';
+import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Services & Providers/constants.dart';
 import '../Services2/navigator_fun.dart';
 import 'app_bar_icon.dart';

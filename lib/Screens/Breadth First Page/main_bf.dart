@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import 'appbar_bf.dart';
-import 'center_column_bf.dart';
+import 'Chart BF/center_column_bf.dart';
 import 'left_column_bf.dart';
 import 'Archive BF/right_column_bf.dart';
 

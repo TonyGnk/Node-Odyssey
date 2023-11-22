@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Screens/Breadth First Page/Services/List Panel/list_provider.dart';
+import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 
 class Node {
   Node(this.value, this.cost, this.operation);

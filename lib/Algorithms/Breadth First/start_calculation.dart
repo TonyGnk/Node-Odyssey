@@ -29,8 +29,8 @@
 // }
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Screens/Breadth First Page/Services/List Panel/list_provider.dart';
-import '../../Screens/Breadth First Page/Services/List Panel/result_providers.dart';
+import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import 'algorithm_bf.dart';
 
 startCalR(WidgetRef ref) async {

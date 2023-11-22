@@ -2,10 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/constants.dart';
-import 'Services/List Panel/list_provider.dart';
-import 'Services/List Panel/result_providers.dart';
-import 'Result Panel BF/result_box_bf.dart';
+import '../../../Services & Providers/constants.dart';
+import '../Archive BF/list_provider.dart';
+import '../Archive BF/result_providers.dart';
+import '../Result Panel BF/result_box_bf.dart';
 
 Widget centerColumnBf(BuildContext context) =>
     Consumer(builder: (_, WidgetRef ref, __) {
