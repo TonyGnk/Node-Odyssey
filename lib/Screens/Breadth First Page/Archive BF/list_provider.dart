@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services & Providers/tracking_container.dart';
-
 final stopTimerProvider = StateProvider<bool>(
   (ref) => false,
 );

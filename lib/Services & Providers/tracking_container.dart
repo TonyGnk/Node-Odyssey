@@ -128,6 +128,5 @@ class _TrackingTilesState extends State<TrackingTiles> {
 final trackUpdater = StateProvider<bool>((ref) => false);
 
 void addTrackingContainerRolling(WidgetRef ref) {
-  //every time set to opposite bool value
   ref.watch(trackUpdater.notifier).state = !ref.read(trackUpdater);
 }
