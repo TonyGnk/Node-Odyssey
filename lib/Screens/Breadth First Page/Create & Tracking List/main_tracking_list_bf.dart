@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Archive BF/list_provider.dart';
 import '../main_bf.dart';
-import 'list_and_button.dart';
-import 'submit_controls.dart';
+import 'list_and_button_bf.dart';
+import 'submit_controls_bf.dart';
 
 Widget trackingListAndButton(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
