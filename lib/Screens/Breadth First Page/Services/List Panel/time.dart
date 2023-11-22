@@ -22,16 +22,21 @@ Widget algorithmTime(BuildContext context) =>
         child: isCreating
             ? const Center(child: SizedBox())
             : Container(
-                child: const StopwatchWidget(),
+                child: StopwatchWidget(ref: ref),
               ),
       );
     });
 
 class StopwatchWidget extends StatefulWidget {
-  const StopwatchWidget({super.key});
+  const StopwatchWidget({
+    required this.ref,
+    super.key, // Fix typo: change super.key to Key key
+  });
+
+  final WidgetRef ref;
 
   @override
-  _StopwatchWidgetState createState() => _StopwatchWidgetState();
+  State<StopwatchWidget> createState() => _StopwatchWidgetState();
 }
 
 class _StopwatchWidgetState extends State<StopwatchWidget> {
@@ -42,13 +47,15 @@ class _StopwatchWidgetState extends State<StopwatchWidget> {
 
   @override
   void initState() {
+    bool _stopTimer = widget.ref.read(stopTimerProvider.notifier).state;
     super.initState();
     startTimer();
   }
 
   void startTimer() {
     timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
-      if (isRunning) {
+      bool _stopTimer = widget.ref.read(stopTimerProvider.notifier).state;
+      if (isRunning && !_stopTimer) {
         setState(() {
           milliseconds++;
           if (milliseconds == 1000) {
@@ -96,8 +103,6 @@ class _StopwatchWidgetState extends State<StopwatchWidget> {
                   icon: Icon(isRunning ? Icons.pause : Icons.play_arrow),
                 ),
                 const SizedBox(width: 20),
-                //Reset stopwatch button
-
                 ElevatedButton.icon(
                   onPressed: () {
                     setState(() {

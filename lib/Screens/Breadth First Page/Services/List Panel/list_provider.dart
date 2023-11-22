@@ -41,6 +41,10 @@ class TrackingList extends StatelessWidget {
   }
 }
 
+final stopTimerProvider = StateProvider<bool>(
+  (ref) => false,
+);
+
 final bfRunningProvider = StateProvider<BfRunning>(
   (ref) => BfRunning(
     startValue: 0,

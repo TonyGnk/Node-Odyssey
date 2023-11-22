@@ -36,6 +36,8 @@ import 'algorithm_bf.dart';
 startCalR(WidgetRef ref) async {
 //clear the
   ref.watch(trackingListProvider).clear();
+  //make stopTimer false
+  ref.watch(stopTimerProvider.notifier).state = false;
   BfRunning running = ref.read(bfRunningProvider.notifier).state;
   List<Node>? solution = await findBreadthSolutionUI(
     running.startValue,
@@ -60,6 +62,7 @@ startCalR(WidgetRef ref) async {
     solutionCost += '${solution.last.cost}';
     addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
   }
+  ref.watch(stopTimerProvider.notifier).state = true;
   print('ΤΕΛΟΣ');
 }
 
