@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../UI/Routed Screen/routed_screen.dart';
-import 'Breadth First Page/breadth_first_page.dart';
+import 'Breadth First Page/main_bf.dart';
 import 'Home Page/home_page.dart';
 
 final screensProvider = StateProvider<List<RoutedScreen>>(

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../Services & Providers/constants.dart';
-import 'list_provider.dart';
+import '../../../Services & Providers/constants.dart';
+import '../Services/List Panel/list_provider.dart';
 
 Widget algorithmTime(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
