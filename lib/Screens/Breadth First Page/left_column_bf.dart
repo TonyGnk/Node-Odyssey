@@ -3,27 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
 import 'Archive BF/list_provider.dart';
-import 'Stopwatch BF/time.dart';
 import 'Tracking List BF/create_stage.dart';
 import 'Tracking List BF/list_and_button.dart';
-
-// This a the left column of the Breadth First Algorithm page.
-Widget leftColumnBf(BuildContext context) => Column(
-      children: [
-        Expanded(
-          child: trackingListAndButton(context),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: 200,
-          child: algorithmTimeDisplay(
-            context,
-          ),
-        ),
-      ],
-    );
 
 Widget trackingListAndButton(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
@@ -45,16 +26,3 @@ Widget trackingListAndButton(BuildContext context) =>
               ),
       );
     });
-
-// This is is the left and bottom container counting the time of the algorithm.
-Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(cornerSize),
-        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.0),
-        border: Border.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-        ),
-      ),
-      child: algorithmTime(context),
-    );

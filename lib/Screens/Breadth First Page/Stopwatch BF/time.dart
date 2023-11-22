@@ -6,6 +6,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
 
+// This is is the left and bottom container counting the time of the algorithm.
+Widget algorithmTimeDisplay(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(cornerSize),
+        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.0),
+        border: Border.all(
+          width: 1,
+          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+        ),
+      ),
+      child: algorithmTime(context),
+    );
+
 Widget algorithmTime(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
       final isCreating = ref.watch(isCreatingProvider);
@@ -21,9 +34,7 @@ Widget algorithmTime(BuildContext context) =>
         clipBehavior: Clip.antiAlias,
         child: isCreating
             ? const Center(child: SizedBox())
-            : Container(
-                child: StopwatchWidget(ref: ref),
-              ),
+            : StopwatchWidget(ref: ref),
       );
     });
 
