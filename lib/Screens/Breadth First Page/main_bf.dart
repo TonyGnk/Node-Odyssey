@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/center_column_bf.dart';
@@ -62,4 +63,24 @@ Widget leftColumnBf(BuildContext context) => Column(
           child: algorithmTimeDisplay(context),
         ),
       ],
+    );
+
+// Κάθε βασικό στοιχείο της οθόνης είναι ένα Container
+// Περιλαμβάνει ένα πρότυπο στυλ για τα Container
+Container containerWithStyleBF(
+  Color color,
+  Color borderColor,
+  Widget child,
+) =>
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(cornerSize),
+        color: color,
+        border: Border.all(
+          width: 1,
+          color: borderColor,
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: child,
     );
