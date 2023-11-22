@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/center_column_bf.dart';
@@ -18,6 +19,8 @@ class BreadthFirstAlg extends StatelessWidget {
       );
 }
 
+// Αυτή είναι η γραμμή τίτλου της οθόνης
+// Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
 Widget appBarBf(BuildContext context) => const AdaptAppBar(
       filled: false,
       label: 'Αλγόριθμος Πρώτα σε Βάθος',
@@ -25,6 +28,8 @@ Widget appBarBf(BuildContext context) => const AdaptAppBar(
       showInfoIcon: true,
     );
 
+// Αυτή είναι το κεντρικό σώμα της οθόνης
+// Περιλαμβάνει την αριστερή και την δεξιά στήλη
 Widget body(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -42,7 +47,8 @@ Widget body(BuildContext context) => Row(
       ],
     );
 
-// This a the left column of the Breadth First Algorithm page.
+// Αυτή είναι η αριστερή στήλη της οθόνης
+// Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο
 Widget leftColumnBf(BuildContext context) => Column(
       children: [
         Expanded(
