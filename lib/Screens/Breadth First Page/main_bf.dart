@@ -4,6 +4,7 @@ import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/center_column_bf.dart';
 import 'Stopwatch BF/time.dart';
+import 'Tracking List BF/main_tracking_list_bf.dart';
 import 'left_column_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
@@ -59,9 +60,7 @@ Widget leftColumnBf(BuildContext context) => Column(
         ),
         SizedBox(
           height: 200,
-          child: algorithmTimeDisplay(
-            context,
-          ),
+          child: algorithmTimeDisplay(context),
         ),
       ],
     );
