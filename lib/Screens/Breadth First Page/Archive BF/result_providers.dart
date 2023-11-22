@@ -20,11 +20,11 @@ void addResultPanelList(
   List<ResultBoxBf>? list = ref.watch(resultPanelList);
   if (list == null) {
     ref.read(resultPanelList.notifier).state = [
-      ResultBoxBf(text: text, title: title, cost: cost, error: error),
+      ResultBoxBf(text: text, title: title, totalCost: cost, error: error),
     ];
   } else {
     ref.read(resultPanelList.notifier).state.add(
-          ResultBoxBf(text: text, title: title, cost: cost, error: error),
+          ResultBoxBf(text: text, title: title, totalCost: cost, error: error),
         );
   }
 }

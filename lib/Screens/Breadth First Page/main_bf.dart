@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
-import 'Chart BF/main_right_column_bf.dart';
+import 'Chart BF/chart_bf.dart';
+import 'Result Panel BF/result_panel_bf.dart';
 import 'Stopwatch BF/time.dart';
 import 'Create & Tracking List/main_tracking_list_bf.dart';
 

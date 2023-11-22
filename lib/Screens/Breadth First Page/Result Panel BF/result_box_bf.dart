@@ -4,13 +4,13 @@ class ResultBoxBf {
   ResultBoxBf({
     this.text = '',
     this.title = '',
-    this.cost = '',
+    this.totalCost = '',
     this.error = false,
   });
 
   final String title;
   final String text;
-  final String cost;
+  final String totalCost;
   final bool error;
 
   Widget build(BuildContext context) => Container(
@@ -45,7 +45,7 @@ class ResultBoxBf {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  cost,
+                  totalCost,
                   style: const TextStyle(fontSize: 24),
                 ),
                 const Text(
