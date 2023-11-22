@@ -32,6 +32,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import 'algorithm_bf.dart';
+import 'providers_bf.dart';
 
 startCalR(WidgetRef ref) async {
 //clear the
@@ -63,7 +64,7 @@ startCalR(WidgetRef ref) async {
     addResultPanelList(ref, solutionTitle, solutionText, solutionCost, false);
   }
   ref.watch(stopTimerProvider.notifier).state = true;
-  print('ΤΕΛΟΣ');
+  ref.watch(isAlgorithmEndProviderBf.notifier).state = true;
 }
 
 startCal(int start, int end, int speed, WidgetRef ref) async {

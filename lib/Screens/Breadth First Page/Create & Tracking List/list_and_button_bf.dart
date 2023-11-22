@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../../Services & Providers/constants.dart';
+import '../../../Algorithms/Breadth First/providers_bf.dart';
 import '../Archive BF/list_provider.dart';
 
 class TrackingStage extends StatefulWidget {
@@ -18,7 +19,8 @@ class _TrackingListState extends State<TrackingStage> {
   @override
   void initState() {
     super.initState();
-    startCalR(widget.ref);
+    bool isFinished = widget.ref.read(isAlgorithmEndProviderBf.notifier).state;
+    isFinished ? null : startCalR(widget.ref);
   }
 
   @override
