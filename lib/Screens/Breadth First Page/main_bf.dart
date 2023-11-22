@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
-import 'appbar_bf.dart';
+import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/center_column_bf.dart';
 import 'left_column_bf.dart';
-import 'Archive BF/right_column_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
   const BreadthFirstAlg({super.key});
 
   @override
   Widget build(BuildContext context) => bodyWithAppBar(
-        appBar: appBar(context),
+        appBar: appBarBf(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: body(context),
         ),
       );
 
-  Widget appBar(BuildContext context) => appBarBf(
-        context,
+  Widget appBarBf(BuildContext context) => const AdaptAppBar(
+        filled: false,
+        label: 'Αλγόριθμος Πρώτα σε Βάθος',
+        showThemeIcon: true,
+        showInfoIcon: true,
       );
 
   Widget body(BuildContext context) => Row(
@@ -35,10 +37,6 @@ class BreadthFirstAlg extends StatelessWidget {
             flex: 14,
             child: centerColumnBf(context),
           ),
-          // Expanded(
-          //   flex: 3,
-          //   child: rightColumnBf(context),
-          // ),
         ],
       );
 }
