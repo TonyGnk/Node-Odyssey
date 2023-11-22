@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import '../../Services & Providers/tracking_container.dart';
 
 class Node {
   Node(this.value, this.cost, this.operation);
@@ -40,13 +41,15 @@ Future<List<Node>?> findBreadthSolutionUI(
 
     // Print the current node value
     log('${current.value}');
-    ref.watch(trackingListProvider).addTile(current.value, current.operation);
+    ref
+        .watch(trackingListProvider)
+        .addTile(current.value, current.operation, ref);
 
 // For printing the ui only
-    addTrackingContainerRolling(
-      ref,
-      '${current.value}',
-    );
+    // addTrackingContainerRolling(
+    //   ref,
+    //   '${current.value}',
+    // );
 
     if (current.value == end) {
       return currentPath;
@@ -170,10 +173,6 @@ Future<List<List<Node>>?> findBreadthSolutionsUI2(
     // Print the current node value
     log('${current.value}');
     // For printing the ui only
-    addTrackingContainerRolling(
-      ref,
-      '${current.value}',
-    );
 
     if (current.value == end) {
       solutions.add(currentPath);
@@ -298,10 +297,6 @@ Future<List<List<Node>>?> findBreadthSolutionsUI3(
     // Print the current node value
     log('${current.value}');
     // For printing the ui only
-    addTrackingContainerRolling(
-      ref,
-      '${current.value}',
-    );
 
     if (current.value == end) {
       solutions.add(currentPath);
