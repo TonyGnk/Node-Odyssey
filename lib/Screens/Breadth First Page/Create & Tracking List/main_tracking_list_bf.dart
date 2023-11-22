@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Archive BF/list_provider.dart';
 import '../main_bf.dart';
 import 'list_and_button_bf.dart';
+import 'sliders_and_options_bf.dart';
 import 'submit_controls_bf.dart';
 
 Widget trackingListAndButton(BuildContext context) =>
@@ -17,8 +18,8 @@ Widget trackingListAndButton(BuildContext context) =>
     });
 
 // Χρήσιμα Στοιχεία
-TextEditingController controller1 = TextEditingController();
-TextEditingController controller2 = TextEditingController();
+TextEditingController inputControllerBf = TextEditingController();
+TextEditingController targetControllerBf = TextEditingController();
 
 // Αυτή είναι η φόρμα αναζήτησης για την εισαγωγή αρχικής και τελικής τιμής
 // Περιλαμβάνει τον τίτλο, πεδία εισαγωγής και ράβδους επιλογής ταχύτητας και λύσεων
@@ -33,20 +34,20 @@ Widget form(BuildContext context) => Column(
         ),
         inPutFieldBf(
           context,
-          controller1,
+          inputControllerBf,
           'Εισάγεται Αρχική Τιμή',
         ),
         inPutFieldBf(
           context,
-          controller2,
+          targetControllerBf,
           'Εισάγεται Τελική Τιμή',
         ),
-        speedSlider2(context),
+        speedSliderBf(context),
         const SizedBox(height: 2),
-        solutionSlider2(context),
+        solutionSliderBf(context),
         Expanded(
           child: Container(),
         ),
-        newSubmit2(context),
+        submitButtonBf(context),
       ],
     );
