@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
+import 'buttons_templates.dart';
 
 Widget buttonArea(BuildContext context) => Consumer(
     builder: (context, ref, _) => Container(
@@ -19,33 +19,39 @@ Widget buttonArea(BuildContext context) => Consumer(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: repeatButton(context, ref)),
               Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    ref.watch(isCreatingProvider.notifier).state = true;
-                  },
-                  child: const Text(
-                    'Νέα Αναζήτηση',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
+                child: trackingFilledButtonBf(
+                  context,
+                  'Νέα Αναζήτηση',
+                  //Prefer an icon for a New Search
+                  Icons.search,
+                  () => ref.watch(isCreatingProvider.notifier).state = true,
                 ),
+                //     TextButton(
+                //   onPressed: () {
+                //     ref.watch(isCreatingProvider.notifier).state = true;
+                //   },
+                //   child: const Text(
+                //     'Νέα Αναζήτηση',
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                // ),
               ),
             ],
           ),
         ));
 
-TextButton repeatButton(BuildContext context, WidgetRef ref) => TextButton(
-      onPressed: () {
-        //add delay 1ms
-        startCalR(ref);
-      },
-      child: const Text(
-        'Επανάληψη',
-        style: TextStyle(
-          color: Colors.white,
-        ),
-      ),
-    );
+// TextButton repeatButton(BuildContext context, WidgetRef ref) => TextButton(
+//       onPressed: () {
+//         //add delay 1ms
+//         startCalR(ref);
+//       },
+//       child: const Text(
+//         'Επανάληψη',
+//         style: TextStyle(
+//           color: Colors.white,
+//         ),
+//       ),
+//     );
