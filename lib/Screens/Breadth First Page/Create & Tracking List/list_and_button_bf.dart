@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Algorithms/Breadth First/providers_bf.dart';
 import '../../../Services & Providers/tracking_container.dart';
+import '../Archive BF/list_provider.dart';
+import 'buttons_templates_bf.dart';
 import 'tracking_buttons.dart';
 
 class TrackingStage extends StatefulWidget {
@@ -31,9 +33,22 @@ class _TrackingListState extends State<TrackingStage> {
           final updater = ref.watch(trackUpdater);
           return Column(
             children: [
+              miniAppBar(context),
               Expanded(
-                child: trackingList.build(context),
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  floatingActionButton: FloatingActionButton.small(
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                    tooltip: 'Μη διαθέσιμο',
+                    onPressed: () {
+                      null;
+                    },
+                    child: const Icon(Icons.pause),
+                  ),
+                  body: trackingList.build(context),
+                ),
               ),
+              //pauseResumeAreaBf(context),
               buttonArea(context),
             ],
           );

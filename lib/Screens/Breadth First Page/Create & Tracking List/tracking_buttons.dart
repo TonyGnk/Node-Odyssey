@@ -1,46 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
-import 'buttons_templates.dart';
+import 'buttons_templates_bf.dart';
 
 Widget buttonArea(BuildContext context) => Consumer(
-    builder: (context, ref, _) => Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(cornerSize - 1),
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-            ),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: trackingFilledButtonBf(
-                  context,
-                  'Νέα Αναζήτηση',
-                  //Prefer an icon for a New Search
-                  Icons.search,
-                  () => ref.watch(isCreatingProvider.notifier).state = true,
-                ),
-                //     TextButton(
-                //   onPressed: () {
-                //     ref.watch(isCreatingProvider.notifier).state = true;
-                //   },
-                //   child: const Text(
-                //     'Νέα Αναζήτηση',
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //     ),
-                //   ),
-                // ),
+    builder: (context, ref, _) => Row(
+          children: [
+            Expanded(
+              child: trackingFilledButtonBf(
+                context,
+                'Νέα Αναζήτηση',
+                Icons.search,
+                () => ref.watch(isCreatingProvider.notifier).state = true,
               ),
-            ],
-          ),
+            ),
+          ],
         ));
 
 // TextButton repeatButton(BuildContext context, WidgetRef ref) => TextButton(
@@ -55,3 +32,27 @@ Widget buttonArea(BuildContext context) => Consumer(
 //         ),
 //       ),
 //     );
+
+Widget miniAppBar(BuildContext context) => Consumer(
+      builder: (context, ref, _) => Row(
+        children: [
+          //Create an icon button with reset icon
+          const SizedBox(width: 8),
+          const Expanded(child: Text('Αναζήτηση από το Χ στο Ψ')),
+          IconButton(
+            onPressed: () {
+              startCalR(ref);
+            },
+            style: ButtonStyle(
+              //corners
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cornerSize - 1),
+                ),
+              ),
+            ),
+            icon: const Icon(Icons.restart_alt_outlined),
+          ),
+        ],
+      ),
+    );

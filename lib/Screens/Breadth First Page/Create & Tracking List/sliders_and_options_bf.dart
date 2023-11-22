@@ -48,13 +48,13 @@ Widget solutionSliderBf(BuildContext context) =>
       return Column(
         children: [
           const Text('Πλήθος Λύσεων'),
-          const Text('Μη διαθέσιμο'),
           Slider(
             value: solutionSlider,
             min: 1,
             max: 3,
             divisions: 2,
-            label: solutionSlider.toInt().toString(),
+            label:
+                solutionSlider != 3 ? solutionSlider.toInt().toString() : '3!',
             thumbColor: Theme.of(context).colorScheme.secondary,
             activeColor: Theme.of(context).colorScheme.secondary,
             onChanged: (double value) {
