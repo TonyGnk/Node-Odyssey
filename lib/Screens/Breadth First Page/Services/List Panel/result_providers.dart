@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Archive BF/result_box_bf.dart';
+import '../../Result Panel/result_box_bf.dart';
 
 final resultPanelList = StateProvider<List<ResultBoxBf>>(
   (ref) => [],

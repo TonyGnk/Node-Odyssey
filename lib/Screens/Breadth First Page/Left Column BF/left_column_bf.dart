@@ -5,7 +5,7 @@ import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
 import '../Stopwatch BF/time.dart';
 import '../Tracking List BF/create_stage.dart';
-import '../Tracking List BF/list_and_button.dart';
+import '../list_and_button.dart';
 
 // This a the left column of the Breadth First Algorithm page.
 Widget leftColumnBf(BuildContext context) => Column(

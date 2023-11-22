@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Services/List Panel/list_provider.dart';
 import '../Services/List Panel/result_providers.dart';
-import '../Archive BF/result_box_bf.dart';
+import '../Result Panel/result_box_bf.dart';
 
 Widget centerColumnBf(BuildContext context) =>
     Consumer(builder: (_, WidgetRef ref, __) {
