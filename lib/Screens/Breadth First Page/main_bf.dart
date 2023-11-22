@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
-import 'Chart BF/center_column_bf.dart';
+import 'Chart BF/main_right_column_bf.dart';
 import 'Stopwatch BF/time.dart';
 import 'Create & Tracking List/main_tracking_list_bf.dart';
 
@@ -43,7 +43,7 @@ Widget body(BuildContext context) => Row(
         ),
         Expanded(
           flex: 14,
-          child: centerColumnBf(context),
+          child: rightColumnBf(context),
         ),
       ],
     );
@@ -61,6 +61,25 @@ Widget leftColumnBf(BuildContext context) => Column(
         SizedBox(
           height: 200,
           child: algorithmTimeDisplay(context),
+        ),
+      ],
+    );
+
+// Αυτή είναι η δεξιά στήλη της οθόνης
+// Περιλαμβάνει την γραφική παράσταση και την οθόνη αποτελεσμάτων
+Widget rightColumnBf(BuildContext context) => Column(
+      children: [
+        Expanded(
+          child: containerZ(context),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 200,
+          child: resultPanel(
+            context,
+          ),
         ),
       ],
     );

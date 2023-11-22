@@ -20,19 +20,6 @@ Widget buttonArea(BuildContext context) => Consumer(
           ],
         ));
 
-// TextButton repeatButton(BuildContext context, WidgetRef ref) => TextButton(
-//       onPressed: () {
-//         //add delay 1ms
-//         startCalR(ref);
-//       },
-//       child: const Text(
-//         'Επανάληψη',
-//         style: TextStyle(
-//           color: Colors.white,
-//         ),
-//       ),
-//     );
-
 Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
       final startValue =
           ref.read(bfRunningProvider.notifier).state.startValue.toString();

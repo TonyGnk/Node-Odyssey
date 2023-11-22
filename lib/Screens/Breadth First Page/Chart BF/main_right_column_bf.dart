@@ -8,39 +8,10 @@ import '../Archive BF/list_provider.dart';
 import '../Archive BF/result_providers.dart';
 import '../Result Panel BF/result_box_bf.dart';
 
-Widget centerColumnBf(BuildContext context) =>
-    Consumer(builder: (_, WidgetRef ref, __) {
+Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
       final isCreating = ref.watch(isCreatingProvider);
       final bfRunning = ref.read(bfRunningProvider.notifier).state;
       final bfRunningUpdater = ref.watch(bfRunningProviderUpdater);
-      //final startValue = bfRunning.getStartValue;
-      return Column(
-        children: [
-          Expanded(
-            child: containerZ(context),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 200,
-            child: resultPanel(
-              context,
-            ),
-          ),
-          // Text('Start: ${bfRunning.startValue}'),
-          // Text('Target: ${bfRunning.targetValue}'),
-          // Text('Speed: ${bfRunning.speed} ms'),
-          // IconButton(
-          //   onPressed: () => ref.read(isCreatingProvider.notifier).state =
-          //       ref.watch(isCreatingProvider) ? false : true,
-          //   icon: const Icon(Icons.refresh),
-          // ),
-        ],
-      );
-    });
-
-Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
       final outercontroller = ScrollController();
       final innercontroller = ScrollController();
 
@@ -81,6 +52,9 @@ Widget containerZ(BuildContext context) => Consumer(builder: (context, ref, _) {
 
 Widget resultPanel(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
+      final isCreating = ref.watch(isCreatingProvider);
+      final bfRunning = ref.read(bfRunningProvider.notifier).state;
+      final bfRunningUpdater = ref.watch(bfRunningProviderUpdater);
       final stringResult = ref.watch(resultPanelList);
       return DecoratedBox(
         decoration: BoxDecoration(
