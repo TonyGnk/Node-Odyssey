@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
-import '../Create & Tracking List/buttons_templates_bf.dart';
-import '../Create & Tracking List/main_tracking_list_bf.dart';
-import '../Create & Tracking List/sliders_and_options_bf.dart';
+import 'main_search_bf.dart';
+import 'sliders_and_options_bf.dart';
 
 Widget inPutFieldBf(
   BuildContext context,
@@ -53,6 +53,7 @@ Widget submitButtonBf(BuildContext context) => Consumer(
 
 void onButtonPressed(WidgetRef ref) {
   final speedSlider = ref.watch(speedSliderProviderBf);
+  startCalR(ref);
   ref.watch(bfRunningProvider.notifier).state = BfRunning(
     startValue: int.parse(inputControllerBf.text),
     targetValue: int.parse(targetControllerBf.text),
@@ -61,6 +62,9 @@ void onButtonPressed(WidgetRef ref) {
   ref.watch(isCreatingProvider.notifier).state = false;
   ref.watch(bfRunningProviderUpdater.notifier).state =
       !ref.watch(bfRunningProviderUpdater);
+  //reset the textcontrollers
+  inputControllerBf.clear();
+  targetControllerBf.clear();
 }
 
 Widget extraButtonBf(BuildContext context) => Consumer(

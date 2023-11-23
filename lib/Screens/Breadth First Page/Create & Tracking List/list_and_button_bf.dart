@@ -32,22 +32,8 @@ class _TrackingListState extends State<TrackingStage> {
           return Column(
             children: [
               miniAppBar(context),
-              Expanded(
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  floatingActionButton: FloatingActionButton.small(
-                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                    tooltip: 'Μη διαθέσιμο',
-                    onPressed: () {
-                      null;
-                    },
-                    child: const Icon(Icons.pause),
-                  ),
-                  body: trackingList.build(context),
-                ),
-              ),
+              Expanded(child: trackingList.build(context)),
               //pauseResumeAreaBf(context),
-              buttonArea(context),
             ],
           );
         },

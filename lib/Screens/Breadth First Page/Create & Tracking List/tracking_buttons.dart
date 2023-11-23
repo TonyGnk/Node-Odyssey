@@ -29,22 +29,17 @@ Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
         children: [
           //Create an icon button with reset icon
           const SizedBox(width: 8),
-          Expanded(
-              child: Text('Αναζήτηση από το $startValue στο $targetValue')),
-          IconButton(
-            onPressed: () {
-              startCalR(ref);
-            },
-            style: ButtonStyle(
-              //corners
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(cornerSize - 1),
-                ),
-              ),
-            ),
-            icon: const Icon(Icons.restart_alt_outlined),
+          Expanded(child: Text('Αναζήτηση από $startValue σε $targetValue')),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  value: 0.7,
+                )),
           ),
+          const SizedBox(width: 8),
         ],
       );
     });

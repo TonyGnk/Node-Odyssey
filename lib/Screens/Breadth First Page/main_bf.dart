@@ -79,15 +79,6 @@ Widget rightColumnBf(BuildContext context) => Column(
         Expanded(
           child: containerZ(context),
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        // SizedBox(
-        //   height: 200,
-        //   child: resultPanel(
-        //     context,
-        //   ),
-        // ),
       ],
     );
 
@@ -104,7 +95,7 @@ Container containerWithStyleBF(
         color: color,
         border: Border.all(
           width: 1,
-          color: borderColor,
+          color: borderColor.withOpacity(0),
         ),
       ),
       clipBehavior: Clip.antiAlias,

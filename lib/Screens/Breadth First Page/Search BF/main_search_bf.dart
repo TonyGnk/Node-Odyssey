@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../Services & Providers/constants.dart';
-import '../Create & Tracking List/main_tracking_list_bf.dart';
-import '../Create & Tracking List/sliders_and_options_bf.dart';
+import 'sliders_and_options_bf.dart';
 import 'submit_controls_bf.dart';
-import '../main_bf.dart';
 
 // Αυτή είναι η φόρμα αναζήτησης για την εισαγωγή αρχικής και τελικής τιμής
 // Περιλαμβάνει τον τίτλο, πεδία εισαγωγής και ράβδους επιλογής ταχύτητας και λύσεων
@@ -69,6 +67,12 @@ Widget searchContainer(BuildContext context, Widget child) => Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
         color: Theme.of(context).shadowColor,
+        border: Border.all(
+          width: 1,
+          color: Theme.of(context).colorScheme.onSurface.withOpacity(0),
+        ),
       ),
       child: child,
     );
+TextEditingController inputControllerBf = TextEditingController();
+TextEditingController targetControllerBf = TextEditingController();
