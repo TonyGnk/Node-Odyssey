@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Services & Providers/constants.dart';
 import 'sliders_and_options_bf.dart';
@@ -35,6 +36,11 @@ Widget form(BuildContext context) => Column(
       ],
     );
 
+TextEditingController inputControllerBf = TextEditingController();
+TextEditingController targetControllerBf = TextEditingController();
+
+final moreOptionsProviderBf = StateProvider<bool>((ref) => false);
+
 Widget formR(BuildContext context) => searchContainer(
       context,
       Row(
@@ -55,14 +61,15 @@ Widget formR(BuildContext context) => searchContainer(
             ),
           ),
           const SizedBox(width: 6),
-          extraButtonBf(context),
+          //extraButtonBf(context),
           const SizedBox(width: 3),
           submitButtonBf(context),
         ],
       ),
     );
 
-Widget searchContainer(BuildContext context, Widget child) => Container(
+Widget searchContainer(BuildContext context, Widget child) => AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
@@ -74,5 +81,3 @@ Widget searchContainer(BuildContext context, Widget child) => Container(
       ),
       child: child,
     );
-TextEditingController inputControllerBf = TextEditingController();
-TextEditingController targetControllerBf = TextEditingController();

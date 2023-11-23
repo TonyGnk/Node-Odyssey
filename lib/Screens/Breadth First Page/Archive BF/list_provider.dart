@@ -60,7 +60,7 @@ final isCreatingProvider = StateProvider<bool>(
 //
 
 //3
-void adddTrackingContainer(
+void addTrackingContainer(
   WidgetRef ref,
   String text,
   int width,

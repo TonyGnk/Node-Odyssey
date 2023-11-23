@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//import 'package:riverpod/riverpod.dart';
+
 import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
@@ -69,14 +69,17 @@ void onButtonPressed(WidgetRef ref) {
 
 Widget extraButtonBf(BuildContext context) => Consumer(
       builder: (_, WidgetRef ref, __) => IconButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cornerSize - 1),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(cornerSize - 1),
+              ),
             ),
           ),
-        ),
-        icon: const Icon(Icons.tune_outlined),
-        onPressed: () => onButtonPressed(ref),
-      ),
+          icon: const Icon(Icons.tune_outlined),
+          onPressed: () {
+            ref.watch(moreOptionsProviderBf.notifier).state =
+                !ref.read(moreOptionsProviderBf);
+            print('extra button pressed');
+          }),
     );

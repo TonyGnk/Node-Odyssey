@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:math' as math;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services & Providers/tracking_container.dart';
 
 class Node {
@@ -26,7 +27,7 @@ Future<List<Node>?> findBreadthSolutionUI(
   queue.add([Node(start, 0, 'Αρχική Τιμή')]);
 
   while (queue.isNotEmpty) {
-    await Future.delayed(Duration(milliseconds: speed));
+    await Future.delayed(Duration(microseconds: speed));
 
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
@@ -42,6 +43,7 @@ Future<List<Node>?> findBreadthSolutionUI(
     ref
         .watch(trackingListProvider)
         .addTile(current.value, current.operation, ref);
+    addTrackingContainer(ref, '${current.value}', current.value, end);
 
 // For printing the ui only
     // addTrackingContainerRolling(
