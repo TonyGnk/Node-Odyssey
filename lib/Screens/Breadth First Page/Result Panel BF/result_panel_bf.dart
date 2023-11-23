@@ -9,6 +9,9 @@ import 'results_appbar_bf.dart';
 Widget resultPanel(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
       final stringResult = ref.watch(resultPanelList);
+      final resList = ref.watch(resListProvider);
+      final resList2 = ref.watch(resListProvider2);
+
       return DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(
@@ -23,17 +26,22 @@ Widget resultPanel(BuildContext context) =>
         child: Column(
           children: [
             resultsAppBar(context),
-            Expanded(child: listView(context, stringResult)),
+            Expanded(
+              child: resList.build(
+                context,
+              ),
+            ),
+            //Expanded(child: listView(context, stringResult)),
           ],
         ),
       );
     });
 
-ListView listView(BuildContext context, List<ResultBoxBf> trackingTiles) =>
-    ListView(
-      reverse: false,
-      children: [
-        for (int i = 0; i < trackingTiles.length; i++)
-          trackingTiles[i].build(context),
-      ],
-    );
+// ListView listView(BuildContext context, List<ResultBoxBf> trackingTiles) =>
+//     ListView(
+//       reverse: false,
+//       children: [
+//         for (int i = 0; i < trackingTiles.length; i++)
+//           trackingTiles[i].build(context),
+//       ],
+//     );

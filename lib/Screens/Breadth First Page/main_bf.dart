@@ -5,6 +5,7 @@ import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/chart_bf.dart';
 import 'Result Panel BF/result_panel_bf.dart';
+import 'Search BF/main_search_bf.dart';
 import 'Stopwatch BF/time.dart';
 import 'Create & Tracking List/main_tracking_list_bf.dart';
 
@@ -35,35 +36,40 @@ Widget appBarBf(BuildContext context) => const AdaptAppBar(
 Widget body(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 4,
-          child: leftColumnBf(context),
-        ),
+        leftColumnBf(context),
         const SizedBox(
           width: 10,
         ),
         Expanded(
-          flex: 14,
+          flex: 14, //14
           child: rightColumnBf(context),
         ),
+        // Expanded(
+        //   flex: 5,
+        //   child: SizedBox(
+        //     child: resultPanel(
+        //       context,
+        //     ),
+        //   ),
+        // ),
       ],
     );
 
 // Αυτή είναι η αριστερή στήλη της οθόνης
 // Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο
-Widget leftColumnBf(BuildContext context) => Column(
-      children: [
-        Expanded(
-          child: trackingListAndButton(context),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: 200,
-          child: algorithmTimeDisplay(context),
-        ),
-      ],
+Widget leftColumnBf(BuildContext context) => SizedBox(
+      width: 310,
+      child: Column(
+        children: [
+          formR(context),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: trackingListAndButton(context),
+          ),
+        ],
+      ),
     );
 
 // Αυτή είναι η δεξιά στήλη της οθόνης
@@ -76,12 +82,12 @@ Widget rightColumnBf(BuildContext context) => Column(
         const SizedBox(
           height: 10,
         ),
-        SizedBox(
-          height: 200,
-          child: resultPanel(
-            context,
-          ),
-        ),
+        // SizedBox(
+        //   height: 200,
+        //   child: resultPanel(
+        //     context,
+        //   ),
+        // ),
       ],
     );
 

@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../Services & Providers/constants.dart';
+import '../Archive BF/list_provider.dart';
+import '../Create & Tracking List/buttons_templates_bf.dart';
+import '../Create & Tracking List/main_tracking_list_bf.dart';
+import '../Create & Tracking List/sliders_and_options_bf.dart';
+
+Widget inPutFieldBf(
+  BuildContext context,
+  TextEditingController controller,
+  String message,
+) =>
+    Container(
+      height: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(cornerSize - 1),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+      ),
+      //4 left and right , 12 top and 0 bottom
+      padding: const EdgeInsets.fromLTRB(7, 0, 7, 4),
+      margin: const EdgeInsets.symmetric(vertical: 0),
+      child: Center(
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: message,
+          ),
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+        ),
+      ),
+    );
+
+Widget submitButtonBf(BuildContext context) => Consumer(
+      builder: (_, WidgetRef ref, __) => IconButton.filled(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cornerSize - 1),
+            ),
+          ),
+        ),
+        icon: const Icon(Icons.auto_awesome_outlined),
+        onPressed: () => onButtonPressed(ref),
+      ),
+    );
+
+void onButtonPressed(WidgetRef ref) {
+  final speedSlider = ref.watch(speedSliderProviderBf);
+  ref.watch(bfRunningProvider.notifier).state = BfRunning(
+    startValue: int.parse(inputControllerBf.text),
+    targetValue: int.parse(targetControllerBf.text),
+    speed: setSpeedFromSlider(speedSlider),
+  );
+  ref.watch(isCreatingProvider.notifier).state = false;
+  ref.watch(bfRunningProviderUpdater.notifier).state =
+      !ref.watch(bfRunningProviderUpdater);
+}
+
+Widget extraButtonBf(BuildContext context) => Consumer(
+      builder: (_, WidgetRef ref, __) => IconButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cornerSize - 1),
+            ),
+          ),
+        ),
+        icon: const Icon(Icons.tune_outlined),
+        onPressed: () => onButtonPressed(ref),
+      ),
+    );

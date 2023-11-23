@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Algorithms/Breadth First/algorithm_bf.dart';
+import '../../../Services & Providers/tracking_container.dart';
+import '../Archive BF/result_providers.dart';
 
 class ResultBoxBf {
   ResultBoxBf({
@@ -10,35 +13,23 @@ class ResultBoxBf {
 
   final String title;
   final List<Node> solution;
+  String allValuesInOneString = '';
 
-  Widget build(BuildContext context) => Container(
-        //margin: const EdgeInsets.all(5),
-        padding: const EdgeInsets.all(10),
-        //color: Colors.black,
-        child: Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (int i = 0; i < solution.length; i++)
-                      Text(
-                        'Τιμή ${solution[i].value} | Πράξη ${solution[i].operation} ',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                  ],
-                ),
+  Widget build(BuildContext context) => Consumer(builder: (context, ref, _) {
+        final resList = ref.watch(resListProvider);
+
+        return Container(
+          width: 200,
+          height: 22,
+          child: Column(
+            children: [
+              Expanded(
+                child: resList.build(context),
               ),
-            ),
-            costPartBf(),
-          ],
-        ),
-      );
+            ],
+          ),
+        );
+      });
 
   Row costPartBf() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,4 +44,19 @@ class ResultBoxBf {
           ),
         ],
       );
+}
+
+String operationToString(String operation) {
+  switch (operation) {
+    case 'Πρόσθεση κατά 1':
+      return '+ 1 = ';
+    case 'Αφαίρεση κατά 1':
+      return '- 1 = ';
+    case 'Πολ/σιασμός επί 2':
+      return '* 2 = ';
+    case 'Διαίρεση με 2':
+      return '/ 2 = ';
+    default:
+      return '';
+  }
 }

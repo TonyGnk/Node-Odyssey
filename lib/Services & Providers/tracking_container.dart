@@ -11,15 +11,17 @@ class TrackingList extends StatelessWidget {
   TrackingList({
     super.key,
     this.ref,
+    this.reverse = false,
     List<TrackingTiles>? trackingTiles,
   }) : trackingTiles = trackingTiles ?? [];
 
   final WidgetRef? ref;
   final List<TrackingTiles> trackingTiles;
+  final bool reverse;
 
   @override
   ListView build(BuildContext context) => ListView(
-        reverse: true,
+        reverse: reverse,
         children: [
           for (int i = trackingTiles.length - 1; i >= 0; i--) trackingTiles[i],
         ],
@@ -32,7 +34,7 @@ class TrackingList extends StatelessWidget {
   void addTile(int value, String operation, WidgetRef ref) {
     trackingTiles.add(
       TrackingTiles(
-        text: '$operation $value',
+        //text: '$operation $value',
         value: value,
         operation: operation,
       ),
@@ -43,13 +45,11 @@ class TrackingList extends StatelessWidget {
 
 class TrackingTiles extends StatefulWidget {
   const TrackingTiles({
-    required this.text,
     super.key,
     this.value = 0,
     this.operation = '',
   });
 
-  final String text;
   final int value;
   final String operation;
 
@@ -102,26 +102,60 @@ class _TrackingTilesState extends State<TrackingTiles> {
           ),
         ),
       );
+}
 
-  getPreviousValue(int value, String operation) {
-    //if (operation == 'Πρόσθεση κατά 1'
-    if (operation == 'Πρόσθεση κατά 1') {
-      return (value - 1).toString();
-    } else if (operation == 'Αφαίρεση κατά 1') {
-      return (value + 1).toString();
-    } else if (operation == 'Πολ/σιασμός επί 2') {
-      return (value ~/ 2).toString();
-    } else if (operation == 'Διαίρεση με 2') {
-      return (value * 2).toString();
-    } else if (operation == 'Τετράγωνο') {
-      return sqrt(value).toInt().toString();
-    } else if (operation == 'Ρίζα') {
-      return pow(value, 2).toInt().toString();
-    } else if (operation == 'Αρχική Τιμή') {
-      return '';
-    } else {
-      return 0.toString();
-    }
+class SemiTrack extends StatelessWidget {
+  const SemiTrack({
+    super.key,
+    this.value = 0,
+    this.operation = '',
+  });
+
+  final int value;
+  final String operation;
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Container(
+          margin: const EdgeInsets.all(2),
+          width: 90,
+          height: 40,
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(cornerSize),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              getPreviousValue(value, operation) +
+                  (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                  value.toString(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      );
+}
+
+getPreviousValue(int value, String operation) {
+  //if (operation == 'Πρόσθεση κατά 1'
+  if (operation == 'Πρόσθεση κατά 1') {
+    return (value - 1).toString();
+  } else if (operation == 'Αφαίρεση κατά 1') {
+    return (value + 1).toString();
+  } else if (operation == 'Πολ/σιασμός επί 2') {
+    return (value ~/ 2).toString();
+  } else if (operation == 'Διαίρεση με 2') {
+    return (value * 2).toString();
+  } else if (operation == 'Τετράγωνο') {
+    return sqrt(value).toInt().toString();
+  } else if (operation == 'Ρίζα') {
+    return pow(value, 2).toInt().toString();
+  } else if (operation == 'Αρχική Τιμή') {
+    return '';
+  } else {
+    return 0.toString();
   }
 }
 

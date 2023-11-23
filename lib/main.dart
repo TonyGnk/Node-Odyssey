@@ -18,5 +18,5 @@ void main() async {
 AdaptiveRoot buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
       savedThemeMode: savedThemeMode,
       appTitle: 'Algorithms',
-      debugShowFloatingThemeButton: true,
+      debugShowFloatingThemeButton: false,
     );

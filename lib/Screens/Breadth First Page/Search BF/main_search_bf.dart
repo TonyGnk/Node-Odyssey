@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+
+import '../../../Services & Providers/constants.dart';
+import '../Create & Tracking List/main_tracking_list_bf.dart';
+import '../Create & Tracking List/sliders_and_options_bf.dart';
+import 'submit_controls_bf.dart';
+import '../main_bf.dart';
+
+// Αυτή είναι η φόρμα αναζήτησης για την εισαγωγή αρχικής και τελικής τιμής
+// Περιλαμβάνει τον τίτλο, πεδία εισαγωγής και ράβδους επιλογής ταχύτητας και λύσεων
+Widget form(BuildContext context) => Column(
+      children: [
+        const SizedBox(height: 8),
+        const Text(
+          'Νέα Αναζήτηση',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+        inPutFieldBf(
+          context,
+          inputControllerBf,
+          'Εισάγεται Αρχική Τιμή',
+        ),
+        inPutFieldBf(
+          context,
+          targetControllerBf,
+          'Εισάγεται Τελική Τιμή',
+        ),
+        speedSliderBf(context),
+        const SizedBox(height: 2),
+        solutionSliderBf(context),
+        Expanded(
+          child: Container(),
+        ),
+        submitButtonBf(context),
+      ],
+    );
+
+Widget formR(BuildContext context) => searchContainer(
+      context,
+      Row(
+        children: [
+          Expanded(
+            child: inPutFieldBf(
+              context,
+              inputControllerBf,
+              'Αρχική Τιμή',
+            ),
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: inPutFieldBf(
+              context,
+              targetControllerBf,
+              'Τελική Τιμή',
+            ),
+          ),
+          const SizedBox(width: 6),
+          extraButtonBf(context),
+          const SizedBox(width: 3),
+          submitButtonBf(context),
+        ],
+      ),
+    );
+
+Widget searchContainer(BuildContext context, Widget child) => Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(cornerSize),
+        color: Theme.of(context).shadowColor,
+      ),
+      child: child,
+    );
