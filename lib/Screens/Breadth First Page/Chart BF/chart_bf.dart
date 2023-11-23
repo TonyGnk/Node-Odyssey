@@ -13,7 +13,7 @@ final innercontroller = ScrollController();
 
 Widget containerZ(BuildContext context) => Consumer(
       builder: (context, ref, _) {
-        final boxList = ref.watch(trackingBox);
+        final boxList = ref.watch(chartColumnsProvider);
         // ignore: unused_local_variable
         final resultPanelListUpdater = ref.watch(trackUpdater);
         return chartContainer(

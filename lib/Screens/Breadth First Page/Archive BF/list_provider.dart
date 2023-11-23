@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,43 +64,31 @@ final isCreatingProvider = StateProvider<bool>(
 //3
 void addTrackingContainer(
   WidgetRef ref,
-  String text,
   int width,
   int target,
 ) {
   double a = width / target * 10;
   double bc = 10 - a;
-  ref.read(trackingBox.notifier).state.add(
+  double logOfWidth = log(width + 1);
+  //find the logarithm of width with base 3
+  logOfWidth = logOfWidth / log(1.03);
+  print(logOfWidth);
+  ref.read(chartColumnsProvider.notifier).state.add(
         Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              child: Container(
-                width: 10,
-                color: const Color.fromARGB(255, 73, 67, 67).withOpacity(1),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                width: 10,
-                color: const Color.fromARGB(255, 73, 67, 67).withOpacity(1),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(flex: bc.toInt(), child: const SizedBox()),
-                    Expanded(
-                        flex: a.toInt(),
-                        child: Container(color: Colors.grey.withOpacity(0.4))),
-                    //Expanded(flex: bc.toInt(), child: const SizedBox()),
-                  ],
-                ),
-              ),
-            ),
+            Container(color: Colors.red, height: logOfWidth, width: 5),
           ],
         ),
       );
 }
 
 //log
-final trackingBox = StateProvider<List<Column>>(
+final chartColumnsProvider = StateProvider<List<Column>>(
   (ref) => [],
 );
+
+//function for clearing trackingBox
+void clearTrackingBox(WidgetRef ref) {
+  ref.read(chartColumnsProvider.notifier).state.clear();
+}

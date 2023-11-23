@@ -52,6 +52,7 @@ Widget submitButtonBf(BuildContext context) => Consumer(
     );
 
 void onButtonPressed(WidgetRef ref) {
+  clearTrackingBox(ref);
   final speedSlider = ref.watch(speedSliderProviderBf);
   startCalR(ref);
   ref.watch(bfRunningProvider.notifier).state = BfRunning(

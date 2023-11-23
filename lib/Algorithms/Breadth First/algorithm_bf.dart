@@ -43,7 +43,7 @@ Future<List<Node>?> findBreadthSolutionUI(
     ref
         .watch(trackingListProvider)
         .addTile(current.value, current.operation, ref);
-    addTrackingContainer(ref, '${current.value}', current.value, end);
+    addTrackingContainer(ref, current.value, end);
 
 // For printing the ui only
     // addTrackingContainerRolling(
