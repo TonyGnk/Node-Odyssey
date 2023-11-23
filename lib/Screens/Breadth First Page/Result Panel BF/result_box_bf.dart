@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../Algorithms/Breadth First/algorithm_bf.dart';
+
 class ResultBoxBf {
   ResultBoxBf({
-    this.text = '',
+    required this.solution,
     this.title = '',
-    this.totalCost = '',
-    this.error = false,
   });
 
   final String title;
-  final String text;
-  final String totalCost;
-  final bool error;
+  final List<Node> solution;
 
   Widget build(BuildContext context) => Container(
         //margin: const EdgeInsets.all(5),
@@ -25,36 +23,34 @@ class ResultBoxBf {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w400,
+                    for (int i = 0; i < solution.length; i++)
+                      Text(
+                        'Τιμή ${solution[i].value} | Πράξη ${solution[i].operation} ',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    error
-                        ? const SizedBox()
-                        : Text(
-                            text,
-                          ),
                   ],
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  totalCost,
-                  style: const TextStyle(fontSize: 24),
-                ),
-                const Text(
-                  '⚡',
-                  style: TextStyle(fontSize: 24),
-                ),
-              ],
-            )
+            costPartBf(),
           ],
         ),
+      );
+
+  Row costPartBf() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            solution.last.cost.toString(),
+            style: const TextStyle(fontSize: 24),
+          ),
+          const Text(
+            '⚡',
+            style: TextStyle(fontSize: 24),
+          ),
+        ],
       );
 }

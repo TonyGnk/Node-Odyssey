@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/result_providers.dart';
 import 'result_box_bf.dart';
+import 'results_appbar_bf.dart';
 
 Widget resultPanel(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
@@ -19,7 +20,12 @@ Widget resultPanel(BuildContext context) =>
             color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
           ),
         ),
-        child: listView(context, stringResult),
+        child: Column(
+          children: [
+            resultsAppBar(context),
+            Expanded(child: listView(context, stringResult)),
+          ],
+        ),
       );
     });
 
