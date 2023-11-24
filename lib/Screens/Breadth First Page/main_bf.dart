@@ -4,10 +4,8 @@ import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/chart_bf.dart';
-import 'Result Panel BF/result_panel_bf.dart';
 import 'Search BF/main_search_bf.dart';
-import 'Stopwatch BF/time.dart';
-import 'Create & Tracking List/main_tracking_list_bf.dart';
+import 'Create & Tracking List/list_and_button_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {
   const BreadthFirstAlg({super.key});
@@ -37,21 +35,11 @@ Widget body(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         leftColumnBf(context),
-        const SizedBox(
-          width: 10,
-        ),
+        const SizedBox(width: 10),
         Expanded(
           flex: 14, //14
-          child: rightColumnBf(context),
+          child: containerZ(context),
         ),
-        // Expanded(
-        //   flex: 5,
-        //   child: SizedBox(
-        //     child: resultPanel(
-        //       context,
-        //     ),
-        //   ),
-        // ),
       ],
     );
 
@@ -62,24 +50,12 @@ Widget leftColumnBf(BuildContext context) => SizedBox(
       child: Column(
         children: [
           formR(context),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(context),
           ),
         ],
       ),
-    );
-
-// Αυτή είναι η δεξιά στήλη της οθόνης
-// Περιλαμβάνει την γραφική παράσταση και την οθόνη αποτελεσμάτων
-Widget rightColumnBf(BuildContext context) => Column(
-      children: [
-        Expanded(
-          child: containerZ(context),
-        ),
-      ],
     );
 
 // Κάθε βασικό στοιχείο της οθόνης είναι ένα Container
