@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'dart:math';
 
 import 'package:flutter/gestures.dart';
@@ -11,30 +13,6 @@ import '../Archive BF/list_provider.dart';
 
 final outercontroller = ScrollController();
 final innercontroller = ScrollController();
-
-Widget containerZ2(BuildContext context) => Consumer(
-      builder: (context, ref, _) {
-        final boxList = ref.watch(chartColumnsProvider);
-        // ignore: unused_local_variable
-        final resultPanelListUpdater = ref.watch(trackUpdater);
-        return Row(
-          children: [
-            //A loop with 1000 loops create 1000 containers with child the Text(i)
-            for (int i = 0; i < 900; i++)
-              Expanded(
-                child: Container(
-                  color: i != 100 ? Colors.green : Colors.amber,
-                  child: Expanded(
-                    child: Column(
-                      children: [],
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
-    );
 
 Widget containerZ(BuildContext context) => Consumer(
       builder: (context, ref, _) {
@@ -87,19 +65,28 @@ Widget chartLister(List<Column> boxList) => Listener(
     );
 
 Widget chartLabelsColumn(BuildContext context) => SizedBox(
-      width: 60,
+      width: 50,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          //opposite loop
-          for (int i = 4; i >= 0; i--)
-            SizedBox(
-              child: Center(
-                child: Text(
-                  '${10 * pow(10, i)}',
-                ),
-              ),
-            ),
+          Expanded(flex: 13, child: const SizedBox()),
+          Text('10^8'),
+          Expanded(flex: 11, child: const SizedBox()),
+          Text('10^7'),
+          Expanded(flex: 12, child: const SizedBox()),
+          Text('10^6'),
+          Expanded(flex: 10, child: const SizedBox()),
+          Text('10^5'),
+          Expanded(flex: 11, child: const SizedBox()),
+          Text('10^4'),
+          Expanded(flex: 11, child: const SizedBox()),
+          Text('10^3'),
+          Expanded(flex: 12, child: const SizedBox()),
+          Text('10^2'),
+          Expanded(flex: 10, child: const SizedBox()),
+          Text('10^1'),
+          Expanded(flex: 7, child: const SizedBox()),
+          Text('10^0'),
+          Expanded(flex: 3, child: const SizedBox()),
         ],
       ),
     );
