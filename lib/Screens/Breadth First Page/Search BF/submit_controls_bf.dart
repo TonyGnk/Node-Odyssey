@@ -19,7 +19,6 @@ Widget inPutFieldBf(
         borderRadius: BorderRadius.circular(cornerSize - 1),
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),
-      //4 left and right , 12 top and 0 bottom
       padding: const EdgeInsets.fromLTRB(7, 0, 7, 4),
       margin: const EdgeInsets.symmetric(vertical: 0),
       child: Center(
@@ -54,16 +53,18 @@ Widget submitButtonBf(BuildContext context) => Consumer(
 void onButtonPressed(WidgetRef ref) {
   clearTrackingBox(ref);
   final speedSlider = ref.watch(speedSliderProviderBf);
-  startCalR(ref);
+
   ref.watch(bfRunningProvider.notifier).state = BfRunning(
     startValue: int.parse(inputControllerBf.text),
     targetValue: int.parse(targetControllerBf.text),
     speed: setSpeedFromSlider(speedSlider),
   );
+  startCalR(ref);
   ref.watch(isCreatingProvider.notifier).state = false;
   ref.watch(bfRunningProviderUpdater.notifier).state =
       !ref.watch(bfRunningProviderUpdater);
-  //reset the textcontrollers
+
+  //Reset the Input Fields
   inputControllerBf.clear();
   targetControllerBf.clear();
 }

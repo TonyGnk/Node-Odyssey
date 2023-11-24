@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Algorithms/Breadth First/providers_bf.dart';
 import '../../../Services & Providers/tracking_container.dart';
 import '../Archive BF/list_provider.dart';
+import '../Result Panel BF/result_panel_bf.dart';
 import '../main_bf.dart';
 
 Widget trackingListAndButton(BuildContext context) =>
@@ -12,7 +13,7 @@ Widget trackingListAndButton(BuildContext context) =>
       return containerWithStyleBF(
         Theme.of(context).shadowColor.withOpacity(1),
         Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-        isAlgorithmEnd ? const SizedBox() : trackingStage(context),
+        isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
       );
     });
 
