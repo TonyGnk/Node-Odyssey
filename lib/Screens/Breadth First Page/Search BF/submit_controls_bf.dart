@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Breadth First/providers_bf.dart';
 import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
 import '../Archive BF/list_provider.dart';
@@ -52,6 +53,7 @@ Widget submitButtonBf(BuildContext context) => Consumer(
 
 void onButtonPressed(WidgetRef ref) {
   clearTrackingBox(ref);
+  ref.read(isAlgorithmEndProviderBf.notifier).state = false;
   final speedSlider = ref.watch(speedSliderProviderBf);
 
   ref.watch(bfRunningProvider.notifier).state = BfRunning(
@@ -69,8 +71,11 @@ void onButtonPressed(WidgetRef ref) {
   targetControllerBf.clear();
 }
 
-Widget extraButtonBf(BuildContext context) => Consumer(
-      builder: (_, WidgetRef ref, __) => IconButton(
+Widget extraButtonBf(BuildContext context) =>
+    Consumer(builder: (_, WidgetRef ref, __) {
+      final moreOptions = ref.watch(moreOptionsProviderBf);
+      final moreOptions2 = ref.watch(moreOptionsProviderBf2);
+      return IconButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -78,10 +83,35 @@ Widget extraButtonBf(BuildContext context) => Consumer(
               ),
             ),
           ),
-          icon: const Icon(Icons.tune_outlined),
-          onPressed: () {
-            ref.watch(moreOptionsProviderBf.notifier).state =
-                !ref.read(moreOptionsProviderBf);
+          icon: moreOptions
+              ? const Icon(Icons.close)
+              : const Icon(Icons.tune_outlined),
+          onPressed: () async {
+            await Future.delayed(const Duration(milliseconds: 150));
+            moreOptions
+                ? {
+                    ref.watch(moreOptionsProviderBf.notifier).state = false,
+                  }
+                : moreOptionsFun(ref);
+            moreOptions2
+                ? ref.read(moreOptionsProviderBf2.notifier).state = false
+                : null;
             print('extra button pressed');
-          }),
-    );
+          });
+    });
+
+Widget closeExtraButtonBf(BuildContext context) => Consumer(
+    builder: (_, WidgetRef ref, __) => IconButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cornerSize - 1),
+            ),
+          ),
+        ),
+        icon: const Icon(Icons.close),
+        onPressed: () async {
+          await Future.delayed(const Duration(milliseconds: 150));
+          ref.watch(moreOptionsProviderBf.notifier).state = false;
+          ref.read(moreOptionsProviderBf2.notifier).state = false;
+        }));

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/chart_bf.dart';
+import 'Result Panel BF/result_panel_bf.dart';
 import 'Search BF/main_search_bf.dart';
 import 'Create & Tracking List/list_and_button_bf.dart';
 
@@ -58,13 +61,20 @@ Widget leftColumnBf(BuildContext context) => SizedBox(
       ),
     );
 
+Widget trackingListAndButton(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final isAlgorithmEnd = ref.watch(isAlgorithmEndProviderBf);
+        return containerWithStyleBF(
+          Theme.of(context).shadowColor.withOpacity(1),
+          Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+          isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
+        );
+      },
+    );
+
 // Κάθε βασικό στοιχείο της οθόνης είναι ένα Container
 // Περιλαμβάνει ένα πρότυπο στυλ για τα Container
-Container containerWithStyleBF(
-  Color color,
-  Color borderColor,
-  Widget child,
-) =>
+Container containerWithStyleBF(Color color, Color borderColor, Widget child) =>
     Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
