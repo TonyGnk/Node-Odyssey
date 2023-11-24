@@ -23,7 +23,8 @@ class TrackingList extends StatelessWidget {
   ListView build(BuildContext context) => ListView(
         reverse: reverse,
         children: [
-          for (int i = trackingTiles.length - 1; i >= 0; i--) trackingTiles[i],
+          for (int i = trackingTiles.length - 1; i >= 0; i--)
+            trackingTiles[i].build(context),
         ],
       );
 
@@ -31,20 +32,37 @@ class TrackingList extends StatelessWidget {
     trackingTiles.clear();
   }
 
-  void addTile(int value, String operation, WidgetRef ref) {
+  // void addTile2(int value, String operation, WidgetRef ref) {
+  //   trackingTiles.add(
+  //     TrackingTiles(
+  //       //text: '$operation $value',
+  //       value: value,
+  //       operation: operation,
+  //     ),
+  //   );
+  //   addTrackingContainerRolling(ref);
+  // }
+
+  void addTile(
+    BuildContext context,
+    BigInt value,
+    String operation,
+    WidgetRef ref,
+  ) {
     trackingTiles.add(
       TrackingTiles(
         //text: '$operation $value',
-        value: value,
-        operation: operation,
+
+        value,
+        operation, context,
       ),
     );
     addTrackingContainerRolling(ref);
   }
 }
 
-class TrackingTiles extends StatefulWidget {
-  const TrackingTiles({
+class TrackingTiles2 extends StatefulWidget {
+  TrackingTiles2({
     super.key,
     this.value = 0,
     this.operation = '',
@@ -54,10 +72,10 @@ class TrackingTiles extends StatefulWidget {
   final String operation;
 
   @override
-  State<TrackingTiles> createState() => _TrackingTilesState();
+  State<TrackingTiles2> createState() => _TrackingTilesState();
 }
 
-class _TrackingTilesState extends State<TrackingTiles> {
+class _TrackingTilesState extends State<TrackingTiles2> {
   bool _isHovering = false;
 
   @override
@@ -100,6 +118,49 @@ class _TrackingTilesState extends State<TrackingTiles> {
               ),
             ],
           ),
+        ),
+      );
+}
+
+class TrackingTiles {
+  TrackingTiles(this.value, this.operation, this.context);
+
+  final BuildContext context;
+  final BigInt value;
+  final String operation;
+
+  Widget build(BuildContext context) => AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+        ),
+        margin: const EdgeInsets.all(5),
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text('  ${operation}'),
+            ),
+            Container(
+              width: 135,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(cornerSize),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  //getPreviousValue(value, operation) +
+
+                  (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') + value.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
         ),
       );
 }

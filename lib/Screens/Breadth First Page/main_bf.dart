@@ -67,7 +67,9 @@ Widget trackingListAndButton(BuildContext context) => Consumer(
         return containerWithStyleBF(
           Theme.of(context).shadowColor.withOpacity(1),
           Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-          isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
+          //  isAlgorithmEnd ? resultPanel(context) :
+
+          trackingStage(context),
         );
       },
     );

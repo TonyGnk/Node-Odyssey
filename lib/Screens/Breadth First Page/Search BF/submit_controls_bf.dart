@@ -47,21 +47,23 @@ Widget submitButtonBf(BuildContext context) => Consumer(
           ),
         ),
         icon: const Icon(Icons.auto_awesome_outlined),
-        onPressed: () => onButtonPressed(ref),
+        onPressed: () => onButtonPressed(context, ref),
       ),
     );
 
-void onButtonPressed(WidgetRef ref) {
+void onButtonPressed(BuildContext context, WidgetRef ref) {
   clearTrackingBox(ref);
   ref.read(isAlgorithmEndProviderBf.notifier).state = false;
   final speedSlider = ref.watch(speedSliderProviderBf);
 
   ref.watch(bfRunningProvider.notifier).state = BfRunning(
-    startValue: int.parse(inputControllerBf.text),
-    targetValue: int.parse(targetControllerBf.text),
+    //startValue: int.parse(inputControllerBf.text),
+    startValue: BigInt.parse(inputControllerBf.text),
+    //targetValue: int.parse(targetControllerBf.text),
+    targetValue: BigInt.parse(targetControllerBf.text),
     speed: setSpeedFromSlider(speedSlider),
   );
-  startCalR(ref);
+  startCalR(context, ref);
   ref.watch(isCreatingProvider.notifier).state = false;
   ref.watch(bfRunningProviderUpdater.notifier).state =
       !ref.watch(bfRunningProviderUpdater);

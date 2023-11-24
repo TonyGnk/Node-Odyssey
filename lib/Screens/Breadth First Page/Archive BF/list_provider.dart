@@ -11,8 +11,8 @@ final stopTimerProvider = StateProvider<bool>(
 
 final bfRunningProvider = StateProvider<BfRunning>(
   (ref) => BfRunning(
-    startValue: 0,
-    targetValue: 0,
+    startValue: BigInt.from(0),
+    targetValue: BigInt.from(0),
     speed: 1,
   ),
 );
@@ -29,21 +29,21 @@ class BfRunning {
   });
 
   //Αρχική Τιμή
-  int startValue;
+  BigInt startValue;
 
   //Τελική Τιμή
-  int targetValue;
+  BigInt targetValue;
 
   // Speed of the algorithm
   int speed = 1;
 
-  int getStartValue() => startValue;
-  void setStartValue(int startValue) {
+  BigInt getStartValue() => startValue;
+  void setStartValue(BigInt startValue) {
     this.startValue = startValue;
   }
 
-  int getTargetValue() => targetValue;
-  void setTargetValue(int targetValue) {
+  BigInt getTargetValue() => targetValue;
+  void setTargetValue(BigInt targetValue) {
     this.targetValue = targetValue;
   }
 
@@ -63,17 +63,25 @@ final isCreatingProvider = StateProvider<bool>(
 
 //
 
-//3
-void addTrackingContainer(WidgetRef ref, int width, int target) {
-  double logOfWidth = log(width + 1);
-  double logOfTarget = log(target + 1);
+void addTrackingContainer(WidgetRef ref, BigInt width, BigInt target) {
+  //300
+  BigInt Part1of3width = width ~/ BigInt.from(3);
+  BigInt remainder1of3width = width % BigInt.from(3); //100
+//1of50000of3width
+  double Part1of50000of3 = Part1of3width / BigInt.from(50000);
+  //print('LOG $Part1of50000of3');
+  double logOfWidth = log(Part1of50000of3 + 1) + log(50000) + log(3);
+
+  // double logOfWidth = log(width + BigInt.from(1));
+
+  //double logOfTarget = log(target + 1);
   logOfWidth = logOfWidth / log(1.0219);
   print(logOfWidth);
   double doubleFlex2 = logOfWidth / 9.565920679129044;
 
-  ref.read(chartColumnsProvider.notifier).state.length == 2300
-      ? ref.read(chartColumnsProvider.notifier).state.clear()
-      : null;
+  // ref.read(chartColumnsProvider.notifier).state.length == 2300
+  //     ? ref.read(chartColumnsProvider.notifier).state.clear()
+  //     : null;
 
   int flex2 = doubleFlex2.toInt();
   int flex1 = 100 - flex2;

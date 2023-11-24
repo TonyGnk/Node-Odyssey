@@ -13,6 +13,7 @@ void clearResultPanelList(WidgetRef ref) {
 }
 
 void addResultPanelList(
+  BuildContext context,
   WidgetRef ref,
   String title,
   List<Node> solution,
@@ -22,6 +23,7 @@ void addResultPanelList(
 //full the list with the tracking tiles of solution
   for (int i = 0; i < solution.length; i++) {
     ref.read(resListProvider.notifier).state.addTile(
+          context,
           solution[i].value,
           solution[i].operation,
           ref,
