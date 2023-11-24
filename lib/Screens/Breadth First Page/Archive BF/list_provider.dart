@@ -73,11 +73,29 @@ void addTrackingContainer(
   //find the logarithm of width with base 3
   logOfWidth = logOfWidth / log(1.03);
   print(logOfWidth);
+  ref.read(chartColumnsProvider.notifier).state.length == 2300
+      ? ref.read(chartColumnsProvider.notifier).state.clear()
+      : null;
   ref.read(chartColumnsProvider.notifier).state.add(
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(color: Colors.red, height: logOfWidth, width: 5),
+            Tooltip(
+              preferBelow: false,
+              message: '$width',
+              child: Container(
+                height: logOfWidth,
+                width: 10,
+                margin: EdgeInsets.all(0.2),
+                decoration: BoxDecoration(
+                  // border: Border.all(
+                  //   width: 1,
+                  //   color: Colors.black,
+                  // ),
+                  color: Colors.red,
+                ),
+              ),
+            ),
           ],
         ),
       );

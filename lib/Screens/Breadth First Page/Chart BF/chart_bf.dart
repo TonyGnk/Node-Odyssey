@@ -4,12 +4,37 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Arc/container_tree.dart';
 import '../../../Services & Providers/constants.dart';
 import '../../../Services & Providers/tracking_container.dart';
 import '../Archive BF/list_provider.dart';
 
 final outercontroller = ScrollController();
 final innercontroller = ScrollController();
+
+Widget containerZ2(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final boxList = ref.watch(chartColumnsProvider);
+        // ignore: unused_local_variable
+        final resultPanelListUpdater = ref.watch(trackUpdater);
+        return Row(
+          children: [
+            //A loop with 1000 loops create 1000 containers with child the Text(i)
+            for (int i = 0; i < 900; i++)
+              Expanded(
+                child: Container(
+                  color: i != 100 ? Colors.green : Colors.amber,
+                  child: Expanded(
+                    child: Column(
+                      children: [],
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
 
 Widget containerZ(BuildContext context) => Consumer(
       builder: (context, ref, _) {

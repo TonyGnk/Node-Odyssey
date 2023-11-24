@@ -70,7 +70,7 @@ class TreeBox extends StatelessWidget {
 
 Color getRandomColor() =>
     Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-        .withOpacity(0.1);
+        .withOpacity(0.4);
 
 Widget node = Container(
   height: circleWidth,
