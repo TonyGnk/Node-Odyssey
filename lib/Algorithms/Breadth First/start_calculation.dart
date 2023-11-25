@@ -41,7 +41,6 @@ startCalR(BuildContext context, WidgetRef ref) async {
   ref.watch(stopTimerProvider.notifier).state = false;
   BfRunning running = ref.read(bfRunningProvider.notifier).state;
   List<Node>? solution = await findBreadthSolutionUI(
-    context,
     running.startValue,
     running.targetValue,
     running.speed,

@@ -44,7 +44,6 @@ class TrackingList extends StatelessWidget {
   // }
 
   void addTile(
-    BuildContext context,
     BigInt value,
     String operation,
     WidgetRef ref,
@@ -54,7 +53,7 @@ class TrackingList extends StatelessWidget {
         //text: '$operation $value',
 
         value,
-        operation, context,
+        operation,
       ),
     );
     addTrackingContainerRolling(ref);
@@ -123,9 +122,8 @@ class _TrackingTilesState extends State<TrackingTiles2> {
 }
 
 class TrackingTiles {
-  TrackingTiles(this.value, this.operation, this.context);
+  TrackingTiles(this.value, this.operation);
 
-  final BuildContext context;
   final BigInt value;
   final String operation;
 

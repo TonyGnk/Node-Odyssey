@@ -17,7 +17,6 @@ class Node {
 }
 
 Future<List<Node>?> findBreadthSolutionUI(
-  BuildContext context,
   BigInt start,
   BigInt end,
   int speed,
@@ -25,9 +24,10 @@ Future<List<Node>?> findBreadthSolutionUI(
 ) async {
   ListQueue<List<Node>> queue = ListQueue();
   // Initialize visited list
-  List<bool> visited = List.filled(99999, false);
+  List<bool> visited = [];
 
   queue.add([Node(start, 0, 'Αρχική Τιμή')]);
+  visited.add(true);
 
   while (queue.isNotEmpty) {
     await Future.delayed(Duration(microseconds: speed));
@@ -42,11 +42,15 @@ Future<List<Node>?> findBreadthSolutionUI(
     // Mark the node as visited
     //visited[current.value.toInt()] = true;
 
-    // Print the current node value
-    //print('${current.value}');
+    //if visited.length is<number then from last position add items false untill arrive to number and add true
+    // if (visited.length-1 < current.value.toInt() ) {
+    //   visited.addAll(
+    //       List.filled(current.value.toInt() + 1 - visited.length, false));
+    // }
+
     ref
         .watch(trackingListProvider)
-        .addTile(context, current.value, current.operation, ref);
+        .addTile(current.value, current.operation, ref);
     addTrackingContainer(ref, current.value, end);
 
 // For printing the ui only
@@ -62,15 +66,15 @@ Future<List<Node>?> findBreadthSolutionUI(
     // Πρόσθεση x+1
     //Κόστος:2
     //Προϋπόθεση x<10^9
-    // if (current.value + 1 < math.pow(10, 9)) {
-    //   Node newNode = Node(
-    //     current.value + 1,
-    //     current.cost + 2,
-    //     'Πρόσθεση κατά 1',
-    //   );
-    //   List<Node> newPath = List.from(currentPath)..add(newNode);
-    //   queue.add(newPath);
-    // }
+    if (current.value + BigInt.from(1) < BigInt.from(10).pow(9)) {
+      Node newNode = Node(
+        current.value + BigInt.from(1),
+        current.cost + 2,
+        'Πρόσθεση κατά 1',
+      );
+      List<Node> newPath = List.from(currentPath)..add(newNode);
+      queue.add(newPath);
+    }
 
     // Αφαίρεση x-1
     // Κόστος:2
@@ -89,7 +93,7 @@ Future<List<Node>?> findBreadthSolutionUI(
     // Κόστος: floor(x/2)+1
     // Προϋπόθεση x>0 AND 2*x<10^9
     if (current.value > BigInt.from(0) &&
-        BigInt.from(2) * current.value < BigInt.from(10).pow(10)) {
+        BigInt.from(2) * current.value < BigInt.from(10).pow(9)) {
       Node newNode = Node(
         current.value * BigInt.from(2),
         current.cost + (current.value / BigInt.from(2)).ceil() + 1,
