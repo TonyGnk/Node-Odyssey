@@ -11,17 +11,15 @@ class TrackingList extends StatelessWidget {
   TrackingList({
     super.key,
     this.ref,
-    this.reverse = false,
     List<TrackingTiles>? trackingTiles,
   }) : trackingTiles = trackingTiles ?? [];
 
   final WidgetRef? ref;
   final List<TrackingTiles> trackingTiles;
-  final bool reverse;
 
   @override
   ListView build(BuildContext context) => ListView(
-        reverse: reverse,
+        reverse: true,
         children: [
           for (int i = trackingTiles.length - 1; i >= 0; i--)
             trackingTiles[i].build(context),
