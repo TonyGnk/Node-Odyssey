@@ -57,11 +57,15 @@ void onButtonPressed(BuildContext context, WidgetRef ref) {
   final speedSlider = ref.watch(speedSliderProviderBf);
 
   ref.watch(bfRunningProvider.notifier).state = BfRunning(
-    //startValue: int.parse(inputControllerBf.text),
-    startValue: BigInt.parse(inputControllerBf.text),
-    //targetValue: int.parse(targetControllerBf.text),
-    targetValue: BigInt.parse(targetControllerBf.text),
+    startValue: int.parse(inputControllerBf.text),
+    targetValue: int.parse(targetControllerBf.text),
     speed: setSpeedFromSlider(speedSlider),
+    checkOnePlus: ref.watch(checkPlusOneProvider),
+    checkOneMinus: ref.watch(checkMinusOneProvider),
+    checkDouble: ref.watch(checkDoubleProvider),
+    checkHalf: ref.watch(checkHalfProvider),
+    checkSquare: ref.watch(checkSquareProvider),
+    checkRoot: ref.watch(checkRootProvider),
   );
   startCalR(context, ref);
   ref.watch(isCreatingProvider.notifier).state = false;

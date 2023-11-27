@@ -44,7 +44,7 @@ class TrackingList extends StatelessWidget {
   // }
 
   void addTile(
-    BigInt value,
+    int value,
     String operation,
     WidgetRef ref,
   ) {
@@ -97,7 +97,7 @@ class _TrackingTilesState extends State<TrackingTiles2> {
                 child: Text('  ${widget.operation}'),
               ),
               Container(
-                width: 135,
+                width: 165,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color:
@@ -124,7 +124,7 @@ class _TrackingTilesState extends State<TrackingTiles2> {
 class TrackingTiles {
   TrackingTiles(this.value, this.operation);
 
-  final BigInt value;
+  final int value;
   final String operation;
 
   Widget build(BuildContext context) => AnimatedContainer(
@@ -141,7 +141,7 @@ class TrackingTiles {
               child: Text('  ${operation}'),
             ),
             Container(
-              width: 135,
+              width: 175,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
@@ -151,10 +151,13 @@ class TrackingTiles {
               ),
               child: Center(
                 child: Text(
-                  //getPreviousValue(value, operation) +
-
-                  (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') + value.toString(),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  getPreviousValue(value, operation) +
+                      (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                      value.toString(),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

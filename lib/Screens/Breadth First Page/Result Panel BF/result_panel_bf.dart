@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services & Providers/constants.dart';
 import '../Archive BF/result_providers.dart';
-import 'result_box_bf.dart';
 import 'results_appbar_bf.dart';
 
 Widget resultPanel(BuildContext context) =>
@@ -13,7 +11,9 @@ Widget resultPanel(BuildContext context) =>
 
       return Column(
         children: [
+          const SizedBox(height: 3),
           resultsAppBar(context),
+          const SizedBox(height: 3),
           Expanded(
             child: resList.build(
               context,

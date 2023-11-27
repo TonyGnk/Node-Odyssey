@@ -44,6 +44,12 @@ startCalR(BuildContext context, WidgetRef ref) async {
     running.startValue,
     running.targetValue,
     running.speed,
+    running.checkOnePlus,
+    running.checkOneMinus,
+    running.checkDouble,
+    running.checkHalf,
+    running.checkSquare,
+    running.checkRoot,
     ref,
   );
   clearResultPanelList(ref);

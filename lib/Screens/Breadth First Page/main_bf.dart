@@ -49,7 +49,7 @@ Widget body(BuildContext context) => Row(
 // Αυτή είναι η αριστερή στήλη της οθόνης
 // Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο
 Widget leftColumnBf(BuildContext context) => SizedBox(
-      width: 310,
+      width: 330,
       child: Column(
         children: [
           formR(context),
@@ -67,9 +67,7 @@ Widget trackingListAndButton(BuildContext context) => Consumer(
         return containerWithStyleBF(
           Theme.of(context).shadowColor.withOpacity(1),
           Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-          //  isAlgorithmEnd ? resultPanel(context) :
-
-          trackingStage(context),
+          isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
         );
       },
     );

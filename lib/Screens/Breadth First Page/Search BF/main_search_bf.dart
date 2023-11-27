@@ -29,33 +29,29 @@ Widget formR(BuildContext context) => searchContainer(
       ),
     );
 
-Widget basicRow(BuildContext context) => Consumer(builder: (context, ref, _) {
-      final moreOptions = ref.watch(moreOptionsProviderBf);
-      final moreOptions2 = ref.watch(moreOptionsProviderBf2);
-      return Row(
-        children: [
-          Expanded(
-            child: inPutFieldBf(
-              context,
-              inputControllerBf,
-              'Αρχική Τιμή',
-            ),
+Widget basicRow(BuildContext context) => Row(
+      children: [
+        Expanded(
+          child: inPutFieldBf(
+            context,
+            inputControllerBf,
+            'Αρχική Τιμή',
           ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: inPutFieldBf(
-              context,
-              targetControllerBf,
-              'Τελική Τιμή',
-            ),
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: inPutFieldBf(
+            context,
+            targetControllerBf,
+            'Τελική Τιμή',
           ),
-          const SizedBox(width: 6),
-          extraButtonBf(context),
-          const SizedBox(width: 3),
-          submitButtonBf(context),
-        ],
-      );
-    });
+        ),
+        const SizedBox(width: 6),
+        extraButtonBf(context),
+        const SizedBox(width: 3),
+        submitButtonBf(context),
+      ],
+    );
 
 Widget searchContainer(BuildContext context, Widget child) =>
     Consumer(builder: (context, ref, _) {
@@ -63,7 +59,7 @@ Widget searchContainer(BuildContext context, Widget child) =>
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 220),
-        height: moreOptions ? 220 : 50,
+        height: moreOptions ? 374 : 50,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerSize),
@@ -96,7 +92,112 @@ Widget extraOptions(BuildContext context) => Column(
       children: [
         const SizedBox(height: 10),
         speedSliderBf(context),
-        const SizedBox(height: 10),
-        solutionSliderBf(context),
+        const SizedBox(height: 4),
+        //solutionSliderBf(context),
+        checkBoxListTile1(context),
+        checkBoxListTile2(context),
+        checkBoxListTile3(context),
+        checkBoxListTile4(context),
+        checkBoxListTile5(context),
+        checkBoxListTile6(context),
       ],
     );
+
+//CheckboxListTile
+Widget checkBoxListTile1(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkPlusOneProvider);
+        return CheckboxListTile(
+          title: const Text('Πρόσθεση Κατά Ένα'),
+          value: checkedValue,
+          dense: true,
+          onChanged: (newValue) {
+            ref.read(checkPlusOneProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+Widget checkBoxListTile2(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkMinusOneProvider);
+        return CheckboxListTile(
+          title: const Text('Αφαίρεση Κατά Ένα'),
+          value: checkedValue,
+          dense: true,
+          onChanged: (newValue) {
+            ref.read(checkMinusOneProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+Widget checkBoxListTile3(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkDoubleProvider);
+        return CheckboxListTile(
+          dense: true,
+          title: const Text('Διπλασιασμός'),
+          value: checkedValue,
+          onChanged: (newValue) {
+            ref.read(checkDoubleProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+Widget checkBoxListTile4(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkHalfProvider);
+        return CheckboxListTile(
+          title: const Text('Υποδιπλασιασμός'),
+          value: checkedValue,
+          dense: true,
+          onChanged: (newValue) {
+            ref.read(checkHalfProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+Widget checkBoxListTile5(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkSquareProvider);
+        return CheckboxListTile(
+          title: const Text('Τετράγωνο'),
+          value: checkedValue,
+          dense: true,
+          onChanged: (newValue) {
+            ref.read(checkSquareProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+Widget checkBoxListTile6(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final checkedValue = ref.watch(checkRootProvider);
+        return CheckboxListTile(
+          title: const Text('Ρίζα'),
+          value: checkedValue,
+          dense: true,
+          onChanged: (newValue) {
+            ref.read(checkRootProvider.notifier).state = newValue!;
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      },
+    );
+
+//Provider checkedValue
+final checkPlusOneProvider = StateProvider<bool>((ref) => true);
+final checkMinusOneProvider = StateProvider<bool>((ref) => true);
+final checkDoubleProvider = StateProvider<bool>((ref) => true);
+final checkHalfProvider = StateProvider<bool>((ref) => true);
+final checkSquareProvider = StateProvider<bool>((ref) => true);
+final checkRootProvider = StateProvider<bool>((ref) => true);

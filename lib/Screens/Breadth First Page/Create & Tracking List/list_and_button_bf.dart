@@ -31,11 +31,7 @@ Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  value: 0.7,
-                )),
+                width: 20, height: 20, child: CircularProgressIndicator()),
           ),
           const SizedBox(width: 8),
         ],

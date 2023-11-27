@@ -11,9 +11,15 @@ final stopTimerProvider = StateProvider<bool>(
 
 final bfRunningProvider = StateProvider<BfRunning>(
   (ref) => BfRunning(
-    startValue: BigInt.from(0),
-    targetValue: BigInt.from(0),
+    startValue: 0,
+    targetValue: 0,
     speed: 1,
+    checkOnePlus: true,
+    checkOneMinus: true,
+    checkDouble: true,
+    checkHalf: true,
+    checkSquare: true,
+    checkRoot: true,
   ),
 );
 
@@ -26,24 +32,37 @@ class BfRunning {
     required this.startValue,
     required this.targetValue,
     required this.speed,
+    required this.checkOnePlus,
+    required this.checkOneMinus,
+    required this.checkDouble,
+    required this.checkHalf,
+    required this.checkSquare,
+    required this.checkRoot,
   });
 
   //Αρχική Τιμή
-  BigInt startValue;
+  int startValue;
 
   //Τελική Τιμή
-  BigInt targetValue;
+  int targetValue;
 
   // Speed of the algorithm
   int speed = 1;
 
-  BigInt getStartValue() => startValue;
-  void setStartValue(BigInt startValue) {
+  bool checkOnePlus;
+  bool checkOneMinus;
+  bool checkDouble;
+  bool checkHalf;
+  bool checkSquare;
+  bool checkRoot;
+
+  int getStartValue() => startValue;
+  void setStartValue(int startValue) {
     this.startValue = startValue;
   }
 
-  BigInt getTargetValue() => targetValue;
-  void setTargetValue(BigInt targetValue) {
+  int getTargetValue() => targetValue;
+  void setTargetValue(int targetValue) {
     this.targetValue = targetValue;
   }
 
@@ -54,6 +73,36 @@ class BfRunning {
     } else {
       speed = 1;
     }
+  }
+
+  bool getCheckOnePlus() => checkOnePlus;
+  void setCheckOnePlus(bool checkOnePlus) {
+    this.checkOnePlus = checkOnePlus;
+  }
+
+  bool getCheckMinusOne() => checkOneMinus;
+  void setCheckMinusOne(bool checkOneMinus) {
+    this.checkOneMinus = checkOneMinus;
+  }
+
+  bool getCheckDouble() => checkDouble;
+  void setCheckDouble(bool checkDouble) {
+    this.checkDouble = checkDouble;
+  }
+
+  bool getCheckHalf() => checkHalf;
+  void setCheckHalf(bool checkHalf) {
+    this.checkHalf = checkHalf;
+  }
+
+  bool getCheckSquare() => checkSquare;
+  void setCheckSquare(bool checkSquare) {
+    this.checkSquare = checkSquare;
+  }
+
+  bool getCheckRoot() => checkRoot;
+  void setCheckRoot(bool checkRoot) {
+    this.checkRoot = checkRoot;
   }
 }
 
@@ -69,50 +118,16 @@ final isCreatingProvider = StateProvider<bool>(
 
 //
 
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
 /// This function adds a container in column list
 /// Every container had a given a height witch is a BigInt. Maybe is number 1 maybe 10^9
-/// First we need to find the logarithm of the height.
-/// We have 2 cases. The bigInt is actual big number or is a small number.
-void addTrackingContainer(WidgetRef ref, BigInt height, BigInt target) {
+void addTrackingContainer(WidgetRef ref, int height, int target) {
   double logOfWidth;
-  //Check if the bigInt is a small number (<60000)
-  if (height < BigInt.from(50000)) {
-    //If is a small number we can find the logarithm of the number
-    logOfWidth = log(height.toInt() + 1);
-  } else {
-    //The number is a big number. We have to split the number in 3 parts first and after that in 50000 parts
+  ref.read(chartColumnsProvider.notifier).state.length == 2300
+      ? ref.read(chartColumnsProvider.notifier).state.clear()
+      : null;
 
-    //Split the number in 3 parts
-    BigInt bigInt1of3 = height ~/ BigInt.from(3);
-    BigInt remainder = height % BigInt.from(3);
+  logOfWidth = log(height.toInt() + 1);
 
-    //Split the number in 50000 parts
-    double bigInt10f3of50 =
-        (bigInt1of3.toDouble() + remainder.toDouble() / 3) / 50000;
-
-    //With these 2 numbers we can find the logarithm of the number. We add 1 because the log of 0 is not defined.
-    logOfWidth = log(bigInt10f3of50 + 1) + log(50000) + log(3);
-    height < BigInt.from(110000) ? logOfWidth = logOfWidth - 0.8 : null;
-  }
-  //
-
-  //
   logOfWidth = logOfWidth / log(1.0219);
   double doubleFlex2 = logOfWidth / 9.565920679129044;
   doubleFlex2 = doubleFlex2 * 10;
@@ -134,7 +149,7 @@ void addTrackingContainer(WidgetRef ref, BigInt height, BigInt target) {
             flex: flex2,
             child: Tooltip(
               preferBelow: false,
-              message: 'Flex: $flex2 Value: ${height} Log: ${logOfWidth} ',
+              message: '$height',
               child: simpleContainer(),
             ),
           )
