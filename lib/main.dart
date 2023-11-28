@@ -1,29 +1,32 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'UI/Adaptive Folder/adaptive_root.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  if (!UniversalPlatform.isWeb) {
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      fullScreen: false,
+      title: 'Algorithms',
+      size: Size(1110, 790),
+      center: false,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      windowButtonVisibility: true,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
 
-  WindowOptions windowOptions = const WindowOptions(
-    fullScreen: false,
-    title: 'Algorithms',
-    size: Size(800, 620),
-    center: false,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
-    windowButtonVisibility: true,
-  );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
 
   runApp(
     ProviderScope(

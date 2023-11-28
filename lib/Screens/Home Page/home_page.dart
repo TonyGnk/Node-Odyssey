@@ -69,7 +69,6 @@ class _BodyState extends State<Body> {
         ),
         child: Row(
           children: [
-            Text('d'),
             Expanded(
               flex: 2,
               child: terminalSide(context),
