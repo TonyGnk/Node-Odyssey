@@ -88,7 +88,7 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
         )
       : const SizedBox();
 
-  Widget row(BuildContext context) => Consumer(
+  Widget row(BuildContext context, bool window) => Consumer(
         builder: (context, ref, _) {
           final textButton = ref.watch(textButtonProviderR);
           return Row(
@@ -110,9 +110,15 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
               textButton,
               themeIcon(context, showThemeIcon),
               infoIcon(context, showInfoIcon),
-              windowsIcon(context, true, 'Ελαχιστοποίηση'),
-              windowsIcon(context, true, 'Μεγιστοποίηση'),
-              windowsIcon(context, true, 'Κλείσιμο')
+              window
+                  ? windowsIcon(context, true, 'Ελαχιστοποίηση')
+                  : const SizedBox(),
+              window
+                  ? windowsIcon(context, true, 'Μεγιστοποίηση')
+                  : const SizedBox(),
+              window
+                  ? windowsIcon(context, true, 'Κλείσιμο')
+                  : const SizedBox(),
             ],
           );
         },
@@ -120,15 +126,12 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget getAppBarTitle(BuildContext context, String title) {
     if (UniversalPlatform.isWeb) {
-      return Align(
-        alignment: AlignmentDirectional.center,
-        child: Text(title),
-      );
+      return row(context, false);
     } else {
       return DragToMoveArea(
         child: SizedBox(
           height: kToolbarHeight,
-          child: row(context),
+          child: row(context, true),
         ),
       );
     }
