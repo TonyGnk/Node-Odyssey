@@ -1,13 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:window_manager/window_manager.dart';
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Services & Providers/constants.dart';
 import '../Services2/navigator_fun.dart';
 import 'app_bar_icon.dart';
 import 'info_icon.dart';
 import 'theme_icon.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-class AdaptAppBar extends StatelessWidget {
+import 'windows_icon.dart';
+
+class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AdaptAppBar({
     this.showThemeIcon = false,
     this.showInfoIcon = false,
@@ -17,6 +23,11 @@ class AdaptAppBar extends StatelessWidget {
     this.enable = true,
     super.key,
     this.noTopLeftCornerBack = false,
+
+    //
+
+    required this.brightness,
+    required this.backgroundColor,
   });
 
   final bool enable;
@@ -30,6 +41,13 @@ class AdaptAppBar extends StatelessWidget {
   final bool showBackButton;
 
   final bool noTopLeftCornerBack;
+
+  //
+
+  final Brightness brightness;
+  final Color backgroundColor;
+
+  //
 
   bool get getEnable => enable;
 
@@ -51,7 +69,22 @@ class AdaptAppBar extends StatelessWidget {
               : BoxDecoration(
                   borderRadius: BorderRadius.circular(cornerSize),
                 ),
-          child: row(context),
+          child: getAppBarTitle(context, label ?? ''),
+          //  Stack(
+          //   children: [
+          //     Align(
+          //       alignment: AlignmentDirectional.centerEnd,
+          //       child: SizedBox(
+          //         height: kToolbarHeight,
+          //         child: WindowCaption(
+          //           backgroundColor: backgroundColor,
+          //           brightness: brightness,
+          //         ),
+          //       ),
+          //     ),
+          //     getAppBarTitle(context, label ?? ''),
+          //   ],
+          // ),
         )
       : const SizedBox();
 
@@ -76,11 +109,33 @@ class AdaptAppBar extends StatelessWidget {
               const Expanded(child: SizedBox()),
               textButton,
               themeIcon(context, showThemeIcon),
-              infoIcon(context, showInfoIcon)
+              infoIcon(context, showInfoIcon),
+              windowsIcon(context, true, 'Ελαχιστοποίηση'),
+              windowsIcon(context, true, 'Μεγιστοποίηση'),
+              windowsIcon(context, true, 'Κλείσιμο')
             ],
           );
         },
       );
+
+  Widget getAppBarTitle(BuildContext context, String title) {
+    if (UniversalPlatform.isWeb) {
+      return Align(
+        alignment: AlignmentDirectional.center,
+        child: Text(title),
+      );
+    } else {
+      return DragToMoveArea(
+        child: SizedBox(
+          height: kToolbarHeight,
+          child: row(context),
+        ),
+      );
+    }
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 

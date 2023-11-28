@@ -25,11 +25,13 @@ class BreadthFirstAlg extends StatelessWidget {
 
 // Αυτή είναι η γραμμή τίτλου της οθόνης
 // Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
-Widget appBarBf(BuildContext context) => const AdaptAppBar(
+Widget appBarBf(BuildContext context) => AdaptAppBar(
       filled: false,
       label: 'Αλγόριθμος Πρώτα σε Βάθος',
       showThemeIcon: true,
-      showInfoIcon: true,
+      showInfoIcon: false,
+      brightness: Theme.of(context).brightness,
+      backgroundColor: Colors.transparent,
     );
 
 // Αυτή είναι το κεντρικό σώμα της οθόνης
