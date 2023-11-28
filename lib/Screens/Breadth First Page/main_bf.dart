@@ -15,6 +15,7 @@ class BreadthFirstAlg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => bodyWithAppBar(
+        context: context,
         appBar: appBarBf(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
