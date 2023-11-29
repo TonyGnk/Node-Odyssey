@@ -22,10 +22,11 @@ Widget bodyWithAppBarGlass({
   required BuildContext context,
   required Widget appBar,
   required Widget body,
+  required bool isBlackFirst,
 }) =>
     Stack(
       children: [
-        BackgroundWallWithRandShapes(),
+        BackgroundWallWithRandShapes(isBlackFirst: isBlackFirst),
         ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -41,7 +42,12 @@ Widget bodyWithAppBarGlass({
     );
 
 class BackgroundWallWithRandShapes extends StatefulWidget {
-  const BackgroundWallWithRandShapes({super.key});
+  const BackgroundWallWithRandShapes({
+    required this.isBlackFirst,
+    super.key,
+  });
+
+  final bool isBlackFirst;
 
   @override
   State<BackgroundWallWithRandShapes> createState() =>
@@ -50,8 +56,12 @@ class BackgroundWallWithRandShapes extends StatefulWidget {
 
 class _BackgroundWallWithRandShapesState
     extends State<BackgroundWallWithRandShapes> {
-  late Color color1 = Color.fromRGBO(32, 102, 224, 0);
-  late Color color2 = Color.fromRGBO(32, 102, 224, 0);
+  late Color color1 = widget.isBlackFirst
+      ? Color.fromRGBO(32, 102, 224, 0)
+      : Color.fromRGBO(32, 102, 224, 0.3);
+  late Color color2 = widget.isBlackFirst
+      ? Color.fromRGBO(32, 102, 224, 0)
+      : Color.fromRGBO(32, 102, 224, 0.3);
   late Timer timer;
   late Duration duration = const Duration(milliseconds: 200);
 

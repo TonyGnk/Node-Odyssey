@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Arc/container_tree.dart';
+
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
-class TheGloriousButton extends StatefulWidget {
-  const TheGloriousButton({
+class ModernCaption extends StatefulWidget {
+  const ModernCaption({
     required this.label,
     required this.icon,
     required this.onTap,
@@ -19,10 +21,10 @@ class TheGloriousButton extends StatefulWidget {
   final VoidCallback onTap;
 
   @override
-  State<TheGloriousButton> createState() => _TheGloriousButtonState();
+  State<ModernCaption> createState() => _ModernCaptionState();
 }
 
-class _TheGloriousButtonState extends State<TheGloriousButton> {
+class _ModernCaptionState extends State<ModernCaption> {
   late Color color = Colors.grey.withOpacity(0.1);
   late Color borderColor = Colors.white.withOpacity(0.2);
   late Timer timer;
@@ -57,7 +59,7 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
     super.initState();
     _updateGradientType();
     // Set up a timer to update gradient every 4 seconds
-    timer = Timer.periodic(const Duration(milliseconds: 1100), (Timer t) {
+    timer = Timer.periodic(const Duration(milliseconds: 2700), (Timer t) {
       _updateGradientType();
     });
   }
@@ -83,9 +85,12 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
         onEnter: (event) {
           setState(() {
             //color = Colors.grey.withOpacity(0.2);
-            color = const Color.fromARGB(255, 33, 117, 243).withOpacity(0.4);
-            borderColor =
-                const Color.fromARGB(255, 33, 117, 243).withOpacity(0.3);
+            Color randomColor = getRandomColor();
+
+            color = randomColor;
+            // const Color.fromARGB(255, 33, 117, 243).withOpacity(0.4);
+            borderColor = randomColor;
+            //   const Color.fromARGB(255, 33, 117, 243).withOpacity(0.3);
           });
         },
         onExit: (event) {
@@ -105,8 +110,8 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
           },
           child: AnimatedContainer(
             duration: const Duration(seconds: 1),
-            width: 190,
-            height: 80,
+            width: 200,
+            height: 100,
             decoration: BoxDecoration(
               //color: color,
               gradient: LinearGradient(

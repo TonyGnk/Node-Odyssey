@@ -28,11 +28,11 @@ Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
         children: [
           const SizedBox(width: 8),
           Expanded(child: Text('Αναζήτηση από $startValue σε $targetValue')),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: SizedBox(
-                width: 20, height: 20, child: CircularProgressIndicator()),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.all(8.0),
+          //   child: SizedBox(
+          //       width: 20, height: 20, child: CircularProgressIndicator()),
+          // ),
           const SizedBox(width: 8),
         ],
       );

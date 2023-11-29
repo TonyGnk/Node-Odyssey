@@ -6,20 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Services & Providers/welcome_dialog.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
+import 'button_side.dart';
 import 'modern_button.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
-
-  @override
-  Widget build2(BuildContext context) => bodyWithAppBar(
-        context: context,
-        appBar: appBarBf(context),
-        body: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Body(),
-        ),
-      );
 
   @override
   Widget build(BuildContext context) => FutureBuilder(
@@ -33,6 +24,7 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: Body(),
               ),
+              isBlackFirst: true,
             );
           } else {
             return bodyWithAppBar(
@@ -90,9 +82,9 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(25),
-        child: const Row(
+        child: Row(
           children: [
-            Expanded(
+            const Expanded(
               flex: 3,
               child: SizedBox(),
             ),
@@ -101,8 +93,8 @@ class _BodyState extends State<Body> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 3, child: SizedBox()),
-                  Text(
+                  const Expanded(flex: 3, child: SizedBox()),
+                  const Text(
                     'Welcome to',
                     style: TextStyle(
                       fontSize: 32,
@@ -110,7 +102,7 @@ class _BodyState extends State<Body> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  Text(
+                  const Text(
                     'Algorithms Visualizer',
                     style: TextStyle(
                         fontSize: 32,
@@ -118,19 +110,32 @@ class _BodyState extends State<Body> {
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ),
-                  Expanded(flex: 3, child: SizedBox()),
-                  Text('Select the mode you want to use:'),
-                  SizedBox(height: 16),
+                  const Expanded(flex: 3, child: SizedBox()),
+                  const Text('Select the mode you want to use:'),
+                  const SizedBox(height: 16),
                   Row(children: [
                     TheGloriousButton(
                       label: 'Terminal',
                       icon: Icons.terminal,
+                      onTap: () async {},
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     TheGloriousButton(
-                        label: 'GUI', icon: Icons.desktop_windows_outlined),
+                      label: 'GUI',
+                      icon: Icons.desktop_windows_outlined,
+                      onTap: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Scaffold(
+                              body: AlgorithmsGUI(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ]),
-                  Expanded(flex: 1, child: SizedBox()),
+                  const Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
             ),

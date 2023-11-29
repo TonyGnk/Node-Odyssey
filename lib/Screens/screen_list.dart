@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/main_bf.dart';
+import 'Home Page/button_side.dart';
 import 'Home Page/home_page.dart';
 
 final screensProvider = StateProvider<List<RoutedScreen>>(
@@ -14,6 +15,7 @@ final screensProvider = StateProvider<List<RoutedScreen>>(
 final destinationsProvider = StateProvider<List<RoutedScreen>>(
   (ref) => [
     breadthFirstAlgScreen(),
+    algorithmsGUIScreen(),
   ],
 );
 
@@ -37,4 +39,13 @@ RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       labelRoute: 'BreadthFirstAlgorithm',
       icon: Icons.radar_outlined,
       filledIcon: Icons.radar,
+    );
+
+//The GUI page of all algorithms
+RoutedScreen algorithmsGUIScreen() => const RoutedScreen(
+      mainChild: AlgorithmsGUI(),
+      label: 'Όλοι οι Αλγόριθμοι',
+      labelRoute: 'AllAlgorithms',
+      icon: Icons.desktop_windows_outlined,
+      filledIcon: Icons.desktop_windows,
     );
