@@ -108,7 +108,11 @@ flutter:
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  #         weight: 700 
+  fonts: 
+    - family: AdventoPro 
+      fonts: 
+        - asset: assets/adventoPro/AdventPro-Regular.ttf
+          style: normal
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

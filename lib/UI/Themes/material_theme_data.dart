@@ -48,7 +48,7 @@ class MaterialThemeData extends TotalTheme {
           ),
         ),
         secondaryHeaderColor: const Color.fromARGB(255, 56, 56, 56),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 12, 12, 12),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 13, 13, 13),
         shadowColor: const Color.fromARGB(255, 45, 45, 45),
       );
 
