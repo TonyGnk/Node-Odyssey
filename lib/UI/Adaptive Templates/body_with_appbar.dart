@@ -118,14 +118,14 @@ class _BackgroundWallWithRandShapesState
                     ],
                     stops: const [
                       0.1,
-                      0.9
+                      0.6
                     ]),
               ),
             ),
           ),
-          Expanded(
-            child: SizedBox(),
-          ),
+          // Expanded(
+          //   child: SizedBox(),
+          // ),
           Row(
             children: [
               AnimatedContainer(
