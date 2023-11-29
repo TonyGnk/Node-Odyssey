@@ -12,13 +12,39 @@ class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) => bodyWithAppBar(
+  Widget build2(BuildContext context) => bodyWithAppBar(
         context: context,
         appBar: appBarBf(context),
         body: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Body(),
         ),
+      );
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder(
+        future: Future.delayed(const Duration(milliseconds: 1)),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return bodyWithAppBarGlass(
+              context: context,
+              appBar: appBarBf(context),
+              body: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Body(),
+              ),
+            ); // Render the widget with blur effect
+          } else {
+            return bodyWithAppBar(
+              context: context,
+              appBar: appBarBf(context),
+              body: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Body(),
+              ),
+            ); // Render the widget without blur effect
+          }
+        },
       );
 }
 
@@ -44,10 +70,10 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    unawaited(checkFirstRun().catchError((error) {
-      // Handle any errors here.
-      log('An error occurred: $error');
-    }));
+    // unawaited(checkFirstRun().catchError((error) {
+    //   // Handle any errors here.
+    //   log('An error occurred: $error');
+    // }));
   }
 
   Future<void> checkFirstRun() async {
@@ -64,9 +90,10 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-        ),
+        decoration: const BoxDecoration(
+            color:
+                Colors.transparent //Theme.of(context).scaffoldBackgroundColor,
+            ),
         child: const Row(
           children: [
             Expanded(
@@ -78,23 +105,35 @@ class _BodyState extends State<Body> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 1, child: SizedBox()),
+                  Expanded(flex: 3, child: SizedBox()),
                   Text(
                     'Welcome to',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 32,
                       fontFamily: 'AdventoPro',
                     ),
                     textAlign: TextAlign.left,
                   ),
                   Text(
                     'Algorithms Visualizer',
-                    style: TextStyle(fontSize: 30),
+                    style: TextStyle(
+                        fontSize: 32,
+                        color: Color.fromRGBO(32, 102, 224, 0.9),
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ),
-                  //select λειτουργία Τερματικό ή γραφική διεπαφή
-                  Expanded(flex: 1, child: SizedBox()),
+                  Expanded(flex: 3, child: SizedBox()),
                   Text('Select the mode you want to use:'),
+                  SizedBox(height: 16),
+                  Row(children: [
+                    TheGloriousButton(
+                      label: 'Terminal',
+                      icon: Icons.terminal,
+                    ),
+                    SizedBox(width: 10),
+                    TheGloriousButton(
+                        label: 'GUI', icon: Icons.desktop_windows_outlined),
+                  ]),
                   Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
@@ -106,9 +145,3 @@ class _BodyState extends State<Body> {
 
 //terminalSide(context)
 //ButtonsSide
-
-theRow(BuildContext context) => const Row(children: [
-      theGloriousButton(label: 'Best First Search'),
-      SizedBox(width: 10),
-      theGloriousButton(label: 'A* Search'),
-    ]);

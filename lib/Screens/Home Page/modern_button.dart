@@ -1,4 +1,5 @@
-import 'dart:ui';
+import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,24 +8,78 @@ import '../screen_list.dart';
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
-class theGloriousButton extends StatefulWidget {
-  const theGloriousButton({required this.label, super.key});
+class TheGloriousButton extends StatefulWidget {
+  const TheGloriousButton({required this.label, required this.icon, super.key});
 
   final String label;
+  final IconData icon;
 
   @override
-  State<theGloriousButton> createState() => _theGloriousButtonState();
+  State<TheGloriousButton> createState() => _TheGloriousButtonState();
 }
 
-class _theGloriousButtonState extends State<theGloriousButton> {
+class _TheGloriousButtonState extends State<TheGloriousButton> {
   late Color color = Colors.grey.withOpacity(0.1);
   late Color borderColor = Colors.white.withOpacity(0.2);
+  late Timer timer;
+  late AlignmentGeometry alignmentGeometryA =
+      alignmentGeometryList[gradientIndex];
+  late AlignmentGeometry alignmentGeometryB =
+      alignmentGeometryList2[gradientIndex];
+  late List<AlignmentGeometry> alignmentGeometryList = [
+    Alignment.topLeft,
+    Alignment.topCenter,
+    Alignment.topRight,
+    Alignment.centerRight,
+    Alignment.bottomRight,
+    Alignment.bottomCenter,
+    Alignment.bottomLeft,
+    Alignment.centerLeft,
+  ];
+  late List<AlignmentGeometry> alignmentGeometryList2 = [
+    Alignment.bottomRight,
+    Alignment.bottomLeft,
+    Alignment.bottomCenter,
+    Alignment.centerLeft,
+    Alignment.topLeft,
+    Alignment.topCenter,
+    Alignment.topRight,
+    Alignment.centerRight,
+  ];
+  int gradientIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateGradientType();
+    // Set up a timer to update gradient every 4 seconds
+    timer = Timer.periodic(const Duration(milliseconds: 1100), (Timer t) {
+      _updateGradientType();
+    });
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the timer to avoid memory leaks
+    timer.cancel();
+    super.dispose();
+  }
+
+  void _updateGradientType() {
+    setState(() {
+      //Update the index to next one in the list
+      gradientIndex = (gradientIndex + 1) % alignmentGeometryList.length;
+      alignmentGeometryA = alignmentGeometryList[gradientIndex];
+      alignmentGeometryB = alignmentGeometryList2[gradientIndex];
+    });
+  }
 
   @override
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
-            color = Colors.grey.withOpacity(0.2);
+            //color = Colors.grey.withOpacity(0.2);
+            color = const Color.fromARGB(255, 33, 117, 243).withOpacity(0.4);
             borderColor =
                 const Color.fromARGB(255, 33, 117, 243).withOpacity(0.3);
           });
@@ -53,11 +108,20 @@ class _theGloriousButtonState extends State<theGloriousButton> {
             );
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: 340 * MediaQuery.of(context).size.width / 1380,
-            height: 150,
+            duration: const Duration(seconds: 1),
+            width: 190,
+            height: 80,
             decoration: BoxDecoration(
-              color: color,
+              //color: color,
+              gradient: LinearGradient(
+                colors: [
+                  Colors.grey.withOpacity(0.1),
+                  // Colors.grey.withOpacity(0.7),
+                  color,
+                ],
+                begin: alignmentGeometryA,
+                end: alignmentGeometryB,
+              ),
               border: Border.all(
                 color: borderColor,
                 width: 2.5,
@@ -65,31 +129,21 @@ class _theGloriousButtonState extends State<theGloriousButton> {
               borderRadius: const BorderRadius.all(Radius.circular(25)),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-              child: theColumn(context),
-            ),
+            child: theColumn(context),
           ),
         ),
       );
 
-  Widget theColumn(BuildContext context) => Stack(
-        children: [
-          const Column(
-            children: [
-              SizedBox(height: 4),
-              Icon(
-                Icons.radar_outlined,
-                size: 30,
-              ),
-            ],
-          ),
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              widget.label,
-              style: const TextStyle(fontSize: 23),
-            ),
-          ]),
-        ],
-      );
+  Widget theColumn(BuildContext context) =>
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Icon(
+          widget.icon,
+          size: 27,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          widget.label,
+          style: const TextStyle(fontSize: 19),
+        ),
+      ]);
 }

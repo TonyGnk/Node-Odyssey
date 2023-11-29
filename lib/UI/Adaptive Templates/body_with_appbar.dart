@@ -18,6 +18,28 @@ Widget bodyWithAppBar({
       ],
     );
 
+Widget bodyWithAppBarGlass({
+  required BuildContext context,
+  required Widget appBar,
+  required Widget body,
+}) =>
+    Stack(
+      children: [
+        BackgroundWallWithRandShapes(),
+        ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Column(
+              children: [
+                appBar,
+                Expanded(child: body),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+
 class BackgroundWallWithRandShapes extends StatefulWidget {
   const BackgroundWallWithRandShapes({super.key});
 
@@ -28,9 +50,8 @@ class BackgroundWallWithRandShapes extends StatefulWidget {
 
 class _BackgroundWallWithRandShapesState
     extends State<BackgroundWallWithRandShapes> {
-  late Color color1 = Color.fromRGBO(32, 102, 224, 0.2);
-  late Color color2 = Color.fromRGBO(32, 102, 224, 0.2);
-  late Color color3 = Color.fromRGBO(32, 102, 224, 0.2);
+  late Color color1 = Color.fromRGBO(32, 102, 224, 0.6);
+  late Color color2 = Color.fromRGBO(32, 102, 224, 0.6);
   late Timer timer;
 
   @override
@@ -39,7 +60,7 @@ class _BackgroundWallWithRandShapesState
     // Initialize colors with random values
     _updateColors();
     // Set up a timer to update colors every 4 seconds
-    timer = Timer.periodic(Duration(seconds: 20), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
       _updateColors();
     });
   }
@@ -55,16 +76,15 @@ class _BackgroundWallWithRandShapesState
     setState(() {
       // Generate random RGB values
       Random random = Random();
-      int randomRed = random.nextInt(20);
-      int randomGreen = random.nextInt(20);
-      int randomBlue = random.nextInt(20);
+      int randomRed = random.nextInt(40);
+      int randomGreen = random.nextInt(40);
+      int randomBlue = random.nextInt(40);
       Color newColor = Color.fromRGBO(
-        random.nextInt(12 + randomRed),
-        random.nextInt(82 + randomGreen),
-        random.nextInt(185 + randomBlue),
-        0.2,
+        17 + randomRed,
+        87 + randomGreen,
+        204 + randomBlue,
+        0.5,
       );
-      color3 = color2;
       color2 = color1;
       color1 = newColor;
     });
@@ -79,7 +99,7 @@ class _BackgroundWallWithRandShapesState
               Expanded(child: SizedBox()),
               Expanded(child: SizedBox()),
               AnimatedContainer(
-                duration: const Duration(seconds: 4),
+                duration: const Duration(seconds: 3),
                 height: 400 * MediaQuery.of(context).size.height / 620,
                 width: 400 * MediaQuery.of(context).size.height / 620,
                 decoration: BoxDecoration(
@@ -89,7 +109,6 @@ class _BackgroundWallWithRandShapesState
                     colors: [
                       color1,
                       color2,
-                      color3,
                     ],
                   ),
                   borderRadius: BorderRadius.only(
