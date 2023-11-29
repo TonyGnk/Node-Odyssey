@@ -50,17 +50,27 @@ class BackgroundWallWithRandShapes extends StatefulWidget {
 
 class _BackgroundWallWithRandShapesState
     extends State<BackgroundWallWithRandShapes> {
-  late Color color1 = Color.fromRGBO(32, 102, 224, 0.6);
-  late Color color2 = Color.fromRGBO(32, 102, 224, 0.6);
+  late Color color1 = Color.fromRGBO(32, 102, 224, 0);
+  late Color color2 = Color.fromRGBO(32, 102, 224, 0);
   late Timer timer;
+  late Duration duration = const Duration(milliseconds: 200);
 
   @override
   void initState() {
     super.initState();
     // Initialize colors with random values
-    _updateColors();
+    //_updateColors();
+
+//wait 2 seconds
+    Future.delayed(const Duration(seconds: 1), () {
+      // Here you can write your code
+      setState(() {
+        duration = const Duration(seconds: 5);
+      });
+    });
+
     // Set up a timer to update colors every 4 seconds
-    timer = Timer.periodic(Duration(seconds: 7), (Timer t) {
+    timer = Timer.periodic(duration, (Timer t) {
       _updateColors();
     });
   }
@@ -92,14 +102,34 @@ class _BackgroundWallWithRandShapesState
 
 //Color.fromRGBO(32, 102, 224, 0.2);
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(BuildContext context) => Column(
         children: [
-          Column(
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      //Colors.blue,
+                      Theme.of(context).splashColor,
+                      //Colors.red,
+                      Theme.of(context).scaffoldBackgroundColor
+                    ],
+                    stops: const [
+                      0.1,
+                      0.9
+                    ]),
+              ),
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Row(
             children: [
-              Expanded(child: SizedBox()),
-              Expanded(child: SizedBox()),
               AnimatedContainer(
-                duration: const Duration(seconds: 3),
+                duration: duration,
                 height: 400 * MediaQuery.of(context).size.height / 620,
                 width: 400 * MediaQuery.of(context).size.height / 620,
                 decoration: BoxDecoration(
@@ -116,13 +146,8 @@ class _BackgroundWallWithRandShapesState
                   ),
                 ),
               ),
+              Expanded(child: SizedBox()),
             ],
-          ),
-          Expanded(
-            child: SizedBox(),
-          ),
-          Expanded(
-            child: SizedBox(),
           ),
         ],
       );

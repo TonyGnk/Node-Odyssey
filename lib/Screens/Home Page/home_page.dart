@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FutureBuilder(
-        future: Future.delayed(const Duration(milliseconds: 1)),
+        future: Future.delayed(const Duration(milliseconds: 500)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return bodyWithAppBarGlass(
@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: Body(),
               ),
-            ); // Render the widget with blur effect
+            );
           } else {
             return bodyWithAppBar(
               context: context,
@@ -90,10 +90,6 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(25),
-        decoration: const BoxDecoration(
-            color:
-                Colors.transparent //Theme.of(context).scaffoldBackgroundColor,
-            ),
         child: const Row(
           children: [
             Expanded(

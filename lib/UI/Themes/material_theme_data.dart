@@ -26,6 +26,7 @@ class MaterialThemeData extends TotalTheme {
         secondaryHeaderColor: const Color.fromARGB(255, 232, 232, 232),
         scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240),
         shadowColor: const Color.fromARGB(255, 255, 255, 255),
+        splashColor: const Color.fromARGB(255, 255, 255, 255),
       );
 
   @override
@@ -50,6 +51,7 @@ class MaterialThemeData extends TotalTheme {
         secondaryHeaderColor: const Color.fromARGB(255, 56, 56, 56),
         scaffoldBackgroundColor: const Color.fromARGB(255, 13, 13, 13),
         shadowColor: const Color.fromARGB(255, 45, 45, 45),
+        splashColor: const Color.fromARGB(255, 1, 1, 1),
       );
 
   static ThemeData getLightTheme() => MaterialThemeData().light();

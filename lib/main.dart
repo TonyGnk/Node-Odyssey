@@ -17,8 +17,8 @@ void main() async {
       center: false,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-      windowButtonVisibility: true,
+      titleBarStyle: TitleBarStyle.normal,
+      windowButtonVisibility: false,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();

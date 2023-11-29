@@ -1,15 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:universal_platform/universal_platform.dart';
+
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Services & Providers/constants.dart';
 import '../Services2/navigator_fun.dart';
 import 'app_bar_icon.dart';
 import 'info_icon.dart';
 import 'theme_icon.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 import 'windows_icon.dart';
 
@@ -110,15 +109,6 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
               textButton,
               themeIcon(context, showThemeIcon),
               infoIcon(context, showInfoIcon),
-              window
-                  ? windowsIcon(context, true, 'Ελαχιστοποίηση')
-                  : const SizedBox(),
-              window
-                  ? windowsIcon(context, true, 'Μεγιστοποίηση')
-                  : const SizedBox(),
-              window
-                  ? windowsIcon(context, true, 'Κλείσιμο')
-                  : const SizedBox(),
             ],
           );
         },
