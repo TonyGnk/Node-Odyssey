@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/main_bf.dart';
+import 'Depth First Page/main_df.dart';
 import 'Home Page/button_side.dart';
 import 'Home Page/home_page.dart';
 
@@ -16,6 +17,7 @@ final destinationsProvider = StateProvider<List<RoutedScreen>>(
   (ref) => [
     breadthFirstAlgScreen(),
     algorithmsGUIScreen(),
+    depthFirstAlgScreen(),
   ],
 );
 
@@ -35,7 +37,7 @@ final resultPanelList = StateProvider<List<Container>>(
 // The Breadth First Algorithm page.
 RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
       mainChild: BreadthFirstAlg(),
-      label: 'Αλγόριθμος Πρώτα σε Βάθος ',
+      label: 'Αλγόριθμος Πρώτα σε Πλάτος ',
       labelRoute: 'BreadthFirstAlgorithm',
       icon: Icons.radar_outlined,
       filledIcon: Icons.radar,
@@ -48,4 +50,13 @@ RoutedScreen algorithmsGUIScreen() => const RoutedScreen(
       labelRoute: 'AllAlgorithms',
       icon: Icons.desktop_windows_outlined,
       filledIcon: Icons.desktop_windows,
+    );
+
+// The Depth First Algorithm page.
+RoutedScreen depthFirstAlgScreen() => const RoutedScreen(
+      mainChild: DepthFirstAlg(),
+      label: 'Αλγόριθμος Πρώτα σε Βάθος ',
+      labelRoute: 'DepthFirstAlgorithm',
+      icon: Icons.radar_outlined,
+      filledIcon: Icons.radar,
     );

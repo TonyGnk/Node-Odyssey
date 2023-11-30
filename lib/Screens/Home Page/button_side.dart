@@ -77,7 +77,16 @@ class AlgorithmsGUIBody extends StatelessWidget {
           ModernCaption(
             // label: 'Αλγόριθμος Πρώτα σε Βάθος' in English,
             label: 'Depth First',
-            onTap: () async {},
+            onTap: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    body: depthFirstAlgScreen(),
+                  ),
+                ),
+              );
+            },
             icon: Icons.grid_goldenratio,
           ),
           const SizedBox(height: 12, width: 12),

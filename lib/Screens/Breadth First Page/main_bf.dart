@@ -28,7 +28,7 @@ class BreadthFirstAlg extends StatelessWidget {
 // Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
 Widget appBarBf(BuildContext context) => AdaptAppBar(
       filled: false,
-      label: 'Αλγόριθμος Πρώτα σε Βάθος',
+      label: 'Αλγόριθμος Πρώτα σε Πλάτος',
       showThemeIcon: true,
       showInfoIcon: false,
       brightness: Theme.of(context).brightness,
