@@ -19,7 +19,7 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
 
   while (stack.isNotEmpty) {
     int counter = 0;
-    await Future.delayed(Duration(milliseconds: 3));
+    //await Future.delayed(Duration(milliseconds: 3));
 
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
