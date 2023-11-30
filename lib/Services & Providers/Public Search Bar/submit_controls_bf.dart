@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Breadth First/providers_bf.dart';
-import '../../../Algorithms/Breadth First/start_calculation.dart';
-import '../../../Services & Providers/constants.dart';
-import '../../../Services & Providers/six_calculations.dart';
-import '../Archive BF/list_provider.dart';
+import '../../Algorithms/Breadth First/providers_bf.dart';
+import '../../Algorithms/Breadth First/start_calculation.dart';
+import '../constants.dart';
+import '../six_calculations.dart';
+import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'main_search_bf.dart';
 import 'sliders_and_options_bf.dart';
 

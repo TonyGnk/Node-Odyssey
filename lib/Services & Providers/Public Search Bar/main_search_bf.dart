@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services & Providers/constants.dart';
+import '../constants.dart';
 import 'sliders_and_options_bf.dart';
 import 'submit_controls_bf.dart';
 

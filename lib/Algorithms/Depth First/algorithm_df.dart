@@ -1,6 +1,6 @@
 import '../../Services & Providers/node.dart';
 
-int barrier = 1000; //1000000000;
+int barrier = 1000;
 
 void StartSearching(int start, int target) {
   List<Node> stack = [];

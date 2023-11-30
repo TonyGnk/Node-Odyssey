@@ -7,7 +7,7 @@ import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/chart_bf.dart';
 import 'Result Panel BF/result_panel_bf.dart';
-import 'Search BF/main_search_bf.dart';
+import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import 'Create & Tracking List/list_and_button_bf.dart';
 
 class BreadthFirstAlg extends StatelessWidget {

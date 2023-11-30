@@ -14,7 +14,6 @@ void clearResultPanelList(WidgetRef ref) {
 }
 
 void addResultPanelList(
-  BuildContext context,
   WidgetRef ref,
   String title,
   List<Node> solution,
