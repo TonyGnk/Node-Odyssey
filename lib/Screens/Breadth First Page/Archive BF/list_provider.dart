@@ -11,12 +11,12 @@ final stopTimerProvider = StateProvider<bool>(
   (ref) => false,
 );
 
-final bfRunningProvider = StateProvider<BfRunning>(
-  (ref) => BfRunning(
+final runningRequestProvider = StateProvider<RunningRequest>(
+  (ref) => RunningRequest(
     startValue: 0,
     targetValue: 0,
     speed: 1,
-    enableCalculationMap: {
+    enabledOperations: {
       CalculationType.addition: true,
       CalculationType.subtraction: true,
       CalculationType.multiplication: true,
@@ -27,16 +27,12 @@ final bfRunningProvider = StateProvider<BfRunning>(
   ),
 );
 
-final bfRunningProviderUpdater = StateProvider<bool>(
-  (ref) => false,
-);
-
-class BfRunning {
-  BfRunning({
+class RunningRequest {
+  RunningRequest({
     required this.startValue,
     required this.targetValue,
     required this.speed,
-    required this.enableCalculationMap,
+    required this.enabledOperations,
   });
 
   //Αρχική Τιμή
@@ -48,7 +44,7 @@ class BfRunning {
   // Speed of the algorithm
   int speed = 1;
 
-  Map<CalculationType, bool> enableCalculationMap;
+  Map<CalculationType, bool> enabledOperations;
 
   int getStartValue() => startValue;
   void setStartValue(int startValue) {
@@ -69,10 +65,6 @@ class BfRunning {
     }
   }
 }
-
-final isCreatingProvider = StateProvider<bool>(
-  (ref) => true,
-);
 
 //
 // ref.read(chartColumnsProvider.notifier).state.length == 2300

@@ -2,20 +2,19 @@ import 'dart:collection';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
-import '../../Services & Providers/tracking_container.dart';
 
-Future<List<Node>?> findBreadthSolutionUI(
-  int start,
-  int end,
-  int speed,
-  Map<CalculationType, bool> enableCalculationMap,
-  WidgetRef ref,
-) async {
+Future<List<Node>?> runBFGui(WidgetRef ref) async {
+  RunningRequest request = ref.read(runningRequestProvider.notifier).state;
+  int start = request.startValue;
+  int end = request.targetValue;
+  int speed = request.speed;
+  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
+
   ListQueue<List<Node>> queue = ListQueue();
-  // ignore: prefer_collection_literals
-  Set<int> visited = Set();
+  Set<int> visited = {};
 
   queue.add([Node(start, 0, 'Αρχική Τιμή')]);
   visited.add(start);
@@ -26,17 +25,14 @@ Future<List<Node>?> findBreadthSolutionUI(
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    ref
-        .watch(trackingListProvider)
-        .addTile(current.value, current.operation, ref);
-    addTrackingContainer(ref, current.value, end);
+    updateChartAndTrackingPanel(ref, current, end);
 
     if (current.value == end) {
       return currentPath;
     }
 
     for (CalculationType type in CalculationType.values) {
-      if (enableCalculationMap[type]!) {
+      if (enabledOperations[type]!) {
         int newValue = getNewValue(current.value, type);
         if (isAllowed(newValue, current.value, type)) {
           if (!visited.contains(newValue)) {

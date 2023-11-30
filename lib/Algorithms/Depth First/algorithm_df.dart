@@ -1,32 +1,64 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
+import '../../Services & Providers/six_calculations.dart';
 
-int barrier = 1000;
+Future<List<Node>?> runDFGui(WidgetRef ref) async {
+  RunningRequest request = ref.read(runningRequestProvider.notifier).state;
+  int start = request.startValue;
+  int end = request.targetValue;
+  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
 
-void StartSearching(int start, int target) {
-  List<Node> stack = [];
-  Set<int> visited = Set();
-  stack.add(Node(start, 0, ''));
+  List<List<Node>> stack = [];
+  Set<int> visited = {};
+
+  stack.add([Node(start, 0, 'Αρχική Τιμή')]);
   visited.add(start);
 
   while (stack.isNotEmpty) {
-    Node current = stack.removeLast();
-    print('Current node: ${current.value}');
+    await Future.delayed(Duration(seconds: 1));
 
-    if (current.value == target) {
-      print('Found a path: ${current.operation}');
-      return;
+    List<Node> currentPath = stack.removeLast();
+    Node current = currentPath.last;
+
+    updateChartAndTrackingPanel(ref, current, end);
+
+    if (current.value == end) {
+      return currentPath;
     }
-    if (current.value * 2 < barrier && !visited.contains(current.value * 2)) {
-      stack.add(
-          Node(current.value * 2, current.cost + 1, '${current.operation}*2 '));
-      visited.add(current.value * 2);
+
+    // Calculate all the possible
+    for (CalculationType type in CalculationType.values) {
+      //If the operation is enabled
+      if (enabledOperations[type]!) {
+        int newValue = getNewValue(current.value, type);
+        // If the new value is allowed from the rules
+        if (isAllowed(newValue, current.value, type)) {
+          // If the new value is not visited
+          if (!visited.contains(newValue)) {
+            print(type.toString() + ': ' + newValue.toString());
+            Node newNode = getNewNode(
+              current.value,
+              current.cost,
+              newValue,
+              type,
+            );
+            List<Node> newPath = List.from(currentPath)..add(newNode);
+            //stack.add(newPath);
+            stack.insert(0, newPath);
+            visited.add(newNode.value);
+          }
+        }
+      }
     }
-    if (current.value + 1 < barrier && !visited.contains(current.value + 1)) {
-      stack.add(
-          Node(current.value + 1, current.cost + 1, '${current.operation}+1 '));
-      visited.add(current.value + 1);
+
+    //print all the paths
+    for (List<Node> path in stack) {
+      print(path);
     }
   }
 
-  print('No path found');
+  return null;
 }

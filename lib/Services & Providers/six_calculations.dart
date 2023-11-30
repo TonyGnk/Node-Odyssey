@@ -41,7 +41,7 @@ bool isAllowed(int newValue, int value, CalculationType type) {
     case CalculationType.division:
       return newValue > 0;
     case CalculationType.exponential:
-      return newValue <= pow(10, 9);
+      return newValue <= pow(10, 9) && newValue > 1;
     case CalculationType.square:
       return (newValue * newValue == value) && (value > 1);
   }

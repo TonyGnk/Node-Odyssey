@@ -22,10 +22,16 @@ Widget trackingStage(BuildContext context) => Consumer(
 
 Widget miniAppBar(BuildContext context) => Consumer(
       builder: (context, ref, _) {
-        final startValue =
-            ref.read(bfRunningProvider.notifier).state.startValue.toString();
-        final targetValue =
-            ref.read(bfRunningProvider.notifier).state.targetValue.toString();
+        final startValue = ref
+            .read(runningRequestProvider.notifier)
+            .state
+            .startValue
+            .toString();
+        final targetValue = ref
+            .read(runningRequestProvider.notifier)
+            .state
+            .targetValue
+            .toString();
         return Row(
           children: [
             const SizedBox(width: 8),
