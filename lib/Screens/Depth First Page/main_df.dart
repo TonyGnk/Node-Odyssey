@@ -31,7 +31,7 @@ Widget body(BuildContext context) => Center(
       child: ElevatedButton(
         child: const Text('Πειράματα σε Τερματικό'),
         onPressed: () {
-          StartSearching(2, 12);
+          StartSearching(2, 113);
         },
       ),
     );

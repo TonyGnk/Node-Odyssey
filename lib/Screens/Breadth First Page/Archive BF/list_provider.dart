@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Services & Providers/six_calculations.dart';
+
 final stopTimerProvider = StateProvider<bool>(
   (ref) => false,
 );
@@ -14,12 +16,14 @@ final bfRunningProvider = StateProvider<BfRunning>(
     startValue: 0,
     targetValue: 0,
     speed: 1,
-    checkOnePlus: true,
-    checkOneMinus: true,
-    checkDouble: true,
-    checkHalf: true,
-    checkSquare: true,
-    checkRoot: true,
+    enableCalculationMap: {
+      CalculationType.addition: true,
+      CalculationType.subtraction: true,
+      CalculationType.multiplication: true,
+      CalculationType.division: true,
+      CalculationType.exponential: true,
+      CalculationType.square: true,
+    },
   ),
 );
 
@@ -32,12 +36,7 @@ class BfRunning {
     required this.startValue,
     required this.targetValue,
     required this.speed,
-    required this.checkOnePlus,
-    required this.checkOneMinus,
-    required this.checkDouble,
-    required this.checkHalf,
-    required this.checkSquare,
-    required this.checkRoot,
+    required this.enableCalculationMap,
   });
 
   //Αρχική Τιμή
@@ -49,12 +48,7 @@ class BfRunning {
   // Speed of the algorithm
   int speed = 1;
 
-  bool checkOnePlus;
-  bool checkOneMinus;
-  bool checkDouble;
-  bool checkHalf;
-  bool checkSquare;
-  bool checkRoot;
+  Map<CalculationType, bool> enableCalculationMap;
 
   int getStartValue() => startValue;
   void setStartValue(int startValue) {
@@ -73,36 +67,6 @@ class BfRunning {
     } else {
       speed = 1;
     }
-  }
-
-  bool getCheckOnePlus() => checkOnePlus;
-  void setCheckOnePlus(bool checkOnePlus) {
-    this.checkOnePlus = checkOnePlus;
-  }
-
-  bool getCheckMinusOne() => checkOneMinus;
-  void setCheckMinusOne(bool checkOneMinus) {
-    this.checkOneMinus = checkOneMinus;
-  }
-
-  bool getCheckDouble() => checkDouble;
-  void setCheckDouble(bool checkDouble) {
-    this.checkDouble = checkDouble;
-  }
-
-  bool getCheckHalf() => checkHalf;
-  void setCheckHalf(bool checkHalf) {
-    this.checkHalf = checkHalf;
-  }
-
-  bool getCheckSquare() => checkSquare;
-  void setCheckSquare(bool checkSquare) {
-    this.checkSquare = checkSquare;
-  }
-
-  bool getCheckRoot() => checkRoot;
-  void setCheckRoot(bool checkRoot) {
-    this.checkRoot = checkRoot;
   }
 }
 

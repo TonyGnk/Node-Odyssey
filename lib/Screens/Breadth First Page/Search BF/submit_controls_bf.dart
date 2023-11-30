@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Algorithms/Breadth First/providers_bf.dart';
 import '../../../Algorithms/Breadth First/start_calculation.dart';
 import '../../../Services & Providers/constants.dart';
+import '../../../Services & Providers/six_calculations.dart';
 import '../Archive BF/list_provider.dart';
 import 'main_search_bf.dart';
 import 'sliders_and_options_bf.dart';
@@ -60,12 +61,14 @@ void onButtonPressed(BuildContext context, WidgetRef ref) {
     startValue: int.parse(inputControllerBf.text),
     targetValue: int.parse(targetControllerBf.text),
     speed: setSpeedFromSlider(speedSlider),
-    checkOnePlus: ref.watch(checkPlusOneProvider),
-    checkOneMinus: ref.watch(checkMinusOneProvider),
-    checkDouble: ref.watch(checkDoubleProvider),
-    checkHalf: ref.watch(checkHalfProvider),
-    checkSquare: ref.watch(checkSquareProvider),
-    checkRoot: ref.watch(checkRootProvider),
+    enableCalculationMap: {
+      CalculationType.addition: ref.watch(checkPlusOneProvider),
+      CalculationType.subtraction: ref.watch(checkMinusOneProvider),
+      CalculationType.multiplication: ref.watch(checkDoubleProvider),
+      CalculationType.division: ref.watch(checkHalfProvider),
+      CalculationType.exponential: ref.watch(checkRootProvider),
+      CalculationType.square: ref.watch(checkSquareProvider),
+    },
   );
   startCalR(context, ref);
   ref.watch(isCreatingProvider.notifier).state = false;

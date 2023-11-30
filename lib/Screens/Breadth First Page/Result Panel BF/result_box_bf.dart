@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Algorithms/Breadth First/algorithm_bf.dart';
+import '../../../Services & Providers/node.dart';
 import '../Archive BF/result_providers.dart';
 
 class ResultBoxBf {
