@@ -55,7 +55,7 @@ Widget leftColumnBf(BuildContext context) => SizedBox(
       width: 330,
       child: Column(
         children: [
-          mainSearchBar(context),
+          searchBarContainer(),
           const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(context),
