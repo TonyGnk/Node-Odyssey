@@ -11,15 +11,7 @@ TextEditingController targetControllerBf = TextEditingController();
 final moreOptionsProviderBf = StateProvider<bool>((ref) => false);
 final moreOptionsProviderBf2 = StateProvider<bool>((ref) => false);
 
-void moreOptionsFun(WidgetRef ref) async {
-  ref.read(moreOptionsProviderBf.notifier).state = true;
-  await Future.delayed(const Duration(milliseconds: 150));
-  ref.read(moreOptionsProviderBf2.notifier).state = true;
-}
-
-// Αυτή είναι η φόρμα αναζήτησης για την εισαγωγή αρχικής και τελικής τιμής
-// Περιλαμβάνει τον τίτλο, πεδία εισαγωγής και ράβδους επιλογής ταχύτητας και λύσεων
-Widget formR(BuildContext context) => searchContainer(
+Widget mainSearchBar(BuildContext context) => searchContainer(
       context,
       Column(
         children: [
@@ -58,7 +50,7 @@ Widget searchContainer(BuildContext context, Widget child) =>
       final moreOptions = ref.watch(moreOptionsProviderBf);
       return AnimatedContainer(
         curve: Curves.easeInOut,
-        duration: const Duration(milliseconds: 220),
+        duration: const Duration(milliseconds: 120),
         height: moreOptions ? 374 : 50,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
@@ -73,6 +65,12 @@ Widget searchContainer(BuildContext context, Widget child) =>
       );
     });
 
+void moreOptionsFun(WidgetRef ref) async {
+  ref.read(moreOptionsProviderBf.notifier).state = true;
+  await Future.delayed(const Duration(milliseconds: 200));
+  ref.read(moreOptionsProviderBf2.notifier).state = true;
+}
+
 Widget extraOptionsBuilder(BuildContext context) => Consumer(
       builder: (context, ref, _) {
         final moreOptions2 = ref.watch(moreOptionsProviderBf2);
@@ -81,7 +79,7 @@ Widget extraOptionsBuilder(BuildContext context) => Consumer(
               ? 1.0
               : 0.0, // Ρύθμισε το opacity ανάλογα με το moreOptions2
           duration: const Duration(
-              milliseconds: 300), // Ρύθμισε τον χρόνο εμφάνισης/εξαφάνισης
+              milliseconds: 600), // Ρύθμισε τον χρόνο εμφάνισης/εξαφάνισης
           child: moreOptions2 ? extraOptions(context) : const SizedBox(),
         );
       },
