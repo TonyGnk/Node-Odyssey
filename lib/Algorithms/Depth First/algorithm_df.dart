@@ -18,7 +18,8 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
   visited.add(start);
 
   while (stack.isNotEmpty) {
-    await Future.delayed(Duration(seconds: 1));
+    int counter = 0;
+    await Future.delayed(Duration(milliseconds: 3));
 
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
@@ -45,18 +46,30 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
               newValue,
               type,
             );
-            List<Node> newPath = List.from(currentPath)..add(newNode);
+            List<Node> newPath = List.from(currentPath)
+              ..add(
+                  newNode); // Αυτή η εντολή δημιουργεί ένα νέο λίστα με τα στοιχεία της currentPath και προσθέτει στο τέλος της τον newNode
             //stack.add(newPath);
-            stack.insert(0, newPath);
-            visited.add(newNode.value);
+            //stack.insert(0, newPath);
+
+            //Add in stack at the last position
+            //stack.add(newPath);
+            //Add in stack at the preLast position
+            stack.insert(stack.length - counter, newPath);
+
+            //visited.add(newNode.value);
           }
         }
       }
+      counter++;
     }
 
-    //print all the paths
+    //print all nodes of stack
     for (List<Node> path in stack) {
-      print(path);
+      print('Node Number: ' + stack.indexOf(path).toString());
+      for (Node node in path) {
+        print('Path: ' + node.value.toString());
+      }
     }
   }
 
