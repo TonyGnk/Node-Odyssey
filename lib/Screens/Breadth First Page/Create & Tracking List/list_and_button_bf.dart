@@ -11,29 +11,27 @@ Widget trackingStage(BuildContext context) => Consumer(
         final updater = ref.watch(trackUpdater);
         return Column(
           children: [
+            const SizedBox(height: 5),
             miniAppBar(context),
+            const SizedBox(height: 5),
             Expanded(child: trackingList.build(context)),
-            //pauseResumeAreaBf(context),
           ],
         );
       },
     );
 
-Widget miniAppBar(BuildContext context) => Consumer(builder: (context, ref, _) {
-      final startValue =
-          ref.read(bfRunningProvider.notifier).state.startValue.toString();
-      final targetValue =
-          ref.read(bfRunningProvider.notifier).state.targetValue.toString();
-      return Row(
-        children: [
-          const SizedBox(width: 8),
-          Expanded(child: Text('Αναζήτηση από $startValue σε $targetValue')),
-          // const Padding(
-          //   padding: EdgeInsets.all(8.0),
-          //   child: SizedBox(
-          //       width: 20, height: 20, child: CircularProgressIndicator()),
-          // ),
-          const SizedBox(width: 8),
-        ],
-      );
-    });
+Widget miniAppBar(BuildContext context) => Consumer(
+      builder: (context, ref, _) {
+        final startValue =
+            ref.read(bfRunningProvider.notifier).state.startValue.toString();
+        final targetValue =
+            ref.read(bfRunningProvider.notifier).state.targetValue.toString();
+        return Row(
+          children: [
+            const SizedBox(width: 8),
+            Expanded(child: Text('Αναζήτηση από $startValue σε $targetValue')),
+            const SizedBox(width: 8),
+          ],
+        );
+      },
+    );

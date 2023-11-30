@@ -7,6 +7,11 @@ final trackingListProvider = StateProvider<TrackingList>(
   (ref) => TrackingList(),
 );
 
+//clear the tracking list
+void clearTrackingList(WidgetRef ref) {
+  ref.read(trackingListProvider.notifier).state.clear();
+}
+
 class TrackingList extends StatelessWidget {
   TrackingList({
     super.key,

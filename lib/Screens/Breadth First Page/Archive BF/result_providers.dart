@@ -60,3 +60,8 @@ final textButtonProviderR = StateProvider<Widget>(
 final resListProvider = StateProvider<TrackingList>(
   (ref) => TrackingList(),
 );
+
+//Clear resListProvider
+// void clearResListProvider(WidgetRef ref) {
+//   ref.read(resListProvider.notifier).state = TrackingList();
+// }
