@@ -224,6 +224,6 @@ final chartColumnsProvider = StateProvider<List<Column>>(
 );
 
 //function for clearing trackingBox
-void clearTrackingBox(WidgetRef ref) {
-  ref.read(chartColumnsProvider.notifier).state.clear();
-}
+// void clearCharts(WidgetRef ref) {
+//   ref.read(chartColumnsProvider.notifier).state.clear();
+// }

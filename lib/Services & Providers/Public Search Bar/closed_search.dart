@@ -6,7 +6,7 @@ import '../constants.dart';
 import 'main_search_bf.dart';
 import 'submit_controls_bf.dart';
 
-closedSearch(BuildContext context) => Row(
+closedSearch(BuildContext context, AlgorithmType type) => Row(
       children: [
         inPutFieldBf(context, inputControllerBf, 'Αρχική Τιμή'),
         const SizedBox(width: 6),
@@ -14,7 +14,7 @@ closedSearch(BuildContext context) => Row(
         const SizedBox(width: 6),
         extraButtonBf(),
         const SizedBox(width: 3),
-        submitButtonBf(),
+        submitButtonBf(type),
       ],
     );
 
@@ -83,10 +83,10 @@ moreOptionsFun(WidgetRef ref) async {
   ref.read(showTheExtraOptionsProvider.notifier).state = true;
 }
 
-Widget submitButtonBf() => Consumer(
+Widget submitButtonBf(AlgorithmType type) => Consumer(
       builder: (context, WidgetRef ref, __) => IconButton.filled(
         style: modernButtonStyle(context),
         icon: const Icon(Icons.auto_awesome_outlined),
-        onPressed: () => onButtonPressed(ref),
+        onPressed: () => onButtonPressed(ref, type),
       ),
     );

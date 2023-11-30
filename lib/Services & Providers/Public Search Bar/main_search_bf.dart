@@ -8,7 +8,7 @@ import 'sliders_and_options_bf.dart';
 final makeContainerTallerProvider = StateProvider<bool>((ref) => false);
 final showTheExtraOptionsProvider = StateProvider<bool>((ref) => false);
 
-searchBarContainer() => Consumer(builder: (context, ref, _) {
+searchBarContainer(AlgorithmType type) => Consumer(builder: (context, ref, _) {
       final moreOptions = ref.watch(makeContainerTallerProvider);
       return AnimatedContainer(
         curve: Curves.easeInOut,
@@ -16,7 +16,7 @@ searchBarContainer() => Consumer(builder: (context, ref, _) {
         height: moreOptions ? 374 : 50,
         padding: const EdgeInsets.all(4),
         decoration: modernDecoration(context),
-        child: mainSearchBar(context),
+        child: mainSearchBar(context, type),
       );
     });
 
@@ -29,8 +29,8 @@ modernDecoration(BuildContext context) => BoxDecoration(
       ),
     );
 
-mainSearchBar(BuildContext context) => Column(
-      children: [closedSearch(context), extraOptionsBuilder(context)],
+mainSearchBar(BuildContext context, AlgorithmType type) => Column(
+      children: [closedSearch(context, type), extraOptionsBuilder(context)],
     );
 
 void moreOptionsFun(WidgetRef ref) async {
@@ -164,3 +164,8 @@ final checkDoubleProvider = StateProvider<bool>((ref) => true);
 final checkHalfProvider = StateProvider<bool>((ref) => true);
 final checkSquareProvider = StateProvider<bool>((ref) => true);
 final checkRootProvider = StateProvider<bool>((ref) => true);
+
+void resetControllers() {
+  inputControllerBf.clear();
+  targetControllerBf.clear();
+}
