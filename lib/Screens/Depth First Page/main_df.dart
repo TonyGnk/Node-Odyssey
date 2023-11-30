@@ -28,7 +28,7 @@ class DepthFirstAlg extends StatelessWidget {
 
 Widget appBarDf(BuildContext context) => AdaptAppBar(
       filled: false,
-      label: 'Αλγόριθμος Πρώτα σε Βάθος',
+      label: 'Depth First Algorithm',
       showThemeIcon: true,
       showInfoIcon: false,
       brightness: Theme.of(context).brightness,
