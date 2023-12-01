@@ -2,80 +2,80 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
-import 'ArchHP/button_side.dart';
 import 'ArchHP/modern_button.dart';
 
 home() => Consumer(
-      builder: (context, ref, _) => Container(
-        padding: const EdgeInsets.all(25),
-        child: Row(
-          children: [
-            const Expanded(
-              flex: 3,
-              child: SizedBox(),
-            ),
-            Expanded(
-              flex: 2,
-              child: rightColumn(),
-            ),
-          ],
-        ),
+      builder: (context, ref, _) => Row(
+        children: [
+          const Expanded(
+            flex: 3,
+            child: SizedBox(),
+          ),
+          Expanded(
+            flex: 2,
+            child: rightColumn(),
+          ),
+        ],
       ),
     );
 
-rightColumn() => Consumer(
+rightColumn() => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Expanded(flex: 3, child: SizedBox()),
+        welcomeToText(),
+        titleText(),
+        const Expanded(flex: 3, child: SizedBox()),
+        const Text('Select the mode you want to use:'),
+        const SizedBox(height: 16),
+        rowOfButtons(),
+        const Expanded(flex: 1, child: SizedBox()),
+      ],
+    );
+
+welcomeToText() => const Text(
+      'Welcome to',
+      style: TextStyle(
+        fontSize: 32,
+        fontFamily: 'AdventoPro',
+      ),
+      textAlign: TextAlign.left,
+    );
+
+titleText() => const Text(
+      'Algorithms Visualizer',
+      style: TextStyle(
+          fontSize: 32,
+          color: Color.fromRGBO(32, 102, 224, 0.9),
+          fontWeight: FontWeight.bold),
+      textAlign: TextAlign.left,
+    );
+
+rowOfButtons() => Consumer(
+      builder: (context, ref, _) => Row(
+        children: [
+          TheGloriousButton(
+            label: 'Terminal',
+            icon: Icons.terminal,
+            onTap: () async => onPressed(ref),
+          ),
+          const SizedBox(width: 10),
+          TheGloriousButton(
+            label: 'GUI',
+            icon: Icons.desktop_windows_outlined,
+            onTap: () async {},
+          ),
+        ],
+      ),
+    );
+
+animatedColumn(Widget child) => Consumer(
       builder: (context, ref, _) => AnimatedOpacity(
         opacity: ref.watch(opacityProvider),
-        duration: Duration(milliseconds: 300),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Expanded(flex: 3, child: SizedBox()),
-            const Text(
-              'Welcome to',
-              style: TextStyle(
-                fontSize: 32,
-                fontFamily: 'AdventoPro',
-              ),
-              textAlign: TextAlign.left,
-            ),
-            const Text(
-              'Algorithms Visualizer',
-              style: TextStyle(
-                  fontSize: 32,
-                  color: Color.fromRGBO(32, 102, 224, 0.9),
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
-            ),
-            const Expanded(flex: 3, child: SizedBox()),
-            const Text('Select the mode you want to use:'),
-            const SizedBox(height: 16),
-            Row(children: [
-              TheGloriousButton(
-                label: 'Terminal',
-                icon: Icons.terminal,
-                onTap: () async => onPressed(ref),
-              ),
-              const SizedBox(width: 10),
-              TheGloriousButton(
-                label: 'GUI',
-                icon: Icons.desktop_windows_outlined,
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Scaffold(
-                        body: AlgorithmsGUI(),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ]),
-            const Expanded(flex: 1, child: SizedBox()),
-          ],
-        ),
+        duration: basicDuration,
+        child: child,
       ),
     );
 
