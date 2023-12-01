@@ -26,7 +26,7 @@ Widget appBar(BuildContext context) => Consumer(
         label: '',
         showThemeIcon: true,
         showCustomBackButton: ref.watch(showBackButtonProvider),
-        customBackButtonOnTap: () => homeBack(ref),
+        customBackButtonOnTap: () => homeReturn(ref),
         showBackButton: false,
         brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,

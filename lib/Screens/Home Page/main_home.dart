@@ -60,13 +60,13 @@ rowOfButtons() => Consumer(
           TheGloriousButton(
             label: 'Terminal',
             icon: Icons.terminal,
-            onTap: () async => homeGo(ref, ScreenDestination.terminal),
+            onTap: () => homeGo(ref, ScreenDestination.terminal),
           ),
           const SizedBox(width: 10),
           TheGloriousButton(
             label: 'GUI',
             icon: Icons.desktop_windows_outlined,
-            onTap: () async {},
+            onTap: () => homeGo(ref, ScreenDestination.algorithmsGUI),
           ),
         ],
       ),

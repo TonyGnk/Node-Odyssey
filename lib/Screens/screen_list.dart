@@ -26,6 +26,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return home();
     case ScreenDestination.terminal:
       return terminalSide();
+    case ScreenDestination.algorithmsGUI:
+      return const AlgorithmsGUIBody();
     default:
       return home();
   }

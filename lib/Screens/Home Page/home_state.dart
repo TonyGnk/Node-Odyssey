@@ -12,11 +12,14 @@ void homeGo(WidgetRef ref, ScreenDestination goTo) {
     ref.read(isTerminalProvider.notifier).state = true;
     ref.read(showBackButtonProvider.notifier).state = true;
 
+    //Terminal Back
     ref.read(currentScreenProvider.notifier).state = goTo;
   });
 }
 
-void homeBack(WidgetRef ref) {
+void homeReturn(WidgetRef ref) {
+  ref.read(currentScreenProvider.notifier).state = ScreenDestination.home;
+
   ref.read(isTerminalProvider.notifier).state = false;
   ref.read(showBackButtonProvider.notifier).state = false;
 
