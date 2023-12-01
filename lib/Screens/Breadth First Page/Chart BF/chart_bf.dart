@@ -14,7 +14,7 @@ import '../Archive BF/list_provider.dart';
 final outercontroller = ScrollController();
 final innercontroller = ScrollController();
 
-Widget containerZ(BuildContext context) => Consumer(
+Widget containerZ() => Consumer(
       builder: (context, ref, _) {
         final boxList = ref.watch(chartColumnsProvider);
         // ignore: unused_local_variable

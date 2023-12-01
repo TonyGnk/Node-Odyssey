@@ -21,7 +21,7 @@ class DepthFirstAlg extends StatelessWidget {
         appBar: appBarDf(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: body(context),
+          child: bodyDf(),
         ),
       );
 }
@@ -37,32 +37,32 @@ Widget appBarDf(BuildContext context) => AdaptAppBar(
 
 // Αυτή είναι το κεντρικό σώμα της οθόνης
 // Περιλαμβάνει την αριστερή και την δεξιά στήλη
-Widget body(BuildContext context) => Row(
+Widget bodyDf() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        leftColumnBf(context),
+        leftColumnBf(),
         const SizedBox(width: 10),
         Expanded(
           flex: 14, //14
-          child: containerZ(context),
+          child: containerZ(),
         ),
       ],
     );
 
-Widget leftColumnBf(BuildContext context) => SizedBox(
+Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
           searchBarContainer(AlgorithmType.df),
           const SizedBox(height: 10),
           Expanded(
-            child: trackingListAndButton(context),
+            child: trackingListAndButton(),
           ),
         ],
       ),
     );
 
-Widget trackingListAndButton(BuildContext context) => Consumer(
+Widget trackingListAndButton() => Consumer(
       builder: (context, ref, _) {
         final isAlgorithmEnd = ref.watch(isAlgorithmEndProviderBf);
         return containerWithStyleBF(

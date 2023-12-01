@@ -19,7 +19,7 @@ class BreadthFirstAlg extends StatelessWidget {
         appBar: appBarBf(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: body(context),
+          child: bodyBf(),
         ),
       );
 }
@@ -37,34 +37,34 @@ Widget appBarBf(BuildContext context) => AdaptAppBar(
 
 // Αυτή είναι το κεντρικό σώμα της οθόνης
 // Περιλαμβάνει την αριστερή και την δεξιά στήλη
-Widget body(BuildContext context) => Row(
+Widget bodyBf() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        leftColumnBf(context),
+        leftColumnBf(),
         const SizedBox(width: 10),
         Expanded(
           flex: 14, //14
-          child: containerZ(context),
+          child: containerZ(),
         ),
       ],
     );
 
 // Αυτή είναι η αριστερή στήλη της οθόνης
 // Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο
-Widget leftColumnBf(BuildContext context) => SizedBox(
+Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
           searchBarContainer(AlgorithmType.bf),
           const SizedBox(height: 10),
           Expanded(
-            child: trackingListAndButton(context),
+            child: trackingListAndButton(),
           ),
         ],
       ),
     );
 
-Widget trackingListAndButton(BuildContext context) => Consumer(
+Widget trackingListAndButton() => Consumer(
       builder: (context, ref, _) {
         final isAlgorithmEnd = ref.watch(isAlgorithmEndProviderBf);
         return containerWithStyleBF(
