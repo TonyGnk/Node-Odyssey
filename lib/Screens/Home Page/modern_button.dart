@@ -105,7 +105,7 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
           },
           child: AnimatedContainer(
             duration: const Duration(seconds: 1),
-            width: 190,
+            width: 190 * MediaQuery.of(context).size.width / 1120,
             height: 80,
             decoration: BoxDecoration(
               //color: color,
@@ -130,19 +130,21 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
         ),
       );
 
-  Widget theColumn(BuildContext context) =>
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Icon(
-          widget.icon,
-          size: 27,
-        ),
-        const SizedBox(width: 8),
-        Text(
-          widget.label,
-          style: const TextStyle(
-            fontSize: 21,
-            fontFamily: 'AdventoPro',
+  Widget theColumn(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            widget.icon,
+            size: 27,
           ),
-        ),
-      ]);
+          const SizedBox(width: 8),
+          Text(
+            widget.label,
+            style: const TextStyle(
+              fontSize: 21,
+              fontFamily: 'AdventoPro',
+            ),
+          ),
+        ],
+      );
 }

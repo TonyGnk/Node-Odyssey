@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Widget bodyWithAppBar({
   required BuildContext context,
@@ -23,10 +24,11 @@ Widget bodyWithAppBarGlass({
   required Widget appBar,
   required Widget body,
   required bool isBlackFirst,
+  required WidgetRef ref,
 }) =>
     Stack(
       children: [
-        BackgroundWallWithRandShapes(isBlackFirst: isBlackFirst),
+        BackgroundWallWithRandShapes(isBlackFirst: isBlackFirst, ref: ref),
         ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -44,10 +46,12 @@ Widget bodyWithAppBarGlass({
 class BackgroundWallWithRandShapes extends StatefulWidget {
   const BackgroundWallWithRandShapes({
     required this.isBlackFirst,
+    required this.ref,
     super.key,
   });
 
   final bool isBlackFirst;
+  final WidgetRef ref;
 
   @override
   State<BackgroundWallWithRandShapes> createState() =>
@@ -71,16 +75,18 @@ class _BackgroundWallWithRandShapesState
     // Initialize colors with random values
     //_updateColors();
 
-//wait 2 seconds
+    //wait 2 seconds
     Future.delayed(const Duration(seconds: 1), () {
       // Here you can write your code
       setState(() {
         duration = const Duration(seconds: 5);
+        widget.ref.read(durationProvider.notifier).state =
+            const Duration(seconds: 5);
       });
     });
 
     // Set up a timer to update colors every 4 seconds
-    timer = Timer.periodic(duration, (Timer t) {
+    timer = Timer.periodic(widget.ref.watch(durationProvider), (Timer t) {
       _updateColors();
     });
   }
@@ -96,14 +102,14 @@ class _BackgroundWallWithRandShapesState
     setState(() {
       // Generate random RGB values
       Random random = Random();
-      int randomRed = random.nextInt(40);
-      int randomGreen = random.nextInt(40);
-      int randomBlue = random.nextInt(40);
+      int randomRed = random.nextInt(50);
+      int randomGreen = random.nextInt(50);
+      int randomBlue = random.nextInt(50);
       Color newColor = Color.fromRGBO(
         17 + randomRed,
         87 + randomGreen,
         204 + randomBlue,
-        0.5,
+        widget.ref.watch(hideSmoothProvider) ? 0.0 : 0.5,
       );
       color2 = color1;
       color1 = newColor;
@@ -139,7 +145,7 @@ class _BackgroundWallWithRandShapesState
           Row(
             children: [
               AnimatedContainer(
-                duration: duration,
+                duration: widget.ref.watch(durationProvider),
                 height: 400 * MediaQuery.of(context).size.height / 620,
                 width: 400 * MediaQuery.of(context).size.height / 620,
                 decoration: BoxDecoration(
@@ -162,3 +168,9 @@ class _BackgroundWallWithRandShapesState
         ],
       );
 }
+
+//Create an bool provider
+final hideSmoothProvider = StateProvider<bool>((ref) => false);
+
+final durationProvider =
+    StateProvider<Duration>((ref) => const Duration(milliseconds: 200));

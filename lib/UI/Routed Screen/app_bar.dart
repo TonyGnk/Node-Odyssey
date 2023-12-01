@@ -68,7 +68,7 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
               : BoxDecoration(
                   borderRadius: BorderRadius.circular(cornerSize),
                 ),
-          child: getAppBarTitle(context, label ?? ''),
+          child: row(context),
           //  Stack(
           //   children: [
           //     Align(
@@ -87,7 +87,7 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
         )
       : const SizedBox();
 
-  Widget row(BuildContext context, bool window) => Consumer(
+  Widget row(BuildContext context) => Consumer(
         builder: (context, ref, _) {
           final textButton = ref.watch(textButtonProviderR);
           return Row(
@@ -114,18 +114,18 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
       );
 
-  Widget getAppBarTitle(BuildContext context, String title) {
-    if (UniversalPlatform.isWeb) {
-      return row(context, false);
-    } else {
-      return DragToMoveArea(
-        child: SizedBox(
-          height: kToolbarHeight,
-          child: row(context, true),
-        ),
-      );
-    }
-  }
+  // Widget getAppBarTitle(BuildContext context, String title) {
+  //   if (UniversalPlatform.isWeb) {
+  //     return row(context);
+  //   } else {
+  //     return DragToMoveArea(
+  //       child: SizedBox(
+  //         height: kToolbarHeight,
+  //         child: row(context),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

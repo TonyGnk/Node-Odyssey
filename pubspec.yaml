@@ -113,5 +113,9 @@ flutter:
       fonts: 
         - asset: assets/adventoPro/AdventPro-Regular.ttf
           style: normal
+    - family: Consolas 
+      fonts: 
+        - asset: assets/consolas/consolas.ttf
+          style: normal
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
