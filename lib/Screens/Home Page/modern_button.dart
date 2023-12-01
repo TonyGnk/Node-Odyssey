@@ -15,7 +15,6 @@ class TheGloriousButton extends StatefulWidget {
 
   final String label;
   final IconData icon;
-  //onTap
   final VoidCallback onTap;
 
   @override

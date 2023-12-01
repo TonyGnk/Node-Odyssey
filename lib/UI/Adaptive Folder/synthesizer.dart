@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Screens/Home Page/home_state.dart';
 import '../../Screens/Home Page/main_home.dart';
 import '../../Screens/screen_list.dart';
 import '../Adaptive Templates/body_with_appbar.dart';
@@ -26,15 +27,15 @@ Widget appBar(BuildContext context) => Consumer(
         label: '',
         showThemeIcon: true,
         showCustomBackButton: ref.watch(showBackButtonProvider),
-        customBackButtonOnTap: () => onPressedRev(ref),
+        customBackButtonOnTap: () => homeBack(ref),
         showBackButton: false,
         brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
       ),
     );
 
-final currentScreenProvider = StateProvider<ScreenDestinations>(
-  (ref) => ScreenDestinations.home,
+final currentScreenProvider = StateProvider<ScreenDestination>(
+  (ref) => ScreenDestination.home,
 );
 
 

@@ -11,7 +11,7 @@ import 'Depth First Page/main_df.dart';
 import 'Home Page/ArchHP/button_side.dart';
 import 'Home Page/main_home.dart';
 
-enum ScreenDestinations {
+enum ScreenDestination {
   home,
   terminal,
   breadthFirstAlg,
@@ -19,10 +19,12 @@ enum ScreenDestinations {
   depthFirstAlg,
 }
 
-getCurrentScreen(ScreenDestinations currentScreen) {
+getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
-    case ScreenDestinations.home:
+    case ScreenDestination.home:
       return home();
+    // case ScreenDestination.terminal:
+    // return terminal();
     default:
       return home();
   }
