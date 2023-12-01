@@ -177,6 +177,7 @@ final terminalRowsProvider = StateProvider<List<Widget>>((ref) => []);
 final justForRefreshProvider = StateProvider<bool>((ref) => false);
 
 showResult(WidgetRef ref, List<Node>? solution) {
+  ref.read(terminalRowsProvider.notifier).state = [];
   if (solution == null) {
     ref.read(terminalRowsProvider.notifier).state.add(
           terminalText(
