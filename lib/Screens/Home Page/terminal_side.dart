@@ -18,7 +18,7 @@ Widget terminalSide(BuildContext context) {
       builder: (_, WidgetRef ref, __) => Column(
             children: [
               terminalTitle(context),
-              Text('Press F12 for Reasults',
+              const Text('Press F12 for Results',
                   style: TextStyle(
                     fontFamily: 'AdventoPro',
                     fontSize: 17,
@@ -68,15 +68,15 @@ textField() => Consumer(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                 ),
-                onSubmitted: (value) {
+                onSubmitted: (value) async {
                   ref.read(textProvider.notifier).state = value;
                   analyzeTheText(ref);
                   addText(value, ref);
                   //controller.clear();
                 },
               ),
-              Expanded(
-                child: const SizedBox(),
+              const Expanded(
+                child: SizedBox(),
               ),
             ],
           ),
@@ -136,9 +136,7 @@ Future<void> analyzeTheText(WidgetRef ref) async {
     ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
 
     //Print the solution
-    for (Node node in solution!) {
-      print(node.value.toString() + ' ' + node.operation.toString());
-    }
+    //showResult(solution, ref);
   }
 }
 
