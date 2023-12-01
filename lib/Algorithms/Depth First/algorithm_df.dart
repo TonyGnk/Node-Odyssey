@@ -39,7 +39,7 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
         if (isAllowed(newValue, current.value, type)) {
           // If the new value is not visited
           if (!visited.contains(newValue)) {
-            print(type.toString() + ': ' + newValue.toString());
+            //print(type.toString() + ': ' + newValue.toString());
             Node newNode = getNewNode(
               current.value,
               current.cost,
@@ -56,8 +56,9 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
             //stack.add(newPath);
             //Add in stack at the preLast position
             stack.insert(stack.length - counter, newPath);
-
-            //visited.add(newNode.value);
+            if (counter == 0) {
+              visited.add(newNode.value);
+            }
           }
         }
       }
@@ -65,12 +66,12 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
     }
 
     //print all nodes of stack
-    for (List<Node> path in stack) {
-      print('Node Number: ' + stack.indexOf(path).toString());
-      for (Node node in path) {
-        print('Path: ' + node.value.toString());
-      }
-    }
+    // for (List<Node> path in stack) {
+    //   print('Node Number: ' + stack.indexOf(path).toString());
+    //   for (Node node in path) {
+    //     print('Path: ' + node.value.toString());
+    //   }
+    // }
   }
 
   return null;
