@@ -9,6 +9,7 @@ import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Depth First Page/main_df.dart';
 import 'Home Page/ArchHP/button_side.dart';
+import 'Home Page/ArchHP/terminal_side.dart';
 import 'Home Page/main_home.dart';
 
 enum ScreenDestination {
@@ -23,8 +24,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
     case ScreenDestination.home:
       return home();
-    // case ScreenDestination.terminal:
-    // return terminal();
+    case ScreenDestination.terminal:
+      return terminalSide();
     default:
       return home();
   }

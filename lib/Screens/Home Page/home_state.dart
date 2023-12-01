@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
+import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../screen_list.dart';
 
@@ -10,6 +11,8 @@ void homeGo(WidgetRef ref, ScreenDestination goTo) {
   Future.delayed(const Duration(milliseconds: 600), () {
     ref.read(isTerminalProvider.notifier).state = true;
     ref.read(showBackButtonProvider.notifier).state = true;
+
+    ref.read(currentScreenProvider.notifier).state = goTo;
   });
 }
 

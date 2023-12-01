@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Home Page/home_state.dart';
-import '../../Screens/Home Page/main_home.dart';
 import '../../Screens/screen_list.dart';
 import '../Adaptive Templates/body_with_appbar.dart';
 import '../Routed Screen/app_bar.dart';

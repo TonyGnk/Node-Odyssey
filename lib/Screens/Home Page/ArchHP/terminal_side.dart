@@ -12,11 +12,11 @@ import 'text_viewer.dart';
 
 TextEditingController controller = TextEditingController();
 
-Widget terminalSide(BuildContext context) {
+Widget terminalSide() {
   TerminalViewer te = const TerminalViewer();
 
   return Consumer(
-      builder: (_, WidgetRef ref, __) => Column(
+      builder: (context, WidgetRef ref, __) => Column(
             children: [
               terminalTitle(context),
               const SizedBox(height: 14),
