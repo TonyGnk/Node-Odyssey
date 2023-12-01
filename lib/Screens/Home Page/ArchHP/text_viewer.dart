@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/text_editor_provider.dart';
+import '../../../Services & Providers/text_editor_provider.dart';
 
 class TerminalViewer extends StatefulWidget {
   const TerminalViewer({

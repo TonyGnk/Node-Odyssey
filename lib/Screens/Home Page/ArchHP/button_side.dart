@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../Arc/custom_list_tile.dart';
-import '../../UI/Adaptive Templates/body_with_appbar.dart';
-import '../../UI/Routed Screen/app_bar.dart';
-import '../screen_list.dart';
+import '../../../Arc/custom_list_tile.dart';
+import '../../../UI/Adaptive Templates/body_with_appbar.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
+import '../../screen_list.dart';
 //math
 import 'dart:math' as math;
 
@@ -61,32 +61,14 @@ class AlgorithmsGUIBody extends StatelessWidget {
           ModernCaption(
             // label: 'Αλγόριθμος Πρώτα σε Πλάτος' in English,
             label: 'Breadth First',
-            onTap: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Scaffold(
-                    body: breadthFirstAlgScreen(),
-                  ),
-                ),
-              );
-            },
+            onTap: () async {},
             icon: Icons.radar_outlined,
           ),
           const SizedBox(height: 12, width: 12),
           ModernCaption(
             // label: 'Αλγόριθμος Πρώτα σε Βάθος' in English,
             label: 'Depth First',
-            onTap: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Scaffold(
-                    body: depthFirstAlgScreen(),
-                  ),
-                ),
-              );
-            },
+            onTap: () async {},
             icon: Icons.grid_goldenratio,
           ),
           const SizedBox(height: 12, width: 12),

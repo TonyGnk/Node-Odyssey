@@ -20,15 +20,19 @@ Widget rootConfig(
       debugShowFloatingThemeButton: debugShowFloatingThemeButton,
       initial: savedThemeMode ?? AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
-        onGenerateTitle: (context) => appTitle,
-        theme: theme,
-        darkTheme: darkTheme,
-        debugShowCheckedModeBanner: false,
-        home: const Synthesizer(), //TheApp()
-        // routes: generateRoutes(
-        //   mergeScreenLists(screens,),
-        // ),
-      ),
+          onGenerateTitle: (context) => appTitle,
+          theme: theme,
+          darkTheme: darkTheme,
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: home(),
+          )
+
+          //const Synthesizer(), //TheApp()
+          // routes: generateRoutes(
+          //   mergeScreenLists(screens,),
+          // ),
+          ),
     );
 
 Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
@@ -61,69 +65,3 @@ List<RoutedScreen> mergeScreenLists(
   }
   return c;
 }
-
-//Create the app widget
-class TheApp extends StatelessWidget {
-  const TheApp({super.key});
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Row(
-          children: [
-            SizedBox(
-              width: 100,
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    color: Colors.pink,
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 60,
-                          color: Colors.green,
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    color: Colors.pink,
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 100,
-                          color: Colors.green,
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-}
-
-//Create the app state

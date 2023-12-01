@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Algorithms/Breadth First/providers_bf.dart';
-import '../../Services & Providers/constants.dart';
-import '../../Services & Providers/node.dart';
-import '../../Services & Providers/six_calculations.dart';
-import '../../Services & Providers/text_editor_provider.dart';
-import '../../Services & Providers/tracking_container.dart';
-import '../Breadth First Page/Archive BF/list_provider.dart';
+import '../../../Algorithms/Breadth First/providers_bf.dart';
+import '../../../Services & Providers/constants.dart';
+import '../../../Services & Providers/node.dart';
+import '../../../Services & Providers/six_calculations.dart';
+import '../../../Services & Providers/text_editor_provider.dart';
+import '../../../Services & Providers/tracking_container.dart';
+import '../../Breadth First Page/Archive BF/list_provider.dart';
 import 'text_viewer.dart';
 
 TextEditingController controller = TextEditingController();
