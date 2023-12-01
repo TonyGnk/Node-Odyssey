@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,13 +32,17 @@ class Home extends StatelessWidget {
 
 // Αυτή είναι η γραμμή τίτλου της οθόνης
 // Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
-Widget appBarBf(BuildContext context) => AdaptAppBar(
-      filled: false,
-      label: '',
-      showThemeIcon: true,
-      showBackButton: false,
-      brightness: Theme.of(context).brightness,
-      backgroundColor: Colors.transparent,
+Widget appBarBf(BuildContext context) => Consumer(
+      builder: (context, ref, _) => AdaptAppBar(
+        filled: false,
+        label: '',
+        showThemeIcon: true,
+        showCustomBackButton: ref.watch(showBackButtonProvider),
+        customBackButtonOnTap: () => onPressedRev(ref),
+        showBackButton: false,
+        brightness: Theme.of(context).brightness,
+        backgroundColor: Colors.transparent,
+      ),
     );
 
 class Body extends StatefulWidget {
@@ -147,11 +150,27 @@ class _BodyState extends State<Body> {
 //function onPressed
 void onPressed(WidgetRef ref) {
   ref.read(hideSmoothProvider.notifier).state = true;
-  ref.read(durationProvider.notifier).state = const Duration(milliseconds: 200);
+  ref.read(durationProvider.notifier).state = const Duration(milliseconds: 100);
   ref.read(opacityProvider.notifier).state = 0;
   //delay 200ms
-  Future.delayed(const Duration(milliseconds: 300), () {
+  Future.delayed(const Duration(milliseconds: 600), () {
     ref.read(isTerminalProvider.notifier).state = true;
+    ref.read(showBackButtonProvider.notifier).state = true;
+  });
+}
+
+void onPressedRev(WidgetRef ref) {
+  ref.read(isTerminalProvider.notifier).state = false;
+  ref.read(showBackButtonProvider.notifier).state = false;
+
+  //delay 200ms
+  Future.delayed(const Duration(milliseconds: 600), () {
+    ref.read(hideSmoothProvider.notifier).state = false;
+    //ref.read(durationProvider.notifier).state = const Duration(seconds: 5);
+    ref.read(opacityProvider.notifier).state = 1;
+  });
+  Future.delayed(const Duration(milliseconds: 700), () {
+    ref.read(durationProvider.notifier).state = const Duration(seconds: 5);
   });
 }
 
@@ -160,3 +179,6 @@ final opacityProvider = StateProvider<double>((ref) => 1);
 
 //provider for boolean
 final isTerminalProvider = StateProvider<bool>((ref) => false);
+
+//provider for boolean
+final showBackButtonProvider = StateProvider<bool>((ref) => false);

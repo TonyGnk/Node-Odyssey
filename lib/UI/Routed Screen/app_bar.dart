@@ -16,6 +16,8 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AdaptAppBar({
     this.showThemeIcon = false,
     this.showInfoIcon = false,
+    this.showCustomBackButton = false,
+    this.customBackButtonOnTap,
     this.showBackButton = true,
     this.filled = true,
     this.label,
@@ -34,6 +36,10 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   ///The label at the top left corner of the app bar. If null rooted screen sets to label of the screen.
   final String? label;
+
+  final bool showCustomBackButton;
+  //ontap function of customback button
+  final void Function()? customBackButtonOnTap;
 
   final bool showThemeIcon;
   final bool showInfoIcon;
@@ -92,6 +98,14 @@ class AdaptAppBar extends StatelessWidget implements PreferredSizeWidget {
           final textButton = ref.watch(textButtonProviderR);
           return Row(
             children: [
+              showCustomBackButton
+                  ? AppBarIcon(
+                      tooltip: 'Πίσω',
+                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                      onPressed: customBackButtonOnTap,
+                      noBottomLeftCorner: noTopLeftCornerBack,
+                    )
+                  : const SizedBox(),
               showBackButton
                   ? AppBarIcon(
                       tooltip: 'Πίσω',
