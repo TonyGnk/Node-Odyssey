@@ -6,6 +6,7 @@ import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../../Services & Providers/text_editor_provider.dart';
+import '../../Services & Providers/tracking_container.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import 'text_viewer.dart';
 
@@ -18,11 +19,6 @@ Widget terminalSide(BuildContext context) {
       builder: (_, WidgetRef ref, __) => Column(
             children: [
               terminalTitle(context),
-              const Text('Press F12 for Results',
-                  style: TextStyle(
-                    fontFamily: 'AdventoPro',
-                    fontSize: 17,
-                  )),
               const SizedBox(height: 14),
               //te,
               //const SizedBox(height: 20),
@@ -43,8 +39,11 @@ terminalTitle(BuildContext context) => const Text(
       ),
     );
 
-textField() => Consumer(
-      builder: (context, WidgetRef ref, __) => Container(
+textField() => Consumer(builder: (context, WidgetRef ref, __) {
+      final terminalRows = ref.watch(terminalRowsProvider);
+      // ignore: unused_local_variable
+      final refreash = ref.watch(justForRefreshProvider);
+      return Container(
         decoration: boxDecoration(context),
         child: SelectionArea(
           child: Column(
@@ -75,14 +74,16 @@ textField() => Consumer(
                   //controller.clear();
                 },
               ),
+              //display all terminalRowsProvider items
+              ...terminalRows,
               const Expanded(
                 child: SizedBox(),
               ),
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
 
 boxDecoration(BuildContext context) => BoxDecoration(
       color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
@@ -113,7 +114,7 @@ Future<void> analyzeTheText(WidgetRef ref) async {
   List<String> words = text.split(' ');
   if (words[0] == 'C:WindowsSystem32>') words.removeAt(0);
 
-  if (words.length == 4) {
+  if (words.length >= 4) {
     String register = words[0];
     String algorithm = words[1];
     int integer1 = int.parse(words[2]);
@@ -136,7 +137,7 @@ Future<void> analyzeTheText(WidgetRef ref) async {
     ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
 
     //Print the solution
-    //showResult(solution, ref);
+    showResult(ref, solution);
   }
 }
 
@@ -169,3 +170,38 @@ AlgorithmType findType(String algorithm) {
       return AlgorithmType.bf;
   }
 }
+
+//Create a provider List<Widget>
+final terminalRowsProvider = StateProvider<List<Widget>>((ref) => []);
+
+final justForRefreshProvider = StateProvider<bool>((ref) => false);
+
+showResult(WidgetRef ref, List<Node>? solution) {
+  if (solution == null) {
+    ref.read(terminalRowsProvider.notifier).state.add(
+          terminalText(
+            'No Solution Found!',
+          ),
+        );
+  } else {
+    int nodeCounter = countNodes(solution);
+    int totalCost = solution.last.cost;
+    ref.read(terminalRowsProvider.notifier).state.add(
+          terminalText(
+            '$nodeCounter, $totalCost',
+          ),
+        );
+    for (Node node in solution) {
+      ref.read(terminalRowsProvider.notifier).state.add(
+            terminalText(
+                '${node.operation} ${getPreviousValue(node.value, node.operation)} ${node.cost}'),
+          );
+    }
+  }
+
+  //Refresh the terminalRowsProvider
+  ref.read(justForRefreshProvider.notifier).state =
+      !ref.read(justForRefreshProvider.notifier).state;
+}
+
+int countNodes(List<Node> solution) => solution.length;
