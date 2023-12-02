@@ -13,7 +13,7 @@ void homeGo(WidgetRef ref, ScreenDestination goTo) {
 
   //Disable the Screen
   Future.delayed(basicDuration, () {
-    screenReturn(ref, goTo);
+    callReturnOfScreen(ref, goTo);
   });
 }
 
@@ -25,7 +25,6 @@ void homeReturn(WidgetRef ref) {
   ref.read(appBarIsEnableBackButtonProvider.notifier).state = false;
 
   //Show with Animations
-  ref.read(showBackButtonProvider.notifier).state = false;
 
   //For Glass Only
   Future.delayed(const Duration(milliseconds: 600), () {
@@ -46,7 +45,6 @@ animatedColumn(Widget child) => Consumer(
     );
 
 final animatedOpacityProvider = StateProvider<double>((ref) => 1);
-final showBackButtonProvider = StateProvider<bool>((ref) => false);
 
 //To Remove
 forGlassOnlyGo(WidgetRef ref) {

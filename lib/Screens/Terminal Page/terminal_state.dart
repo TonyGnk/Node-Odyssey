@@ -12,7 +12,7 @@ void terminalGo(WidgetRef ref, ScreenDestination goTo) {
 
   //Disable the Screen
   Future.delayed(basicDuration, () {
-    screenReturn(ref, goTo);
+    callReturnOfScreen(ref, goTo);
   });
 }
 

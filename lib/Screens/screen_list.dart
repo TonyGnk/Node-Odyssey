@@ -7,8 +7,9 @@ import '../UI/Adaptive Templates/body_with_appbar.dart';
 import '../UI/Routed Screen/app_bar.dart';
 import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/main_bf.dart';
+import 'Buttons/button_state.dart';
 import 'Depth First Page/main_df.dart';
-import 'Home Page/ArchHP/button_side.dart';
+import 'Buttons/button_side.dart';
 import 'Home Page/home_state.dart';
 import 'Terminal Page/terminal_side.dart';
 import 'Home Page/main_home.dart';
@@ -54,12 +55,14 @@ backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
   }
 }
 
-screenReturn(WidgetRef ref, ScreenDestination goTo) {
+callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
   switch (goTo) {
     case ScreenDestination.home:
       homeReturn(ref);
     case ScreenDestination.terminal:
       terminalReturn(ref);
+    case ScreenDestination.algorithmsGUI:
+      buttonReturn(ref);
     default:
       homeReturn(ref);
   }
