@@ -38,6 +38,5 @@ void terminalReturn(WidgetRef ref) {
   Future.delayed(basicDuration, () {});
 
   //Show with Animations
-  ref.read(showBackButtonProvider.notifier).state = true;
   Future.delayed(const Duration(milliseconds: 600), () {});
 }

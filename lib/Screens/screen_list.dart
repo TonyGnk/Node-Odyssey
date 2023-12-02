@@ -50,6 +50,8 @@ backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
       null;
     case ScreenDestination.terminal:
       terminalGo(ref, targetScreen);
+    case ScreenDestination.algorithmsGUI:
+      buttonGo(ref, targetScreen);
     default:
       null;
   }

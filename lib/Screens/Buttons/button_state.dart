@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
-import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
@@ -23,6 +22,9 @@ void buttonReturn(WidgetRef ref) {
 
   //Set AppBarItems
   ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
+  ref.read(appBarCurrentScreen.notifier).state =
+      ScreenDestination.algorithmsGUI;
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
 
   //Show with Animations
 }
