@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,7 +40,7 @@ textFieldContainer() => Consumer(
     );
 
 boxDecoration(BuildContext context) => BoxDecoration(
-      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
+      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
       border: Border.all(
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),
@@ -47,12 +48,13 @@ boxDecoration(BuildContext context) => BoxDecoration(
     );
 
 contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
-      //final terminalRows = ref.watch(terminalRowsProvider);
-      // ignore: unused_local_variable
-      final refresh = ref.watch(justForRefreshProvider);
+      final terminalContent = ref.watch(terminalContentProvider);
+      final scrollController = ref.watch(scrollControllerProvider);
       return ListView(
+        //controller: scrollController,
+        dragStartBehavior: DragStartBehavior.down,
         children: [
-          terminalText(windowsText),
+          terminalText(terminalContent),
           textField(),
         ],
       );
@@ -60,12 +62,14 @@ contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
 
 textField() => Consumer(
       builder: (context, WidgetRef ref, __) => TextField(
-        autofocus: true,
+        //autofocus: true,
+        focusNode: myFocusNode,
         autocorrect: false,
         enableSuggestions: false,
         showCursor: true,
         textAlignVertical: TextAlignVertical.center,
         cursorWidth: 1,
+        scrollPadding: const EdgeInsets.all(0),
         cursorColor:
             Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
         style: const TextStyle(
@@ -73,7 +77,10 @@ textField() => Consumer(
           fontSize: 16,
         ),
         controller: ref.watch(controllerProvider),
-        decoration: const InputDecoration(border: InputBorder.none),
+        decoration: const InputDecoration(
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.all(0),
+            isDense: true),
         onSubmitted: (value) => onSubmittedTextField(ref, value),
       ),
     );

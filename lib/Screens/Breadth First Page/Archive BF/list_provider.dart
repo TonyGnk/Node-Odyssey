@@ -28,12 +28,18 @@ final runningRequestProvider = StateProvider<RunningRequest>(
 );
 
 class RunningRequest {
-  RunningRequest({
-    required this.startValue,
-    required this.targetValue,
-    required this.speed,
-    required this.enabledOperations,
-  });
+  RunningRequest(
+      {required this.startValue,
+      required this.targetValue,
+      this.speed = 0,
+      this.enabledOperations = const {
+        CalculationType.addition: true,
+        CalculationType.subtraction: true,
+        CalculationType.multiplication: true,
+        CalculationType.division: true,
+        CalculationType.exponential: true,
+        CalculationType.square: true,
+      }});
 
   //Αρχική Τιμή
   int startValue;

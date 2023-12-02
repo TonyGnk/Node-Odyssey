@@ -3,13 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services & Providers/node.dart';
 import '../../Services & Providers/text_editor_provider.dart';
 import 'terminal_helpler2.dart';
 import 'terminal_side.dart';
 
 final controllerProvider = StateProvider<TextEditingController>(
   (ref) => TextEditingController(
-    text: system32Text,
+    text: '$system32Text ',
   ),
 );
 
@@ -30,8 +31,22 @@ void addText(String text, WidgetRef ref) {
   ref.watch(textProvider.notifier).state = '${ref.read(textProvider)}\n$text';
 }
 
-String system32Text = 'C:\\Windows\\System32> ';
+String system32Text = 'C:\\Windows\\System32>';
 
-final terminalRowsProvider = StateProvider<List<Widget>>((ref) => []);
+final terminalRowsProvider = StateProvider<List<Widget>>(
+  (ref) => [],
+);
 
-final justForRefreshProvider = StateProvider<bool>((ref) => false);
+final justForRefreshProvider = StateProvider<bool>(
+  (ref) => false,
+);
+
+final terminalContentProvider = StateProvider<String>(
+  (ref) => windowsText,
+);
+
+final scrollControllerProvider = StateProvider<ScrollController>(
+  (ref) => ScrollController(),
+);
+
+FocusNode myFocusNode = FocusNode();

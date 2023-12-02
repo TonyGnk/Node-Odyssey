@@ -5,6 +5,7 @@ import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../Home Page/home_state.dart';
 import '../screen_list.dart';
+import 'terminal_helper.dart';
 
 void terminalGo(WidgetRef ref, ScreenDestination goTo) {
   //Hide with Animations
@@ -23,6 +24,18 @@ void terminalReturn(WidgetRef ref) {
   ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.terminal;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
+  // ref.read(appBarCustomIcon1.notifier).state = appBarIcon(
+  //   ref,
+  //   const Icon(Icons.clear_all),
+  //   () {
+  //     print('Clear All');
+  //     ref.watch(terminalContentProvider.notifier).state = windowsText;
+  //   },
+  // );
+
+  //Set Functioning stuff
+  myFocusNode.requestFocus();
+  Future.delayed(basicDuration, () {});
 
   //Show with Animations
   ref.read(showBackButtonProvider.notifier).state = true;

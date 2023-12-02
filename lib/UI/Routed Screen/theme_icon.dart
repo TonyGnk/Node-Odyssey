@@ -1,12 +1,14 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_bar.dart';
 
-Widget themeIcon(BuildContext context, bool enable) {
+Widget themeIcon(BuildContext context, WidgetRef ref, bool enable) {
   String mode = AdaptiveTheme.of(context).mode.toString();
   return enable
       ? appBarIcon(
+          ref,
           Icon(Icons.wb_sunny_outlined,
               color: Theme.of(context).colorScheme.onBackground),
           () {

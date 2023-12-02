@@ -15,6 +15,8 @@ final appBarLabel = StateProvider<String?>((ref) => null);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarPreviousScreen = StateProvider<ScreenDestination?>((ref) => null);
 
+final appBarCustomIcon1 = StateProvider<IconButton?>((ref) => null);
+
 Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
       final isEnable = ref.watch(appBarIsEnableProvider);
       final filled = ref.watch(appBarIsFilledProvider);
@@ -37,10 +39,12 @@ Widget row(BuildContext context) => Consumer(
         final isEnableInfoButton = ref.watch(appBarIsEnableInfoButtonProvider);
         final currentScreen = ref.watch(appBarCurrentScreen);
         final previousScreen = ref.watch(appBarPreviousScreen);
+        final customIcon1 = ref.watch(appBarCustomIcon1);
         return Row(
           children: [
             isEnableBackButton
                 ? appBarIcon(
+                    ref,
                     const Icon(Icons.arrow_back_ios_new_outlined),
                     () => backButtonReturn(ref, currentScreen, previousScreen),
                   )
@@ -50,8 +54,9 @@ Widget row(BuildContext context) => Consumer(
               style: const TextStyle(fontSize: 16),
             ),
             const Expanded(child: SizedBox()),
-            themeIcon(context, isEnableThemeButton),
-            infoIcon(context, isEnableInfoButton),
+            customIcon1 ?? const SizedBox(),
+            themeIcon(context, ref, isEnableThemeButton),
+            infoIcon(context, ref, isEnableInfoButton),
           ],
         );
       },
@@ -73,31 +78,30 @@ boxDecoration(BuildContext context) => BoxDecoration(
     );
 
 appBarIcon(
+  WidgetRef ref,
   Icon icon,
   void Function() onPressed, [
   String s = '',
   Icon? selectedIcon,
   bool? isSelected,
 ]) =>
-    Consumer(
-      builder: (context, ref, _) => IconButton(
-        tooltip: s != '' ? s : null,
-        selectedIcon: selectedIcon,
-        isSelected: isSelected,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(cornerSize),
-                topLeft: Radius.circular(cornerSize),
-                topRight: Radius.circular(cornerSize),
-                bottomRight: Radius.circular(cornerSize),
-              ),
+    IconButton(
+      tooltip: s != '' ? s : null,
+      selectedIcon: selectedIcon,
+      isSelected: isSelected,
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all<OutlinedBorder>(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(cornerSize),
+              topLeft: Radius.circular(cornerSize),
+              topRight: Radius.circular(cornerSize),
+              bottomRight: Radius.circular(cornerSize),
             ),
           ),
-          fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
         ),
-        onPressed: onPressed,
-        icon: icon,
+        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
       ),
+      onPressed: onPressed,
+      icon: icon,
     );
