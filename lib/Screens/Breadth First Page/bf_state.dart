@@ -5,7 +5,7 @@ import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
-void buttonGo(WidgetRef ref, ScreenDestination goTo) {
+void bfGo(WidgetRef ref, ScreenDestination goTo) {
   //Hide with Animations
 
   //Disable the Screen
@@ -14,17 +14,18 @@ void buttonGo(WidgetRef ref, ScreenDestination goTo) {
   });
 }
 
-void buttonReturn(WidgetRef ref) {
+void bfReturn(WidgetRef ref) {
   //Enable the Screen
   ref.read(currentScreenProvider.notifier).state =
-      ScreenDestination.algorithmsGUI;
+      ScreenDestination.breadthFirstAlg;
 
   //Set AppBarItems
   ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
   ref.read(appBarCurrentScreen.notifier).state =
+      ScreenDestination.breadthFirstAlg;
+  ref.read(appBarPreviousScreen.notifier).state =
       ScreenDestination.algorithmsGUI;
-  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
-  ref.read(appBarLabel.notifier).state = '';
+  ref.read(appBarLabel.notifier).state = 'Breadth First Search';
 
   //Show with Animations
 }

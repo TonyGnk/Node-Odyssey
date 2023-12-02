@@ -51,7 +51,7 @@ Widget row(BuildContext context) => Consumer(
                 : const SizedBox(),
             Text(
               label ?? '',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, fontFamily: 'AdventPro'),
             ),
             const Expanded(child: SizedBox()),
             customIcon1 ?? const SizedBox(),

@@ -13,7 +13,7 @@ void main() async {
     WindowOptions windowOptions = const WindowOptions(
       fullScreen: false,
       title: 'Algorithms',
-      size: Size(1080, 770),
+      size: Size(1060, 670), //1080-770
       center: false,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,

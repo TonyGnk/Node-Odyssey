@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Arc/custom_list_tile.dart';
-import '../../UI/Adaptive Templates/body_with_appbar.dart';
-import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
-//math
-import 'dart:math' as math;
 
 import '../Home Page/home_state.dart';
 import '../Home Page/ArchHP/modern_caption.dart';

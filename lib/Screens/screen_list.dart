@@ -6,8 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../UI/Adaptive Templates/body_with_appbar.dart';
 import '../UI/Routed Screen/app_bar.dart';
 import '../UI/Routed Screen/routed_screen.dart';
+import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Buttons/button_state.dart';
+import 'Depth First Page/df_state.dart';
 import 'Depth First Page/main_df.dart';
 import 'Buttons/button_side.dart';
 import 'Home Page/home_state.dart';
@@ -52,6 +54,10 @@ backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
       terminalGo(ref, targetScreen);
     case ScreenDestination.algorithmsGUI:
       buttonGo(ref, targetScreen);
+    case ScreenDestination.breadthFirstAlg:
+      bfGo(ref, targetScreen);
+    case ScreenDestination.depthFirstAlg:
+      dfGo(ref, targetScreen);
     default:
       null;
   }
@@ -65,6 +71,10 @@ callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
       terminalReturn(ref);
     case ScreenDestination.algorithmsGUI:
       buttonReturn(ref);
+    case ScreenDestination.breadthFirstAlg:
+      bfReturn(ref);
+    case ScreenDestination.depthFirstAlg:
+      dfReturn(ref);
     default:
       homeReturn(ref);
   }
