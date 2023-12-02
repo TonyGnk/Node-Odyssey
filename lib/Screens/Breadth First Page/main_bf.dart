@@ -26,14 +26,7 @@ class BreadthFirstAlg extends StatelessWidget {
 
 // Αυτή είναι η γραμμή τίτλου της οθόνης
 // Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
-Widget appBarBf(BuildContext context) => AdaptAppBar(
-      filled: false,
-      label: 'Breadth First Algorithm',
-      showThemeIcon: true,
-      showInfoIcon: false,
-      brightness: Theme.of(context).brightness,
-      backgroundColor: Colors.transparent,
-    );
+Widget appBarBf(BuildContext context) => adaptAppBar();
 
 // Αυτή είναι το κεντρικό σώμα της οθόνης
 // Περιλαμβάνει την αριστερή και την δεξιά στήλη

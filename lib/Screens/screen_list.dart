@@ -9,8 +9,10 @@ import '../UI/Routed Screen/routed_screen.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Depth First Page/main_df.dart';
 import 'Home Page/ArchHP/button_side.dart';
-import 'Home Page/ArchHP/terminal_side.dart';
+import 'Home Page/home_state.dart';
+import 'Terminal Page/terminal_side.dart';
 import 'Home Page/main_home.dart';
+import 'Terminal Page/terminal_state.dart';
 
 enum ScreenDestination {
   home,
@@ -37,6 +39,31 @@ getCurrentScreen(ScreenDestination currentScreen) {
   }
 }
 
+backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
+    ScreenDestination? targetScreen) {
+  if (currentScreen == null || targetScreen == null) {
+    return;
+  }
+  switch (currentScreen) {
+    case ScreenDestination.home:
+      null;
+    case ScreenDestination.terminal:
+      terminalGo(ref, targetScreen);
+    default:
+      null;
+  }
+}
+
+screenReturn(WidgetRef ref, ScreenDestination goTo) {
+  switch (goTo) {
+    case ScreenDestination.home:
+      homeReturn(ref);
+    case ScreenDestination.terminal:
+      terminalReturn(ref);
+    default:
+      homeReturn(ref);
+  }
+}
 
 
 

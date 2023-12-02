@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Services & Providers/node.dart';
 import '../../../Services & Providers/tracking_container.dart';
@@ -29,11 +28,6 @@ void addResultPanelList(
     }
   }
 }
-
-//Create an empty provider for a TextButton
-final textButtonProviderR = StateProvider<Widget>(
-  (ref) => const SizedBox(),
-);
 
 final resListProvider = StateProvider<TrackingList>(
   (ref) => TrackingList(),

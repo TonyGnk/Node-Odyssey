@@ -10,29 +10,6 @@ import 'dart:math' as math;
 import '../home_state.dart';
 import 'modern_caption.dart';
 
-class AlgorithmsGUI extends StatelessWidget {
-  const AlgorithmsGUI({super.key});
-
-  @override
-  Widget build(BuildContext context) => bodyWithAppBar(
-        context: context,
-        appBar: appBarBf(context),
-        body: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: AlgorithmsGUIBody(),
-        ),
-      );
-}
-
-Widget appBarBf(BuildContext context) => AdaptAppBar(
-      filled: false,
-      label: '',
-      showThemeIcon: true,
-      showBackButton: true,
-      brightness: Theme.of(context).brightness,
-      backgroundColor: Colors.transparent,
-    );
-
 class AlgorithmsGUIBody extends StatelessWidget {
   const AlgorithmsGUIBody({super.key});
 

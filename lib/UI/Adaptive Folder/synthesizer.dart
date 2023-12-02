@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Screens/Home Page/home_state.dart';
 import '../../Screens/screen_list.dart';
 import '../Adaptive Templates/body_with_appbar.dart';
 import '../Routed Screen/app_bar.dart';
@@ -21,16 +20,7 @@ Widget home() => Consumer(builder: (context, ref, _) {
     });
 
 Widget appBar(BuildContext context) => Consumer(
-      builder: (context, ref, _) => AdaptAppBar(
-        filled: false,
-        label: '',
-        showThemeIcon: true,
-        showCustomBackButton: ref.watch(showBackButtonProvider),
-        customBackButtonOnTap: () => homeReturn(ref),
-        showBackButton: false,
-        brightness: Theme.of(context).brightness,
-        backgroundColor: Colors.transparent,
-      ),
+      builder: (context, ref, _) => adaptAppBar(),
     );
 
 final currentScreenProvider = StateProvider<ScreenDestination>(
