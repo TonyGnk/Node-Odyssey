@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
@@ -9,6 +10,7 @@ import 'terminal_helper.dart';
 
 void terminalGo(WidgetRef ref, ScreenDestination goTo) {
   //Hide with Animations
+  ref.read(opacityTerminalState.notifier).state = 1;
 
   //Disable the Screen
   Future.delayed(basicDuration, () {
@@ -24,19 +26,42 @@ void terminalReturn(WidgetRef ref) {
   ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.terminal;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
-  // ref.read(appBarCustomIcon1.notifier).state = appBarIcon(
-  //   ref,
-  //   const Icon(Icons.clear_all),
-  //   () {
-  //     print('Clear All');
-  //     ref.watch(terminalContentProvider.notifier).state = windowsText;
-  //   },
-  // );
 
   //Set Functioning stuff
   myFocusNode.requestFocus();
   Future.delayed(basicDuration, () {});
 
   //Show with Animations
-  Future.delayed(const Duration(milliseconds: 600), () {});
+
+  Future.delayed(basicDuration5, () {
+    ref.read(opacityTerminalState.notifier).state = 1;
+  });
 }
+
+class animatedColumn extends ConsumerWidget {
+  const animatedColumn(this.child, {super.key});
+
+  final Column child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final opacity = ref.watch(opacityTerminalState);
+    return AnimatedOpacity(
+      opacity: opacity,
+      duration: basicDuration,
+      child: child,
+    );
+  }
+}
+
+final opacityTerminalState = StateProvider<double>((ref) => 1);
+
+
+// animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
+//       final opacity = ref.watch(opacityTerminalState);
+//       return AnimatedOpacity(
+//         opacity: opacity,
+//         duration: basicDuration,
+//         child: child,
+//       );
+//     });

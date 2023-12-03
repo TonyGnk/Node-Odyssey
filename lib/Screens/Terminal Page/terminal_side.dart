@@ -7,15 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services & Providers/text_editor_provider.dart';
 import 'terminal_helper.dart';
 import 'terminal_helpler2.dart';
+import 'terminal_state.dart';
 
 Widget terminalSide() => Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          terminalTitle(),
-          const SizedBox(height: 16),
-          Expanded(child: textFieldContainer()),
-        ],
+      child: animatedColumn(
+        Column(
+          children: [
+            terminalTitle(),
+            const SizedBox(height: 16),
+            Expanded(child: textFieldContainer()),
+          ],
+        ),
       ),
     );
 
