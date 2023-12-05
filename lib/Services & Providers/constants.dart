@@ -11,9 +11,9 @@ enum AlgorithmType { bf, df, bestf, astar }
 List<Node>? startAlgorithmTerminal(
     WidgetRef ref, AlgorithmType type, RunningRequest request) {
   if (type == AlgorithmType.bf) {
-    return runBFGuiTerminal(ref, request);
+    return runBFGuiTerminal(request);
   } else if (type == AlgorithmType.df) {
-    return runDFGuiTerminal(ref, request);
+    return runDFGuiTerminal(request);
   } else {
     return null;
   }

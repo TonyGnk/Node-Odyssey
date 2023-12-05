@@ -60,7 +60,7 @@ Future<List<Node>?> runDFGui(WidgetRef ref, RunningRequest request) async {
   return null;
 }
 
-List<Node>? runDFGuiTerminal(WidgetRef ref, RunningRequest request) {
+List<Node>? runDFGuiTerminal(RunningRequest request) {
   int start = request.startValue;
   int end = request.targetValue;
 
@@ -75,8 +75,6 @@ List<Node>? runDFGuiTerminal(WidgetRef ref, RunningRequest request) {
 
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
-
-    updateChartAndTrackingPanel(ref, current, end);
 
     if (current.value == end) {
       return currentPath;

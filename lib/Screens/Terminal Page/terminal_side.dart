@@ -58,7 +58,7 @@ textFieldContainer() => Consumer(
     );
 
 boxDecoration(BuildContext context) => BoxDecoration(
-      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
+      color: Colors.grey.withOpacity(0.1),
       border: Border.all(
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),

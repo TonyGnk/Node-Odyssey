@@ -53,7 +53,7 @@ Future<List<Node>?> runBFGui(WidgetRef ref, RunningRequest request) async {
   return null;
 }
 
-List<Node>? runBFGuiTerminal(WidgetRef ref, RunningRequest request) {
+List<Node>? runBFGuiTerminal(RunningRequest request) {
   int start = request.startValue;
   int end = request.targetValue;
 
