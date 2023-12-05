@@ -11,21 +11,21 @@ final stopTimerProvider = StateProvider<bool>(
   (ref) => false,
 );
 
-final runningRequestProvider = StateProvider<RunningRequest>(
-  (ref) => RunningRequest(
-    startValue: 0,
-    targetValue: 0,
-    speed: 1,
-    enabledOperations: {
-      CalculationType.addition: true,
-      CalculationType.subtraction: true,
-      CalculationType.multiplication: true,
-      CalculationType.division: true,
-      CalculationType.exponential: true,
-      CalculationType.square: true,
-    },
-  ),
-);
+// final runningRequestProvider = StateProvider<RunningRequest>(
+//   (ref) => RunningRequest(
+//     startValue: 0,
+//     targetValue: 0,
+//     speed: 1,
+//     enabledOperations: {
+//       CalculationType.addition: true,
+//       CalculationType.subtraction: true,
+//       CalculationType.multiplication: true,
+//       CalculationType.division: true,
+//       CalculationType.exponential: true,
+//       CalculationType.square: true,
+//     },
+//   ),
+// );
 
 class RunningRequest {
   RunningRequest(

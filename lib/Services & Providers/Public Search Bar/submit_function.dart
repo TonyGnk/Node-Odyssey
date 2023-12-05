@@ -16,11 +16,12 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   clearGUI(ref);
 
   //Collect all the data from the UI
-  ref.watch(runningRequestProvider.notifier).state = running(ref);
+  //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
+  RunningRequest request = saveRequest(ref);
 
   //Start the selected algorithm
   ref.read(isAlgorithmEndProviderBf.notifier).state = false; //Started
-  List<Node>? solution = await startAlgorithm(ref, type);
+  List<Node>? solution = await startAlgorithm(ref, type, request);
   ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
 
   //Add the solution to the Result Panel
@@ -30,9 +31,9 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   resetControllers();
 }
 
-running(WidgetRef ref) => RunningRequest(
-      startValue: int.parse(inputControllerBf.text),
-      targetValue: int.parse(targetControllerBf.text),
+saveRequest(WidgetRef ref) => RunningRequest(
+      startValue: int.parse(inputController.text),
+      targetValue: int.parse(targetController.text),
       speed: setSpeedFromSlider(ref.watch(speedSliderProviderBf)),
       enabledOperations: {
         CalculationType.addition: ref.watch(checkPlusOneProvider),

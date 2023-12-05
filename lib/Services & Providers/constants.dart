@@ -1,21 +1,30 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Breadth First/algorithm_bf.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
+import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'node.dart';
 
 const double cornerSize = 16;
 
 enum AlgorithmType { bf, df, bestf, astar }
 
-Future<List<Node>?> startAlgorithm(WidgetRef ref, AlgorithmType type) async {
+List<Node>? startAlgorithmTerminal(
+    WidgetRef ref, AlgorithmType type, RunningRequest request) {
   if (type == AlgorithmType.bf) {
-    return runBFGui(ref);
+    return runBFGuiTerminal(ref, request);
   } else if (type == AlgorithmType.df) {
-    return runDFGui(ref);
-  } else if (type == AlgorithmType.bestf) {
-    return runBFGui(ref);
-  } else if (type == AlgorithmType.astar) {
-    return runBFGui(ref);
+    return runDFGuiTerminal(ref, request);
+  } else {
+    return null;
+  }
+}
+
+Future<List<Node>?> startAlgorithm(
+    WidgetRef ref, AlgorithmType type, RunningRequest request) async {
+  if (type == AlgorithmType.bf) {
+    return runBFGui(ref, request);
+  } else if (type == AlgorithmType.df) {
+    return runDFGui(ref, request);
   } else {
     return null;
   }

@@ -1,12 +1,5 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../Services & Providers/node.dart';
-import '../../Services & Providers/text_editor_provider.dart';
-import 'terminal_helpler2.dart';
-import 'terminal_side.dart';
 
 final controllerProvider = StateProvider<TextEditingController>(
   (ref) => TextEditingController(
@@ -18,7 +11,7 @@ terminalText(String text) => Text(
       text,
       style: const TextStyle(
         fontFamily: 'Consolas',
-        fontSize: 16,
+        fontSize: 15,
       ),
     );
 
@@ -33,20 +26,8 @@ void addText(String text, WidgetRef ref) {
 
 String system32Text = 'C:\\Windows\\System32>';
 
-final terminalRowsProvider = StateProvider<List<Widget>>(
-  (ref) => [],
-);
-
-final justForRefreshProvider = StateProvider<bool>(
-  (ref) => false,
-);
-
 final terminalContentProvider = StateProvider<String>(
   (ref) => windowsText,
-);
-
-final scrollControllerProvider = StateProvider<ScrollController>(
-  (ref) => ScrollController(),
 );
 
 FocusNode myFocusNode = FocusNode();

@@ -1,20 +1,12 @@
-// ignore_for_file: unused_import
-
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/node.dart';
-import '../../Services & Providers/six_calculations.dart';
-import '../../Services & Providers/text_editor_provider.dart';
-import '../../Services & Providers/tracking_container.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
-import 'terminal_helper.dart';
+import 'terminal_providers.dart';
 
-Future<void> analyzeTheText(WidgetRef ref) async {
+analyzeTheText(WidgetRef ref) {
   //Get the text from the textField
   final text = ref.watch(controllerProvider);
 
@@ -33,14 +25,15 @@ Future<void> analyzeTheText(WidgetRef ref) async {
   int startValue = int.parse(words[2]);
   int targetValue = int.parse(words[3]);
 
-  ref.watch(runningRequestProvider.notifier).state = RunningRequest(
+  //ref.watch(runningRequestProvider.notifier).state =
+  RunningRequest request = RunningRequest(
     startValue: startValue,
     targetValue: targetValue,
   );
 
   //Start the selected algorithm
   ref.read(isAlgorithmEndProviderBf.notifier).state = false; //Started
-  List<Node>? solution = await startAlgorithm(ref, type);
+  List<Node>? solution = startAlgorithmTerminal(ref, type, request);
   ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
 
   newResult(ref, solution);

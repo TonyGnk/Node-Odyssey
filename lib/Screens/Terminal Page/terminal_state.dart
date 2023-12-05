@@ -5,7 +5,7 @@ import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
-import 'terminal_helper.dart';
+import 'terminal_providers.dart';
 
 final opacityTerminalState = StateProvider<double>((ref) => 1);
 

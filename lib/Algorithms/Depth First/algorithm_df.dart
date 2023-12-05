@@ -5,10 +5,10 @@ import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 
-Future<List<Node>?> runDFGui(WidgetRef ref) async {
-  RunningRequest request = ref.read(runningRequestProvider.notifier).state;
+Future<List<Node>?> runDFGui(WidgetRef ref, RunningRequest request) async {
   int start = request.startValue;
   int end = request.targetValue;
+  int speed = request.speed;
   Map<CalculationType, bool> enabledOperations = request.enabledOperations;
 
   List<List<Node>> stack = [];
@@ -18,8 +18,8 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
   visited.add(start);
 
   while (stack.isNotEmpty) {
+    await Future.delayed(Duration(milliseconds: speed));
     int counter = 0;
-    //await Future.delayed(Duration(milliseconds: 3));
 
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
@@ -39,22 +39,13 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
         if (isAllowed(newValue, current.value, type)) {
           // If the new value is not visited
           if (!visited.contains(newValue)) {
-            //print(type.toString() + ': ' + newValue.toString());
             Node newNode = getNewNode(
               current.value,
               current.cost,
               newValue,
               type,
             );
-            List<Node> newPath = List.from(currentPath)
-              ..add(
-                  newNode); // Αυτή η εντολή δημιουργεί ένα νέο λίστα με τα στοιχεία της currentPath και προσθέτει στο τέλος της τον newNode
-            //stack.add(newPath);
-            //stack.insert(0, newPath);
-
-            //Add in stack at the last position
-            //stack.add(newPath);
-            //Add in stack at the preLast position
+            List<Node> newPath = List.from(currentPath)..add(newNode);
             stack.insert(stack.length - counter, newPath);
             if (counter == 0) {
               visited.add(newNode.value);
@@ -64,14 +55,55 @@ Future<List<Node>?> runDFGui(WidgetRef ref) async {
       }
       counter++;
     }
+  }
 
-    //print all nodes of stack
-    // for (List<Node> path in stack) {
-    //   print('Node Number: ' + stack.indexOf(path).toString());
-    //   for (Node node in path) {
-    //     print('Path: ' + node.value.toString());
-    //   }
-    // }
+  return null;
+}
+
+List<Node>? runDFGuiTerminal(WidgetRef ref, RunningRequest request) {
+  int start = request.startValue;
+  int end = request.targetValue;
+
+  List<List<Node>> stack = [];
+  Set<int> visited = {};
+
+  stack.add([Node(start, 0, 'Αρχική Τιμή')]);
+  visited.add(start);
+
+  while (stack.isNotEmpty) {
+    int counter = 0;
+
+    List<Node> currentPath = stack.removeLast();
+    Node current = currentPath.last;
+
+    updateChartAndTrackingPanel(ref, current, end);
+
+    if (current.value == end) {
+      return currentPath;
+    }
+
+    // Calculate all the possible
+    for (CalculationType type in CalculationType.values) {
+      int newValue = getNewValue(current.value, type);
+      // If the new value is allowed from the rules
+      if (isAllowed(newValue, current.value, type)) {
+        // If the new value is not visited
+        if (!visited.contains(newValue)) {
+          Node newNode = getNewNode(
+            current.value,
+            current.cost,
+            newValue,
+            type,
+          );
+          List<Node> newPath = List.from(currentPath)..add(newNode);
+          stack.insert(stack.length - counter, newPath);
+          if (counter == 0) {
+            visited.add(newNode.value);
+          }
+        }
+      }
+      counter++;
+    }
   }
 
   return null;

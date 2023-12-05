@@ -166,6 +166,6 @@ final checkSquareProvider = StateProvider<bool>((ref) => true);
 final checkRootProvider = StateProvider<bool>((ref) => true);
 
 void resetControllers() {
-  inputControllerBf.clear();
-  targetControllerBf.clear();
+  inputController.clear();
+  targetController.clear();
 }

@@ -1,12 +1,9 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/text_editor_provider.dart';
-import 'terminal_helper.dart';
-import 'terminal_helpler2.dart';
+import 'terminal_providers.dart';
+import 'terminal_functions.dart';
 import 'terminal_state.dart';
 
 class TerminalSide extends ConsumerStatefulWidget {
@@ -81,7 +78,6 @@ contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
 
 textField() => Consumer(
       builder: (context, WidgetRef ref, __) => TextField(
-        //autofocus: true,
         focusNode: myFocusNode,
         autocorrect: false,
         enableSuggestions: false,
@@ -93,7 +89,7 @@ textField() => Consumer(
             Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
         style: const TextStyle(
           fontFamily: 'Consolas',
-          fontSize: 16,
+          fontSize: 15,
         ),
         controller: ref.watch(controllerProvider),
         decoration: const InputDecoration(
@@ -108,5 +104,4 @@ onSubmittedTextField(WidgetRef ref, String value) async {
   ref.read(controllerProvider.notifier).state.text = value;
   analyzeTheText(ref);
   addText(value, ref);
-  //controller.clear();
 }

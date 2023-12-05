@@ -8,9 +8,9 @@ import 'submit_function.dart';
 
 closedSearch(BuildContext context, AlgorithmType type) => Row(
       children: [
-        inPutFieldBf(context, inputControllerBf, 'Αρχική Τιμή'),
+        inPutFieldBf(context, inputController, 'Αρχική Τιμή'),
         const SizedBox(width: 6),
-        inPutFieldBf(context, targetControllerBf, 'Τελική Τιμή'),
+        inPutFieldBf(context, targetController, 'Τελική Τιμή'),
         const SizedBox(width: 6),
         extraButtonBf(),
         const SizedBox(width: 3),
@@ -18,8 +18,8 @@ closedSearch(BuildContext context, AlgorithmType type) => Row(
       ],
     );
 
-TextEditingController inputControllerBf = TextEditingController();
-TextEditingController targetControllerBf = TextEditingController();
+TextEditingController inputController = TextEditingController();
+TextEditingController targetController = TextEditingController();
 
 inPutFieldBf(
   BuildContext context,
