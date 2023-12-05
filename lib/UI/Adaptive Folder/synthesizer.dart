@@ -8,14 +8,11 @@ import '../Routed Screen/app_bar.dart';
 Widget home() => Consumer(builder: (context, ref, _) {
       final currentScreen = ref.watch(currentScreenProvider);
       return bodyWithAppBarGlass(
-        context: context,
         appBar: appBar(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: getCurrentScreen(currentScreen),
         ),
-        isBlackFirst: true,
-        ref: ref,
       );
     });
 
