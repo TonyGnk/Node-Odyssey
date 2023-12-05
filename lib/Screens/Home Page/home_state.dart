@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
+import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
@@ -9,11 +10,13 @@ final opacityHomeState = StateProvider<double>((ref) => 1);
 
 homeGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
+  hideColors(ref);
 
   goTo(ref, destination);
 }
 
 homeReturn(WidgetRef ref) {
+  setColors(ref);
   updateAppBarItems(ref, true);
 }
 

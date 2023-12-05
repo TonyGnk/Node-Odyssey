@@ -24,11 +24,9 @@ class _BackgroundWallState extends ConsumerState<BackgroundWall> {
   void initState() {
     super.initState();
 
-    setColors(ref);
-
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
-      updateColors(ref);
-    });
+    // timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+    //   updateColors(ref);
+    // });
   }
 
   @override
