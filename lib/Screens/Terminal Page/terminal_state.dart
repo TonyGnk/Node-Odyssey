@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
-import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 import 'terminal_providers.dart';
 
 final opacityTerminalState = StateProvider<double>((ref) => 1);
 
-terminalGo(WidgetRef ref, ScreenDestination goTo) {
+terminalGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
 
   //Change Screen
-  Future.delayed(basicDuration, () {
-    ref.read(currentScreenProvider.notifier).state = goTo;
-  });
+  goTo(ref, destination);
 }
 
 terminalReturn(WidgetRef ref) {

@@ -3,44 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Services & Providers/constants.dart';
-import '../../UI/Adaptive Templates/body_with_appbar.dart';
-import '../../UI/Routed Screen/app_bar.dart';
 import 'Chart BF/chart_bf.dart';
 import 'Result Panel BF/result_panel_bf.dart';
 import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import 'Create & Tracking List/list_and_button_bf.dart';
+import 'bf_state.dart';
 
-class BreadthFirstAlg extends StatelessWidget {
+class BreadthFirstAlg extends ConsumerStatefulWidget {
   const BreadthFirstAlg({super.key});
 
   @override
-  Widget build(BuildContext context) => bodyWithAppBar(
-        context: context,
-        appBar: appBarBf(context),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: bodyBf(),
-        ),
-      );
+  ConsumerState<BreadthFirstAlg> createState() => _TerminalSideState();
 }
 
-// Αυτή είναι η γραμμή τίτλου της οθόνης
-// Περιλαμβάνει το όνομα του αλγορίθμου και τα εικονίδια θέματος και πληροφοριών
-Widget appBarBf(BuildContext context) => adaptAppBar();
+class _TerminalSideState extends ConsumerState<BreadthFirstAlg> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      bfReturn(ref);
+    });
+  }
 
-// Αυτή είναι το κεντρικό σώμα της οθόνης
-// Περιλαμβάνει την αριστερή και την δεξιά στήλη
-Widget bodyBf() => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        leftColumnBf(),
-        const SizedBox(width: 10),
-        Expanded(
-          flex: 14, //14
-          child: containerZ(),
-        ),
-      ],
-    );
+  @override
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          leftColumnBf(),
+          const SizedBox(width: 10),
+          Expanded(
+            flex: 14, //14
+            child: containerZ(),
+          ),
+        ],
+      );
+}
 
 // Αυτή είναι η αριστερή στήλη της οθόνης
 // Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο

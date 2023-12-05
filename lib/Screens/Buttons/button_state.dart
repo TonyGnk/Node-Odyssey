@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
-import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
 final opacityButtonState = StateProvider<double>((ref) => 1);
 
-void buttonGo(WidgetRef ref, ScreenDestination goTo) {
+void buttonGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
 
-  //Disable the Screen
-  Future.delayed(basicDuration, () {
-    ref.read(currentScreenProvider.notifier).state = goTo;
-  });
+  goTo(ref, destination);
 }
 
 void buttonReturn(WidgetRef ref) {
@@ -27,8 +23,7 @@ void buttonReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   ref.read(opacityButtonState.notifier).state = isReturn ? 1 : 0;
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state =
-      isReturn ? true : false;
+  ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
 }
 
 //EXTRA

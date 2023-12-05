@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Services & Providers/constants.dart';
+import '../UI/Adaptive Folder/synthesizer.dart';
 import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Buttons/button_state.dart';
@@ -19,6 +21,12 @@ enum ScreenDestination {
   depthFirstAlg,
 }
 
+goTo(WidgetRef ref, ScreenDestination destination) async {
+  Future.delayed(basicDuration, () {
+    ref.read(currentScreenProvider.notifier).state = destination;
+  });
+}
+
 getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
     case ScreenDestination.home:
@@ -28,9 +36,9 @@ getCurrentScreen(ScreenDestination currentScreen) {
     case ScreenDestination.algorithmsGUI:
       return const AlgorithmsGUIBody();
     case ScreenDestination.breadthFirstAlg:
-      return bodyBf();
+      return const BreadthFirstAlg();
     case ScreenDestination.depthFirstAlg:
-      return bodyDf();
+      return const BodyDf();
     default:
       return const Home();
   }
