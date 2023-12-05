@@ -22,9 +22,9 @@ enum ScreenDestination {
 getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
     case ScreenDestination.home:
-      return home();
+      return const Home();
     case ScreenDestination.terminal:
-      return terminalSide();
+      return const TerminalSide();
     case ScreenDestination.algorithmsGUI:
       return const AlgorithmsGUIBody();
     case ScreenDestination.breadthFirstAlg:
@@ -32,7 +32,7 @@ getCurrentScreen(ScreenDestination currentScreen) {
     case ScreenDestination.depthFirstAlg:
       return bodyDf();
     default:
-      return home();
+      return const Home();
   }
 }
 

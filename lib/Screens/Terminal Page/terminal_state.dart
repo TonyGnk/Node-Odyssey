@@ -4,64 +4,54 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
-import '../Home Page/home_state.dart';
 import '../screen_list.dart';
 import 'terminal_helper.dart';
 
-void terminalGo(WidgetRef ref, ScreenDestination goTo) {
-  //Hide with Animations
-  ref.read(opacityTerminalState.notifier).state = 1;
+final opacityTerminalState = StateProvider<double>((ref) => 1);
 
-  //Disable the Screen
+terminalGo(WidgetRef ref, ScreenDestination goTo) {
+  updateAppBarItems(ref, false);
+
+  //Change Screen
   Future.delayed(basicDuration, () {
-    callReturnOfScreen(ref, goTo);
+    ref.read(currentScreenProvider.notifier).state = goTo;
   });
 }
 
-void terminalReturn(WidgetRef ref) {
-  //Enable the Screen
-  ref.read(currentScreenProvider.notifier).state = ScreenDestination.terminal;
-
-  //Set AppBarItems
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
+terminalReturn(WidgetRef ref) {
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.terminal;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
 
   //Set Functioning stuff
   myFocusNode.requestFocus();
-  Future.delayed(basicDuration, () {});
 
-  //Show with Animations
-
-  Future.delayed(basicDuration5, () {
-    ref.read(opacityTerminalState.notifier).state = 1;
-  });
+  updateAppBarItems(ref, true);
 }
 
-class animatedColumn extends ConsumerWidget {
-  const animatedColumn(this.child, {super.key});
+updateAppBarItems(WidgetRef ref, bool isReturn) {
+  //Update Animations
+  ref.read(opacityTerminalState.notifier).state = isReturn ? 1 : 0;
 
-  final Column child;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final opacity = ref.watch(opacityTerminalState);
-    return AnimatedOpacity(
-      opacity: opacity,
-      duration: basicDuration,
-      child: child,
-    );
-  }
+  //Update AppBarItems
+  ref.read(appBarIsEnableBackButtonProvider.notifier).state =
+      isReturn ? true : false;
+  ref.read(appBarCustomIcon1.notifier).state = isReturn
+      ? IconButton(
+          onPressed: () {
+            ref.read(terminalContentProvider.notifier).state = windowsText;
+            myFocusNode.requestFocus();
+          },
+          icon: const Icon(Icons.restart_alt_outlined),
+        )
+      : null;
 }
 
-final opacityTerminalState = StateProvider<double>((ref) => 1);
-
-
-// animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
-//       final opacity = ref.watch(opacityTerminalState);
-//       return AnimatedOpacity(
-//         opacity: opacity,
-//         duration: basicDuration,
-//         child: child,
-//       );
-//     });
+//EXTRA
+animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
+      final opacity = ref.watch(opacityTerminalState);
+      return AnimatedOpacity(
+        opacity: opacity,
+        duration: basicDuration,
+        child: child,
+      );
+    });

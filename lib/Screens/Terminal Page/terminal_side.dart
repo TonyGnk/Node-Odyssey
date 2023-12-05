@@ -9,18 +9,36 @@ import 'terminal_helper.dart';
 import 'terminal_helpler2.dart';
 import 'terminal_state.dart';
 
-Widget terminalSide() => Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: animatedColumn(
-        Column(
-          children: [
-            terminalTitle(),
-            const SizedBox(height: 16),
-            Expanded(child: textFieldContainer()),
-          ],
+class TerminalSide extends ConsumerStatefulWidget {
+  const TerminalSide({super.key});
+
+  @override
+  ConsumerState<TerminalSide> createState() => _TerminalSideState();
+}
+
+class _TerminalSideState extends ConsumerState<TerminalSide> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      terminalReturn(ref);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: animatedColumn(
+          Column(
+            children: [
+              terminalTitle(),
+              const SizedBox(height: 16),
+              Expanded(child: textFieldContainer()),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+}
 
 terminalTitle() => const Text(
       'Terminal',
@@ -52,9 +70,7 @@ boxDecoration(BuildContext context) => BoxDecoration(
 
 contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
       final terminalContent = ref.watch(terminalContentProvider);
-      final scrollController = ref.watch(scrollControllerProvider);
       return ListView(
-        //controller: scrollController,
         dragStartBehavior: DragStartBehavior.down,
         children: [
           terminalText(terminalContent),

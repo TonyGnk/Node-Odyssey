@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/constants.dart';
@@ -5,26 +6,36 @@ import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
+final opacityButtonState = StateProvider<double>((ref) => 1);
+
 void buttonGo(WidgetRef ref, ScreenDestination goTo) {
-  //Hide with Animations
+  updateAppBarItems(ref, false);
 
   //Disable the Screen
   Future.delayed(basicDuration, () {
-    callReturnOfScreen(ref, goTo);
+    ref.read(currentScreenProvider.notifier).state = goTo;
   });
 }
 
 void buttonReturn(WidgetRef ref) {
-  //Enable the Screen
-  ref.read(currentScreenProvider.notifier).state =
-      ScreenDestination.algorithmsGUI;
-
-  //Set AppBarItems
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.algorithmsGUI;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
-  ref.read(appBarLabel.notifier).state = '';
 
-  //Show with Animations
+  updateAppBarItems(ref, true);
 }
+
+updateAppBarItems(WidgetRef ref, bool isReturn) {
+  ref.read(opacityButtonState.notifier).state = isReturn ? 1 : 0;
+  ref.read(appBarIsEnableBackButtonProvider.notifier).state =
+      isReturn ? true : false;
+}
+
+//EXTRA
+animatedColumn(Widget child) => Consumer(
+      builder: (context, ref, _) => AnimatedOpacity(
+        opacity: ref.watch(opacityButtonState),
+        duration: basicDuration,
+        child: child,
+      ),
+    );

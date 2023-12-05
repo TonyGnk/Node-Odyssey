@@ -5,8 +5,24 @@ import '../screen_list.dart';
 import 'modern_button.dart';
 import 'home_state.dart';
 
-home() => Consumer(
-      builder: (context, ref, _) => Row(
+class Home extends ConsumerStatefulWidget {
+  const Home({super.key});
+
+  @override
+  ConsumerState<Home> createState() => _TerminalSideState();
+}
+
+class _TerminalSideState extends ConsumerState<Home> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      homeReturn(ref);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Row(
         children: [
           const Expanded(
             flex: 3,
@@ -17,8 +33,8 @@ home() => Consumer(
             child: rightColumn(),
           ),
         ],
-      ),
-    );
+      );
+}
 
 rightColumn() => animatedColumn(
       Column(

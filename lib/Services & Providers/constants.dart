@@ -21,7 +21,7 @@ Future<List<Node>?> startAlgorithm(WidgetRef ref, AlgorithmType type) async {
   }
 }
 
-const Duration basicDuration = Duration(milliseconds: 300);
+const Duration basicDuration = Duration(milliseconds: 200);
 Duration basicDuration1 = Duration(
   milliseconds: basicDuration.inMilliseconds + 100,
 );
