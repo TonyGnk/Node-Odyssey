@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Services & Providers/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
+import 'Best First Search/bsf_state.dart';
+import 'Best First Search/main_bsf.dart';
 import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Buttons/button_state.dart';
@@ -19,6 +21,7 @@ enum ScreenDestination {
   breadthFirstAlg,
   algorithmsGUI,
   depthFirstAlg,
+  bestFirstAlg,
 }
 
 goTo(WidgetRef ref, ScreenDestination destination) async {
@@ -39,6 +42,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const BreadthFirstAlg();
     case ScreenDestination.depthFirstAlg:
       return const BodyDf();
+    case ScreenDestination.bestFirstAlg:
+      return const BestFirstAlg();
     default:
       return const Home();
   }
@@ -60,6 +65,8 @@ backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
       bfGo(ref, targetScreen);
     case ScreenDestination.depthFirstAlg:
       dfGo(ref, targetScreen);
+    case ScreenDestination.bestFirstAlg:
+      bsfGo(ref, targetScreen);
     default:
       null;
   }

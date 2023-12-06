@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Algorithms/Best First/algorithm_bsf.dart';
 import '../Algorithms/Breadth First/algorithm_bf.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
@@ -25,6 +26,8 @@ Future<List<Node>?> startAlgorithm(
     return runBFGui(ref, request);
   } else if (type == AlgorithmType.df) {
     return runDFGui(ref, request);
+  } else if (type == AlgorithmType.bestf) {
+    return runBSFGui(ref, request);
   } else {
     return null;
   }
