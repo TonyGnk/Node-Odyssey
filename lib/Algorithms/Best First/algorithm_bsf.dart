@@ -7,6 +7,8 @@ import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 
+// Add comments to this file
+// The comment is not clear
 class HeuristicResult {
   HeuristicResult(this.node, this.abs);
   late Node? node;
