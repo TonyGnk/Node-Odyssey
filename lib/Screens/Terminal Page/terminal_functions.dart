@@ -47,7 +47,7 @@ AlgorithmType findType(String algorithm) {
       return AlgorithmType.df;
     case 'best':
       return AlgorithmType.bestf;
-    case 'a*':
+    case 'astar':
       return AlgorithmType.astar;
     default:
       return AlgorithmType.bf;

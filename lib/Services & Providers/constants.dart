@@ -15,6 +15,8 @@ List<Node>? startAlgorithmTerminal(
     return runBFGuiTerminal(request);
   } else if (type == AlgorithmType.df) {
     return runDFGuiTerminal(request);
+  } else if (type == AlgorithmType.bestf) {
+    return runBSFTerminal(request);
   } else {
     return null;
   }
