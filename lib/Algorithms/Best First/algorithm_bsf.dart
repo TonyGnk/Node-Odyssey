@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable, body_might_complete_normally_nullable, prefer_expression_function_bodies
-
 import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,19 +38,23 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
     }
 
     List<Node> calculationList = [];
+
     for (CalculationType type in CalculationType.values) {
-      int newValue = getNewValue(current.value, type);
-      if (isAllowed(newValue, current.value, type)) {
-        if (!visited.contains(newValue)) {
-          calculationList.add(
-            getNewNode(current.value, current.cost, newValue, type),
-          );
+      if (enabledOperations[type]!) {
+        int newValue = getNewValue(current.value, type);
+        if (isAllowed(newValue, current.value, type)) {
+          if (!visited.contains(newValue)) {
+            calculationList.add(
+              getNewNode(current.value, current.cost, newValue, type),
+            );
+          }
         }
       }
     }
 
     //Call a function with given properties the list and target value
     HeuristicResult result = heuristic(calculationList, end);
+
     //Call a function with given properties the list and target value
     HeuristicResult resultSquare = heuristicSquare(calculationList, end);
 

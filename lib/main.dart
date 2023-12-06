@@ -13,13 +13,14 @@ void main() async {
     WindowOptions windowOptions = const WindowOptions(
       fullScreen: false,
       title: 'Algorithms',
-      size: Size(1050, 660), //1080-770
+      size: Size(2080, 830), //1050-660
       center: false,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
       windowButtonVisibility: false,
     );
+
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();

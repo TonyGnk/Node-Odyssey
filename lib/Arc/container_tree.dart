@@ -1,38 +1,33 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'tree.dart';
+import 'Tree Widgets/new_tree.dart';
 
 class TreeBox extends StatelessWidget {
   const TreeBox({
     required this.width,
-    required this.number,
-    this.height,
-    this.child = const SizedBox.shrink(),
     super.key,
     this.topSide = false,
     this.leftSide = false,
     this.bottomSide = false,
     this.rightSide = false,
+    this.node = false,
   });
 
   final double width;
-  final double? height;
-  final Widget child;
   final bool topSide;
   final bool leftSide;
   final bool bottomSide;
   final bool rightSide;
-  final int number;
+  final bool node;
 
   final double borderWidth = 2;
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        height: height ?? width,
+  Widget build(BuildContext context) => Container(
+        height: 50,
         width: width,
         decoration: BoxDecoration(
-          color: getRandomColor(),
+          color: node ? Colors.yellow : getRandomColor(),
           border: Border(
             top: topSide
                 ? BorderSide(
@@ -60,23 +55,18 @@ class TreeBox extends StatelessWidget {
                 : BorderSide.none,
           ),
         ),
-        child: Center(
-          child: Text(
-            number.toString(),
-          ),
-        ),
       );
 }
 
 Color getRandomColor() =>
     Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-        .withOpacity(0.4);
+        .withOpacity(0.2);
 
 Widget node = Container(
-  height: circleWidth,
-  width: circleWidth,
+  height: nodeWidth,
+  width: nodeWidth,
   decoration: BoxDecoration(
-    color: Colors.black,
+    color: Colors.black.withBlue(250),
     borderRadius: BorderRadius.circular(50),
   ),
 );

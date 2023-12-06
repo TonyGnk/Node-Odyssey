@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
+import '../../Arc/Tree Widgets/new_tree.dart';
+import '../../Arc/container_tree.dart';
+import '../../Arc/tree.dart';
 import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import '../../Services & Providers/constants.dart';
 import '../Breadth First Page/Chart BF/chart_bf.dart';
@@ -34,7 +37,7 @@ class _TerminalSideState extends ConsumerState<BestFirstAlg> {
           const SizedBox(width: 10),
           Expanded(
             flex: 14, //14
-            child: containerZ(),
+            child: containerZ(), //NewTree(),
           ),
         ],
       );
