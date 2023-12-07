@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Tree Widgets/new_tree.dart';
 
 class Leaf extends StatelessWidget {
@@ -11,8 +11,6 @@ class Leaf extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
         flex: (nodeWidth * 2 + gapWidth).toInt(),
         child: Container(
-          //height: 30,
-          //width: nodeWidth * 2 + gapWidth,
           decoration: decoration(),
         ),
       );
@@ -23,10 +21,31 @@ decoration() => const BoxDecoration(
       shape: BoxShape.circle,
     );
 
-// get random color only for 50 first rgb not more. and opacity 0.6
-Color getRandomColor() => Color.fromARGB(
-      255,
-      math.Random().nextInt(111),
-      math.Random().nextInt(111),
-      0,
+class LeafThrone extends ConsumerWidget {
+  const LeafThrone({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final throne = ref.watch(throneProvider);
+    return Expanded(
+      flex: (nodeWidth * 2 + gapWidth).toInt(),
+      child: Container(
+          decoration: decoration(),
+          child: Center(
+            child: Text(
+              throne != null ? throne.toString() : '',
+              style: const TextStyle(
+                color: Colors.black,
+                //fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )),
     );
+  }
+}
+
+//Integer Provider
+final throneProvider = StateProvider<int?>((ref) => null);

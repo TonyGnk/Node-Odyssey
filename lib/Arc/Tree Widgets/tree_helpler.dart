@@ -48,7 +48,7 @@ row00() => Row(
       children: [
         cleanTreeBox(15 * nodeWidth + 15 * gapWidth), //
         //
-        const Leaf(),
+        const LeafThrone(),
         //
         cleanTreeBox(15 * nodeWidth + 15 * gapWidth), //
       ],

@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../Arc/container_tree.dart';
+import 'dart:math' as math;
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
@@ -150,3 +149,11 @@ class _ModernCaptionState extends State<ModernCaption> {
         ),
       ]);
 }
+
+// get random color only for 50 first rgb not more. and opacity 0.6
+Color getRandomColor() => Color.fromARGB(
+      255,
+      math.Random().nextInt(111),
+      math.Random().nextInt(111),
+      0,
+    );

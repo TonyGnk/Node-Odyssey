@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Arc/container_tree.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
@@ -26,10 +27,11 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
   visited.add(start);
 
   while (queue.isNotEmpty) {
-    await Future.delayed(Duration(seconds: speed));
+    await Future.delayed(Duration(seconds: speed + 1));
 
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
+    ref.read(throneProvider.notifier).state = current.value;
 
     updateChartAndTrackingPanel(ref, current, end);
 
