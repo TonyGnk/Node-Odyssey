@@ -33,19 +33,19 @@ Future<List<Node>?> runBFGui(WidgetRef ref, RunningRequest request) async {
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
         int newValue = getNewValue(current.value, type);
-        if (isAllowed(newValue, current.value, type)) {
-          if (!visited.contains(newValue)) {
-            Node newNode = getNewNode(
-              current.value,
-              current.cost,
-              newValue,
-              type,
-            );
-            List<Node> newPath = List.from(currentPath)..add(newNode);
-            queue.add(newPath);
-            visited.add(newNode.value);
-          }
-        }
+        //if (isAllowed(newValue, current.value, type)) {
+        //if (!visited.contains(newValue)) {
+        Node newNode = getNewNode(
+          current.value,
+          current.cost,
+          newValue,
+          type,
+        );
+        List<Node> newPath = List.from(currentPath)..add(newNode);
+        queue.add(newPath);
+        visited.add(newNode.value);
+        //}
+        //}
       }
     }
   }

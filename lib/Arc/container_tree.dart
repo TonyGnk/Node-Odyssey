@@ -2,71 +2,31 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'Tree Widgets/new_tree.dart';
 
-class TreeBox extends StatelessWidget {
-  const TreeBox({
-    required this.width,
+class Leaf extends StatelessWidget {
+  const Leaf({
     super.key,
-    this.topSide = false,
-    this.leftSide = false,
-    this.bottomSide = false,
-    this.rightSide = false,
-    this.node = false,
   });
 
-  final double width;
-  final bool topSide;
-  final bool leftSide;
-  final bool bottomSide;
-  final bool rightSide;
-  final bool node;
-
-  final double borderWidth = 2;
-
   @override
-  Widget build(BuildContext context) => Container(
-        height: 50,
-        width: width,
-        decoration: BoxDecoration(
-          color: node ? Colors.yellow : getRandomColor(),
-          border: Border(
-            top: topSide
-                ? BorderSide(
-                    color: Colors.black.withOpacity(1),
-                    width: borderWidth,
-                  )
-                : BorderSide.none,
-            left: leftSide
-                ? BorderSide(
-                    color: Colors.black.withOpacity(1),
-                    width: borderWidth,
-                  )
-                : BorderSide.none,
-            bottom: bottomSide
-                ? BorderSide(
-                    color: Colors.black.withOpacity(1),
-                    width: borderWidth,
-                  )
-                : BorderSide.none,
-            right: rightSide
-                ? BorderSide(
-                    color: Colors.black.withOpacity(1),
-                    width: borderWidth,
-                  )
-                : BorderSide.none,
-          ),
+  Widget build(BuildContext context) => Expanded(
+        flex: (nodeWidth * 2 + gapWidth).toInt(),
+        child: Container(
+          //height: 30,
+          //width: nodeWidth * 2 + gapWidth,
+          decoration: decoration(),
         ),
       );
 }
 
-Color getRandomColor() =>
-    Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-        .withOpacity(0.2);
+decoration() => const BoxDecoration(
+      color: Colors.yellow,
+      shape: BoxShape.circle,
+    );
 
-Widget node = Container(
-  height: nodeWidth,
-  width: nodeWidth,
-  decoration: BoxDecoration(
-    color: Colors.black.withBlue(250),
-    borderRadius: BorderRadius.circular(50),
-  ),
-);
+// get random color only for 50 first rgb not more. and opacity 0.6
+Color getRandomColor() => Color.fromARGB(
+      255,
+      math.Random().nextInt(111),
+      math.Random().nextInt(111),
+      0,
+    );

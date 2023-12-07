@@ -35,10 +35,11 @@ class _TerminalSideState extends ConsumerState<BestFirstAlg> {
         children: [
           leftColumnBf(),
           const SizedBox(width: 10),
-          Expanded(
+          const Expanded(
             flex: 14, //14
-            child: containerZ(), //NewTree(),
+            child: NewTree(),
           ),
+          //containerZ(),  ),
         ],
       );
 }
