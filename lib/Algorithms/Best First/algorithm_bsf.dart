@@ -2,36 +2,49 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Arc/container_tree.dart';
+import '../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 
-class HeuristicResult {
-  HeuristicResult(this.node, this.abs);
-  late Node? node;
-  late int abs;
-}
-
 Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
   int start = request.startValue;
   int end = request.targetValue;
-  int speed = request.speed;
   Map<CalculationType, bool> enabledOperations = request.enabledOperations;
 
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
+  clearLeafs(ref);
 
   queue.add([Node(start, 0, 'Αρχική Τιμή')]);
   visited.add(start);
 
-  while (queue.isNotEmpty) {
-    await Future.delayed(Duration(seconds: speed + 1));
+  List<List<int?>> treeList = [
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+  ];
 
+  List<int?> treeListSmall = [null, null, null, null, null, null];
+  for (CalculationType type in CalculationType.values) {
+    if (enabledOperations[type]!) {
+      int newValue = getNewValue(start, type);
+      if (isAllowed(newValue, start, type)) {
+        if (!visited.contains(newValue)) {
+          treeListSmall[getPosition(type)] = newValue;
+        }
+      }
+    }
+  }
+  bool founded = false;
+  while (queue.isNotEmpty) {
+    setKingLeafs(treeListSmall, ref);
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
-    ref.read(throneProvider.notifier).state = current.value;
 
     updateChartAndTrackingPanel(ref, current, end);
 
@@ -39,69 +52,112 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
       return currentPath;
     }
 
-    List<Node> calculationList = [];
-
-    for (CalculationType type in CalculationType.values) {
-      if (enabledOperations[type]!) {
-        int newValue = getNewValue(current.value, type);
-        if (isAllowed(newValue, current.value, type)) {
-          if (!visited.contains(newValue)) {
-            calculationList.add(
-              getNewNode(current.value, current.cost, newValue, type),
-            );
-          }
+    for (int i = 0; i < treeListSmall.length; i++) {
+      if (treeListSmall[i] != null) {
+        if (treeListSmall[i] == end) {
+          Node rightNode = getNewNode(
+            current.value,
+            current.cost,
+            treeListSmall[i] ?? 0,
+            positionToType(i),
+          );
+          List<Node> newPath = List.from(currentPath)..add(rightNode);
+          queue.add(newPath);
+          founded = true;
         }
       }
     }
+    if (founded) continue;
 
-    //Call a function with given properties the list and target value
-    HeuristicResult result = heuristic(calculationList, end);
-
-    //Call a function with given properties the list and target value
-    HeuristicResult resultSquare = heuristicSquare(calculationList, end);
-
-    //Check which is smaller, the heuristic or heuristicSquare and do:
-    if (result.abs < resultSquare.abs) {
-      List<Node> newPath = List.from(currentPath)..add(result.node!);
-      queue.add(newPath);
-      visited.add(result.node!.value);
-    } else {
-      List<Node> newPath = List.from(currentPath)..add(resultSquare.node!);
-      queue.add(newPath);
-      visited.add(resultSquare.node!.value);
+    for (int i = 0; i < treeListSmall.length; i++) {
+      if (treeListSmall[i] == null) {
+        treeList[i] = [null, null, null, null, null, null];
+      } else {
+        List<int?> temp = [null, null, null, null, null, null];
+        for (CalculationType type in CalculationType.values) {
+          if (enabledOperations[type]!) {
+            int newValue = getNewValue(treeListSmall[i], type);
+            if (isAllowed(newValue, treeListSmall[i], type)) {
+              if (!visited.contains(newValue)) {
+                temp[getPosition(type)] = newValue;
+              }
+            }
+          }
+        }
+        treeList[i] = temp;
+      }
     }
+    setLeafs(treeList, ref);
+    Map map = findSmallest(treeList, treeListSmall, end);
+    int rightNodePosition = map['minListIndex'];
+    int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
+
+    Node rightNode = getNewNode(
+      current.value,
+      current.cost,
+      rightNodeValue,
+      positionToType(rightNodePosition),
+    );
+    List<Node> newPath = List.from(currentPath)..add(rightNode);
+    queue.add(newPath);
+    visited.add(rightNode.value);
+
+    //Update the list small. Store the list of the smallest value in a variable
+    treeListSmall = treeList[rightNodePosition];
+    treeList = [
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+    ];
+    await Future.delayed(const Duration(seconds: 60));
   }
 
   return null;
 }
 
-HeuristicResult heuristic(List<Node> list, int target) {
-  int min = 100000;
-  int temp;
-  Node? minNode;
-  for (int i = 0; i < list.length; i++) {
-    temp = (list[i].value - target).abs();
-    if (temp < min) {
-      min = temp;
-      minNode = list[i];
+findSmallest(List<List<int?>> treeList, List<int?> treeListSmall, int target) {
+  int? minValue;
+  int? minListIndex;
+  int? minValueIndex;
+
+  for (int i = 0; i < treeList.length; i++) {
+    for (int j = 0; j < treeList[i].length; j++) {
+      if (treeList[i][j] != null) {
+        int temp = (target - treeList[i][j]!).abs();
+        if (minValue == null || temp < minValue) {
+          minValue = temp;
+          minListIndex = i;
+          minValueIndex = j;
+        }
+      }
     }
   }
-  return HeuristicResult(minNode, min);
+
+  return {
+    'minListIndex': minListIndex,
+    'minValueIndex': minValueIndex,
+  };
 }
 
-HeuristicResult heuristicSquare(List<Node> list, int target) {
-  int min = 100000;
-  int temp;
-  Node? minNode;
-  // Get the square of list[i].value and compare it with target
-  for (int i = 0; i < list.length; i++) {
-    temp = (list[i].value * list[i].value - target).abs();
-    if (temp < min) {
-      min = temp;
-      minNode = list[i];
-    }
+//switch (type) if addition then 0 if subtraction then 1 etc
+getPosition(type) {
+  switch (type) {
+    case CalculationType.addition:
+      return 0;
+    case CalculationType.subtraction:
+      return 1;
+    case CalculationType.multiplication:
+      return 2;
+    case CalculationType.division:
+      return 3;
+    case CalculationType.exponential:
+      return 4;
+    case CalculationType.square:
+      return 5;
   }
-  return HeuristicResult(minNode, min);
 }
 
 List<Node>? runBSFTerminal(RunningRequest request) {
@@ -134,21 +190,21 @@ List<Node>? runBSFTerminal(RunningRequest request) {
       }
     }
 
-    //Call a function with given properties the list and target value
-    HeuristicResult result = heuristic(calculationList, end);
-    //Call a function with given properties the list and target value
-    HeuristicResult resultSquare = heuristicSquare(calculationList, end);
+    // //Call a function with given properties the list and target value
+    // HeuristicResult result = heuristic(calculationList, end);
+    // //Call a function with given properties the list and target value
+    // HeuristicResult resultSquare = heuristicSquare(calculationList, end);
 
-    //Check which is smaller, the heuristic or heuristicSquare and do:
-    if (result.abs < resultSquare.abs) {
-      List<Node> newPath = List.from(currentPath)..add(result.node!);
-      queue.add(newPath);
-      visited.add(result.node!.value);
-    } else {
-      List<Node> newPath = List.from(currentPath)..add(resultSquare.node!);
-      queue.add(newPath);
-      visited.add(resultSquare.node!.value);
-    }
+    // //Check which is smaller, the heuristic or heuristicSquare and do:
+    // if (result.abs < resultSquare.abs) {
+    //   List<Node> newPath = List.from(currentPath)..add(result.node!);
+    //   queue.add(newPath);
+    //   visited.add(result.node!.value);
+    // } else {
+    //   List<Node> newPath = List.from(currentPath)..add(resultSquare.node!);
+    //   queue.add(newPath);
+    //   visited.add(resultSquare.node!.value);
+    // }
   }
 
   return null;

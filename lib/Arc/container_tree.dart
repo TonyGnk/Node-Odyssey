@@ -1,51 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Tree Widgets/new_tree.dart';
+import 'Tree Widgets/providers_tree.dart';
 
-class Leaf extends StatelessWidget {
+class Leaf extends ConsumerWidget {
   const Leaf({
+    required this.type,
     super.key,
   });
 
+  final LeafType type;
+
   @override
-  Widget build(BuildContext context) => Expanded(
-        flex: (nodeWidth * 2 + gapWidth).toInt(),
-        child: Container(
-          decoration: decoration(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tag = getTheRightProvider(ref, type);
+    return Expanded(
+      flex: (nodeWidth * 2 + gapWidth).toInt(),
+      child: DecoratedBox(
+        decoration: tag != null ? decoration() : decorationNull(),
+        child: Center(
+          child: Text(
+            tag != null ? tag.toString() : '',
+            style: const TextStyle(
+              color: Colors.black,
+              //fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-      );
+      ),
+    );
+  }
 }
 
 decoration() => const BoxDecoration(
       color: Colors.yellow,
       shape: BoxShape.circle,
     );
-
-class LeafThrone extends ConsumerWidget {
-  const LeafThrone({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final throne = ref.watch(throneProvider);
-    return Expanded(
-      flex: (nodeWidth * 2 + gapWidth).toInt(),
-      child: Container(
-          decoration: decoration(),
-          child: Center(
-            child: Text(
-              throne != null ? throne.toString() : '',
-              style: const TextStyle(
-                color: Colors.black,
-                //fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          )),
+decorationNull() => BoxDecoration(
+      color: Colors.yellow.withOpacity(0.2),
+      shape: BoxShape.circle,
     );
-  }
-}
-
-//Integer Provider
-final throneProvider = StateProvider<int?>((ref) => null);

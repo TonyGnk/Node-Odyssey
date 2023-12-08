@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../container_tree.dart';
 import 'new_tree.dart';
+import 'providers_tree.dart';
 import 'tree_helpler.dart';
 
 row1() => Row(
@@ -31,7 +32,9 @@ row2() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth), //
-        Leaf(),
+        Leaf(
+          type: LeafType.additionLeaf,
+        ),
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth),
         borderTree(),
         cleanTreeBox(4 * nodeWidth + 3 * gapWidth),
@@ -43,7 +46,7 @@ row2() => Row(
         cleanTreeBox(4 * nodeWidth + 3 * gapWidth),
         borderTree(),
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth),
-        Leaf(),
+        Leaf(type: LeafType.squareRootLeaf),
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth), //
       ],
     );
@@ -117,7 +120,7 @@ row4() => Row(
 row5() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Leaf(),
+        Leaf(type: LeafType.additionLeaf1),
         borderTree(),
         cleanTreeBox(nodeWidth),
         borderTree(),
@@ -127,7 +130,7 @@ row5() => Row(
         borderTree(),
         cleanTreeBox(nodeWidth),
         borderTree(),
-        Leaf(),
+        Leaf(type: LeafType.squareRootLeaf1),
         //
         borderTree(),
         cleanTreeBox(4 * nodeWidth + 3 * gapWidth),
@@ -137,7 +140,7 @@ row5() => Row(
         cleanTreeBox(4 * nodeWidth + 3 * gapWidth),
         borderTree(),
         //
-        Leaf(),
+        Leaf(type: LeafType.additionLeaf6),
         borderTree(),
         cleanTreeBox(nodeWidth),
         borderTree(),
@@ -147,6 +150,6 @@ row5() => Row(
         borderTree(),
         cleanTreeBox(nodeWidth),
         borderTree(),
-        Leaf(),
+        Leaf(type: LeafType.squareRootLeaf6),
       ],
     );

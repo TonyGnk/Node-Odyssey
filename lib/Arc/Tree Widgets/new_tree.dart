@@ -16,7 +16,6 @@ class NewTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AnimatedContainer(
         duration: const Duration(seconds: 1),
-        //color: const Color.fromARGB(55, 131, 146, 111),
         child: const NewLeaf(),
       );
 }

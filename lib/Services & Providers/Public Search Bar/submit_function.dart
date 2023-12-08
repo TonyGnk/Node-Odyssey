@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
+import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../constants.dart';
 import '../node.dart';
@@ -25,7 +26,9 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
 
   //Add the solution to the Result Panel
-  addResultPanelList(ref, solution);
+  if (solution != null) {
+    addResultPanelList(ref, solution);
+  }
 
   //Reset the inputs
   resetControllers();
@@ -57,4 +60,5 @@ clearGUI(WidgetRef ref) {
 updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
   ref.watch(trackingListProvider).addTile(node.value, node.operation, ref);
   addTrackingContainer(ref, node.value, end);
+  ref.read(throneProvider.notifier).state = node.value;
 }

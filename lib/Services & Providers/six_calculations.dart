@@ -11,7 +11,8 @@ enum CalculationType {
   square,
 }
 
-int getNewValue(int value, CalculationType type) {
+int getNewValue(int? value, CalculationType type) {
+  if (value == null) return 0;
   switch (type) {
     case CalculationType.addition:
       return value + 1;
@@ -30,7 +31,8 @@ int getNewValue(int value, CalculationType type) {
   }
 }
 
-bool isAllowed(int newValue, int value, CalculationType type) {
+bool isAllowed(int newValue, int? value, CalculationType type) {
+  if (value == null) return false;
   switch (type) {
     case CalculationType.addition:
       return newValue < pow(10, 9);
@@ -44,6 +46,25 @@ bool isAllowed(int newValue, int value, CalculationType type) {
       return newValue <= pow(10, 9) && newValue > 1;
     case CalculationType.square:
       return (newValue * newValue == value) && (value > 1);
+  }
+}
+
+positionToType(int pos) {
+  switch (pos) {
+    case 0:
+      return CalculationType.addition;
+    case 1:
+      return CalculationType.subtraction;
+    case 2:
+      return CalculationType.multiplication;
+    case 3:
+      return CalculationType.division;
+    case 4:
+      return CalculationType.exponential;
+    case 5:
+      return CalculationType.square;
+    default:
+      return CalculationType.addition;
   }
 }
 
@@ -83,7 +104,7 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(
         newValue,
         cost + (value - newValue.toInt()) ~/ 4 + 1,
-        'Τετράγωνο',
+        'Ρίζα',
       );
     default:
       return Node(newValue, cost, '');

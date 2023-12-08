@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../container_tree.dart';
 import 'new_tree.dart';
+import 'providers_tree.dart';
 import 'tree_helpler.dart';
 
 row6() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         cleanTreeBox(nodeWidth + gapWidth), //
-        const Leaf(),
+        const Leaf(type: LeafType.subtractionLeaf1),
         borderTree(),
         //
         cleanTreeBox(2 * nodeWidth + gapWidth),
         //
         borderTree(),
-        const Leaf(),
+        const Leaf(type: LeafType.squareLeaf1),
         cleanTreeBox(nodeWidth + gapWidth),
         //
         borderTree(),
@@ -26,13 +27,13 @@ row6() => Row(
         borderTree(),
         //
         cleanTreeBox(nodeWidth + gapWidth),
-        const Leaf(),
+        const Leaf(type: LeafType.subtractionLeaf6),
         borderTree(),
         //
         cleanTreeBox(2 * nodeWidth + gapWidth),
         //
         borderTree(),
-        const Leaf(),
+        const Leaf(type: LeafType.squareLeaf6),
         cleanTreeBox(nodeWidth + gapWidth), //
       ],
     );
@@ -41,9 +42,13 @@ row7() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         cleanTreeBox(2 * nodeWidth + 2 * gapWidth), //
-        const Leaf(),
+        const Leaf(
+          type: LeafType.multiplicationLeaf1,
+        ),
         cleanTreeBox(gapWidth),
-        const Leaf(),
+        const Leaf(
+          type: LeafType.divisionLeaf1,
+        ),
         cleanTreeBox(2 * nodeWidth + 2 * gapWidth),
         //
         borderTree(),
@@ -55,10 +60,13 @@ row7() => Row(
         borderTree(),
         //
         cleanTreeBox(2 * nodeWidth + 2 * gapWidth),
-        const Leaf(),
+        const Leaf(
+          type: LeafType.multiplicationLeaf6,
+        ),
         cleanTreeBox(gapWidth),
-
-        const Leaf(),
+        const Leaf(
+          type: LeafType.divisionLeaf6,
+        ),
         cleanTreeBox(2 * nodeWidth + 2 * gapWidth), //
       ],
     );
@@ -67,7 +75,7 @@ row8() => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         cleanTreeBox(7 * nodeWidth + 7 * gapWidth), //
-        const Leaf(),
+        const Leaf(type: LeafType.subtractionLeaf),
         //
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth),
         borderTree(),
@@ -76,7 +84,7 @@ row8() => Row(
         borderTree(),
         cleanTreeBox(3 * nodeWidth + 3 * gapWidth),
         //
-        const Leaf(),
+        const Leaf(type: LeafType.squareLeaf),
         cleanTreeBox(7 * nodeWidth + 7 * gapWidth), //
       ],
     );
