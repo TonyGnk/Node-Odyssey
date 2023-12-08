@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
@@ -46,6 +47,7 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
+    ref.read(throneProvider.notifier).state = current.value;
     updateChartAndTrackingPanel(ref, current, end);
 
     if (current.value == end) {
@@ -189,22 +191,6 @@ List<Node>? runBSFTerminal(RunningRequest request) {
         }
       }
     }
-
-    // //Call a function with given properties the list and target value
-    // HeuristicResult result = heuristic(calculationList, end);
-    // //Call a function with given properties the list and target value
-    // HeuristicResult resultSquare = heuristicSquare(calculationList, end);
-
-    // //Check which is smaller, the heuristic or heuristicSquare and do:
-    // if (result.abs < resultSquare.abs) {
-    //   List<Node> newPath = List.from(currentPath)..add(result.node!);
-    //   queue.add(newPath);
-    //   visited.add(result.node!.value);
-    // } else {
-    //   List<Node> newPath = List.from(currentPath)..add(resultSquare.node!);
-    //   queue.add(newPath);
-    //   visited.add(resultSquare.node!.value);
-    // }
   }
 
   return null;

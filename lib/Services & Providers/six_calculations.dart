@@ -110,3 +110,14 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(newValue, cost, '');
   }
 }
+
+initializeTreeList66() => [
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+    ];
+
+initializeTreeList6() => [null, null, null, null, null, null];

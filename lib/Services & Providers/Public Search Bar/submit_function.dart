@@ -60,5 +60,4 @@ clearGUI(WidgetRef ref) {
 updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
   ref.watch(trackingListProvider).addTile(node.value, node.operation, ref);
   addTrackingContainer(ref, node.value, end);
-  ref.read(throneProvider.notifier).state = node.value;
 }
