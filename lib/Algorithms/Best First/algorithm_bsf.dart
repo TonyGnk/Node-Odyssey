@@ -112,7 +112,7 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
       [null, null, null, null, null, null],
       [null, null, null, null, null, null],
     ];
-    await Future.delayed(const Duration(seconds: 60));
+    await Future.delayed(const Duration(milliseconds: 500));
   }
 
   return null;

@@ -55,6 +55,8 @@ Widget leftColumnBf() => SizedBox(
           Expanded(
             child: trackingListAndButton(),
           ),
+          Text('Experiment'),
+          rowButtons(),
         ],
       ),
     );
@@ -68,4 +70,18 @@ Widget trackingListAndButton() => Consumer(
           isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
         );
       },
+    );
+
+rowButtons() => Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [button1(), button2()],
+    );
+
+button1() => TextButton(
+      onPressed: () {},
+      child: const Text('Έναρξη σε Βήματα'),
+    );
+button2() => TextButton(
+      onPressed: () {},
+      child: const Text('Επόμενο'),
     );
