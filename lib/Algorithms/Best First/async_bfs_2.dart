@@ -32,7 +32,14 @@ List<Node>? runBSFAsyncStep(WidgetRef ref, RunningRequest request) {
 
   ref.read(treeListSmallProvider.notifier).state =
       ref.read(treeListProvider.notifier).state[rightNodePosition];
-  ref.read(treeListProvider.notifier).state = initializeTreeList66();
+  ref.read(treeListProvider.notifier).state = [
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+  ];
 
   //
   ref.read(currentPathProvider.notifier).state =
@@ -47,64 +54,65 @@ List<Node>? runBSFAsyncStep(WidgetRef ref, RunningRequest request) {
   //setKingLeafs(ref.read(treeListSmallProvider.notifier).state, ref);
 
   //
-  print(ref.read(currentProvider.notifier).state.value);
+  print(ref.read(currentProvider.notifier).state.value == end);
   if (ref.read(currentProvider.notifier).state.value == end) {
     return ref.read(currentPathProvider.notifier).state;
   }
 
-  // for (int i = 0;
-  //     i < ref.read(treeListSmallProvider.notifier).state.length;
-  //     i++) {
-  //   if (ref.read(treeListSmallProvider.notifier).state[i] != null) {
-  //     if (ref.read(treeListSmallProvider.notifier).state[i] == end) {
-  //       Node rightNode = getNewNode(
-  //         ref.read(currentProvider.notifier).state.value,
-  //         ref.read(currentProvider.notifier).state.cost,
-  //         ref.read(treeListSmallProvider.notifier).state[i] ?? 0,
-  //         positionToType(i),
-  //       );
-  //       List<Node> newPath =
-  //           List.from(ref.read(currentPathProvider.notifier).state)
-  //             ..add(rightNode);
-  //       ref.read(queueProvider.notifier).state.add(newPath);
-  //       ref.read(isFoundProvider.notifier).state = true;
-  //     }
-  //   }
-  // }
-  // if (ref.read(isFoundProvider.notifier).state) return null;
+  for (int i = 0;
+      i < ref.read(treeListSmallProvider.notifier).state.length;
+      i++) {
+    if (ref.read(treeListSmallProvider.notifier).state[i] != null) {
+      if (ref.read(treeListSmallProvider.notifier).state[i] == end) {
+        Node rightNode = getNewNode(
+          ref.read(currentProvider.notifier).state.value,
+          ref.read(currentProvider.notifier).state.cost,
+          ref.read(treeListSmallProvider.notifier).state[i] ?? 0,
+          positionToType(i),
+        );
+        List<Node> newPath =
+            List.from(ref.read(currentPathProvider.notifier).state)
+              ..add(rightNode);
+        ref.read(queueProvider.notifier).state.add(newPath);
+        ref.read(isFoundProvider.notifier).state = true;
+      }
+    }
+  }
+  if (ref.read(isFoundProvider.notifier).state) return null;
 
   //
 
-  // for (int i = 0;
-  //     i < ref.read(treeListSmallProvider.notifier).state.length;
-  //     i++) {
-  //   if (ref.read(treeListSmallProvider.notifier).state[i] == null) {
-  //     ref.read(treeListProvider.notifier).state[i] = [
-  //       null,
-  //       null,
-  //       null,
-  //       null,
-  //       null,
-  //       null
-  //     ];
-  //   } else {
-  //     List<int?> temp = [null, null, null, null, null, null];
-  //     for (CalculationType type in CalculationType.values) {
-  //       if (enabledOperations[type]!) {
-  //         int newValue = getNewValue(
-  //             ref.read(treeListSmallProvider.notifier).state[i], type);
-  //         if (isAllowed(newValue,
-  //             ref.read(treeListSmallProvider.notifier).state[i], type)) {
-  //           if (!ref.read(visitedProvider.notifier).state.contains(newValue)) {
-  //             temp[getPosition(type)] = newValue;
-  //           }
-  //         }
-  //       }
-  //     }
-  //     ref.read(treeListProvider.notifier).state[i] = temp;
-  //   }
-  // }
-  // setLeafs(ref.read(treeListProvider.notifier).state, ref);
+  for (int i = 0;
+      i < ref.read(treeListSmallProvider.notifier).state.length;
+      i++) {
+    if (ref.read(treeListSmallProvider.notifier).state[i] == null) {
+      ref.read(treeListProvider.notifier).state[i] = [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ];
+    } else {
+      List<int?> temp = [null, null, null, null, null, null];
+      for (CalculationType type in CalculationType.values) {
+        if (enabledOperations[type]!) {
+          int newValue = getNewValue(
+              ref.read(treeListSmallProvider.notifier).state[i], type);
+          if (isAllowed(newValue,
+              ref.read(treeListSmallProvider.notifier).state[i], type)) {
+            if (!ref.read(visitedProvider.notifier).state.contains(newValue)) {
+              temp[getPosition(type)] = newValue;
+            }
+          }
+        }
+      }
+      ref.read(treeListProvider.notifier).state[i] = temp;
+    }
+  }
+  setLeafs(ref.read(treeListProvider.notifier).state, ref);
 
   //
+  return null;
 }

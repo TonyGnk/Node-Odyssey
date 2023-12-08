@@ -106,6 +106,7 @@ button2() => Consumer(
         onPressed: () {
           List<Node>? solution = runBSFAsyncStep(ref, saveRequest(ref));
           if (solution != null) {
+            ref.read(isAlgorithmEndProviderBf.notifier).state = true;
             addResultPanelList(ref, solution);
           }
         },

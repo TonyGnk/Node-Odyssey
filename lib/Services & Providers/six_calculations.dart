@@ -86,7 +86,7 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(
         newValue,
         cost + (value / 2).ceil() + 1,
-        'Πολλαπλασιασμός με 2',
+        'Πολ/σιασμός επί 2',
       );
     case CalculationType.division:
       return Node(
@@ -98,7 +98,7 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(
         newValue,
         cost + ((value * value - value) ~/ 4 + 1).toInt(),
-        'Εκθετική',
+        'Τετράγωνο',
       );
     case CalculationType.square:
       return Node(
