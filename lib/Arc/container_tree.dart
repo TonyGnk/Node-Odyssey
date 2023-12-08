@@ -16,7 +16,8 @@ class Leaf extends ConsumerWidget {
     final tag = getTheRightProvider(ref, type);
     return Expanded(
       flex: (nodeWidth * 2 + gapWidth).toInt(),
-      child: DecoratedBox(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         decoration: tag != null ? decoration() : decorationNull(),
         child: Center(
           child: Text(
