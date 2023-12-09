@@ -18,5 +18,5 @@ void bfReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  ref.read(appBarLabel.notifier).state = isReturn ? 'Breadth First Search' : '';
+  updateAppBarLabel(ref, 'Breadth First Search', isReturn);
 }

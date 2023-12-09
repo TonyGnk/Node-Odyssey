@@ -57,7 +57,7 @@ Widget row(BuildContext context) => Consumer(
               duration: basicDuration,
               child: Text(
                 label ?? '',
-                style: const TextStyle(fontSize: 21, fontFamily: 'AdventoPro'),
+                style: const TextStyle(fontSize: 21, fontFamily: 'Play'),
               ),
             ),
             const Expanded(child: SizedBox()),

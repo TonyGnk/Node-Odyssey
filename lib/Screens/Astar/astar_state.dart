@@ -17,5 +17,5 @@ void asfReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  ref.read(appBarLabel.notifier).state = isReturn ? 'A*' : '';
+  updateAppBarLabel(ref, 'A*', isReturn);
 }

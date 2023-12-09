@@ -19,5 +19,5 @@ void dfReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  ref.read(appBarLabel.notifier).state = isReturn ? 'Depth First Search' : '';
+  updateAppBarLabel(ref, 'Depth First Search', isReturn);
 }
