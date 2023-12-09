@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../screen_list.dart';
 
-import '../Home Page/ArchHP/modern_caption.dart';
+import '../Home/ArchHP/modern_caption.dart';
 import 'button_state.dart';
 
 class AlgorithmsGUIBody extends ConsumerStatefulWidget {
