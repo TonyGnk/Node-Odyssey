@@ -8,27 +8,28 @@ import '../../Arc/Tree Widgets/new_tree.dart';
 import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/constants.dart';
+import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import '../Breadth First Page/Archive BF/result_providers.dart';
 import '../Breadth First Page/Create & Tracking List/list_and_button_bf.dart';
 import '../Breadth First Page/Result Panel BF/result_panel_bf.dart';
 import '../Breadth First Page/main_bf.dart';
-import 'bsf_state.dart';
+import 'astar_state.dart';
 
-class BestFirstAlg extends ConsumerStatefulWidget {
-  const BestFirstAlg({super.key});
+class AStarAlg extends ConsumerStatefulWidget {
+  const AStarAlg({super.key});
 
   @override
-  ConsumerState<BestFirstAlg> createState() => _TerminalSideState();
+  ConsumerState<AStarAlg> createState() => _TerminalSideState();
 }
 
-class _TerminalSideState extends ConsumerState<BestFirstAlg> {
+class _TerminalSideState extends ConsumerState<AStarAlg> {
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      bsfReturn(ref);
+      asfReturn(ref);
     });
   }
 
@@ -53,7 +54,7 @@ Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
-          searchBarContainer(AlgorithmType.bestf),
+          searchBarContainer(AlgorithmType.astar),
           const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(),

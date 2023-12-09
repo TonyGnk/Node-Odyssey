@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Services & Providers/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
+import 'Astar/astar_state.dart';
+import 'Astar/main_astart.dart';
 import 'Best First Search/bsf_state.dart';
 import 'Best First Search/main_bsf.dart';
 import 'Breadth First Page/bf_state.dart';
@@ -22,6 +24,7 @@ enum ScreenDestination {
   algorithmsGUI,
   depthFirstAlg,
   bestFirstAlg,
+  aStarAlg,
 }
 
 goTo(WidgetRef ref, ScreenDestination destination) async {
@@ -44,6 +47,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const BodyDf();
     case ScreenDestination.bestFirstAlg:
       return const BestFirstAlg();
+    case ScreenDestination.aStarAlg:
+      return const AStarAlg();
     default:
       return const Home();
   }
@@ -67,11 +72,14 @@ backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
       dfGo(ref, targetScreen);
     case ScreenDestination.bestFirstAlg:
       bsfGo(ref, targetScreen);
+    case ScreenDestination.aStarAlg:
+      asfGo(ref, targetScreen);
     default:
       null;
   }
 }
 
+//Maybe useless
 callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
   switch (goTo) {
     case ScreenDestination.home:
@@ -84,6 +92,10 @@ callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
       bfReturn(ref);
     case ScreenDestination.depthFirstAlg:
       dfReturn(ref);
+    case ScreenDestination.bestFirstAlg:
+      bsfReturn(ref);
+    case ScreenDestination.aStarAlg:
+      asfReturn(ref);
     default:
       homeReturn(ref);
   }

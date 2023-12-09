@@ -74,7 +74,7 @@ Widget listButtons(BuildContext context) => Consumer(
           ModernCaption(
             // label: 'Α*' in English,
             label: 'A*',
-            onTap: () async {},
+            onTap: () => buttonGo(ref, ScreenDestination.aStarAlg),
             icon: Icons.star_border_outlined,
           ),
         ],
@@ -124,8 +124,9 @@ Widget listOfChecks() => Consumer(
             height: 100,
             child: Center(
               child: Icon(
-                Icons.close,
-                color: Colors.red,
+                //Some icon for loading, processing, etc.
+                Icons.sync_outlined,
+                color: Colors.yellow,
               ),
             ),
           ),

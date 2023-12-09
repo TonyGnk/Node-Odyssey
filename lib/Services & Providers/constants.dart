@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Best First/algorithm_bsf.dart';
 import '../Algorithms/Breadth First/algorithm_bf.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
-import 'node.dart';
+import 'six_calculations.dart';
 
 const double cornerSize = 16;
 
@@ -30,6 +31,8 @@ Future<List<Node>?> startAlgorithm(
     return runDFGui(ref, request);
   } else if (type == AlgorithmType.bestf) {
     return runBSFGui(ref, request);
+  } else if (type == AlgorithmType.astar) {
+    return runAStarGui(ref, request);
   } else {
     return null;
   }

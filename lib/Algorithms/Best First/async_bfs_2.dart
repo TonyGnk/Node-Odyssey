@@ -51,7 +51,7 @@ List<Node>? runBSFAsyncStep(WidgetRef ref, RunningRequest request) {
       ref.read(currentProvider.notifier).state.value;
   updateChartAndTrackingPanel(
       ref, ref.read(currentProvider.notifier).state, end);
-  //setKingLeafs(ref.read(treeListSmallProvider.notifier).state, ref);
+  setKingLeafs(ref.read(treeListSmallProvider.notifier).state, ref);
 
   //
   print(ref.read(currentProvider.notifier).state.value == end);

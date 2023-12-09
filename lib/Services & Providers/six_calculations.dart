@@ -1,6 +1,17 @@
 import 'dart:math';
 
-import 'node.dart';
+class Node {
+  Node(this.value, this.cost, this.operation);
+
+  late int value;
+  late int cost;
+  late String operation;
+  late int distance;
+
+  setDistance(int target) {
+    distance = (target - value).abs();
+  }
+}
 
 enum CalculationType {
   addition,
@@ -110,14 +121,3 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(newValue, cost, '');
   }
 }
-
-initializeTreeList66() => [
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-    ];
-
-initializeTreeList6() => [null, null, null, null, null, null];

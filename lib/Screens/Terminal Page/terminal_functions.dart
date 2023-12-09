@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Services & Providers/constants.dart';
-import '../../Services & Providers/node.dart';
+import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import 'terminal_providers.dart';
 
