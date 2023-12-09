@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services & Providers/constants.dart';
 import '../../UI/Adaptive Templates/body_with_appbar.dart';
 import '../../UI/Routed Screen/app_bar.dart';
+import '../../UI/Routed Screen/info_icon.dart';
 import '../screen_list.dart';
 
 final opacityHomeState = StateProvider<double>((ref) => 1);
@@ -16,7 +17,12 @@ homeGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 homeReturn(WidgetRef ref) {
+  ref.read(appBarPreviousScreen.notifier).state =
+      ref.read(appBarCurrentScreen.notifier).state;
+  ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.home;
+
   setColors(ref);
+  updateAppBarInfoButton(ref, true);
   updateAppBarItems(ref, true);
 }
 

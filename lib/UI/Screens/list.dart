@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Routed Screen/routed_screen.dart';
-import 'about_page.dart';
+import 'about_main.dart';
 
 // The home page for the app. This is the first page the user sees.
 RoutedScreen aboutScreen() => const RoutedScreen(

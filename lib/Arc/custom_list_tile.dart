@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Services & Providers/constants.dart';
+
 class CustomListTile extends StatefulWidget {
   const CustomListTile({
     required this.label,
@@ -22,8 +24,7 @@ class _CustomListTileState extends State<CustomListTile> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-        const Duration(milliseconds: 700), () => changeColor(context));
+    Future.delayed(basicDuration, () => changeColor(context));
     return AnimatedContainer(
       height: height,
       duration: const Duration(milliseconds: 300),
@@ -86,9 +87,11 @@ class _CustomListTileState extends State<CustomListTile> {
   }
 
   changeColor(BuildContext context) {
-    setState(() {
-      height = 80;
-    });
+    if (mounted) {
+      setState(() {
+        height = 80;
+      });
+    }
     //showAlert(context, true);
   }
 }

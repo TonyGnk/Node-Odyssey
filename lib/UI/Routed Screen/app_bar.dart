@@ -9,7 +9,6 @@ import 'theme_icon.dart';
 final appBarIsEnableProvider = StateProvider<bool>((ref) => true);
 final appBarIsFilledProvider = StateProvider<bool>((ref) => false);
 final appBarIsEnableThemeButtonProvider = StateProvider<bool>((ref) => true);
-final appBarIsEnableInfoButtonProvider = StateProvider<bool>((ref) => false);
 final appBarLabel = StateProvider<String?>((ref) => null);
 final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
@@ -36,7 +35,6 @@ Widget row(BuildContext context) => Consumer(
         final labelOpacity = ref.watch(appBarLabelOpacity);
         final isEnableThemeButton =
             ref.watch(appBarIsEnableThemeButtonProvider);
-        final isEnableInfoButton = ref.watch(appBarIsEnableInfoButtonProvider);
         final currentScreen = ref.watch(appBarCurrentScreen);
         final previousScreen = ref.watch(appBarPreviousScreen);
         final customIcon1 = ref.watch(appBarCustomIcon1);
@@ -49,9 +47,8 @@ Widget row(BuildContext context) => Consumer(
               duration: basicDuration,
               child: isEnableBackButton
                   ? appBarIcon(
-                      const Icon(Icons.arrow_back_ios_new_outlined),
-                      () =>
-                          backButtonReturn(ref, currentScreen, previousScreen),
+                      const Icon(Icons.arrow_back_ios_outlined),
+                      () => go(ref, previousScreen ?? ScreenDestination.home),
                     )
                   : const SizedBox(),
             ),
@@ -70,7 +67,7 @@ Widget row(BuildContext context) => Consumer(
               child: customIcon1 ?? const SizedBox(),
             ),
             themeIcon(context, ref, isEnableThemeButton),
-            infoIcon(context, ref, isEnableInfoButton),
+            infoIcon(),
             const SizedBox(width: 2),
           ],
         );

@@ -2,6 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Services & Providers/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
+import '../UI/Screens/about_main.dart';
+import '../UI/Screens/about_state.dart';
+import '../UI/Screens/settings.dart';
+import '../UI/Screens/settings_state.dart';
 import 'Astar/astar_state.dart';
 import 'Astar/main_astar.dart';
 import 'Best First Search/bsf_state.dart';
@@ -25,6 +29,35 @@ enum ScreenDestination {
   depthFirstAlg,
   bestFirstAlg,
   aStarAlg,
+  settings,
+  about,
+}
+
+//Create the go function with ref and a destination. Reads switch appBarCurrentScreen if is ScreenDestination.terminal call terminalGo etc.
+go(WidgetRef ref, ScreenDestination destination) {
+  final currentScreen = ref.read(currentScreenProvider.notifier).state;
+  switch (currentScreen) {
+    case ScreenDestination.home:
+      homeGo(ref, destination);
+    case ScreenDestination.terminal:
+      terminalGo(ref, destination);
+    case ScreenDestination.algorithmsGUI:
+      buttonGo(ref, destination);
+    case ScreenDestination.breadthFirstAlg:
+      bfGo(ref, destination);
+    case ScreenDestination.depthFirstAlg:
+      dfGo(ref, destination);
+    case ScreenDestination.bestFirstAlg:
+      bsfGo(ref, destination);
+    case ScreenDestination.aStarAlg:
+      asfGo(ref, destination);
+    case ScreenDestination.about:
+      aboutGo(ref, destination);
+    case ScreenDestination.settings:
+      settingsGo(ref, destination);
+    default:
+      homeGo(ref, destination);
+  }
 }
 
 goTo(WidgetRef ref, ScreenDestination destination) async {
@@ -49,33 +82,12 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const BestFirstAlg();
     case ScreenDestination.aStarAlg:
       return const AStarAlg();
+    case ScreenDestination.settings:
+      return const Settings();
+    case ScreenDestination.about:
+      return const AboutScreen();
     default:
       return const Home();
-  }
-}
-
-backButtonReturn(WidgetRef ref, ScreenDestination? currentScreen,
-    ScreenDestination? targetScreen) {
-  if (currentScreen == null || targetScreen == null) {
-    return;
-  }
-  switch (currentScreen) {
-    case ScreenDestination.home:
-      null;
-    case ScreenDestination.terminal:
-      terminalGo(ref, targetScreen);
-    case ScreenDestination.algorithmsGUI:
-      buttonGo(ref, targetScreen);
-    case ScreenDestination.breadthFirstAlg:
-      bfGo(ref, targetScreen);
-    case ScreenDestination.depthFirstAlg:
-      dfGo(ref, targetScreen);
-    case ScreenDestination.bestFirstAlg:
-      bsfGo(ref, targetScreen);
-    case ScreenDestination.aStarAlg:
-      asfGo(ref, targetScreen);
-    default:
-      null;
   }
 }
 
@@ -100,41 +112,3 @@ callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
       homeReturn(ref);
   }
 }
-
-
-
-// // The home page for the app. This is the first page the user sees.
-// RoutedScreen homeScreen() => RoutedScreen(
-//       mainChild: home(),
-//       label: 'Αρχική',
-//       labelRoute: '/Home',
-//       //Add a stat icon
-//       icon: Icons.auto_awesome_outlined,
-//     );
-
-// // The Breadth First Algorithm page.
-// RoutedScreen breadthFirstAlgScreen() => const RoutedScreen(
-//       mainChild: BreadthFirstAlg(),
-//       label: 'Αλγόριθμος Πρώτα σε Πλάτος ',
-//       labelRoute: 'BreadthFirstAlgorithm',
-//       icon: Icons.radar_outlined,
-//       filledIcon: Icons.radar,
-//     );
-
-// //The GUI page of all algorithms
-// RoutedScreen algorithmsGUIScreen() => const RoutedScreen(
-//       mainChild: AlgorithmsGUI(),
-//       label: 'Όλοι οι Αλγόριθμοι',
-//       labelRoute: 'AllAlgorithms',
-//       icon: Icons.desktop_windows_outlined,
-//       filledIcon: Icons.desktop_windows,
-//     );
-
-// // The Depth First Algorithm page.
-// RoutedScreen depthFirstAlgScreen() => const RoutedScreen(
-//       mainChild: DepthFirstAlg(),
-//       label: 'Αλγόριθμος Πρώτα σε Βάθος ',
-//       labelRoute: 'DepthFirstAlgorithm',
-//       icon: Icons.radar_outlined,
-//       filledIcon: Icons.radar,
-//     );

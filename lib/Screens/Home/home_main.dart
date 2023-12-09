@@ -9,10 +9,10 @@ class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
   @override
-  ConsumerState<Home> createState() => _TerminalSideState();
+  ConsumerState<Home> createState() => _HomeState();
 }
 
-class _TerminalSideState extends ConsumerState<Home> {
+class _HomeState extends ConsumerState<Home> {
   @override
   void initState() {
     super.initState();

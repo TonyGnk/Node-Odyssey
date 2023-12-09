@@ -10,14 +10,17 @@ final opacityTerminalState = StateProvider<double>((ref) => 1);
 
 terminalGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
+  destination == ScreenDestination.home
+      ? updateAppBarBackButton(ref, false)
+      : updateAppBarBackButton(ref, true);
 
-  //Change Screen
   goTo(ref, destination);
 }
 
 terminalReturn(WidgetRef ref) {
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.terminal;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
+  updateAppBarBackButton(ref, true);
 
   //Set Functioning stuff
   myFocusNode.requestFocus();
@@ -27,7 +30,6 @@ terminalReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   ref.read(opacityTerminalState.notifier).state = isReturn ? 1 : 0;
-  updateAppBarBackButton(ref, isReturn);
   updateAppBarCustomIcon1(ref, restartTerminalButton(ref), isReturn);
 }
 
