@@ -31,7 +31,7 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
               'Select the desired algorithm',
               style: TextStyle(
                 fontSize: 27,
-                fontFamily: 'AdventoPro',
+                fontFamily: 'Play',
               ),
             ),
             const SizedBox(height: 42),

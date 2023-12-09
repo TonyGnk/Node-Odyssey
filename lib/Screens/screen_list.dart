@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Services & Providers/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
 import 'Astar/astar_state.dart';
-import 'Astar/main_astart.dart';
+import 'Astar/main_astar.dart';
 import 'Best First Search/bsf_state.dart';
 import 'Best First Search/main_bsf.dart';
 import 'Breadth First Page/bf_state.dart';

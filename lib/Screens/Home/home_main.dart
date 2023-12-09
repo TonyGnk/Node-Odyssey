@@ -56,7 +56,7 @@ welcomeToText() => const Text(
       'Welcome to',
       style: TextStyle(
         fontSize: 30,
-        fontFamily: 'AdventoPro',
+        fontFamily: 'Play',
       ),
       textAlign: TextAlign.left,
     );

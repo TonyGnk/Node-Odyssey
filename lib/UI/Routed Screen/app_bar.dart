@@ -8,15 +8,12 @@ import 'theme_icon.dart';
 
 final appBarIsEnableProvider = StateProvider<bool>((ref) => true);
 final appBarIsFilledProvider = StateProvider<bool>((ref) => false);
-final appBarIsEnableBackButtonProvider = StateProvider<bool>((ref) => false);
 final appBarIsEnableThemeButtonProvider = StateProvider<bool>((ref) => true);
 final appBarIsEnableInfoButtonProvider = StateProvider<bool>((ref) => false);
 final appBarLabel = StateProvider<String?>((ref) => null);
 final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarPreviousScreen = StateProvider<ScreenDestination?>((ref) => null);
-
-final appBarCustomIcon1 = StateProvider<IconButton?>((ref) => null);
 
 Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
       final isEnable = ref.watch(appBarIsEnableProvider);
@@ -33,7 +30,8 @@ Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
 
 Widget row(BuildContext context) => Consumer(
       builder: (context, ref, _) {
-        final isEnableBackButton = ref.watch(appBarIsEnableBackButtonProvider);
+        final isEnableBackButton = ref.watch(appBarIsEnableBackButton);
+        final backButtonOpacity = ref.watch(appBarBackButtonOpacity);
         final label = ref.watch(appBarLabel);
         final labelOpacity = ref.watch(appBarLabelOpacity);
         final isEnableThemeButton =
@@ -42,26 +40,35 @@ Widget row(BuildContext context) => Consumer(
         final currentScreen = ref.watch(appBarCurrentScreen);
         final previousScreen = ref.watch(appBarPreviousScreen);
         final customIcon1 = ref.watch(appBarCustomIcon1);
+        final customIconOpacity = ref.watch(appBarCustomIconOpacity);
         return Row(
           children: [
             const SizedBox(width: 2),
-            isEnableBackButton
-                ? appBarIcon(
-                    ref,
-                    const Icon(Icons.arrow_back_ios_new_outlined),
-                    () => backButtonReturn(ref, currentScreen, previousScreen),
-                  )
-                : const SizedBox(),
+            AnimatedOpacity(
+              opacity: backButtonOpacity,
+              duration: basicDuration,
+              child: isEnableBackButton
+                  ? appBarIcon(
+                      const Icon(Icons.arrow_back_ios_new_outlined),
+                      () =>
+                          backButtonReturn(ref, currentScreen, previousScreen),
+                    )
+                  : const SizedBox(),
+            ),
             AnimatedOpacity(
               opacity: labelOpacity,
               duration: basicDuration,
               child: Text(
                 label ?? '',
-                style: const TextStyle(fontSize: 21, fontFamily: 'Play'),
+                style: const TextStyle(fontSize: 19, fontFamily: 'Play'),
               ),
             ),
             const Expanded(child: SizedBox()),
-            customIcon1 ?? const SizedBox(),
+            AnimatedOpacity(
+              opacity: customIconOpacity,
+              duration: basicDuration,
+              child: customIcon1 ?? const SizedBox(),
+            ),
             themeIcon(context, ref, isEnableThemeButton),
             infoIcon(context, ref, isEnableInfoButton),
             const SizedBox(width: 2),
@@ -86,7 +93,6 @@ boxDecoration(BuildContext context) => BoxDecoration(
     );
 
 appBarIcon(
-  WidgetRef ref,
   Icon icon,
   void Function() onPressed, [
   String s = '',
@@ -106,6 +112,40 @@ appBarIcon(
     );
 
 updateAppBarLabel(WidgetRef ref, String label, bool isReturn) {
-  ref.read(appBarLabel.notifier).state = isReturn ? label : null;
+  ref.read(appBarLabel.notifier).state = label;
   ref.read(appBarLabelOpacity.notifier).state = isReturn ? 1 : 0;
+}
+
+// A provider for a custom icon in the app bar
+final appBarCustomIcon1 = StateProvider<IconButton?>((ref) => null);
+final appBarCustomIconOpacity = StateProvider<double>((ref) => 0);
+updateAppBarCustomIcon1(WidgetRef ref, IconButton iconButton, bool isReturn) {
+  isReturn
+      ? {
+          ref.read(appBarCustomIcon1.notifier).state = iconButton,
+          ref.read(appBarCustomIconOpacity.notifier).state = 1
+        }
+      : {
+          ref.read(appBarCustomIconOpacity.notifier).state = 0,
+          Future.delayed(basicDuration, () {
+            ref.read(appBarCustomIcon1.notifier).state = null;
+          })
+        };
+}
+
+// A provider for the back button in the app bar
+final appBarIsEnableBackButton = StateProvider<bool>((ref) => true);
+final appBarBackButtonOpacity = StateProvider<double>((ref) => 0);
+updateAppBarBackButton(WidgetRef ref, bool isReturn) {
+  isReturn
+      ? {
+          ref.read(appBarIsEnableBackButton.notifier).state = true,
+          ref.read(appBarBackButtonOpacity.notifier).state = 1
+        }
+      : {
+          ref.read(appBarBackButtonOpacity.notifier).state = 0,
+          Future.delayed(basicDuration, () {
+            ref.read(appBarIsEnableBackButton.notifier).state = false;
+          })
+        };
 }

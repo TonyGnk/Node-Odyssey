@@ -141,7 +141,7 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
             widget.label,
             style: const TextStyle(
               fontSize: 21,
-              fontFamily: 'AdventoPro',
+              fontFamily: 'Play',
             ),
           ),
         ],

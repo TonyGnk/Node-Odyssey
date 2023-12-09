@@ -5,7 +5,6 @@ import 'app_bar.dart';
 
 Widget infoIcon(BuildContext context, WidgetRef ref, bool enable) => enable
     ? appBarIcon(
-        ref,
         Icon(Icons.info_outlined,
             color: Theme.of(context).colorScheme.onBackground),
         () async {

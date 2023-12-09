@@ -9,6 +9,9 @@ final opacityButtonState = StateProvider<double>((ref) => 1);
 
 void buttonGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
+  destination == ScreenDestination.home
+      ? updateAppBarBackButton(ref, false)
+      : updateAppBarBackButton(ref, true);
 
   goTo(ref, destination);
 }
@@ -17,13 +20,13 @@ void buttonReturn(WidgetRef ref) {
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.algorithmsGUI;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
+  updateAppBarBackButton(ref, true);
 
   updateAppBarItems(ref, true);
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   ref.read(opacityButtonState.notifier).state = isReturn ? 1 : 0;
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state = true;
 }
 
 //EXTRA

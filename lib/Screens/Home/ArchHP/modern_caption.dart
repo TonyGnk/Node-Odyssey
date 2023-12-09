@@ -144,7 +144,7 @@ class _ModernCaptionState extends State<ModernCaption> {
           widget.label,
           style: const TextStyle(
             fontSize: 21,
-            fontFamily: 'AdventoPro',
+            fontFamily: 'Play',
           ),
         ),
       ]);

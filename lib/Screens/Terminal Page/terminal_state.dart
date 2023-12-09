@@ -26,21 +26,9 @@ terminalReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  //Update Animations
   ref.read(opacityTerminalState.notifier).state = isReturn ? 1 : 0;
-
-  //Update AppBarItems
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state =
-      isReturn ? true : false;
-  ref.read(appBarCustomIcon1.notifier).state = isReturn
-      ? IconButton(
-          onPressed: () {
-            ref.read(terminalContentProvider.notifier).state = windowsText;
-            myFocusNode.requestFocus();
-          },
-          icon: const Icon(Icons.restart_alt_outlined),
-        )
-      : null;
+  updateAppBarBackButton(ref, isReturn);
+  updateAppBarCustomIcon1(ref, restartTerminalButton(ref), isReturn);
 }
 
 //EXTRA
@@ -51,4 +39,10 @@ animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
         duration: basicDuration,
         child: child,
       );
+    });
+
+restartTerminalButton(WidgetRef ref) =>
+    appBarIcon(const Icon(Icons.restart_alt_outlined), () {
+      ref.read(terminalContentProvider.notifier).state = windowsText;
+      myFocusNode.requestFocus();
     });

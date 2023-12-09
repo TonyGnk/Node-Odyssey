@@ -8,7 +8,6 @@ Widget themeIcon(BuildContext context, WidgetRef ref, bool enable) {
   String mode = AdaptiveTheme.of(context).mode.toString();
   return enable
       ? appBarIcon(
-          ref,
           Icon(Icons.wb_sunny_outlined,
               color: Theme.of(context).colorScheme.onBackground),
           () {

@@ -22,7 +22,7 @@ homeReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   ref.read(opacityHomeState.notifier).state = isReturn ? 1 : 0;
-  ref.read(appBarIsEnableBackButtonProvider.notifier).state = false;
+  ref.read(appBarIsEnableBackButton.notifier).state = false;
 }
 
 //EXTRA
