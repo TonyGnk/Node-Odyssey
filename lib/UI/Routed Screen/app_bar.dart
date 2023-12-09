@@ -12,6 +12,7 @@ final appBarIsEnableBackButtonProvider = StateProvider<bool>((ref) => false);
 final appBarIsEnableThemeButtonProvider = StateProvider<bool>((ref) => true);
 final appBarIsEnableInfoButtonProvider = StateProvider<bool>((ref) => false);
 final appBarLabel = StateProvider<String?>((ref) => null);
+final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarPreviousScreen = StateProvider<ScreenDestination?>((ref) => null);
 
@@ -34,6 +35,7 @@ Widget row(BuildContext context) => Consumer(
       builder: (context, ref, _) {
         final isEnableBackButton = ref.watch(appBarIsEnableBackButtonProvider);
         final label = ref.watch(appBarLabel);
+        final labelOpacity = ref.watch(appBarLabelOpacity);
         final isEnableThemeButton =
             ref.watch(appBarIsEnableThemeButtonProvider);
         final isEnableInfoButton = ref.watch(appBarIsEnableInfoButtonProvider);
@@ -42,6 +44,7 @@ Widget row(BuildContext context) => Consumer(
         final customIcon1 = ref.watch(appBarCustomIcon1);
         return Row(
           children: [
+            const SizedBox(width: 2),
             isEnableBackButton
                 ? appBarIcon(
                     ref,
@@ -49,14 +52,19 @@ Widget row(BuildContext context) => Consumer(
                     () => backButtonReturn(ref, currentScreen, previousScreen),
                   )
                 : const SizedBox(),
-            Text(
-              label ?? '',
-              style: const TextStyle(fontSize: 16, fontFamily: 'AdventPro'),
+            AnimatedOpacity(
+              opacity: labelOpacity,
+              duration: basicDuration,
+              child: Text(
+                label ?? '',
+                style: const TextStyle(fontSize: 21, fontFamily: 'AdventoPro'),
+              ),
             ),
             const Expanded(child: SizedBox()),
             customIcon1 ?? const SizedBox(),
             themeIcon(context, ref, isEnableThemeButton),
             infoIcon(context, ref, isEnableInfoButton),
+            const SizedBox(width: 2),
           ],
         );
       },
@@ -90,18 +98,14 @@ appBarIcon(
       selectedIcon: selectedIcon,
       isSelected: isSelected,
       style: ButtonStyle(
-        shape: MaterialStateProperty.all<OutlinedBorder>(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(cornerSize),
-              topLeft: Radius.circular(cornerSize),
-              topRight: Radius.circular(cornerSize),
-              bottomRight: Radius.circular(cornerSize),
-            ),
-          ),
-        ),
         fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
       ),
       onPressed: onPressed,
       icon: icon,
+      highlightColor: Colors.grey.withOpacity(0.2),
     );
+
+updateAppBarLabel(WidgetRef ref, String label, bool isReturn) {
+  ref.read(appBarLabel.notifier).state = isReturn ? label : null;
+  ref.read(appBarLabelOpacity.notifier).state = isReturn ? 1 : 0;
+}

@@ -32,7 +32,6 @@ void main() async {
   runApp(
     ProviderScope(
       child: buildApp(savedThemeMode: savedThemeMode),
-      //MyApp(savedThemeMode: savedThemeMode),
     ),
   );
 }

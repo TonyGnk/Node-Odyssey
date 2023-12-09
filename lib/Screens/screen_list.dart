@@ -14,7 +14,7 @@ import 'Depth First Page/main_df.dart';
 import 'Buttons/button_side.dart';
 import 'Home/home_state.dart';
 import 'Terminal Page/terminal_side.dart';
-import 'Home/main_home.dart';
+import 'Home/home_main.dart';
 import 'Terminal Page/terminal_state.dart';
 
 enum ScreenDestination {

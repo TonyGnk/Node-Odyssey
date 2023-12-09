@@ -16,10 +16,10 @@ Widget themeIcon(BuildContext context, WidgetRef ref, bool enable) {
             AdaptiveTheme.of(context).updateState();
           },
           mode == 'AdaptiveThemeMode.dark'
-              ? 'Είσαι dark. Αλλαγή σε σύστημα θέμα'
+              ? 'Dark Mode'
               : mode == 'AdaptiveThemeMode.system'
-                  ? 'Είσαι σύστημα. Αλλαγή σε φωτεινό θέμα'
-                  : 'Είσαι φωτεινός. Αλλαγή σε σκοτεινό θέμα.',
+                  ? 'System Mode'
+                  : 'Light Mode',
           mode == 'AdaptiveThemeMode.dark'
               ? Icon(Icons.dark_mode_outlined,
                   color: Theme.of(context).colorScheme.onBackground)

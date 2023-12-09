@@ -17,5 +17,6 @@ void bsfReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
+  updateAppBarLabel(ref, 'Best First Algorithm', isReturn);
   ref.read(appBarLabel.notifier).state = isReturn ? 'Best First Algorithm' : '';
 }

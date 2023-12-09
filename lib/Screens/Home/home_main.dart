@@ -55,16 +55,16 @@ rightColumn() => animatedColumn(
 welcomeToText() => const Text(
       'Welcome to',
       style: TextStyle(
-        fontSize: 32,
+        fontSize: 30,
         fontFamily: 'AdventoPro',
       ),
       textAlign: TextAlign.left,
     );
 
 titleText() => const Text(
-      'Algorithms Visualizer',
+      'Node Odyssey',
       style: TextStyle(
-          fontSize: 32,
+          fontSize: 33,
           color: Color.fromRGBO(32, 102, 224, 0.9),
           fontWeight: FontWeight.bold),
       textAlign: TextAlign.left,

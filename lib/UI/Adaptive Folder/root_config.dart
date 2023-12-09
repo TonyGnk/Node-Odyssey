@@ -25,14 +25,8 @@ Widget rootConfig(
           darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            body: home(),
-          )
-
-          //const Synthesizer(), //TheApp()
-          // routes: generateRoutes(
-          //   mergeScreenLists(screens,),
-          // ),
-          ),
+            body: synthesizerDefault(),
+          )),
     );
 
 Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
@@ -52,16 +46,4 @@ Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
       (BuildContext context) => const StyleScreen();
 
   return routes;
-}
-
-List<RoutedScreen> mergeScreenLists(
-    List<RoutedScreen> a, List<RoutedScreen> b) {
-  List<RoutedScreen> c = [];
-  for (int i = 0; i < a.length; i++) {
-    c.add(a[i]);
-  }
-  for (int i = 0; i < b.length; i++) {
-    c.add(b[i]);
-  }
-  return c;
 }
