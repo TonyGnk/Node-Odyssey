@@ -1,64 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:adaptive_theme/adaptive_theme.dart';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../Arc/custom_list_tile.dart';
-import '../Components/Buttons/elevated_button.dart';
-import 'about_state.dart';
-
-class AboutScreen extends ConsumerStatefulWidget {
-  const AboutScreen({super.key});
-
-  @override
-  ConsumerState<AboutScreen> createState() => _AboutState();
-}
-
-class _AboutState extends ConsumerState<AboutScreen> {
-  String? appName;
-  String? packageName;
-  String? version;
-  String? buildNumber;
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(Duration.zero, () async {
-      loadPackageInfo();
-      aboutReturn(ref);
-    });
-  }
-
-  //Load package info
-  Future<void> loadPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      appName = info.appName;
-      //print('appName: $appName');
-      packageName = info.packageName;
-      //print('packageName: $packageName');
-      version = info.version;
-      //print('version: $version');
-      buildNumber = info.buildNumber;
-      log('buildNumber: $buildNumber');
-    });
-  }
-
-  @override
-  build(BuildContext context) => scaffoldAboutScreenType2(
-        context,
-        _defaultApplicationName(context),
-        version ?? 'Loading',
-      );
-}
+import '../../Components/Buttons/elevated_button.dart';
 
 Widget scaffoldAboutScreenType1(
-        BuildContext context, String title, String version) =>
+  BuildContext context,
+  String title,
+  String version,
+) =>
     Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,7 +40,10 @@ Widget scaffoldAboutScreenType1(
     );
 
 Widget scaffoldAboutScreenType2(
-        BuildContext context, String title, String version) =>
+  BuildContext context,
+  String title,
+  String version,
+) =>
     Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Screens/screen_list.dart';
-import '../../UI/Routed Screen/app_bar.dart';
-import '../Routed Screen/info_icon.dart';
+import '../../../Screens/screen_list.dart';
+import '../../Routed Screen/app_bar.dart';
+import '../../Routed Screen/info_icon.dart';
 
 void aboutGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);

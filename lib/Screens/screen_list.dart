@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Services & Providers/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
-import '../UI/Screens/about_main.dart';
-import '../UI/Screens/about_state.dart';
+import '../UI/Screens/About/about_main.dart';
+import '../UI/Screens/About/about_state.dart';
 import '../UI/Screens/settings.dart';
 import '../UI/Screens/settings_state.dart';
 import 'Astar/astar_state.dart';
