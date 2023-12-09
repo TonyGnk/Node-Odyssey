@@ -12,7 +12,7 @@ void main() async {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       fullScreen: false,
-      title: 'Algorithms',
+      title: 'Node Odyssey',
       size: Size(1050, 660), //1050-660
       center: false,
       backgroundColor: Colors.transparent,
@@ -39,6 +39,6 @@ void main() async {
 
 AdaptiveRoot buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
       savedThemeMode: savedThemeMode,
-      appTitle: 'Algorithms',
+      appTitle: 'Node Odyssey',
       debugShowFloatingThemeButton: false,
     );
