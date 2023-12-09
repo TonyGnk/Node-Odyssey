@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../Arc/custom_list_tile.dart';
@@ -89,34 +91,34 @@ Widget scaffoldAboutScreenType2(
     Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomListTile(
-          label: 'App Version: ${_defaultApplicationName(context)} $version',
-          leftIcon: Icons.description_outlined,
-          type: Type.top,
-          onTap: () => log('App Version: $version'),
+        Image.asset(
+          filterQuality: FilterQuality.high,
+          // AdaptiveTheme.of(context).toString() == 'AdaptiveThemeMode.dark'
+          'assets/images/qrCode.png',
+          //: 'assets/images/qrCodeL.png',
+          //'assets/images/qrCode.png',
+          height: MediaQuery.of(context).size.height * 0.42,
         ),
-        CustomListTile(
-          label: 'Operating System: ${Platform.operatingSystem}',
-          leftIcon: getIconPlatform(Platform.operatingSystem),
-          type: Type.none,
-          onTap: () => log(Platform.operatingSystem),
-        ),
-        CustomListTile(
-          label: 'Open Source Licenses',
-          leftIcon: Icons.description_outlined,
-          type: Type.bottom,
-          onTap: () => showLicensePage(
-            context: context,
-          ),
-        )
-
-        // ListTile(
-        //   title: const Text('Open Source Licenses'),
-        //   leading: const Icon(Icons.description_outlined),
+        // CustomListTile(
+        //   label: 'App Version: ${_defaultApplicationName(context)} $version',
+        //   leftIcon: Icons.description_outlined,
+        //   type: Type.top,
+        //   onTap: () => log('App Version: $version'),
+        // ),
+        // CustomListTile(
+        //   label: 'Operating System: ${Platform.operatingSystem}',
+        //   leftIcon: getIconPlatform(Platform.operatingSystem),
+        //   type: Type.none,
+        //   onTap: () => log(Platform.operatingSystem),
+        // ),
+        // CustomListTile(
+        //   label: 'Open Source Licenses',
+        //   leftIcon: Icons.description_outlined,
+        //   type: Type.bottom,
         //   onTap: () => showLicensePage(
         //     context: context,
         //   ),
-        // ),
+        // )
       ],
     );
 

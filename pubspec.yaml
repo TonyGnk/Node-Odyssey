@@ -17,6 +17,7 @@ dependencies:
     sdk: flutter 
   permission_handler: ^10.4.3
   path_provider: ^2.0.5
+  flutter_svg: ^2.0.9
   flutter_riverpod: ^2.3.10
   shared_preferences: ^2.2.1
   adaptive_theme: ^3.4.0
@@ -72,6 +73,12 @@ flutter:
 
   
   uses-material-design: true 
+
+  assets:
+    - assets/images/qrCodeL.png
+    - assets/images/qrCodeD.png
+    - assets/images/qrCode.png
+    - assets/images/qr.svg
 
 
   # To add assets to your application, add an assets section, like this:
