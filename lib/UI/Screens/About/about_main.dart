@@ -69,7 +69,7 @@ customAboutRightColumn() => Column(
           290,
           Image.asset(
             filterQuality: FilterQuality.high,
-            'assets/images/qrCode.png',
+            'assets/images/qrCodeT.png',
           ),
         ),
         const SizedBox(height: 20),
@@ -81,21 +81,23 @@ customAboutRightColumn() => Column(
       ],
     );
 
-aboutContainer(double width, Widget child) => Container(
-      width: width,
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 35, 35, 35),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.3),
-          width: 1.5,
+aboutContainer(double width, Widget child) => Consumer(
+      builder: (context, ref, _) => Container(
+        width: width,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Theme.of(context).shadowColor.withOpacity(0.5),
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.3),
+            width: 1.5,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(cornerSize),
+          ),
         ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(cornerSize),
-        ),
+        clipBehavior: Clip.antiAlias,
+        child: child,
       ),
-      clipBehavior: Clip.antiAlias,
-      child: child,
     );
 
 qrColumn() => Column(
@@ -108,7 +110,6 @@ qrColumn() => Column(
       ],
     );
 
-// 'https://github.com/TonyGnk/algorithms';
 Uri url = Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk/algorithms');
 
 buttonForGithubCode() => Row(
@@ -140,15 +141,10 @@ licenseButton() => Consumer(
                   context: context,
                   applicationName: 'Node Odyssey',
                   applicationVersion: '1.0.0',
-                  applicationIcon: Image.asset(
-                    'assets/images/qrCode.png',
-                    width: 50,
-                    height: 50,
-                  ),
                   applicationLegalese: '© 2023 TonyGnk',
                 );
               },
-              const Text('Hello'),
+              const Text('View Open Source Licenses'),
               //icon for licenses
               const Icon(Icons.feed_outlined),
             ),
@@ -162,23 +158,25 @@ aboutTextButton(
   Widget label,
   Widget icon,
 ) =>
-    TextButton.icon(
-      onPressed: onPressed,
-      label: label,
-      icon: icon,
-      style: ButtonStyle(
-        alignment: Alignment.centerLeft,
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(cornerSize - 2),
+    Consumer(
+      builder: (context, ref, _) => TextButton.icon(
+        onPressed: onPressed,
+        label: label,
+        icon: icon,
+        style: ButtonStyle(
+          alignment: Alignment.centerLeft,
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cornerSize - 2),
+            ),
           ),
-        ),
-        //color #618CD3
-        foregroundColor: MaterialStateProperty.all<Color>(
-          const Color.fromARGB(255, 149, 173, 214),
-        ),
-        overlayColor: MaterialStateProperty.all<Color>(
-          const Color.fromARGB(255, 149, 173, 214).withOpacity(0.2),
+          //color #618CD3
+          foregroundColor: MaterialStateProperty.all<Color>(
+            const Color.fromARGB(255, 149, 173, 214),
+          ),
+          overlayColor: MaterialStateProperty.all<Color>(
+            const Color.fromARGB(255, 149, 173, 214).withOpacity(0.2),
+          ),
         ),
       ),
     );

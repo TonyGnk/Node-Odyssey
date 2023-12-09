@@ -8,7 +8,7 @@ class MaterialThemeData extends TotalTheme {
         brightness: Brightness.light,
         useMaterial3: true,
         //#90A4AE to rgb is 144, 164, 174
-        colorSchemeSeed: const Color.fromARGB(255, 144, 164, 174),
+        colorSchemeSeed: const Color.fromARGB(255, 149, 173, 214),
         textTheme: TextTheme(
           displayLarge: const TextStyle(
             color: Color.fromARGB(255, 31, 31, 31),
@@ -33,7 +33,7 @@ class MaterialThemeData extends TotalTheme {
   ThemeData dark() => ThemeData(
         brightness: Brightness.dark,
         useMaterial3: true,
-        colorSchemeSeed: const Color.fromARGB(255, 144, 164, 174),
+        colorSchemeSeed: const Color.fromARGB(255, 149, 173, 214),
         textTheme: TextTheme(
           displayLarge:
               const TextStyle(color: Color.fromARGB(255, 243, 243, 243)),

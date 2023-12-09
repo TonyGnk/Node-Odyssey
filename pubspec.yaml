@@ -78,6 +78,7 @@ flutter:
   assets:
     - assets/images/qrCodeL.png
     - assets/images/qrCodeD.png
+    - assets/images/qrCodeT.png
     - assets/images/qrCode.png
     - assets/images/qr.svg
 
