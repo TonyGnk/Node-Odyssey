@@ -19,9 +19,10 @@ jobs:
             - name: Show version
               run: |
                   yq -r .version pubspec.yaml
+
             - name: Get version from pubspec.yaml
-              run: |
-                  echo "VERSION=$(yq -r .version pubspec.yaml)" >> $GITHUB_ENV
+              id: vars
+              run: echo "::set-output name=version::$(yq -r .version pubspec.yaml)"
+
             - name: Use the version
-              run: |
-                  echo "The version is ${{ env.VERSION }}"
+              run: echo "The version is ${{ steps.vars.outputs.version }}"
