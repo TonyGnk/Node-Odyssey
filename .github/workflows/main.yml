@@ -23,8 +23,6 @@ jobs:
             # Setup Flutter environment
             - name: Setup Flutter
               uses: subosito/flutter-action@v1
-              with:
-                  flutter-version: "3.13.4"
 
             # Get Flutter dependencies
             - name: Get Dependencies
@@ -41,8 +39,17 @@ jobs:
                   name: release-exe
                   path: build\windows\runner\Release
 
+            - name: Move Release to Root
+              run: mv ../build/windows/runner/Release .
+            
+            - name: Archive Release
+              uses: thedoctor0/zip-release@0.7.5
+              with:
+                filename: 'release.zip'
+                path: Release
+
             # Trigger automatic release
-            - name: Trigger Pre-release
+            - name: Trigger Release
               uses: marvinpinto/action-automatic-releases@latest
               with:
                   repo_token: "${{ secrets.RELEASE_TOKEN }}"
@@ -50,5 +57,4 @@ jobs:
                   prerelease: false
                   title: "Development Build"
                   files: |
-                      LICENSE.txt
-                      build\windows\runner\Release
+                      release.zip
