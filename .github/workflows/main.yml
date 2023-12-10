@@ -23,6 +23,8 @@ jobs:
             # Setup Flutter environment
             - name: Setup Flutter
               uses: subosito/flutter-action@v1
+              with:
+                  flutter-version: "3.13.4"
 
             # Get Flutter dependencies
             - name: Get Dependencies
@@ -54,4 +56,5 @@ jobs:
                   prerelease: false
                   title: "Development Build"
                   files: |
+                      LICENSE.txt
                       release.zip
