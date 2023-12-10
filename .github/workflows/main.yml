@@ -41,8 +41,11 @@ jobs:
                   name: release-exe
                   path: build\windows\runner\Release
 
-            - name: Zip Release
-              run: zip -r release.zip build/windows/runner/Release
+            - name: Archive Release
+              uses: thedoctor0/zip-release@0.7.5
+              with:
+                filename: 'release.zip'
+                path: build\windows\runner\Release
 
             # Trigger automatic release
             - name: Trigger Pre-release
