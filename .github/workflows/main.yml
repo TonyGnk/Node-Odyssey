@@ -1,12 +1,15 @@
 name: Combined Workflow
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - "release"
+    branches: ["release"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       # Checkout the repository
       - name: Checkout
