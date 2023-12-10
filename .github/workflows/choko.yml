@@ -33,7 +33,7 @@ jobs:
               uses: thedoctor0/zip-release@0.7.5
               with:
                   filename: "release.zip"
-                  directory: "build/windows/runner"
+                  directory: "build/windows/x64/runner"
                   path: "Release"
 
             - name: Show version
@@ -60,4 +60,4 @@ jobs:
                   automatic_release_tag: ${{ steps.vars.outputs.version }}
                   prerelease: false
                   files: |
-                      build/windows/runner/release.zip
+                      build/windows/runner/x64/release.zip
