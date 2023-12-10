@@ -3,7 +3,8 @@ on:
     # Runs on pushes targeting the default branch
     push:
         branches:
-            - "release"
+            - release
+    workflow_dispatch:
 
 jobs:
     build-and-release:
@@ -50,4 +51,4 @@ jobs:
                   title: "Development Build"
                   files: |
                       LICENSE.txt
-                      build\windows\runner\Release\*
+                      build\windows\runner\Release
