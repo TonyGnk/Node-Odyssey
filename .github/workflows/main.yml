@@ -1,52 +1,53 @@
 name: Combined Workflow
 on:
-  push:
-    branches:
-      - release
+    # Runs on pushes targeting the default branch
+    push:
+        branches:
+            - "release"
 
 jobs:
-  build-and-release:
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout the repository
-      - name: Checkout
-        uses: actions/checkout@v2
+    build-and-release:
+        runs-on: windows-latest
+        steps:
+            # Checkout the repository
+            - name: Checkout
+              uses: actions/checkout@v2
 
-      # Setup Java environment for Android app build
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: '13.x'
+            # Setup Java environment for Android app build
+            - name: Setup Java
+              uses: actions/setup-java@v1
+              with:
+                  java-version: "13.x"
 
-      # Setup Flutter environment
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.13.4'
+            # Setup Flutter environment
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v1
+              with:
+                  flutter-version: "3.13.4"
 
-      # Get Flutter dependencies
-      - name: Get Dependencies
-        run: flutter pub get
+            # Get Flutter dependencies
+            - name: Get Dependencies
+              run: flutter pub get
 
-      # Build Windows executable
-      - name: Build Windows Executable
-        run: flutter build windows
+            # Build Windows executable
+            - name: Build Windows Executable
+              run: flutter build windows
 
-      # Upload generated artifact to release
-      - name: Upload Artifact to Release
-        uses: actions/upload-artifact@v2
-        with:
-          name: release-exe
-          path: build\windows\runner\Release
+            # Upload generated artifact to release
+            - name: Upload Artifact to Release
+              uses: actions/upload-artifact@v2
+              with:
+                  name: release-exe
+                  path: build\windows\runner\Release
 
-      # Trigger automatic release
-      - name: Trigger Pre-release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.RELEASE_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Development Build"
-          files: |
-            LICENSE.txt
-            build\windows\runner\Release\*
+            # Trigger automatic release
+            - name: Trigger Pre-release
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: "${{ secrets.RELEASE_TOKEN }}"
+                  automatic_release_tag: "latest"
+                  prerelease: false
+                  title: "Development Build"
+                  files: |
+                      LICENSE.txt
+                      build\windows\runner\Release\*
