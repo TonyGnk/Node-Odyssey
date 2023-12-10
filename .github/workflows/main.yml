@@ -40,7 +40,7 @@ jobs:
                   path: build\windows\runner\Release
 
             - name: Move Release to Root
-              run: mv build/windows/runner/Release .
+              run: mv ../build/windows/runner/Release .
             
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
