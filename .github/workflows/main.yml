@@ -39,11 +39,13 @@ jobs:
                   name: release-exe
                   path: build\windows\runner\Release
 
+            - name: Move Release to Root
+            - run: mv build/windows/runner/Release .
+            
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
               with:
                 filename: 'release.zip'
-                directory: build\windows\runner
                 path: Release
 
             # Trigger automatic release
@@ -55,4 +57,4 @@ jobs:
                   prerelease: false
                   title: "Development Build"
                   files: |
-                      build\windows\runner\release.zip
+                      release.zip
