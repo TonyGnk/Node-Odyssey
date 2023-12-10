@@ -60,4 +60,4 @@ jobs:
                   automatic_release_tag: ${{ steps.vars.outputs.version }}
                   prerelease: false
                   files: |
-                      build/windows/runner/x64/release.zip
+                      build/windows/x64/runner/release.zip
