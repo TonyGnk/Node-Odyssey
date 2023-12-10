@@ -11,8 +11,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: setup-yq4
-              uses: infovista-opensource/setup-yq4@v0.9.3
+            - name: (Yet Another) Setup yq
+              uses: vegardit/gha-setup-yq@1.0.0
             - name: Show folks how to run YQ
               run: |
                   yq --help
