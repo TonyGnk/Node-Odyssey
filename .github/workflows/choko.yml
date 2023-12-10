@@ -15,4 +15,5 @@ jobs:
             - name: Install yq
               uses: shiipou/setup-yq-action@v2.2.0
             - name: Test yq
+              shell: bash
               run: yq --version
