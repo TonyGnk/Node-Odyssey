@@ -26,7 +26,7 @@ pText(String text) => Text(
       ),
       textAlign: TextAlign.left,
     );
-//Κουκκίδες για απαρίθμηση Κείμενο πρόσθεσε στην αρχή
+
 dotsText(String text) => Text(
       '• $text',
       style: const TextStyle(
