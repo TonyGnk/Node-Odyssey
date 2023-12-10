@@ -15,7 +15,7 @@ import 'Breadth First Page/main_bf.dart';
 import 'Buttons/button_state.dart';
 import 'Depth First Page/df_state.dart';
 import 'Depth First Page/main_df.dart';
-import 'Buttons/button_side.dart';
+import 'Buttons/button_main.dart';
 import 'Home/home_state.dart';
 import 'Terminal Page/terminal_side.dart';
 import 'Home/home_main.dart';
