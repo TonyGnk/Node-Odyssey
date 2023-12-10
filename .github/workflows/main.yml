@@ -1,60 +1,86 @@
-name: Combined Workflow
+name: Release New Version
 on:
-    # Runs on pushes targeting the default branch
     push:
         branches:
             - release
     workflow_dispatch:
 
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
 jobs:
-    build-and-release:
+    build:
         runs-on: windows-latest
         steps:
-            # Checkout the repository
-            - name: Checkout
+            - name: Checkout code
               uses: actions/checkout@v2
 
-            # Setup Java environment for Android app build
+            - name: Setup yq
+              uses: vegardit/gha-setup-yq@1.0.0
+
             - name: Setup Java
               uses: actions/setup-java@v1
               with:
                   java-version: "13.x"
 
-            # Setup Flutter environment
             - name: Setup Flutter
-              uses: subosito/flutter-action@v1
-              with:
-                  flutter-version: "3.13.4"
+              uses: subosito/flutter-action@v2
 
-            # Get Flutter dependencies
             - name: Get Dependencies
               run: flutter pub get
 
-            # Build Windows executable
             - name: Build Windows Executable
               run: flutter build windows
-
-            # Upload generated artifact to release
-            - name: Upload Artifact to Release
-              uses: actions/upload-artifact@v2
-              with:
-                  name: release-exe
-                  path: build\windows\runner\Release
 
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
               with:
                   filename: "release.zip"
-                  path: build\windows\runner\Release
+                  directory: "build/windows/x64/runner"
+                  path: "Release"
+
+            - run: flutter build web --release --base-href="/algorithms/"
+            - name: Setup Pages
+              uses: actions/configure-pages@v3
+            - name: Build with Jekyll
+              uses: actions/jekyll-build-pages@v1
+              with:
+                  source: ./build/web
+                  destination: ./_site
+
+            - name: Show version
+              run: |
+                  yq -r .version pubspec.yaml
+
+            # Traditional way of getting the version
+            - name: Get version from pubspec.yaml
+              id: vars
+              run: echo "::set-output name=version::$(yq -r .version pubspec.yaml)"
 
             # Trigger automatic release
             - name: Trigger Pre-release
               uses: marvinpinto/action-automatic-releases@latest
               with:
                   repo_token: "${{ secrets.RELEASE_TOKEN }}"
-                  automatic_release_tag: "latest"
+                  #Paste the txt value here
+                  automatic_release_tag: ${{ steps.vars.outputs.version }}
                   prerelease: false
-                  title: "Development Build"
                   files: |
-                      LICENSE.txt
-                      release.zip
+                      build/windows/x64/runner/release.zip
+
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v2

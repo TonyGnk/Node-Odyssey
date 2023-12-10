@@ -18,7 +18,7 @@
 		"**/macos": true,
 		"**/web": true,
 		"**/.dart_tool": true,
-		"**/.github": true,
+		"**/.github": false,
 		"**/linux": true,
 		"**/android": true,
 		//hide readme
@@ -28,6 +28,6 @@
 		//hide analysis_options.yaml
 		"**/analysis_options.yaml": true,
 		//also assets
-		"**/assets": true
+		"**/assets": falsse
 	}
 }
