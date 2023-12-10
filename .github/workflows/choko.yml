@@ -1,6 +1,5 @@
 name: Choko
 on:
-    # Runs on pushes targeting the default branch
     push:
         branches:
             - main
@@ -13,7 +12,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
             - name: Install yq
-              uses: shiipou/setup-yq-action@v2.2.0
-            - name: Test yq
-              shell: bash
-              run: yq --version
+              uses: chrisdickinson/setup-yq@latest
+            - name: Show folks how to run YQ
+              run: |
+                  yq --help
