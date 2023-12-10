@@ -11,15 +11,30 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: (Yet Another) Setup yq
+
+            - name: Setup yq
               uses: vegardit/gha-setup-yq@1.0.0
 
+            - name: Setup Java
+              uses: actions/setup-java@v1
+              with:
+                  java-version: "13.x"
+
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v1
+
+            - name: Get Dependencies
+              run: flutter pub get
+
+            - name: Build Windows Executable
+              run: flutter build windows
+            #build\windows\runner\Release
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
               with:
                   filename: "release.zip"
-                  directory: "assets/fonts"
-                  path: "play"
+                  directory: "build/windows/runner"
+                  path: "Release"
 
             - name: Show version
               run: |
@@ -45,4 +60,4 @@ jobs:
                   automatic_release_tag: ${{ steps.vars.outputs.version }}
                   prerelease: false
                   files: |
-                      assets/fonts/release.zip
+                      build/windows/runner/release.zip
