@@ -16,3 +16,6 @@ jobs:
             - name: Show folks how to run YQ
               run: |
                   yq --help
+            - name: Show version of YQ
+              run: |
+                  yq -r .version pubspec.yaml
