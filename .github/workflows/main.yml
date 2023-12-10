@@ -39,17 +39,14 @@ jobs:
                   name: release-exe
                   path: build\windows\runner\Release
 
-            - name: Move Release to Root
-              run: mv ../build/windows/runner/Release .
-            
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
               with:
-                filename: 'release.zip'
-                path: Release
+                  filename: "release.zip"
+                  path: build\windows\runner\Release
 
             # Trigger automatic release
-            - name: Trigger Release
+            - name: Trigger Pre-release
               uses: marvinpinto/action-automatic-releases@latest
               with:
                   repo_token: "${{ secrets.RELEASE_TOKEN }}"
