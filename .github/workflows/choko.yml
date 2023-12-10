@@ -16,6 +16,12 @@ jobs:
             - name: Show folks how to run YQ
               run: |
                   yq --help
-            - name: Show version of YQ
+            - name: Show version
               run: |
                   yq -r .version pubspec.yaml
+            - name: Get version from pubspec.yaml
+              run: |
+                  echo "VERSION=$(yq -r .version pubspec.yaml)" >> $GITHUB_ENV
+            - name: Use the version
+              run: |
+                  echo "The version is ${{ env.VERSION }}"
