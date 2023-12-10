@@ -20,14 +20,6 @@ jobs:
               run: |
                   yq -r .version pubspec.yaml
 
-            # Example of Modern way of getting the version
-            - name: Get version from pubspec.yaml
-              id: vars2
-              run: echo "version=$(yq -r .version pubspec.yaml)" >> $GITHUB_OUTPUT
-
-            - name: Use the version
-              run: echo "The version is ${{ steps.vars.outputs.version }}"
-
             # Traditional way of getting the version
             - name: Get version from pubspec.yaml
               id: vars
@@ -35,3 +27,18 @@ jobs:
 
             - name: Use the version
               run: echo "The version is ${{ steps.vars.outputs.version }}"
+
+            - name: Get version from pubspec.yaml
+              run: yq -r .version pubspec.yaml > version.txt
+
+            # Trigger automatic release
+            - name: Trigger Pre-release
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: "${{ secrets.RELEASE_TOKEN }}"
+                  #Paste the txt value here
+                  automatic_release_tag: ${{ steps.vars.outputs.version }}
+                  prerelease: false
+                  title: "Development Build"
+                  files: |
+                      LICENSE.txt
