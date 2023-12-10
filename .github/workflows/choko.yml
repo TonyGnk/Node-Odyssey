@@ -20,6 +20,15 @@ jobs:
               run: |
                   yq -r .version pubspec.yaml
 
+            # Example of Modern way of getting the version
+            - name: Get version from pubspec.yaml
+              id: vars2
+              run: echo "version=$(yq -r .version pubspec.yaml)" >> $GITHUB_OUTPUT
+
+            - name: Use the version
+              run: echo "The version is ${{ steps.vars.outputs.version }}"
+
+            # Traditional way of getting the version
             - name: Get version from pubspec.yaml
               id: vars
               run: echo "::set-output name=version::$(yq -r .version pubspec.yaml)"
