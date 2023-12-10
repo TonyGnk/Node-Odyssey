@@ -41,6 +41,9 @@ jobs:
                   name: release-exe
                   path: build\windows\runner\Release
 
+            - name: Zip Release
+              run: zip -r release.zip build/windows/runner/Release
+
             # Trigger automatic release
             - name: Trigger Pre-release
               uses: marvinpinto/action-automatic-releases@latest
@@ -51,4 +54,4 @@ jobs:
                   title: "Development Build"
                   files: |
                       LICENSE.txt
-                      build\windows\runner\Release
+                      release.zip
