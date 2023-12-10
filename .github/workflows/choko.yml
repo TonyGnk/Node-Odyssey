@@ -11,8 +11,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Install yq
-              uses: chrisdickinson/setup-yq@latest
+            - name: setup-yq4
+              uses: infovista-opensource/setup-yq4@v0.9.3
             - name: Show folks how to run YQ
               run: |
                   yq --help
