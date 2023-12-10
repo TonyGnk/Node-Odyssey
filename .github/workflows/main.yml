@@ -2,7 +2,7 @@ name: Combined Workflow
 on:
   push:
     branches:
-      - "release"
+      - release
 
 jobs:
   build-and-release:
@@ -39,11 +39,11 @@ jobs:
           name: release-exe
           path: build\windows\runner\Release
 
-      # Trigger automatic pre-release
+      # Trigger automatic release
       - name: Trigger Pre-release
         uses: marvinpinto/action-automatic-releases@latest
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          repo_token: "${{ secrets.RELEASE_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
           title: "Development Build"
