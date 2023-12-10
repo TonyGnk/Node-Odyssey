@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - release
+    workflow_dispatch:
 
 jobs:
     build-and-release:
@@ -41,8 +42,8 @@ jobs:
             - name: Archive Release
               uses: thedoctor0/zip-release@0.7.5
               with:
-                filename: 'release.zip'
-                path: build\windows\runner\Release
+                  filename: "release.zip"
+                  path: build\windows\runner\Release
 
             # Trigger automatic release
             - name: Trigger Pre-release
