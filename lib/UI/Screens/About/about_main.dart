@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services & Providers/constants.dart';
 import 'about_state.dart';
+import 'about_text.dart';
 
 class AboutScreen extends ConsumerStatefulWidget {
   const AboutScreen({super.key});
@@ -30,7 +31,6 @@ class _AboutState extends ConsumerState<AboutScreen> {
     });
   }
 
-  //Load package info
   Future<void> loadPackageInfo() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
     setState(() {
@@ -48,6 +48,7 @@ class _AboutState extends ConsumerState<AboutScreen> {
   @override
   build(BuildContext context) => Row(
         children: [
+          const SizedBox(width: 20),
           Expanded(flex: 3, child: customAboutLeftColumn()),
           customAboutRightColumn(),
           const SizedBox(width: 20),
@@ -55,13 +56,31 @@ class _AboutState extends ConsumerState<AboutScreen> {
       );
 }
 
-customAboutLeftColumn() => const Column(
+customAboutLeftColumn() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Κείμενο'),
-        Expanded(child: SizedBox()),
+        header1Text(aboutText[0]),
+        const SizedBox(height: 20),
+        header2Text(aboutText[1]),
+        const SizedBox(height: 10),
+        pText(aboutText[2]),
+        const SizedBox(height: 20),
+        header2Text(aboutText[3]),
+        const SizedBox(height: 10),
+        pText(aboutText[4]),
+        const SizedBox(height: 20),
+        header2Text(aboutText[5]),
+        const SizedBox(height: 10),
+        pText(aboutText[6]),
+        //header2Text(aboutText[7]),
+        //dotsText(aboutText[8]),
+        //dotsText(aboutText[9]),
+        //dotsText(aboutText[10]),
+        //dotsText(aboutText[11]),
+        //const Expanded(child: SizedBox()),
       ],
     );
+
 customAboutRightColumn() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -105,27 +124,54 @@ qrColumn() => Column(
       children: [
         //
         buttonForGithubCode(),
+        buttonWebVersion(),
         licenseButton()
         //Open Source Flutter licenses
       ],
     );
 
-Uri url = Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk/algorithms');
+Uri urlCode =
+    Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk/algorithms');
 
 buttonForGithubCode() => Row(
       children: [
         Expanded(
           child: aboutTextButton(
             () async {
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url);
+              if (await canLaunchUrl(urlCode)) {
+                await launchUrl(urlCode);
               } else {
-                throw 'Could not launch $url';
+                throw 'Could not launch $urlCode';
               }
             },
             //Button showing the open source code of the app
             const Text('View code on Github'),
             const Icon(Icons.code),
+          ),
+        ),
+      ],
+    );
+
+//https://tonygnk.github.io/algorithms/
+Uri urlWebVersion =
+    Uri(scheme: 'https', host: 'tonygnk.github.io', path: 'algorithms');
+
+//In Github Pages is hosted the web version of the app
+// This button will open the web version of the app
+buttonWebVersion() => Row(
+      children: [
+        Expanded(
+          child: aboutTextButton(
+            () async {
+              if (await canLaunchUrl(urlWebVersion)) {
+                await launchUrl(urlWebVersion);
+              } else {
+                throw 'Could not launch $urlWebVersion';
+              }
+            },
+            //Button showing the open source code of the app
+            const Text('View web version'),
+            const Icon(Icons.web),
           ),
         ),
       ],
