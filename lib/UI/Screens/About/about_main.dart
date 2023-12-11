@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../Services & Providers/constants.dart';
-import 'about_helper.dart';
+import 'Left Side/about_helper.dart';
 import 'about_state.dart';
-import 'about_text.dart';
+import 'Right Side/about_right_side.dart';
 
 class AboutScreen extends ConsumerStatefulWidget {
   const AboutScreen({super.key});
@@ -49,17 +47,10 @@ class _AboutState extends ConsumerState<AboutScreen> {
   build(BuildContext context) => Row(
         children: [
           const SizedBox(width: 20),
-          Expanded(child: leftColumnAbout(context, version)),
+          Expanded(child: leftColumnAbout(version)),
           const SizedBox(width: 20),
           customAboutRightColumn(),
           const SizedBox(width: 20),
         ],
       );
 }
-
-//Create a function given a tree and return a Uri object
-//"https://github.com/TonyGnk/algorithms/releases/tag/0.8.7%2B2",
-stringToUri(String url) => Uri.parse(url);
-
-//https://tonygnk.github.io/algorithms/
-

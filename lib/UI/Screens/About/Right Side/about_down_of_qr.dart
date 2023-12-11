@@ -14,7 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../Services & Providers/constants.dart';
+import '../../../../Services & Providers/constants.dart';
+import '../about_constants.dart';
 
 qrCodeColumn() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,28 +26,24 @@ qrCodeColumn() => Column(
       ],
     );
 
-Uri urlCode =
-    Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk/algorithms');
 githubButton() => qrButtonsTemplate(
       () async {
-        if (await canLaunchUrl(urlCode)) {
-          await launchUrl(urlCode);
+        if (await canLaunchUrl(codeUrl)) {
+          await launchUrl(codeUrl);
         } else {
-          throw 'Could not launch $urlCode';
+          throw 'Could not launch $codeUrl';
         }
       },
       'View code on Github',
       const Icon(Icons.code),
     );
 
-Uri urlWebVersion =
-    Uri(scheme: 'https', host: 'tonygnk.github.io', path: 'algorithms');
 webVersionButton() => qrButtonsTemplate(
       () async {
-        if (await canLaunchUrl(urlWebVersion)) {
-          await launchUrl(urlWebVersion);
+        if (await canLaunchUrl(webUrl)) {
+          await launchUrl(webUrl);
         } else {
-          throw 'Could not launch $urlWebVersion';
+          throw 'Could not launch $webUrl';
         }
       },
       'View web version',
