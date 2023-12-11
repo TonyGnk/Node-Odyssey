@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'about_main.dart';
+
+import '../../../Services & Providers/constants.dart';
 
 header1Text(String text) => Text(
       text,
       style: const TextStyle(
-        fontSize: 31,
+        fontSize: 27,
         fontFamily: 'Play',
       ),
       textAlign: TextAlign.left,
@@ -37,7 +42,7 @@ dotsText(String text) => Text(
     );
 
 const aboutText = [
-  'Algorithm Visualizer',
+  'Node Odyssey',
   'Overview',
   'This Flutter app is designed to tackle problems through advanced algorithms, employing techniques like Breadth-First Search, Depth-First Search, Best First, and A*. It provides a versatile solution by taking a starting value, a target value, and allowing users to select the algorithm that best suits their needs.',
   'Functionality',
@@ -50,3 +55,70 @@ const aboutText = [
   'Allowed Calculations: Define the rules of the exploration with permitted calculations (+1, -1, *2, /2, ^2).',
   "Visual Progress: The GUI visually illustrates the algorithm's progress, enhancing user understanding.",
 ];
+
+//flutter url https://flutter.dev/
+Uri flutterUrl = Uri(scheme: 'https', host: 'flutter.dev');
+
+//flutter url https://flutter.dev/
+Uri tonyGnkUrl = Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk');
+
+aboutRowContents(String version) => aboutContainer(
+    false,
+    Row(
+      children: [
+        aboutTextButton(
+          () {},
+          version,
+          const Icon(Icons.info_outline_rounded),
+          Alignment.center,
+        ),
+        aboutTextButton(
+          () async {
+            if (await canLaunchUrl(tonyGnkUrl)) {
+              await launchUrl(tonyGnkUrl);
+            } else {
+              throw 'Could not launch $tonyGnkUrl';
+            }
+          },
+          'Create by TonyGnk',
+          const Icon(Icons.person_outline_rounded),
+          Alignment.center,
+        ),
+        aboutTextButton(
+          () async {
+            if (await canLaunchUrl(flutterUrl)) {
+              await launchUrl(flutterUrl);
+            } else {
+              throw 'Could not launch $flutterUrl';
+            }
+          },
+          'Build With Flutter',
+          const Icon(Icons.handyman_outlined),
+          Alignment.center,
+        ),
+        aboutTextButton(
+          () async {},
+          'Check for updates',
+          const Icon(Icons.update_outlined),
+          Alignment.center,
+        ),
+      ],
+    ));
+
+aboutContainer(bool fill, Widget child) => Consumer(
+      builder: (context, ref, _) => Container(
+        //width: 290,
+        height: 40,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: fill
+              ? Theme.of(context).shadowColor.withOpacity(0.5)
+              : Colors.transparent,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(cornerSize),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: child,
+      ),
+    );
