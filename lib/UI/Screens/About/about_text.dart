@@ -1,46 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'about_down_of_qr.dart';
 import 'about_main.dart';
 
 import '../../../Services & Providers/constants.dart';
 import 'about_new_version.dart';
 
-header1Text(String text) => Text(
-      text,
-      style: const TextStyle(
-        fontSize: 27,
-        fontFamily: 'Play',
-      ),
-      textAlign: TextAlign.left,
+customAboutRightColumn() => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        aboutContainer(
+          Image.asset(
+            filterQuality: FilterQuality.high,
+            'assets/images/qrCodeT.png',
+          ),
+        ),
+        const SizedBox(height: 20),
+        aboutContainer(qrCodeColumn()),
+        const Expanded(child: SizedBox()),
+      ],
     );
 
-header2Text(String text) => Text(
-      text,
-      style: const TextStyle(
-        fontSize: 22,
-        fontFamily: 'Play',
+aboutContainer(Widget child) => Consumer(
+      builder: (context, ref, _) => Container(
+        width: 270,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Theme.of(context).shadowColor.withOpacity(0.5),
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.3),
+            width: 1.5,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(cornerSize),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: child,
       ),
-      textAlign: TextAlign.left,
     );
 
-pText(String text) => Text(
-      text,
-      style: const TextStyle(
-        fontSize: 15,
-        fontFamily: 'Play',
-      ),
-      textAlign: TextAlign.left,
-    );
-
-dotsText(String text) => Text(
-      '• $text',
-      style: const TextStyle(
-        fontSize: 15,
-        fontFamily: 'Play',
-      ),
-      textAlign: TextAlign.left,
-    );
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 const aboutText = [
   'Node Odyssey',
@@ -73,7 +83,7 @@ final updateLinkProvider = StateProvider<Uri>((ref) => Uri(
 //Update Button
 aboutUpdateButton() => Consumer(builder: (context, ref, _) {
       final updateLink = ref.watch(updateLinkProvider);
-      return aboutTextButton(
+      return qrButtonsTemplate(
         () async {
           if (await canLaunchUrl(updateLink)) {
             await launchUrl(updateLink);
@@ -121,63 +131,7 @@ snackBar(
       backgroundColor: Theme.of(context).shadowColor,
     );
 
-aboutRowContents(BuildContext context, String version) => Consumer(
-      builder: (context, ref, _) {
-        final updateLink = ref.watch(updateLinkProvider);
-        return aboutContainer(
-          false,
-          Row(
-            children: [
-              aboutTextButton(
-                () {},
-                'Version $version',
-                const Icon(Icons.info_outline_rounded),
-                Alignment.center,
-              ),
-              aboutTextButton(
-                () async {
-                  if (await canLaunchUrl(tonyGnkUrl)) {
-                    await launchUrl(tonyGnkUrl);
-                  } else {
-                    throw 'Could not launch $tonyGnkUrl';
-                  }
-                },
-                //developed by TonyGnk
-                'Created by TonyGnk',
-                const Icon(Icons.person_outline_rounded),
-                Alignment.center,
-              ),
-              aboutTextButton(
-                () async {
-                  if (await canLaunchUrl(flutterUrl)) {
-                    await launchUrl(flutterUrl);
-                  } else {
-                    throw 'Could not launch $flutterUrl';
-                  }
-                },
-                'Build With Flutter',
-                const Icon(Icons.handyman_outlined),
-                Alignment.center,
-              ),
-              aboutTextButton(
-                () async {
-                  getLatestVersion(
-                    ref,
-                    version,
-                    updateLink,
-                  );
-                },
-                'Check for updates',
-                const Icon(Icons.update_outlined),
-                Alignment.center,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-aboutContainer(bool fill, Widget child) => Consumer(
+aboutContainer2(bool fill, Widget child) => Consumer(
       builder: (context, ref, _) => Container(
         //width: 290,
         height: 40,
