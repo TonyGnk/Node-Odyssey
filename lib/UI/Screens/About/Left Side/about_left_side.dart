@@ -13,6 +13,7 @@ import '../about_constants.dart';
 import 'about_actions_row.dart';
 
 leftColumnAbout(String? version) => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         headerText(aboutText[0], AboutTextSize.large),
         const SizedBox(height: 20),
@@ -44,7 +45,7 @@ actionsRow(String version) => Consumer(
           height: 40,
           child: Row(
             children: [
-              versionAction(version),
+              //versionAction(version),
               profileAction,
               flutterAction,
               updateAction(ref, version, updateLink),

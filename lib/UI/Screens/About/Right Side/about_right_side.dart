@@ -22,11 +22,11 @@ customAboutRightColumn() => Column(
     );
 
 /// Builds a container with a specified child widget.
-/// The container has a fixed width of 270 and is decorated with a shadow color, border, and border radius.
+/// The container has a fixed width of 250 and is decorated with a shadow color, border, and border radius.
 /// The child widget is clipped to the container's boundaries.
 aboutContainer(Widget child) => Consumer(
       builder: (context, ref, _) => Container(
-        width: 270,
+        width: 250,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: Theme.of(context).shadowColor.withOpacity(0.5),

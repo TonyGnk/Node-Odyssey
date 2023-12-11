@@ -67,7 +67,7 @@ actionButton(
       onPressed: onPressed,
       label: Text(
         label,
-        style: const TextStyle(fontFamily: 'Play'),
+        style: const TextStyle(fontFamily: 'Play', fontSize: 13),
       ),
       icon: icon,
       style: ButtonStyle(

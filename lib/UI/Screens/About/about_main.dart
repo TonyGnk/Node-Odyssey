@@ -47,13 +47,15 @@ class _AboutState extends ConsumerState<AboutScreen> {
   }
 
   @override
-  build(BuildContext context) => Row(
-        children: [
-          const SizedBox(width: 20),
-          Expanded(child: leftColumnAbout(version)),
-          const SizedBox(width: 20),
-          customAboutRightColumn(),
-          const SizedBox(width: 20),
-        ],
+  build(BuildContext context) => animatedColumn(
+        Row(
+          children: [
+            const SizedBox(width: 10),
+            Expanded(child: leftColumnAbout(version)),
+            const SizedBox(width: 10),
+            customAboutRightColumn(),
+            const SizedBox(width: 10),
+          ],
+        ),
       );
 }
