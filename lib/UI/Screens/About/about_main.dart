@@ -1,10 +1,13 @@
+/// This file contains the main screen of the about section. It contains the left and right side of the about screen. The left side contains the header text and action buttons. The right side contains the QR code.
+library;
+
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'Left Side/about_helper.dart';
+import 'Left Side/about_left_side.dart';
 import 'about_state.dart';
 import 'Right Side/about_right_side.dart';
 

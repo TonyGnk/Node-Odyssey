@@ -1,3 +1,17 @@
+/// Constants used in the About screen. This file contains the `githubApiUrl`, `codeUrl`, `webUrl`, `flutterUrl`, `tonyGnkUrl`, `aboutText`, `AboutTextSize`, `findFontSize`, and `updateLinkProvider` constants.
+/// The `githubApiUrl` constant contains the GitHub API URL.
+/// The `codeUrl` constant contains the URL for the GitHub repository.
+/// The `webUrl` constant contains the URL for the web version of the app.
+/// The `flutterUrl` constant contains the URL for the Flutter website.
+/// The `tonyGnkUrl` constant contains the URL for the developer's GitHub profile.
+/// The `aboutText` constant contains the text for the About screen.
+/// The `AboutTextSize` enum contains the text sizes for the About screen.
+/// The `findFontSize` function returns the font size for the provided text size.
+/// The `updateLinkProvider` provider provides the latest update link. It is used in the `about_update_handler.dart` file.
+library;
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 const String githubApiUrl =
     'https://api.github.com/repos/TonyGnk/algorithms/releases/latest';
 
@@ -54,3 +68,9 @@ double findFontSize(AboutTextSize type) {
       return 22;
   }
 }
+
+final updateLinkProvider = StateProvider<Uri>((ref) => Uri(
+      scheme: 'https',
+      host: 'github.com',
+      path: 'TonyGnk/algorithms/releases/latest',
+    ));

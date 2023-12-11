@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../about_constants.dart';
-import 'about_helper.dart';
+import 'about_actions_row.dart';
 
 Future<bool> getLatestVersion(
     WidgetRef ref, String currentVersion, Uri updateLink) async {
