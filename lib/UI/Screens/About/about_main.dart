@@ -6,6 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services & Providers/constants.dart';
+import 'about_new_version.dart';
 import 'about_state.dart';
 import 'about_text.dart';
 
@@ -21,12 +22,14 @@ class _AboutState extends ConsumerState<AboutScreen> {
   String? packageName;
   String? version;
   String? buildNumber;
+  bool? thereIsNewVersionAvailable;
   @override
   void initState() {
     super.initState();
 
     Future.delayed(Duration.zero, () async {
       loadPackageInfo();
+
       aboutReturn(ref);
     });
   }
@@ -38,7 +41,7 @@ class _AboutState extends ConsumerState<AboutScreen> {
       //print('appName: $appName');
       packageName = info.packageName;
       //print('packageName: $packageName');
-      version = 'App Version ${info.version}';
+      version = info.version;
       //print('version: $version');
       buildNumber = info.buildNumber;
       log('buildNumber: $buildNumber');
@@ -49,14 +52,17 @@ class _AboutState extends ConsumerState<AboutScreen> {
   build(BuildContext context) => Row(
         children: [
           const SizedBox(width: 20),
-          Expanded(flex: 3, child: customAboutLeftColumn()),
+          Expanded(
+            flex: 3,
+            child: customAboutLeftColumn(context),
+          ),
           const SizedBox(width: 20),
           customAboutRightColumn(),
           const SizedBox(width: 20),
         ],
       );
 
-  customAboutLeftColumn() => Column(
+  customAboutLeftColumn(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           header1Text(aboutText[0]),
@@ -79,7 +85,7 @@ class _AboutState extends ConsumerState<AboutScreen> {
           //dotsText(aboutText[11]),
           //const Expanded(child: SizedBox()),
           const SizedBox(height: 20),
-          aboutRowContents(version ?? ''),
+          aboutRowContents(context, version ?? ''),
         ],
       );
 
@@ -102,7 +108,7 @@ class _AboutState extends ConsumerState<AboutScreen> {
 
   aboutContainer(Widget child) => Consumer(
         builder: (context, ref, _) => Container(
-          width: 290,
+          width: 270,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: Theme.of(context).shadowColor.withOpacity(0.5),
@@ -130,6 +136,10 @@ class _AboutState extends ConsumerState<AboutScreen> {
 
   Uri urlCode =
       Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk/algorithms');
+
+  //Create a function given a tree and return a Uri object
+//"https://github.com/TonyGnk/algorithms/releases/tag/0.8.7%2B2",
+  stringToUri(String url) => Uri.parse(url);
 
   buttonForGithubCode() => Row(
         children: [
@@ -209,7 +219,10 @@ aboutTextButton(
         onPressed: onPressed,
         label: Text(
           label,
-          style: TextStyle(fontFamily: 'Play'),
+          style: const TextStyle(
+            fontFamily: 'Play',
+            // fontSize: 13,
+          ),
         ),
         icon: icon,
         style: ButtonStyle(

@@ -9,22 +9,22 @@ import 'UI/Adaptive Folder/adaptive_root.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (!UniversalPlatform.isWeb) {
-    await windowManager.ensureInitialized();
-    WindowOptions windowOptions = const WindowOptions(
-      fullScreen: false,
-      title: 'Node Odyssey',
-      size: Size(1050, 660), //1050-660
-      center: false,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.normal,
-      windowButtonVisibility: false,
-    );
+    // await windowManager.ensureInitialized();
+    // WindowOptions windowOptions = const WindowOptions(
+    //   fullScreen: false,
+    //   title: 'Node Odyssey',
+    //   size: Size(1050, 660), //1050-660
+    //   center: false,
+    //   backgroundColor: Colors.transparent,
+    //   skipTaskbar: false,
+    //   titleBarStyle: TitleBarStyle.normal,
+    //   windowButtonVisibility: false,
+    // );
 
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
-    });
+    // windowManager.waitUntilReadyToShow(windowOptions, () async {
+    //   await windowManager.show();
+    //   await windowManager.focus();
+    // });
   }
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();

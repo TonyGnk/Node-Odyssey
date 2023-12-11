@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'about_main.dart';
 
 import '../../../Services & Providers/constants.dart';
+import 'about_new_version.dart';
 
 header1Text(String text) => Text(
       text,
@@ -62,54 +63,124 @@ Uri flutterUrl = Uri(scheme: 'https', host: 'flutter.dev');
 //flutter url https://flutter.dev/
 Uri tonyGnkUrl = Uri(scheme: 'https', host: 'github.com', path: 'TonyGnk');
 
-aboutRowContents(String version) => aboutContainer(
-    false,
-    Row(
-      children: [
-        aboutTextButton(
-          () {},
-          version,
-          const Icon(Icons.info_outline_rounded),
-          Alignment.center,
-        ),
-        aboutTextButton(
-          () async {
-            if (await canLaunchUrl(tonyGnkUrl)) {
-              await launchUrl(tonyGnkUrl);
-            } else {
-              throw 'Could not launch $tonyGnkUrl';
-            }
-          },
-          'Create by TonyGnk',
-          const Icon(Icons.person_outline_rounded),
-          Alignment.center,
-        ),
-        aboutTextButton(
-          () async {
-            if (await canLaunchUrl(flutterUrl)) {
-              await launchUrl(flutterUrl);
-            } else {
-              throw 'Could not launch $flutterUrl';
-            }
-          },
-          'Build With Flutter',
-          const Icon(Icons.handyman_outlined),
-          Alignment.center,
-        ),
-        aboutTextButton(
-          () async {},
-          'Check for updates',
-          const Icon(Icons.update_outlined),
-          Alignment.center,
-        ),
-      ],
+//Provider for a Uri with name updateLink
+final updateLinkProvider = StateProvider<Uri>((ref) => Uri(
+      scheme: 'https',
+      host: 'github.com',
+      path: 'TonyGnk/algorithms/releases/latest',
     ));
+
+//Update Button
+aboutUpdateButton() => Consumer(builder: (context, ref, _) {
+      final updateLink = ref.watch(updateLinkProvider);
+      return aboutTextButton(
+        () async {
+          if (await canLaunchUrl(updateLink)) {
+            await launchUrl(updateLink);
+          } else {
+            throw 'Could not launch $updateLink';
+          }
+        },
+        'Update',
+        const Icon(Icons.system_update_outlined),
+        Alignment.center,
+      );
+    });
+
+snackBar(
+  BuildContext context,
+  String message,
+  bool showAction,
+  Uri updateLink,
+) =>
+    SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontFamily: 'Play',
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+      ),
+      action: SnackBarAction(
+        textColor: Theme.of(context).colorScheme.onBackground,
+        label: 'Update',
+        onPressed: () async {
+          if (await canLaunchUrl(updateLink)) {
+            await launchUrl(updateLink);
+          } else {
+            throw 'Could not launch $updateLink';
+          }
+        },
+      ),
+      //round corners
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cornerSize),
+      ),
+      showCloseIcon: true,
+      closeIconColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).shadowColor,
+    );
+
+aboutRowContents(BuildContext context, String version) => Consumer(
+      builder: (context, ref, _) {
+        final updateLink = ref.watch(updateLinkProvider);
+        return aboutContainer(
+          false,
+          Row(
+            children: [
+              aboutTextButton(
+                () {},
+                'Version $version',
+                const Icon(Icons.info_outline_rounded),
+                Alignment.center,
+              ),
+              aboutTextButton(
+                () async {
+                  if (await canLaunchUrl(tonyGnkUrl)) {
+                    await launchUrl(tonyGnkUrl);
+                  } else {
+                    throw 'Could not launch $tonyGnkUrl';
+                  }
+                },
+                //developed by TonyGnk
+                'Created by TonyGnk',
+                const Icon(Icons.person_outline_rounded),
+                Alignment.center,
+              ),
+              aboutTextButton(
+                () async {
+                  if (await canLaunchUrl(flutterUrl)) {
+                    await launchUrl(flutterUrl);
+                  } else {
+                    throw 'Could not launch $flutterUrl';
+                  }
+                },
+                'Build With Flutter',
+                const Icon(Icons.handyman_outlined),
+                Alignment.center,
+              ),
+              aboutTextButton(
+                () async {
+                  getLatestVersion(
+                    ref,
+                    version,
+                    updateLink,
+                  );
+                },
+                'Check for updates',
+                const Icon(Icons.update_outlined),
+                Alignment.center,
+              ),
+            ],
+          ),
+        );
+      },
+    );
 
 aboutContainer(bool fill, Widget child) => Consumer(
       builder: (context, ref, _) => Container(
         //width: 290,
         height: 40,
-        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: fill
               ? Theme.of(context).shadowColor.withOpacity(0.5)
