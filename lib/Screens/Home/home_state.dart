@@ -7,7 +7,9 @@ import '../../UI/Routed Screen/app_bar.dart';
 import '../../UI/Routed Screen/info_icon.dart';
 import '../screen_list.dart';
 
-final opacityHomeState = StateProvider<double>((ref) => 1);
+final opacityHomeState = StateProvider<double>((ref) => 0);
+
+final scaleHomeState = StateProvider<double>((ref) => 0.9);
 
 homeGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
@@ -28,6 +30,7 @@ homeReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   ref.read(opacityHomeState.notifier).state = isReturn ? 1 : 0;
+  ref.read(scaleHomeState.notifier).state = isReturn ? 1 : 0.9;
   ref.read(appBarIsEnableBackButton.notifier).state = false;
 }
 
@@ -38,4 +41,15 @@ animatedColumn(Widget child) => Consumer(
         duration: basicDuration,
         child: child,
       ),
+    );
+
+animatedButtonsRow(Widget child) => Consumer(
+      builder: (context, ref, _) {
+        final scale = ref.watch(scaleHomeState);
+        return AnimatedScale(
+          scale: scale,
+          duration: basicDuration,
+          child: child,
+        );
+      },
     );

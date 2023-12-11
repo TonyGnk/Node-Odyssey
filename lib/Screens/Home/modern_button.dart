@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services & Providers/constants.dart';
+
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
-class TheGloriousButton extends StatefulWidget {
-  const TheGloriousButton({
+class ModeButtons extends StatefulWidget {
+  const ModeButtons({
     required this.label,
     required this.icon,
     required this.onTap,
@@ -18,10 +20,10 @@ class TheGloriousButton extends StatefulWidget {
   final VoidCallback onTap;
 
   @override
-  State<TheGloriousButton> createState() => _TheGloriousButtonState();
+  State<ModeButtons> createState() => _ModeButtonsState();
 }
 
-class _TheGloriousButtonState extends State<TheGloriousButton> {
+class _ModeButtonsState extends State<ModeButtons> {
   late Color color = Colors.grey.withOpacity(0.1);
   late Color borderColor = Colors.white.withOpacity(0.2);
   late Timer timer;
@@ -50,12 +52,12 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
     Alignment.centerRight,
   ];
   int gradientIndex = 0;
+  late double scale = 1.0;
 
   @override
   void initState() {
     super.initState();
     _updateGradientType();
-    // Set up a timer to update gradient every 4 seconds
     timer = Timer.periodic(const Duration(milliseconds: 1100), (Timer t) {
       _updateGradientType();
     });
@@ -63,14 +65,12 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
 
   @override
   void dispose() {
-    // Dispose of the timer to avoid memory leaks
     timer.cancel();
     super.dispose();
   }
 
   void _updateGradientType() {
     setState(() {
-      //Update the index to next one in the list
       gradientIndex = (gradientIndex + 1) % alignmentGeometryList.length;
       alignmentGeometryA = alignmentGeometryList[gradientIndex];
       alignmentGeometryB = alignmentGeometryList2[gradientIndex];
@@ -81,6 +81,7 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
+            scale = 0.93;
             //color = Colors.grey.withOpacity(0.2);
             color = const Color.fromARGB(255, 33, 117, 243).withOpacity(0.4);
             borderColor =
@@ -89,6 +90,7 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
         },
         onExit: (event) {
           setState(() {
+            scale = 1.0;
             color = Colors.grey.withOpacity(0.1);
             borderColor = Colors.white.withOpacity(0.2);
           });
@@ -102,29 +104,31 @@ class _TheGloriousButtonState extends State<TheGloriousButton> {
             });
             widget.onTap();
           },
-          child: AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            width: 190 * MediaQuery.of(context).size.width / 1120,
-            height: 80,
-            decoration: BoxDecoration(
-              //color: color,
-              gradient: LinearGradient(
-                colors: [
-                  Colors.grey.withOpacity(0.1),
-                  // Colors.grey.withOpacity(0.7),
-                  color,
-                ],
-                begin: alignmentGeometryA,
-                end: alignmentGeometryB,
+          child: AnimatedScale(
+            scale: scale,
+            duration: basicDuration,
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              height: 80,
+              decoration: BoxDecoration(
+                //color: color,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.withOpacity(0.1),
+                    color,
+                  ],
+                  begin: alignmentGeometryA,
+                  end: alignmentGeometryB,
+                ),
+                border: Border.all(
+                  color: borderColor,
+                  width: 2.5,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
-              border: Border.all(
-                color: borderColor,
-                width: 2.5,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(25)),
+              clipBehavior: Clip.antiAlias,
+              child: theColumn(context),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: theColumn(context),
           ),
         ),
       );

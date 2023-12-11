@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services & Providers/constants.dart';
 import '../screen_list.dart';
 import 'modern_button.dart';
 import 'home_state.dart';
@@ -24,27 +25,25 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) => Row(
         children: [
-          const Expanded(
-            flex: 3,
-            child: SizedBox(),
+          const Expanded(flex: 10, child: SizedBox()),
+          SizedBox(
+            width: 360,
+            child: contentsColumn(),
           ),
-          Expanded(
-            flex: 2,
-            child: rightColumn(),
-          ),
+          const Expanded(flex: 1, child: SizedBox()),
         ],
       );
 }
 
-rightColumn() => animatedColumn(
+contentsColumn() => animatedColumn(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Expanded(flex: 3, child: SizedBox()),
-          welcomeToText(),
-          titleText(),
+          welcomeToText,
+          titleText,
           const Expanded(flex: 3, child: SizedBox()),
-          const Text('Select the mode you want to use:'),
+          modeText,
           const SizedBox(height: 16),
           rowOfButtons(),
           const Expanded(flex: 1, child: SizedBox()),
@@ -52,60 +51,51 @@ rightColumn() => animatedColumn(
       ),
     );
 
-welcomeToText() => const Text(
-      'Welcome to',
-      style: TextStyle(
-        fontSize: 30,
-        fontFamily: 'Play',
-      ),
-      textAlign: TextAlign.left,
-    );
+const welcomeToText = Text(
+  'Welcome to',
+  style: TextStyle(
+    fontSize: 29,
+    fontFamily: 'Play',
+  ),
+  textAlign: TextAlign.left,
+);
 
-titleText() => const Text(
-      'Node Odyssey',
-      style: TextStyle(
-          fontSize: 33,
-          color: Color.fromRGBO(32, 102, 224, 0.9),
-          fontWeight: FontWeight.bold),
-      textAlign: TextAlign.left,
-    );
+const titleText = Text(
+  'Node Odyssey',
+  style: TextStyle(
+      fontSize: 36,
+      color: Color.fromRGBO(32, 102, 224, 0.9),
+      fontWeight: FontWeight.bold),
+  textAlign: TextAlign.left,
+);
+
+const modeText = Text(
+  'Select the mode you want to use:',
+  style: TextStyle(
+    fontSize: 15,
+    fontFamily: 'Play',
+  ),
+  textAlign: TextAlign.left,
+);
 
 rowOfButtons() => Consumer(
       builder: (context, ref, _) => Row(
         children: [
-          TheGloriousButton(
-            label: 'Terminal',
-            icon: Icons.terminal,
-            onTap: () => homeGo(ref, ScreenDestination.terminal),
+          Expanded(
+            child: ModeButtons(
+              label: 'Terminal',
+              icon: Icons.terminal,
+              onTap: () => homeGo(ref, ScreenDestination.terminal),
+            ),
           ),
           const SizedBox(width: 10),
-          TheGloriousButton(
-            label: 'GUI',
-            icon: Icons.desktop_windows_outlined,
-            onTap: () => homeGo(ref, ScreenDestination.algorithmsGUI),
+          Expanded(
+            child: ModeButtons(
+              label: 'GUI',
+              icon: Icons.desktop_windows_outlined,
+              onTap: () => homeGo(ref, ScreenDestination.algorithmsGUI),
+            ),
           ),
         ],
       ),
     );
-
-// class _BodyState extends State<Body> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     unawaited(checkFirstRun().catchError((error) {
-//       // Handle any errors here.
-//       //log('An error occurred: $error');
-//     }));
-//   }
-
-//   Future<void> checkFirstRun() async {
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     bool isFirstRun = true; //prefs.getBool('firstRun') ?? true;
-//     if (isFirstRun) {
-//       Future.delayed(Duration.zero, () {
-//         showAlert(context, true);
-//       });
-//       await prefs.setBool('firstRun', false);
-//     }
-//   }
-// }
