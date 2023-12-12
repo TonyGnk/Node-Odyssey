@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../screen_list.dart';
 
-import '../Home/ArchHP/modern_caption.dart';
 import 'buttons_list.dart';
 import 'buttons_state.dart';
-import 'button_template.dart';
 
 class AlgorithmsGUIBody extends ConsumerStatefulWidget {
   const AlgorithmsGUIBody({super.key});

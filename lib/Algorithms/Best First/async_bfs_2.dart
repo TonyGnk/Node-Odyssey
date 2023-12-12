@@ -4,7 +4,6 @@ import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
-import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 import 'algorithm_bsf.dart';
 import 'async_bfs.dart';

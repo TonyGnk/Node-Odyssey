@@ -141,7 +141,7 @@ class TrackingTiles {
         child: Row(
           children: [
             Expanded(
-              child: Text('  ${operation}'),
+              child: Text('  $operation'),
             ),
             Container(
               width: 175,

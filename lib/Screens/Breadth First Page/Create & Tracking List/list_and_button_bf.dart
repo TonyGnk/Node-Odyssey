@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Services & Providers/Public Search Bar/closed_search.dart';
 import '../../../Services & Providers/tracking_container.dart';
-import '../Archive BF/list_provider.dart';
 
 Widget trackingStage(BuildContext context) => Consumer(
       builder: (context, ref, _) {
@@ -22,25 +21,13 @@ Widget trackingStage(BuildContext context) => Consumer(
     );
 
 Widget miniAppBar(BuildContext context) => Consumer(
-      builder: (context, ref, _) {
-        // final startValue = ref
-        //     .read(runningRequestProvider.notifier)
-        //     .state
-        //     .startValue
-        //     .toString();
-        // final targetValue = ref
-        //     .read(runningRequestProvider.notifier)
-        //     .state
-        //     .targetValue
-        //     .toString();
-        return Row(
-          children: [
-            const SizedBox(width: 8),
-            Expanded(
-                child: Text(
-                    'Αναζήτηση από ${inputController.text} σε ${targetController.text}')),
-            const SizedBox(width: 8),
-          ],
-        );
-      },
+      builder: (context, ref, _) => Row(
+        children: [
+          const SizedBox(width: 8),
+          Expanded(
+              child: Text(
+                  'Αναζήτηση από ${inputController.text} σε ${targetController.text}')),
+          const SizedBox(width: 8),
+        ],
+      ),
     );

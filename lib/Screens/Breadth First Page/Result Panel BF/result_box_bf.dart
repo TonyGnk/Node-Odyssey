@@ -17,7 +17,7 @@ class ResultBoxBf {
   Widget build(BuildContext context) => Consumer(builder: (context, ref, _) {
         final resList = ref.watch(resListProvider);
 
-        return Container(
+        return SizedBox(
           width: 200,
           height: 22,
           child: Column(

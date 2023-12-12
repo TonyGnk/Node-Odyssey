@@ -1,10 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Breadth First/providers_bf.dart';
-import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../constants.dart';
-import '../node.dart';
 import '../six_calculations.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../tracking_container.dart';

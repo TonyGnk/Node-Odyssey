@@ -6,6 +6,7 @@ import 'results_appbar_bf.dart';
 
 Widget resultPanel(BuildContext context) =>
     Consumer(builder: (context, ref, _) {
+      // ignore: unused_local_variable
       final stringResult = ref.watch(resultPanelList);
       final resList = ref.watch(resListProvider);
 

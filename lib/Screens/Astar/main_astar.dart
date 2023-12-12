@@ -8,7 +8,6 @@ import '../../Arc/Tree Widgets/new_tree.dart';
 import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/constants.dart';
-import '../../Services & Providers/node.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import '../Breadth First Page/Archive BF/result_providers.dart';
