@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../screen_list.dart';
-import 'modern_button.dart';
+import 'mode_button_template.dart';
 import 'home_state.dart';
 
 class Home extends ConsumerStatefulWidget {

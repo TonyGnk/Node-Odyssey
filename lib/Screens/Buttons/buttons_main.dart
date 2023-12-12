@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../screen_list.dart';
 
 import '../Home/ArchHP/modern_caption.dart';
+import 'buttons_list.dart';
 import 'buttons_state.dart';
 import 'button_template.dart';
 
@@ -25,49 +26,67 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
   @override
   Widget build(BuildContext context) => Row(
         children: [
+          const Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
           Expanded(
-            child: animatedColumn(
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Select the desired algorithm',
-                    style: TextStyle(
-                      fontSize: 27,
-                      fontFamily: 'Play',
-                    ),
-                  ),
-                  const SizedBox(height: 42),
-                  Expanded(
-                    child: buttonDestinationsTemplate('Breadth First'),
-                  ),
-                  ModernCaption(
-                    label: 'Breadth First',
-                    onTap: () =>
-                        buttonGo(ref, ScreenDestination.breadthFirstAlg),
-                    icon: Icons.radar_outlined,
-                  ),
-                  ModernCaption(
-                    // label: 'Αλγόριθμος Πρώτα σε Βάθος' in English,
-                    label: 'Depth First',
-                    onTap: () => buttonGo(ref, ScreenDestination.depthFirstAlg),
-                    icon: Icons.grid_goldenratio,
-                  ),
-                  ModernCaption(
-                    // label: 'Πρώτα στο καλύτερο' in English,
-                    label: 'Best First',
-                    onTap: () => buttonGo(ref, ScreenDestination.bestFirstAlg),
-                    icon: Icons.filter_tilt_shift_outlined,
-                  ),
-                  ModernCaption(
-                    // label: 'Α*' in English,
-                    label: 'A*',
-                    onTap: () => buttonGo(ref, ScreenDestination.aStarAlg),
-                    icon: Icons.star_border_outlined,
-                  ),
-                ],
-              ),
+            flex: 5,
+            child: animatedColumn(columButScrollable()),
+          ),
+          const Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
+        ],
+      );
+
+  column() => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'Select the desired algorithm',
+            style: TextStyle(
+              fontSize: 27,
+              fontFamily: 'Play',
+            ),
+          ),
+          const SizedBox(height: 42),
+          bfButton,
+          dfButton,
+          bestButton,
+          //aStarButton,
+
+          ModernCaption(
+            // label: 'Α*' in English,
+            label: 'A*',
+            onTap: () => buttonGo(ref, ScreenDestination.aStarAlg),
+            icon: Icons.star_border_outlined,
+          ),
+        ],
+      );
+
+  columButScrollable() => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'Select the desired algorithm',
+            style: TextStyle(
+              fontSize: 27,
+              fontFamily: 'Play',
+            ),
+          ),
+          const SizedBox(height: 32),
+          Expanded(
+            child: ListView(
+              children: const [
+                bfButton,
+                dfButton,
+                bestButton,
+                aStarButton,
+              ],
             ),
           ),
         ],
