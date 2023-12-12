@@ -9,7 +9,7 @@ import '../UI/Screens/settings_state.dart';
 import 'Astar/astar_state.dart';
 import 'Astar/main_astar.dart';
 import 'Best First Search/bsf_state.dart';
-import 'Best First Search/main_bsf.dart';
+import 'Best First Search/bsf_main.dart';
 import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/main_bf.dart';
 import 'Buttons/buttons_main.dart';

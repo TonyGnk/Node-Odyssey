@@ -85,39 +85,49 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
       return Node(
         newValue,
         cost + 2,
-        'Πρόσθεση κατά 1',
+        getCalculationTypeMap()[type]!,
       );
     case CalculationType.subtraction:
       return Node(
         newValue,
         cost + 2,
-        'Αφαίρεση κατά 1',
+        getCalculationTypeMap()[type]!,
       );
     case CalculationType.multiplication:
       return Node(
         newValue,
         cost + (value / 2).ceil() + 1,
-        'Πολ/σιασμός επί 2',
+        getCalculationTypeMap()[type]!,
       );
     case CalculationType.division:
       return Node(
         newValue,
         cost + (value / 4).ceil() + 1,
-        'Διαίρεση με 2',
+        getCalculationTypeMap()[type]!,
       );
     case CalculationType.exponential:
       return Node(
         newValue,
         cost + ((value * value - value) ~/ 4 + 1).toInt(),
-        'Τετράγωνο',
+        getCalculationTypeMap()[type]!,
       );
     case CalculationType.square:
       return Node(
         newValue,
         cost + (value - newValue.toInt()) ~/ 4 + 1,
-        'Ρίζα',
+        getCalculationTypeMap()[type]!,
       );
     default:
       return Node(newValue, cost, '');
   }
 }
+
+//Create map. First is Calculation Type, second is the String 'Ρίζα, Τετράγωνο, Πολ/σιασμός επί 2, Διαίρεση με 2, Πρόσθεση κατά 1, Αφαίρεση κατά 1' etc
+Map<CalculationType, String> getCalculationTypeMap() => {
+      CalculationType.addition: 'Add 1',
+      CalculationType.subtraction: 'Subtract 1',
+      CalculationType.multiplication: 'Multiply by 2',
+      CalculationType.division: 'Divide by 2',
+      CalculationType.exponential: 'Square',
+      CalculationType.square: 'Root',
+    };
