@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Services & Providers/constants.dart';
+import '../../Services & Providers/public_left_column.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import 'terminal_providers.dart';
@@ -32,9 +32,9 @@ analyzeTheText(WidgetRef ref) {
   );
 
   //Start the selected algorithm
-  ref.read(isAlgorithmEndProviderBf.notifier).state = false; //Started
+  ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
   List<Node>? solution = startAlgorithmTerminal(ref, type, request);
-  ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
+  ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   newResult(ref, solution);
 }

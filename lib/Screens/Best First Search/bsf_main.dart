@@ -3,17 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Best First/async_bfs.dart';
 import '../../Algorithms/Best First/async_bfs_2.dart';
-import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Arc/Tree Widgets/new_tree.dart';
 import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/constants.dart';
+import '../../Services & Providers/public_left_column.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import '../Breadth First Page/Archive BF/result_providers.dart';
 import '../Breadth First Page/Create & Tracking List/list_and_button_bf.dart';
 import '../Breadth First Page/Result Panel BF/result_panel_bf.dart';
-import '../Breadth First Page/main_bf.dart';
 import 'bsf_state.dart';
 
 class BestFirstAlg extends ConsumerStatefulWidget {
@@ -53,7 +52,7 @@ Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
-          searchBarContainer(AlgorithmType.bestf),
+          publicSearchBar(AlgorithmType.bestf),
           const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(),
@@ -66,8 +65,8 @@ Widget leftColumnBf() => SizedBox(
 
 Widget trackingListAndButton() => Consumer(
       builder: (context, ref, _) {
-        final isAlgorithmEnd = ref.watch(isAlgorithmEndProviderBf);
-        return containerWithStyleBF(
+        final isAlgorithmEnd = ref.watch(isAlgorithmEndProvider);
+        return container(
           Theme.of(context).shadowColor.withOpacity(1),
           Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
           isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
@@ -91,7 +90,7 @@ button1() => Consumer(
           RunningRequest request = saveRequest(ref);
 
           //Start the selected algorithm
-          ref.read(isAlgorithmEndProviderBf.notifier).state = false; //Started
+          ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
           List<Node>? solution = runBSFAsync(ref, request);
         },
         child: const Text('Έναρξη σε Βήματα'),
@@ -103,7 +102,7 @@ button2() => Consumer(
         onPressed: () {
           List<Node>? solution = runBSFAsyncStep(ref, saveRequest(ref));
           if (solution != null) {
-            ref.read(isAlgorithmEndProviderBf.notifier).state = true;
+            ref.read(isAlgorithmEndProvider.notifier).state = true;
             addResultPanelList(ref, solution);
           }
         },

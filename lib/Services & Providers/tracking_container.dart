@@ -136,7 +136,7 @@ class TrackingTiles {
           borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
         ),
-        margin: const EdgeInsets.all(5),
+        margin: const EdgeInsets.only(top: 5, bottom: 5),
         clipBehavior: Clip.antiAlias,
         child: Row(
           children: [

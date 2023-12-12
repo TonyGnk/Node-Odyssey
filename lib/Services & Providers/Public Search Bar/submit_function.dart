@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Algorithms/Breadth First/providers_bf.dart';
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../constants.dart';
+import '../public_left_column.dart';
 import '../six_calculations.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../tracking_container.dart';
@@ -19,9 +19,11 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   RunningRequest request = saveRequest(ref);
 
   //Start the selected algorithm
-  ref.read(isAlgorithmEndProviderBf.notifier).state = false; //Started
+  ref.read(runOnceProvider.notifier).state = true;
+  ref.read(isOnTrackingProvider.notifier).state = false;
+  ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
   List<Node>? solution = await startAlgorithm(ref, type, request);
-  ref.read(isAlgorithmEndProviderBf.notifier).state = true; //Finished
+  ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   //Add the solution to the Result Panel
   if (solution != null) {

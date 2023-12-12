@@ -118,7 +118,6 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
               fontFamily: 'Play',
             ),
           ),
-          //const SizedBox(height: 2),
           Text(
             widget.slogan,
             style: TextStyle(
@@ -128,16 +127,12 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          //const SizedBox(height: 2),
-
           Text(
             widget.description,
             style: const TextStyle(
-              //inherit: false,
               fontSize: 18,
               fontFamily: 'Play',
             ),
-            //Make the text wrap
             softWrap: true,
             overflow: TextOverflow.fade,
           ),

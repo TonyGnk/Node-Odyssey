@@ -9,24 +9,24 @@ import 'sliders_and_options_bf.dart';
 final makeContainerTallerProvider = StateProvider<bool>((ref) => false);
 final showTheExtraOptionsProvider = StateProvider<bool>((ref) => false);
 
-searchBarContainer(AlgorithmType type) => Consumer(builder: (context, ref, _) {
+publicSearchBar(AlgorithmType type) => Consumer(builder: (context, ref, _) {
       final moreOptions = ref.watch(makeContainerTallerProvider);
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 120),
         height: moreOptions ? 374 : 50,
         padding: const EdgeInsets.all(4),
-        decoration: modernDecoration(context),
+        decoration: decoration(context),
         child: mainSearchBar(context, type),
       );
     });
 
-modernDecoration(BuildContext context) => BoxDecoration(
+decoration(BuildContext context) => BoxDecoration(
       borderRadius: BorderRadius.circular(cornerSize),
-      color: Theme.of(context).shadowColor,
+      color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       border: Border.all(
         width: 1,
-        color: Theme.of(context).colorScheme.onSurface.withOpacity(0),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),
     );
 
@@ -57,7 +57,6 @@ Widget extraOptions(BuildContext context) => Column(
         const SizedBox(height: 10),
         speedSliderBf(context),
         const SizedBox(height: 4),
-        //solutionSliderBf(context),
         totalCheckBox(context, CalculationType.addition),
         totalCheckBox(context, CalculationType.subtraction),
         totalCheckBox(context, CalculationType.multiplication),

@@ -13,16 +13,3 @@ Widget resultsAppBar(BuildContext context) => const Row(
         // colIconButton(Icons.arrow_right, () {}),
       ],
     );
-
-Widget colIconButton(IconData icon, Function() onPressed) => Column(
-      children: [
-        const SizedBox(
-          height: 2,
-        ),
-        IconButton(
-          onPressed: onPressed,
-          icon: Icon(icon),
-          iconSize: 23.0,
-        ),
-      ],
-    );
