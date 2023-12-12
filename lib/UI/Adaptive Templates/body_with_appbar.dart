@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,16 +16,11 @@ Widget bodyWithAppBarGlass({
     Stack(
       children: [
         BackgroundWall(),
-        ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Column(
-              children: [
-                appBar,
-                Expanded(child: body),
-              ],
-            ),
-          ),
+        Column(
+          children: [
+            appBar,
+            Expanded(child: body),
+          ],
         ),
       ],
     );

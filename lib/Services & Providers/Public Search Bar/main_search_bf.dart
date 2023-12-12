@@ -75,7 +75,7 @@ Widget totalCheckBox(BuildContext context, CalculationType type) => Consumer(
         final checkedSquare = ref.watch(checkSquareProvider);
         final checkedRoot = ref.watch(checkRootProvider);
         return CheckboxListTile(
-          title: Text(
+          subtitle: Text(
             getCalculationTypeMap()[type]!,
             style: const TextStyle(
               fontFamily: 'Play',
