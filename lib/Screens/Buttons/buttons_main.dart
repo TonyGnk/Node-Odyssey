@@ -24,7 +24,28 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
   }
 
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'Select the desired algorithm',
+            style: TextStyle(
+              fontSize: 27,
+              fontFamily: 'Play',
+            ),
+          ),
+          const SizedBox(height: 46),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(5),
+              children: [row()],
+            ),
+          ),
+        ],
+      );
+
+  row() => Row(
         children: [
           const Expanded(
             flex: 1,
@@ -41,30 +62,15 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
         ],
       );
 
-  column() => Column(
+  column() => const Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            'Select the desired algorithm',
-            style: TextStyle(
-              fontSize: 27,
-              fontFamily: 'Play',
-            ),
-          ),
-          const SizedBox(height: 46),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(5),
-              children: const [
-                bfButton,
-                dfButton,
-                bestButton,
-                aStarButton,
-                bestButton,
-              ],
-            ),
-          ),
+          bfButton,
+          dfButton,
+          bestButton,
+          aStarButton,
+          bestButton,
         ],
       );
 }
