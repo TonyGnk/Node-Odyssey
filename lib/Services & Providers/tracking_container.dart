@@ -64,7 +64,7 @@ class TrackingList extends StatelessWidget {
 }
 
 class TrackingTiles2 extends StatefulWidget {
-  TrackingTiles2({
+  const TrackingTiles2({
     super.key,
     this.value = 0,
     this.operation = '',

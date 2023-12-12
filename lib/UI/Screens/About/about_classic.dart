@@ -99,11 +99,11 @@ Widget aboutAppIconButton = IconButton(
   padding: const EdgeInsets.all(12),
 );
 
-String _defaultApplicationName(BuildContext context) {
-  final Title? ancestorTitle = context.findAncestorWidgetOfExactType<Title>();
-  return ancestorTitle?.title ??
-      Platform.resolvedExecutable.split(Platform.pathSeparator).last;
-}
+// String _defaultApplicationName(BuildContext context) {
+//   final Title? ancestorTitle = context.findAncestorWidgetOfExactType<Title>();
+//   return ancestorTitle?.title ??
+//       Platform.resolvedExecutable.split(Platform.pathSeparator).last;
+// }
 
 getIconPlatform(String operatingSystem) {
   log(operatingSystem);

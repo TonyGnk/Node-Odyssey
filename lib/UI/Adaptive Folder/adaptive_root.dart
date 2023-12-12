@@ -3,7 +3,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'root_config.dart';
-import '../Services2/uiChange.dart';
+import '../Services2/ui_change.dart';
 import '../Themes/material_theme_data.dart';
 
 class AdaptiveRoot extends StatefulWidget {

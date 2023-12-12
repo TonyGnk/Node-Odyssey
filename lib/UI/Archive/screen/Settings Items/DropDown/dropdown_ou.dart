@@ -700,6 +700,7 @@ class OneUIPopupMenuButton<T> extends StatefulWidget {
   final double? iconSize;
 
   @override
+  // ignore: library_private_types_in_public_api
   _OneUIPopupMenuButtonState<T> createState() =>
       _OneUIPopupMenuButtonState<T>();
 }

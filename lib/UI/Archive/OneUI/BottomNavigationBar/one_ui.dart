@@ -152,7 +152,7 @@ class OneUIBottomNavigationBar extends StatefulWidget {
   final bool? enableFeedback;
 
   @override
-  _OneUIBottomNavigationBarState createState() =>
+  State<OneUIBottomNavigationBar> createState() =>
       _OneUIBottomNavigationBarState();
 }
 
