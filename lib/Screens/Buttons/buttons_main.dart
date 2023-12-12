@@ -32,7 +32,7 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
           ),
           Expanded(
             flex: 5,
-            child: animatedColumn(columButScrollable()),
+            child: animatedColumn(column()),
           ),
           const Expanded(
             flex: 1,
@@ -52,40 +52,16 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
               fontFamily: 'Play',
             ),
           ),
-          const SizedBox(height: 42),
-          bfButton,
-          dfButton,
-          bestButton,
-          //aStarButton,
-
-          ModernCaption(
-            // label: 'Α*' in English,
-            label: 'A*',
-            onTap: () => buttonGo(ref, ScreenDestination.aStarAlg),
-            icon: Icons.star_border_outlined,
-          ),
-        ],
-      );
-
-  columButScrollable() => Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            'Select the desired algorithm',
-            style: TextStyle(
-              fontSize: 27,
-              fontFamily: 'Play',
-            ),
-          ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 46),
           Expanded(
             child: ListView(
+              padding: const EdgeInsets.all(5),
               children: const [
                 bfButton,
                 dfButton,
                 bestButton,
                 aStarButton,
+                bestButton,
               ],
             ),
           ),

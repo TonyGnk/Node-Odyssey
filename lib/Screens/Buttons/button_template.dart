@@ -81,8 +81,8 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           ),
           borderRadius: BorderRadius.circular(cornerSize),
         ),
-        padding: const EdgeInsets.all(7),
-        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(bottom: 11),
         clipBehavior: Clip.antiAlias,
         child: row(),
       );
