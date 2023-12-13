@@ -48,7 +48,7 @@ bool isAllowed(int newValue, int? value, CalculationType type) {
     case CalculationType.addition:
       return newValue < pow(10, 9);
     case CalculationType.subtraction:
-      return newValue > 0;
+      return newValue >= 0; // The = is not in the assignment
     case CalculationType.multiplication:
       return newValue / 2 > 0 && newValue < pow(10, 9);
     case CalculationType.division:

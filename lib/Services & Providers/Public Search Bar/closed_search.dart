@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants.dart';
 import 'main_search.dart';
-import 'submit_function.dart';
+import 'Search Call/submit_function.dart';
 
 closedSearch(BuildContext context, AlgorithmType type) => Row(
       children: [

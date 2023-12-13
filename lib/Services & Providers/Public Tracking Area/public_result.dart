@@ -32,16 +32,15 @@ Widget resultsAppBar(
 ) =>
     Row(
       children: [
-        const SizedBox(width: 2),
+        const SizedBox(width: 8),
         headerText('Results '),
-        costText(previousInput),
         const Expanded(child: SizedBox()),
-        commandsText(count.toString()),
+        commandsText((count - 1).toString()),
         const Icon(Icons.bar_chart_outlined),
         const Expanded(child: SizedBox()),
         commandsText(cost.toString()),
         const Icon(Icons.bolt_outlined, color: Colors.orange),
-        const Expanded(child: SizedBox()),
+        const Expanded(flex: 5, child: SizedBox()),
         IconButton(
           onPressed: () => ref.read(isOnTrackingProvider.notifier).state = true,
           icon: const Icon(Icons.insights_outlined),
@@ -56,7 +55,7 @@ Widget resultsAppBar(
 costText(String text) => Text(
       text,
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: 'Play',
       ),
     );
@@ -64,7 +63,7 @@ costText(String text) => Text(
 commandsText(String text) => Text(
       text,
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: 'Play',
       ),
     );
