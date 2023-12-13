@@ -45,6 +45,7 @@ clearSaved(WidgetRef ref) {
 }
 
 closeTheExtraOptions(ref) {
+  ref.read(heightSearchProvider.notifier).state = 550;
   ref.read(makeContainerTallerProvider.notifier).state = false;
   ref.read(showTheExtraOptionsProvider.notifier).state = false;
 }

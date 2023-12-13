@@ -8,11 +8,24 @@ stepColumn() => Consumer(
       builder: (context, ref, _) => Column(
         children: [
           nextStep(ref),
+          cancel(ref),
         ],
       ),
     );
 
 nextStep(WidgetRef ref) => Row(
+      children: [
+        Expanded(
+          child: TextButton.icon(
+            onPressed: () => onButtonPressedStep(ref),
+            icon: const Icon(Icons.next_plan),
+            label: fontText('Next Step', 14),
+          ),
+        ),
+      ],
+    );
+
+cancel(WidgetRef ref) => Row(
       children: [
         Expanded(
           child: TextButton.icon(

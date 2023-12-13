@@ -9,13 +9,15 @@ import 'sliders_and_options_bf.dart';
 
 final makeContainerTallerProvider = StateProvider<bool>((ref) => false);
 final showTheExtraOptionsProvider = StateProvider<bool>((ref) => false);
+final heightSearchProvider = StateProvider<double>((ref) => 50);
 
 publicSearchBar() => Consumer(builder: (context, ref, _) {
-      final moreOptions = ref.watch(makeContainerTallerProvider);
+      //final moreOptions = ref.watch(makeContainerTallerProvider);
+      final height = ref.watch(heightSearchProvider);
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 200),
-        height: moreOptions ? 291 : null,
+        height: height,
         padding: const EdgeInsets.all(4),
         decoration: decoration(context),
         child: mainSearchBar(context),
@@ -36,6 +38,7 @@ mainSearchBar(BuildContext context) => Column(
     );
 
 void moreOptionsFun(WidgetRef ref) async {
+  ref.read(heightSearchProvider.notifier).state = 291;
   ref.read(makeContainerTallerProvider.notifier).state = true;
   await Future.delayed(const Duration(milliseconds: 200));
   ref.read(showTheExtraOptionsProvider.notifier).state = true;
