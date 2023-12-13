@@ -11,8 +11,8 @@ final segmentedButtonProvider =
 
 enum SpeedType { slow, medium, fast }
 
-segmentedSpeed(BuildContext context) => Consumer(
-      builder: (_, WidgetRef ref, __) {
+segmentedSpeed() => Consumer(
+      builder: (context, WidgetRef ref, __) {
         final selected = ref.watch(segmentedButtonProvider);
         return SegmentedButton(
           segments: [

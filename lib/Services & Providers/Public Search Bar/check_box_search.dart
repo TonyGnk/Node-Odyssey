@@ -3,34 +3,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../six_calculations.dart';
 
-rowOfChecks(BuildContext context) => Row(
+rowOfChecks() => Row(
       children: [
         Expanded(
-          child: col1(context),
+          child: col1(),
         ),
         Expanded(
-          child: col2(context),
+          child: col2(),
         ),
       ],
     );
 
-col1(BuildContext context) => Column(
+col1() => Column(
       children: [
-        totalCheckBox(context, CalculationType.addition),
-        totalCheckBox(context, CalculationType.subtraction),
-        totalCheckBox(context, CalculationType.multiplication),
+        totalCheckBox(CalculationType.addition),
+        totalCheckBox(CalculationType.subtraction),
+        totalCheckBox(CalculationType.multiplication),
       ],
     );
 
-col2(BuildContext context) => Column(
+col2() => Column(
       children: [
-        totalCheckBox(context, CalculationType.division),
-        totalCheckBox(context, CalculationType.square),
-        totalCheckBox(context, CalculationType.exponential),
+        totalCheckBox(CalculationType.division),
+        totalCheckBox(CalculationType.square),
+        totalCheckBox(CalculationType.exponential),
       ],
     );
 
-Widget totalCheckBox(BuildContext context, CalculationType type) => Consumer(
+Widget totalCheckBox(CalculationType type) => Consumer(
       builder: (context, ref, _) {
         final checkedPlus = ref.watch(checkPlusOneProvider);
         final checkedMinus = ref.watch(checkMinusOneProvider);

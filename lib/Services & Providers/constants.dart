@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Best First/algorithm_bsf.dart';
+import '../Algorithms/Breadth First/bf_algorithm_first_step.dart';
 import '../Algorithms/Breadth First/bf_algorithm_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm_total.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
 
 const double cornerSize = 16;
@@ -25,15 +27,31 @@ List<Node>? startAlgorithmTerminal(
 }
 
 Future<List<Node>?> startAlgorithm(
-    WidgetRef ref, AlgorithmType type, RunningRequest request) async {
-  if (type == AlgorithmType.bf) {
+    WidgetRef ref, RunningRequest request) async {
+  if (currentAlgorithm == AlgorithmType.bf) {
     return runBreadthTotal(ref);
-  } else if (type == AlgorithmType.df) {
+  } else if (currentAlgorithm == AlgorithmType.df) {
     return runDFGui(ref, request);
-  } else if (type == AlgorithmType.bestf) {
+  } else if (currentAlgorithm == AlgorithmType.bestf) {
     return runBSFGui(ref, request);
-  } else if (type == AlgorithmType.astar) {
+  } else if (currentAlgorithm == AlgorithmType.astar) {
     return runAStarGui(ref, request);
+  } else {
+    return null;
+  }
+}
+
+List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
+  if (currentAlgorithm == AlgorithmType.bf) {
+    return runBreadthFirstStep(ref);
+  } else {
+    return null;
+  }
+}
+
+List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
+  if (currentAlgorithm == AlgorithmType.bf) {
+    return runBreadthStep(ref);
   } else {
     return null;
   }

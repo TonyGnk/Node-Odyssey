@@ -10,7 +10,7 @@ import '../closed_search.dart';
 import '../main_search.dart';
 import 'call_helper.dart';
 
-onButtonPressed(WidgetRef ref, AlgorithmType type) async {
+onButtonPressed(WidgetRef ref) async {
   //Clear Tracking Panel, Result Panel and Chart
   clearGUI(ref);
 
@@ -21,7 +21,7 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   //Start the selected algorithm
   prepareProvidersForTracking(ref);
   ref.read(isAlgorithmEndProvider.notifier).state = false;
-  List<Node>? solution = await startAlgorithm(ref, type, request);
+  List<Node>? solution = await startAlgorithm(ref, request);
   ref.read(isAlgorithmEndProvider.notifier).state = true;
 
   //Add the solution to the Result Panel

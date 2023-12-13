@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants.dart';
+import 'Search Call/submit_function_step.dart';
 import 'check_box_search.dart';
 import 'closed_search.dart';
 import 'sliders_and_options_bf.dart';
@@ -9,15 +10,15 @@ import 'sliders_and_options_bf.dart';
 final makeContainerTallerProvider = StateProvider<bool>((ref) => false);
 final showTheExtraOptionsProvider = StateProvider<bool>((ref) => false);
 
-publicSearchBar(AlgorithmType type) => Consumer(builder: (context, ref, _) {
+publicSearchBar() => Consumer(builder: (context, ref, _) {
       final moreOptions = ref.watch(makeContainerTallerProvider);
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 200),
-        height: moreOptions ? 291 : 50,
+        height: moreOptions ? 291 : null,
         padding: const EdgeInsets.all(4),
         decoration: decoration(context),
-        child: mainSearchBar(context, type),
+        child: mainSearchBar(context),
       );
     });
 
@@ -30,8 +31,8 @@ decoration(BuildContext context) => BoxDecoration(
       ),
     );
 
-mainSearchBar(BuildContext context, AlgorithmType type) => Column(
-      children: [closedSearch(context, type), extraOptionsBuilder(context)],
+mainSearchBar(BuildContext context) => Column(
+      children: [closedSearch(context), extraOptionsBuilder()],
     );
 
 void moreOptionsFun(WidgetRef ref) async {
@@ -40,23 +41,23 @@ void moreOptionsFun(WidgetRef ref) async {
   ref.read(showTheExtraOptionsProvider.notifier).state = true;
 }
 
-Widget extraOptionsBuilder(BuildContext context) => Consumer(
+Widget extraOptionsBuilder() => Consumer(
       builder: (context, ref, _) {
         final moreOptions2 = ref.watch(showTheExtraOptionsProvider);
         return AnimatedOpacity(
           opacity: moreOptions2 ? 1.0 : 0.0,
           duration: const Duration(milliseconds: 600),
-          child: moreOptions2 ? extraOptions(context) : const SizedBox(),
+          child: moreOptions2 ? extraOptions() : const SizedBox(),
         );
       },
     );
 
-Widget extraOptions(BuildContext context) => Column(
+Widget extraOptions() => Column(
       children: [
         const SizedBox(height: 12),
-        segmentedSpeed(context),
+        segmentedSpeed(),
         const SizedBox(height: 8),
-        rowOfChecks(context),
+        rowOfChecks(),
         const SizedBox(height: 2),
         customSwitch(),
         stepRow(),
@@ -68,16 +69,18 @@ void resetControllers() {
   targetController.clear();
 }
 
-stepRow() => Row(
-      children: [
-        Expanded(
-          child: TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.play_circle_filled_outlined),
-            label: fontText('Run the algorithm in steps', 14),
+stepRow() => Consumer(
+      builder: (context, ref, _) => Row(
+        children: [
+          Expanded(
+            child: TextButton.icon(
+              onPressed: () => onButtonPressedFirst(ref),
+              icon: const Icon(Icons.play_circle_filled_outlined),
+              label: fontText('Run the algorithm in steps', 14),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
 
 fontText(String text, double size) => Text(

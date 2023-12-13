@@ -1,5 +1,8 @@
+import 'dart:collection';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Breadth First/bf_algorithm_first_step.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
@@ -10,50 +13,51 @@ import '../closed_search.dart';
 import '../main_search.dart';
 import 'call_helper.dart';
 
-onButtonPressedFirst(WidgetRef ref, AlgorithmType type) async {
+onButtonPressedFirst(WidgetRef ref) {
   //Clear Tracking Panel, Result Panel and Chart
   clearGUI(ref);
 
-  //Collect all the data from the UI
-  //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
+  ref.read(stepModeProvider.notifier).state = true;
+
   RunningRequest request = saveRequest(ref); //To delete
+  //TODO: Να διαγραφεί η παραπάνω γραμμή
 
   //Start the selected algorithm
   prepareProvidersForTracking(ref);
+
+  //Initialize the algorithm
+  queueBf = ListQueue();
+  visitedBf = {};
+
+  closeTheExtraOptions(ref);
+
   ref.read(isAlgorithmEndProvider.notifier).state = false;
-  List<Node>? solution = await startAlgorithm(ref, type, request);
+  List<Node>? solution = startAlgorithmFirstStep(ref, request);
 
   //Add the solution to the Result Panel
   if (solution != null) {
+    ref.read(isAlgorithmEndProvider.notifier).state = true;
+    ref.read(stepModeProvider.notifier).state = false;
     addResultPanelList(ref, solution);
+    saveInputsForResults(ref, solution.length, solution.last.cost);
+    resetControllers();
   }
-
-  //Reset the inputs
-  //saveInputsForResults(ref, solution!.length, solution.last.cost);
 }
 
-onButtonPressedStep(WidgetRef ref, AlgorithmType type) async {
-  //Clear Tracking Panel, Result Panel and Chart
-  clearGUI(ref);
-
-  //Collect all the data from the UI
-  //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
+onButtonPressedStep(WidgetRef ref) {
   RunningRequest request = saveRequest(ref); //To delete
 
   //Start the selected algorithm
-  prepareProvidersForTracking(ref);
-  ref.read(isAlgorithmEndProvider.notifier).state = false;
-  List<Node>? solution = await startAlgorithm(ref, type, request);
-  ref.read(isAlgorithmEndProvider.notifier).state = true;
+  List<Node>? solution = startAlgorithmStep(ref, request);
 
   //Add the solution to the Result Panel
   if (solution != null) {
+    ref.read(isAlgorithmEndProvider.notifier).state = true;
+    ref.read(stepModeProvider.notifier).state = false;
     addResultPanelList(ref, solution);
+    saveInputsForResults(ref, solution.length, solution.last.cost);
+    resetControllers();
   }
-
-  //Reset the inputs
-  saveInputsForResults(ref, solution!.length, solution.last.cost);
-  resetControllers();
 }
 
 saveRequest(WidgetRef ref) => RunningRequest(

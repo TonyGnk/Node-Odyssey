@@ -3,19 +3,30 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants.dart';
+import 'Search Call/submit_function_step.dart';
 import 'main_search.dart';
 import 'Search Call/submit_function.dart';
+import 'step_search.dart';
 
-closedSearch(BuildContext context, AlgorithmType type) => Row(
+//Bool provider
+final stepModeProvider = StateProvider<bool>((ref) => false);
+
+closedSearch(BuildContext context) => Consumer(
+      builder: (context, WidgetRef ref, __) {
+        final stepMode = ref.watch(stepModeProvider);
+        return stepMode ? stepColumn() : row(context);
+      },
+    );
+
+row(BuildContext context) => Row(
       children: [
-        //Set i
         inPutFieldBf(context, inputController, 'Initial Value'),
         const SizedBox(width: 6),
         inPutFieldBf(context, targetController, 'Target Value'),
         const SizedBox(width: 6),
         showOptionsButton(),
         const SizedBox(width: 3),
-        submitButtonBf(type),
+        submitButton(),
       ],
     );
 
@@ -51,24 +62,26 @@ inPutFieldBf(
       ),
     );
 
-showOptionsButton() => Consumer(builder: (context, WidgetRef ref, __) {
-      final makeContainerTaller = ref.watch(makeContainerTallerProvider);
-      final showTheExtraOptions = ref.watch(showTheExtraOptionsProvider);
-      return IconButton(
-        style: modernButtonStyle(context),
-        icon: makeContainerTaller
-            ? const Icon(Icons.close)
-            : const Icon(Icons.tune_outlined),
-        onPressed: () {
-          makeContainerTaller
-              ? ref.watch(makeContainerTallerProvider.notifier).state = false
-              : moreOptionsFun(ref);
-          showTheExtraOptions
-              ? ref.read(showTheExtraOptionsProvider.notifier).state = false
-              : null;
-        },
-      );
-    });
+showOptionsButton() => Consumer(
+      builder: (context, WidgetRef ref, __) {
+        final makeContainerTaller = ref.watch(makeContainerTallerProvider);
+        final showTheExtraOptions = ref.watch(showTheExtraOptionsProvider);
+        return IconButton(
+          style: modernButtonStyle(context),
+          icon: makeContainerTaller
+              ? const Icon(Icons.close)
+              : const Icon(Icons.tune_outlined),
+          onPressed: () {
+            makeContainerTaller
+                ? ref.watch(makeContainerTallerProvider.notifier).state = false
+                : moreOptionsFun(ref);
+            showTheExtraOptions
+                ? ref.read(showTheExtraOptionsProvider.notifier).state = false
+                : null;
+          },
+        );
+      },
+    );
 
 modernButtonStyle(BuildContext context) => ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -84,10 +97,10 @@ moreOptionsFun(WidgetRef ref) async {
   ref.read(showTheExtraOptionsProvider.notifier).state = true;
 }
 
-Widget submitButtonBf(AlgorithmType type) => Consumer(
+Widget submitButton() => Consumer(
       builder: (context, WidgetRef ref, __) => IconButton.filled(
         style: modernButtonStyle(context),
         icon: const Icon(Icons.auto_awesome_outlined),
-        onPressed: () => onButtonPressed(ref, type),
+        onPressed: () => onButtonPressed(ref),
       ),
     );

@@ -26,7 +26,7 @@ class _TerminalSideState extends ConsumerState<BodyDf> {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          publicLeftColumn(AlgorithmType.df),
+          publicLeftColumn(),
           const SizedBox(width: 10),
           Expanded(
             flex: 14, //14

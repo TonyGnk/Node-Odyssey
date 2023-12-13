@@ -40,14 +40,13 @@ class TrackingList extends StatelessWidget {
     String operation,
     WidgetRef ref,
   ) {
-    if (operation != 'Initial Value') {
-      trackingTiles.add(
-        TrackingTiles(
-          value,
-          operation,
-        ),
-      );
-    }
+    trackingTiles.add(
+      TrackingTiles(
+        value,
+        operation,
+      ),
+    );
+
     addTrackingContainerRolling(ref);
   }
 }
@@ -144,7 +143,7 @@ class TrackingTiles {
               child: Center(
                 child: Text(
                   getPreviousValue(value, operation) +
-                      (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                      (operation == 'Initial Value' ? '' : ' 🡢 ') +
                       value.toString(),
                   style: const TextStyle(
                     fontSize: 13,
@@ -183,7 +182,7 @@ class SemiTrack extends StatelessWidget {
           child: Center(
             child: Text(
               getPreviousValue(value, operation) +
-                  (operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                  (operation != 'Initial Value' ? ' 🡢 ' : '') +
                   value.toString(),
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),

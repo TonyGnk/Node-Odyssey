@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services & Providers/constants.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
@@ -9,6 +11,8 @@ void asfGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void asfReturn(WidgetRef ref) {
+  currentAlgorithm = AlgorithmType.astar;
+
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.aStarAlg;
   ref.read(appBarPreviousScreen.notifier).state =
       ScreenDestination.algorithmsGUI;

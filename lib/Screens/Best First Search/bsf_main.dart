@@ -53,7 +53,7 @@ Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
-          publicSearchBar(AlgorithmType.bestf),
+          publicSearchBar(),
           const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(),

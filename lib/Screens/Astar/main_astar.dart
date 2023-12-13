@@ -7,7 +7,6 @@ import '../../Arc/Tree Widgets/new_tree.dart';
 import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services & Providers/Public Search Bar/main_search.dart';
 import '../../Services & Providers/Public Search Bar/Search Call/submit_function.dart';
-import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/public_left_column.dart';
 import '../../Services & Providers/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
@@ -53,7 +52,7 @@ Widget leftColumnBf() => SizedBox(
       width: 330,
       child: Column(
         children: [
-          publicSearchBar(AlgorithmType.astar),
+          publicSearchBar(),
           const SizedBox(height: 10),
           Expanded(
             child: trackingListAndButton(),

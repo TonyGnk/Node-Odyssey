@@ -7,11 +7,11 @@ import 'Public Tracking Area/public_tracking_stage.dart';
 import 'Public Tracking Area/public_welcome.dart';
 import 'constants.dart';
 
-Widget publicLeftColumn(AlgorithmType type) => SizedBox(
+Widget publicLeftColumn() => SizedBox(
       width: 330,
       child: Column(
         children: [
-          publicSearchBar(type),
+          publicSearchBar(),
           const SizedBox(height: 10),
           Expanded(child: trackingArea()),
         ],

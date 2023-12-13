@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/public_left_column.dart';
 import 'Chart BF/chart_bf.dart';
 import 'bf_state.dart';
@@ -26,7 +25,7 @@ class _TerminalSideState extends ConsumerState<BreadthFirstAlg> {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          publicLeftColumn(AlgorithmType.bf),
+          publicLeftColumn(),
           const SizedBox(width: 10),
           Expanded(
             flex: 14, //14
