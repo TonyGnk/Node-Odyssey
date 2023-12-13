@@ -35,30 +35,19 @@ class TrackingList extends StatelessWidget {
     trackingTiles.clear();
   }
 
-  // void addTile2(int value, String operation, WidgetRef ref) {
-  //   trackingTiles.add(
-  //     TrackingTiles(
-  //       //text: '$operation $value',
-  //       value: value,
-  //       operation: operation,
-  //     ),
-  //   );
-  //   addTrackingContainerRolling(ref);
-  // }
-
   void addTile(
     int value,
     String operation,
     WidgetRef ref,
   ) {
-    trackingTiles.add(
-      TrackingTiles(
-        //text: '$operation $value',
-
-        value,
-        operation,
-      ),
-    );
+    if (operation != 'Initial Value') {
+      trackingTiles.add(
+        TrackingTiles(
+          value,
+          operation,
+        ),
+      );
+    }
     addTrackingContainerRolling(ref);
   }
 }
@@ -112,7 +101,7 @@ class _TrackingTilesState extends State<TrackingTiles2> {
                 child: Center(
                   child: Text(
                     getPreviousValue(widget.value, widget.operation) +
-                        (widget.operation == 'Αρχική Τιμή' ? '' : ' 🡢 ') +
+                        (' 🡢 ') +
                         widget.value.toString(),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -204,20 +193,19 @@ class SemiTrack extends StatelessWidget {
 }
 
 getPreviousValue(int value, String operation) {
-  //if (operation == 'Πρόσθεση κατά 1'
-  if (operation == 'Πρόσθεση κατά 1') {
+  if (operation == 'Increase') {
     return (value - 1).toString();
-  } else if (operation == 'Αφαίρεση κατά 1') {
+  } else if (operation == 'Decrease') {
     return (value + 1).toString();
-  } else if (operation == 'Πολ/σιασμός επί 2') {
+  } else if (operation == 'Double') {
     return (value ~/ 2).toString();
-  } else if (operation == 'Διαίρεση με 2') {
+  } else if (operation == 'Half') {
     return (value * 2).toString();
-  } else if (operation == 'Τετράγωνο') {
+  } else if (operation == 'Square') {
     return sqrt(value).toInt().toString();
-  } else if (operation == 'Ρίζα') {
+  } else if (operation == 'Root') {
     return pow(value, 2).toInt().toString();
-  } else if (operation == 'Αρχική Τιμή') {
+  } else if (operation == 'Initial Value') {
     return '';
   } else {
     return 0.toString();

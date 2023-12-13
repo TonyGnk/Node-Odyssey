@@ -6,9 +6,9 @@ import '../public_left_column.dart';
 import '../six_calculations.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../tracking_container.dart';
+import 'check_box_search.dart';
 import 'closed_search.dart';
-import 'main_search_bf.dart';
-import 'sliders_and_options_bf.dart';
+import 'main_search.dart';
 
 onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   //Clear Tracking Panel, Result Panel and Chart
@@ -19,11 +19,10 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   RunningRequest request = saveRequest(ref);
 
   //Start the selected algorithm
-  ref.read(runOnceProvider.notifier).state = true;
-  ref.read(isOnTrackingProvider.notifier).state = false;
-  ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
+  prepareProvidersForTracking(ref);
+  ref.read(isAlgorithmEndProvider.notifier).state = false;
   List<Node>? solution = await startAlgorithm(ref, type, request);
-  ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
+  ref.read(isAlgorithmEndProvider.notifier).state = true;
 
   //Add the solution to the Result Panel
   if (solution != null) {
@@ -35,9 +34,10 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
 }
 
 saveRequest(WidgetRef ref) => RunningRequest(
+      //
       startValue: int.parse(inputController.text),
       targetValue: int.parse(targetController.text),
-      speed: setSpeedFromSlider(ref.watch(speedSliderProviderBf)),
+      speed: 2,
       enabledOperations: {
         CalculationType.addition: ref.watch(checkPlusOneProvider),
         CalculationType.subtraction: ref.watch(checkMinusOneProvider),
@@ -60,4 +60,9 @@ clearGUI(WidgetRef ref) {
 updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
   ref.watch(trackingListProvider).addTile(node.value, node.operation, ref);
   addTrackingContainer(ref, node.value, end);
+}
+
+prepareProvidersForTracking(WidgetRef ref) {
+  ref.read(runOnceProvider.notifier).state = true;
+  ref.read(isOnTrackingProvider.notifier).state = false;
 }

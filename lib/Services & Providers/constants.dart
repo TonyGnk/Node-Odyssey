@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Best First/algorithm_bsf.dart';
-import '../Algorithms/Breadth First/algorithm_bf.dart';
+import '../Algorithms/Breadth First/bf_algorithm_terminal.dart';
+import '../Algorithms/Breadth First/bf_algorithm_total.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'six_calculations.dart';
@@ -13,7 +14,7 @@ enum AlgorithmType { bf, df, bestf, astar }
 List<Node>? startAlgorithmTerminal(
     WidgetRef ref, AlgorithmType type, RunningRequest request) {
   if (type == AlgorithmType.bf) {
-    return runBFGuiTerminal(request);
+    return runBreadthTerminal(request);
   } else if (type == AlgorithmType.df) {
     return runDFGuiTerminal(request);
   } else if (type == AlgorithmType.bestf) {
@@ -26,7 +27,7 @@ List<Node>? startAlgorithmTerminal(
 Future<List<Node>?> startAlgorithm(
     WidgetRef ref, AlgorithmType type, RunningRequest request) async {
   if (type == AlgorithmType.bf) {
-    return runBFGui(ref, request);
+    return runBreadthTotal(ref);
   } else if (type == AlgorithmType.df) {
     return runDFGui(ref, request);
   } else if (type == AlgorithmType.bestf) {

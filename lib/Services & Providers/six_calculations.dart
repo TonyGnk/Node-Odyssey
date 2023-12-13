@@ -22,7 +22,7 @@ enum CalculationType {
   square,
 }
 
-int getNewValue(int? value, CalculationType type) {
+getNewValue(int? value, CalculationType type) {
   if (value == null) return 0;
   switch (type) {
     case CalculationType.addition:
@@ -124,10 +124,10 @@ Node getNewNode(int value, int cost, int newValue, CalculationType type) {
 
 //Create map. First is Calculation Type, second is the String 'Ρίζα, Τετράγωνο, Πολ/σιασμός επί 2, Διαίρεση με 2, Πρόσθεση κατά 1, Αφαίρεση κατά 1' etc
 Map<CalculationType, String> getCalculationTypeMap() => {
-      CalculationType.addition: 'Add 1',
-      CalculationType.subtraction: 'Subtract 1',
-      CalculationType.multiplication: 'Multiply by 2',
-      CalculationType.division: 'Divide by 2',
+      CalculationType.addition: 'Increase',
+      CalculationType.subtraction: 'Decrease',
+      CalculationType.multiplication: 'Double',
+      CalculationType.division: 'Half',
       CalculationType.exponential: 'Square',
       CalculationType.square: 'Root',
     };

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants.dart';
-import 'main_search_bf.dart';
+import 'main_search.dart';
 import 'submit_function.dart';
 
 closedSearch(BuildContext context, AlgorithmType type) => Row(
@@ -12,7 +12,7 @@ closedSearch(BuildContext context, AlgorithmType type) => Row(
         const SizedBox(width: 6),
         inPutFieldBf(context, targetController, 'Τελική Τιμή'),
         const SizedBox(width: 6),
-        extraButtonBf(),
+        showOptionsButton(),
         const SizedBox(width: 3),
         submitButtonBf(type),
       ],
@@ -50,7 +50,7 @@ inPutFieldBf(
       ),
     );
 
-extraButtonBf() => Consumer(builder: (context, WidgetRef ref, __) {
+showOptionsButton() => Consumer(builder: (context, WidgetRef ref, __) {
       final makeContainerTaller = ref.watch(makeContainerTallerProvider);
       final showTheExtraOptions = ref.watch(showTheExtraOptionsProvider);
       return IconButton(
@@ -79,7 +79,7 @@ modernButtonStyle(BuildContext context) => ButtonStyle(
 
 moreOptionsFun(WidgetRef ref) async {
   ref.read(makeContainerTallerProvider.notifier).state = true;
-  await Future.delayed(const Duration(milliseconds: 200));
+  await Future.delayed(const Duration(milliseconds: 140));
   ref.read(showTheExtraOptionsProvider.notifier).state = true;
 }
 

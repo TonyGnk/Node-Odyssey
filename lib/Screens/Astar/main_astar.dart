@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Algorithms/Best First/async_bfs.dart';
 import '../../Algorithms/Best First/async_bfs_2.dart';
 import '../../Arc/Tree Widgets/new_tree.dart';
-import '../../Services & Providers/Public Search Bar/main_search_bf.dart';
+import '../../Services & Providers/Public Search Bar/main_search.dart';
 import '../../Services & Providers/Public Search Bar/submit_function.dart';
 import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/public_left_column.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Public Search Bar/main_search_bf.dart';
+import 'Public Search Bar/main_search.dart';
 import 'Public Tracking Area/public_result.dart';
 import 'Public Tracking Area/public_tracking_stage.dart';
 import 'Public Tracking Area/public_welcome.dart';
