@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants.dart';
 import 'main_search.dart';
 
-int searchSpeed = 400;
+int searchSpeed = 0;
 
 final segmentedButtonProvider =
-    StateProvider<SpeedType>((ref) => SpeedType.medium);
+    StateProvider<SpeedType>((ref) => SpeedType.fast);
 
 enum SpeedType { slow, medium, fast }
 

@@ -51,7 +51,6 @@ Widget extraOptionsBuilder(BuildContext context) => Consumer(
       },
     );
 
-//Create a widget with 1 column
 Widget extraOptions(BuildContext context) => Column(
       children: [
         const SizedBox(height: 12),

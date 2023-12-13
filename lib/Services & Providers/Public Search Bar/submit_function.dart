@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
+import '../Public Tracking Area/public_result.dart';
 import '../constants.dart';
 import '../public_left_column.dart';
 import '../six_calculations.dart';
@@ -30,6 +31,7 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   }
 
   //Reset the inputs
+  saveInputsForResults(ref);
   resetControllers();
 }
 
@@ -65,4 +67,9 @@ updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
 prepareProvidersForTracking(WidgetRef ref) {
   ref.read(runOnceProvider.notifier).state = true;
   ref.read(isOnTrackingProvider.notifier).state = false;
+}
+
+saveInputsForResults(WidgetRef ref) {
+  ref.read(savedInputProvider.notifier).state =
+      '${inputController.text} 🡢 ${targetController.text}';
 }

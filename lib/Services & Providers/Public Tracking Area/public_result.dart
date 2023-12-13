@@ -8,12 +8,13 @@ Widget resultPanel() => Consumer(builder: (context, ref, _) {
       // ignore: unused_local_variable
       final stringResult = ref.watch(resultPanelList);
       final resList = ref.watch(resListProvider);
+      final previousInput = ref.watch(savedInputProvider);
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 3),
-          resultsAppBar(ref),
+          resultsAppBar(ref, previousInput),
           const SizedBox(height: 3),
           Expanded(
             child: resList.build(context),
@@ -22,10 +23,12 @@ Widget resultPanel() => Consumer(builder: (context, ref, _) {
       );
     });
 
-Widget resultsAppBar(WidgetRef ref) => Row(
+Widget resultsAppBar(WidgetRef ref, String previousInput) => Row(
       children: [
         const SizedBox(width: 8),
-        Expanded(child: headerText('Results')),
+        headerText('Results  '),
+        costText(previousInput),
+        const Expanded(child: SizedBox()),
         const SizedBox(width: 2),
         IconButton(
           onPressed: () => ref.read(isOnTrackingProvider.notifier).state = true,
@@ -37,3 +40,23 @@ Widget resultsAppBar(WidgetRef ref) => Row(
         ),
       ],
     );
+
+costText(String text) => Text(
+      text,
+      style: const TextStyle(
+        fontSize: 14,
+        fontFamily: 'Play',
+      ),
+    );
+
+commandsText(String text) => Text(
+      text,
+      style: const TextStyle(
+        fontSize: 13,
+        fontFamily: 'Play',
+      ),
+    );
+
+final savedInputProvider = StateProvider<String>((ref) => '');
+final resultCountProvider = StateProvider<int>((ref) => 0);
+final resultCostProvider = StateProvider<int>((ref) => 0);
