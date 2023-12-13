@@ -9,12 +9,13 @@ Widget resultPanel() => Consumer(builder: (context, ref, _) {
       final stringResult = ref.watch(resultPanelList);
       final resList = ref.watch(resListProvider);
       final previousInput = ref.watch(savedInputProvider);
-
+      final cost = ref.watch(resultCostProvider);
+      final count = ref.watch(resultCountProvider);
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 3),
-          resultsAppBar(ref, previousInput),
+          resultsAppBar(ref, previousInput, cost, count),
           const SizedBox(height: 3),
           Expanded(
             child: resList.build(context),
@@ -23,13 +24,24 @@ Widget resultPanel() => Consumer(builder: (context, ref, _) {
       );
     });
 
-Widget resultsAppBar(WidgetRef ref, String previousInput) => Row(
+Widget resultsAppBar(
+  WidgetRef ref,
+  String previousInput,
+  int cost,
+  int count,
+) =>
+    Row(
       children: [
-        const SizedBox(width: 8),
-        headerText('Results  '),
+        const SizedBox(width: 2),
+        headerText('Results '),
         costText(previousInput),
         const Expanded(child: SizedBox()),
-        const SizedBox(width: 2),
+        commandsText(count.toString()),
+        const Icon(Icons.bar_chart_outlined),
+        const Expanded(child: SizedBox()),
+        commandsText(cost.toString()),
+        const Icon(Icons.bolt_outlined, color: Colors.orange),
+        const Expanded(child: SizedBox()),
         IconButton(
           onPressed: () => ref.read(isOnTrackingProvider.notifier).state = true,
           icon: const Icon(Icons.insights_outlined),
@@ -52,7 +64,7 @@ costText(String text) => Text(
 commandsText(String text) => Text(
       text,
       style: const TextStyle(
-        fontSize: 13,
+        fontSize: 14,
         fontFamily: 'Play',
       ),
     );

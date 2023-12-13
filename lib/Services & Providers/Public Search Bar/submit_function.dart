@@ -31,7 +31,7 @@ onButtonPressed(WidgetRef ref, AlgorithmType type) async {
   }
 
   //Reset the inputs
-  saveInputsForResults(ref);
+  saveInputsForResults(ref, solution!.length, solution.last.cost);
   resetControllers();
 }
 
@@ -69,7 +69,15 @@ prepareProvidersForTracking(WidgetRef ref) {
   ref.read(isOnTrackingProvider.notifier).state = false;
 }
 
-saveInputsForResults(WidgetRef ref) {
+saveInputsForResults(WidgetRef ref, int count, int cost) {
   ref.read(savedInputProvider.notifier).state =
       '${inputController.text} 🡢 ${targetController.text}';
+  ref.read(resultCountProvider.notifier).state = count;
+  ref.read(resultCostProvider.notifier).state = cost;
+}
+
+clearSaved(WidgetRef ref) {
+  ref.read(savedInputProvider.notifier).state = '';
+  ref.read(resultCountProvider.notifier).state = 0;
+  ref.read(resultCostProvider.notifier).state = 0;
 }
