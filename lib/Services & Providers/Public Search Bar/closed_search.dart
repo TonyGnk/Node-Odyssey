@@ -8,9 +8,10 @@ import 'submit_function.dart';
 
 closedSearch(BuildContext context, AlgorithmType type) => Row(
       children: [
-        inPutFieldBf(context, inputController, 'Αρχική Τιμή'),
+        //Set i
+        inPutFieldBf(context, inputController, 'Initial Value'),
         const SizedBox(width: 6),
-        inPutFieldBf(context, targetController, 'Τελική Τιμή'),
+        inPutFieldBf(context, targetController, 'Target Value'),
         const SizedBox(width: 6),
         showOptionsButton(),
         const SizedBox(width: 3),

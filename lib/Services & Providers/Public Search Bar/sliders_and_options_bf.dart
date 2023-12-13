@@ -82,17 +82,20 @@ bool avoidVisitedIsDisable = false;
 customSwitch() => Consumer(
       builder: (context, ref, _) {
         final switcher = ref.watch(switcherProvider);
-        return Row(
-          children: [
-            const Expanded(child: Text('Avoid the visited nodes')),
-            Switch(
-              value: switcher,
-              onChanged: (newValue) {
-                ref.read(switcherProvider.notifier).state = newValue;
-                avoidVisitedIsDisable = !newValue;
-              },
-            ),
-          ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              Expanded(child: fontText('Avoid the visited nodes', 15)),
+              Switch(
+                value: switcher,
+                onChanged: (newValue) {
+                  ref.read(switcherProvider.notifier).state = newValue;
+                  avoidVisitedIsDisable = !newValue;
+                },
+              ),
+            ],
+          ),
         );
       },
     );

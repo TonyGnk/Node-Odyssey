@@ -14,7 +14,7 @@ publicSearchBar(AlgorithmType type) => Consumer(builder: (context, ref, _) {
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 200),
-        height: moreOptions ? 260 : 50,
+        height: moreOptions ? 291 : 50,
         padding: const EdgeInsets.all(4),
         decoration: decoration(context),
         child: mainSearchBar(context, type),
@@ -60,6 +60,7 @@ Widget extraOptions(BuildContext context) => Column(
         rowOfChecks(context),
         const SizedBox(height: 2),
         customSwitch(),
+        stepRow(),
       ],
     );
 
@@ -67,3 +68,23 @@ void resetControllers() {
   inputController.clear();
   targetController.clear();
 }
+
+stepRow() => Row(
+      children: [
+        Expanded(
+          child: TextButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.play_circle_filled_outlined),
+            label: fontText('Run the algorithm in steps', 14),
+          ),
+        ),
+      ],
+    );
+
+fontText(String text, double size) => Text(
+      text,
+      style: TextStyle(
+        fontSize: size,
+        fontFamily: 'Play',
+      ),
+    );
