@@ -30,7 +30,7 @@ jobs:
     # Get flutter dependencies.
     - run: flutter pub get
     
-    # Build apk.
+    # Build apk. 
     - run: flutter build windows
     
     # Upload generated apk to the artifacts.
