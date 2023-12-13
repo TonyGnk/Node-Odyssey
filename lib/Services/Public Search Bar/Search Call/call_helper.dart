@@ -12,7 +12,7 @@ import '../../tracking_container.dart';
 import '../closed_search.dart';
 import '../main_search.dart';
 
-AlgorithmType currentAlgorithm = AlgorithmType.bf;
+AlgorithmType currentAlgorithm = AlgorithmType.breadth;
 
 clearGUI(WidgetRef ref) {
   //Clear Chart

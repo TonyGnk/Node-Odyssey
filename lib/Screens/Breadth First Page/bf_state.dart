@@ -11,7 +11,7 @@ void bfGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void bfReturn(WidgetRef ref) {
-  currentAlgorithm = AlgorithmType.bf;
+  currentAlgorithm = AlgorithmType.breadth;
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.breadthFirstAlg;
   ref.read(appBarPreviousScreen.notifier).state =

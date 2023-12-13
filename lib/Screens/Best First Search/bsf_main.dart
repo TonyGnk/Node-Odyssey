@@ -7,7 +7,6 @@ import '../../Arc/Tree Widgets/new_tree.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/main_search.dart';
 import '../../Services/Public Search Bar/Search Call/submit_function.dart';
-import '../../Services/constants.dart';
 import '../../Services/public_left_column.dart';
 import '../../Services/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
@@ -36,44 +35,15 @@ class _TerminalSideState extends ConsumerState<BestFirstAlg> {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          leftColumnBf(),
+          publicLeftColumn(),
           const SizedBox(width: 10),
           const Expanded(
             flex: 14, //14
             child: NewTree(),
           ),
-          //containerZ(),  ),
         ],
       );
 }
-
-// Αυτή είναι η αριστερή στήλη της οθόνης
-// Περιλαμβάνει την φόρμα αναζήτησης-οθόνη παρακολούθησης και το χρονόμετρο
-Widget leftColumnBf() => SizedBox(
-      width: 330,
-      child: Column(
-        children: [
-          publicSearchBar(),
-          const SizedBox(height: 10),
-          Expanded(
-            child: trackingListAndButton(),
-          ),
-          const Text('Experiment'),
-          rowButtons(),
-        ],
-      ),
-    );
-
-Widget trackingListAndButton() => Consumer(
-      builder: (context, ref, _) {
-        final isAlgorithmEnd = ref.watch(isAlgorithmEndProvider);
-        return container(
-          Theme.of(context).shadowColor.withOpacity(1),
-          Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-          isAlgorithmEnd ? resultPanel(context) : trackingStage(context),
-        );
-      },
-    );
 
 rowButtons() => Row(
       mainAxisAlignment: MainAxisAlignment.center,

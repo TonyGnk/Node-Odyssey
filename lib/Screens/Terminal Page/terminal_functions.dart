@@ -42,15 +42,15 @@ analyzeTheText(WidgetRef ref) {
 AlgorithmType findType(String algorithm) {
   switch (algorithm) {
     case 'breadth':
-      return AlgorithmType.bf;
+      return AlgorithmType.breadth;
     case 'depth':
-      return AlgorithmType.df;
+      return AlgorithmType.depth;
     case 'best':
-      return AlgorithmType.bestf;
+      return AlgorithmType.best;
     case 'astar':
       return AlgorithmType.astar;
     default:
-      return AlgorithmType.bf;
+      return AlgorithmType.breadth;
   }
 }
 

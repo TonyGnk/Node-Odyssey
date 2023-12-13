@@ -11,7 +11,7 @@ import 'Astar/main_astar.dart';
 import 'Best First Search/bsf_state.dart';
 import 'Best First Search/bsf_main.dart';
 import 'Breadth First Page/bf_state.dart';
-import 'Breadth First Page/main_bf.dart';
+import 'Breadth First Page/bf_main.dart';
 import 'Buttons/buttons_main.dart';
 import 'Buttons/buttons_state.dart';
 import 'Depth First Page/df_state.dart';

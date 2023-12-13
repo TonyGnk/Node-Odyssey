@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
+import '../Algorithms/Best First/async_bfs.dart';
+import '../Algorithms/Best First/async_bfs_2.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_terminal.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
@@ -14,15 +16,15 @@ import 'six_calculations.dart';
 
 const double cornerSize = 16;
 
-enum AlgorithmType { bf, df, bestf, astar }
+enum AlgorithmType { breadth, depth, best, astar }
 
 List<Node>? startAlgorithmTerminal(
     WidgetRef ref, AlgorithmType type, RunningRequest request) {
-  if (type == AlgorithmType.bf) {
+  if (type == AlgorithmType.breadth) {
     return runBreadthTerminal(request);
-  } else if (type == AlgorithmType.df) {
+  } else if (type == AlgorithmType.depth) {
     return runDepthTerminal();
-  } else if (type == AlgorithmType.bestf) {
+  } else if (type == AlgorithmType.best) {
     return runBestTerminal(request);
   } else {
     return null;
@@ -31,11 +33,11 @@ List<Node>? startAlgorithmTerminal(
 
 Future<List<Node>?> startAlgorithm(
     WidgetRef ref, RunningRequest request) async {
-  if (currentAlgorithm == AlgorithmType.bf) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadth(ref);
-  } else if (currentAlgorithm == AlgorithmType.df) {
+  } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepth(ref);
-  } else if (currentAlgorithm == AlgorithmType.bestf) {
+  } else if (currentAlgorithm == AlgorithmType.best) {
     return runBest(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
     return runAStarGui(ref, request);
@@ -46,29 +48,33 @@ Future<List<Node>?> startAlgorithm(
 //TODO : Reset switcher to true when buttonState
 
 List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
-  if (currentAlgorithm == AlgorithmType.bf) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthFirstStep(ref);
-  } else if (currentAlgorithm == AlgorithmType.df) {
+  } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthFirstStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBSFAsync(ref, request);
   } else {
     return null;
   }
 }
 
 List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
-  if (currentAlgorithm == AlgorithmType.bf) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthStep(ref);
-  } else if (currentAlgorithm == AlgorithmType.df) {
+  } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBSFAsyncStep(ref, request);
   } else {
     return null;
   }
 }
 
 List<Node>? startAlgorithmToEnd(WidgetRef ref, RunningRequest request) {
-  if (currentAlgorithm == AlgorithmType.bf) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthToEnd(ref);
-  } else if (currentAlgorithm == AlgorithmType.df) {
+  } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthToEnd(ref);
   } else {
     return null;

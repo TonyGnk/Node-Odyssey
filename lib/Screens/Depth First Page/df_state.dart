@@ -12,7 +12,7 @@ void dfGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void dfReturn(WidgetRef ref) {
-  currentAlgorithm = AlgorithmType.df;
+  currentAlgorithm = AlgorithmType.depth;
 
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.depthFirstAlg;

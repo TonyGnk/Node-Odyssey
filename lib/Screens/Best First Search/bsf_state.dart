@@ -11,7 +11,7 @@ void bsfGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void bsfReturn(WidgetRef ref) {
-  currentAlgorithm = AlgorithmType.bestf;
+  currentAlgorithm = AlgorithmType.best;
 
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.bestFirstAlg;
   ref.read(appBarPreviousScreen.notifier).state =
