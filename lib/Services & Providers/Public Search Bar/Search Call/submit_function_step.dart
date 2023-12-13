@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Breadth First/bf_algorithm_first_step.dart';
+import '../../../Algorithms/Breadth First/bf_algorithm_step.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
@@ -44,17 +44,20 @@ onButtonPressedFirst(WidgetRef ref) {
   }
 }
 
-onButtonPressedStep(WidgetRef ref) {
+onButtonPressedStep(WidgetRef ref, bool toEnd) {
   RunningRequest request = saveRequest(ref); //To delete
 
-  //Start the selected algorithm
-  List<Node>? solution = startAlgorithmStep(ref, request);
+  List<Node>? solution;
+  solution = toEnd
+      ? startAlgorithmToEnd(ref, request)
+      : startAlgorithmStep(ref, request);
 
   //Add the solution to the Result Panel
   if (solution != null) {
     ref.read(isAlgorithmEndProvider.notifier).state = true;
     ref.read(stepModeProvider.notifier).state = false;
     addResultPanelList(ref, solution);
+    closeTheExtraOptions(ref);
     saveInputsForResults(ref, solution.length, solution.last.cost);
     resetControllers();
   }
@@ -74,3 +77,16 @@ saveRequest(WidgetRef ref) => RunningRequest(
         CalculationType.square: ref.watch(checkSquareProvider),
       },
     );
+
+cancelStep(WidgetRef ref) {
+  clearGUI(ref);
+
+  ref.read(stepModeProvider.notifier).state = false;
+
+  ref.read(runOnceProvider.notifier).state = false;
+
+  ref.read(makeContainerTallerProvider.notifier).state = true;
+  ref.read(showTheExtraOptionsProvider.notifier).state = true;
+
+  ref.read(isAlgorithmEndProvider.notifier).state = true;
+}

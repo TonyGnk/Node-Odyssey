@@ -42,12 +42,6 @@ mainSearchBar(BuildContext context) => Column(
       children: [closedSearch(context), extraOptionsBuilder()],
     );
 
-void moreOptionsFun(WidgetRef ref) async {
-  ref.read(makeContainerTallerProvider.notifier).state = true;
-  await Future.delayed(const Duration(milliseconds: 200));
-  ref.read(showTheExtraOptionsProvider.notifier).state = true;
-}
-
 Widget extraOptionsBuilder() => Consumer(
       builder: (context, ref, _) {
         final moreOptions2 = ref.watch(showTheExtraOptionsProvider);
@@ -81,7 +75,10 @@ stepRow() => Consumer(
         children: [
           Expanded(
             child: TextButton.icon(
-              onPressed: () => onButtonPressedFirst(ref),
+              onPressed: () => ((inputController.text != '') &&
+                      (targetController.text != ''))
+                  ? onButtonPressedFirst(ref)
+                  : null,
               icon: const Icon(Icons.play_circle_filled_outlined),
               label: fontText('Run the algorithm in steps', 14),
             ),

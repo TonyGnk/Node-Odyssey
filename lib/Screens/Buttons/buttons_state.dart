@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services & Providers/Public Search Bar/Search Call/submit_function.dart';
 import '../../Services & Providers/Public Search Bar/Search Call/submit_function_step.dart';
+import '../../Services & Providers/Public Search Bar/closed_search.dart';
+import '../../Services & Providers/Public Search Bar/main_search.dart';
 import '../../Services & Providers/constants.dart';
 import '../../Services & Providers/public_left_column.dart';
 import '../../UI/Routed Screen/app_bar.dart';
@@ -28,6 +30,9 @@ void buttonReturn(WidgetRef ref) {
 
   clearGUI(ref);
   clearSaved(ref);
+  closeTheExtraOptions(ref);
+  ref.read(stepModeProvider.notifier).state = false;
+  resetControllers();
   ref.read(runOnceProvider.notifier).state = false;
   updateAppBarItems(ref, true);
 }

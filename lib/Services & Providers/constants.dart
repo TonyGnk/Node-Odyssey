@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Best First/algorithm_bsf.dart';
-import '../Algorithms/Breadth First/bf_algorithm_first_step.dart';
+import '../Algorithms/Breadth First/bf_algorithm_step.dart';
 import '../Algorithms/Breadth First/bf_algorithm_terminal.dart';
-import '../Algorithms/Breadth First/bf_algorithm_total.dart';
+import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/algorithm_df.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
@@ -52,6 +52,14 @@ List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
 List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
   if (currentAlgorithm == AlgorithmType.bf) {
     return runBreadthStep(ref);
+  } else {
+    return null;
+  }
+}
+
+List<Node>? startAlgorithmToEnd(WidgetRef ref, RunningRequest request) {
+  if (currentAlgorithm == AlgorithmType.bf) {
+    return runBreadthToEnd(ref);
   } else {
     return null;
   }
