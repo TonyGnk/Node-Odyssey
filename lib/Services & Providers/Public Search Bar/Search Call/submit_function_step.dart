@@ -10,13 +10,35 @@ import '../closed_search.dart';
 import '../main_search.dart';
 import 'call_helper.dart';
 
-onButtonPressed(WidgetRef ref, AlgorithmType type) async {
+onButtonPressedFirst(WidgetRef ref, AlgorithmType type) async {
   //Clear Tracking Panel, Result Panel and Chart
   clearGUI(ref);
 
   //Collect all the data from the UI
   //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
-  RunningRequest request = saveRequest(ref);
+  RunningRequest request = saveRequest(ref); //To delete
+
+  //Start the selected algorithm
+  prepareProvidersForTracking(ref);
+  ref.read(isAlgorithmEndProvider.notifier).state = false;
+  List<Node>? solution = await startAlgorithm(ref, type, request);
+
+  //Add the solution to the Result Panel
+  if (solution != null) {
+    addResultPanelList(ref, solution);
+  }
+
+  //Reset the inputs
+  //saveInputsForResults(ref, solution!.length, solution.last.cost);
+}
+
+onButtonPressedStep(WidgetRef ref, AlgorithmType type) async {
+  //Clear Tracking Panel, Result Panel and Chart
+  clearGUI(ref);
+
+  //Collect all the data from the UI
+  //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
+  RunningRequest request = saveRequest(ref); //To delete
 
   //Start the selected algorithm
   prepareProvidersForTracking(ref);
