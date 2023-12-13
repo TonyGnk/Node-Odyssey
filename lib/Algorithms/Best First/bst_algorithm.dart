@@ -2,24 +2,19 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Arc/Tree Widgets/tree_helpler.dart';
-import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
 
-Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
-  int start = request.startValue;
-  int end = request.targetValue;
-  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
+Future<List<Node>?> runBest(WidgetRef ref) async {
+  int start = int.parse(inputController.text);
+  int end = int.parse(targetController.text);
 
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
-  clearLeafs(ref);
-
-  queue.add([Node(start, 0, 'Αρχική Τιμή')]);
-  visited.add(start);
-
   List<List<int?>> treeList = [
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -28,8 +23,12 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
   ];
-
   List<int?> treeListSmall = [null, null, null, null, null, null];
+  bool founded = false;
+
+  queue.add([Node(start, 0, 'Initial Value')]);
+  visited.add(start);
+
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
       int newValue = getNewValue(start, type);
@@ -40,19 +39,18 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
       }
     }
   }
-  bool founded = false;
+
   while (queue.isNotEmpty) {
-    setKingLeafs(treeListSmall, ref);
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    ref.read(throneProvider.notifier).state = current.value;
+    setKingLeafs(treeListSmall, ref);
     updateChartAndTrackingPanel(ref, current, end);
 
-    if (current.value == end) {
-      return currentPath;
-    }
+    //Check For Solution itself
+    if (current.value == end) return currentPath;
 
+    //Check For Solution in First Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] != null) {
         if (treeListSmall[i] == end) {
@@ -70,6 +68,7 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
     }
     if (founded) continue;
 
+    //Open the Grand Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] == null) {
         treeList[i] = [null, null, null, null, null, null];
@@ -113,7 +112,7 @@ Future<List<Node>?> runBSFGui(WidgetRef ref, RunningRequest request) async {
       [null, null, null, null, null, null],
       [null, null, null, null, null, null],
     ];
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
   return null;
@@ -159,38 +158,4 @@ getPosition(type) {
     case CalculationType.square:
       return 5;
   }
-}
-
-List<Node>? runBSFTerminal(RunningRequest request) {
-  int start = request.startValue;
-  int end = request.targetValue;
-
-  ListQueue<List<Node>> queue = ListQueue();
-  Set<int> visited = {};
-
-  queue.add([Node(start, 0, 'Αρχική Τιμή')]);
-  visited.add(start);
-
-  while (queue.isNotEmpty) {
-    List<Node> currentPath = queue.removeFirst();
-    Node current = currentPath.last;
-
-    if (current.value == end) {
-      return currentPath;
-    }
-
-    List<Node> calculationList = [];
-    for (CalculationType type in CalculationType.values) {
-      int newValue = getNewValue(current.value, type);
-      if (isAllowed(newValue, current.value, type)) {
-        if (!visited.contains(newValue)) {
-          calculationList.add(
-            getNewNode(current.value, current.cost, newValue, type),
-          );
-        }
-      }
-    }
-  }
-
-  return null;
 }

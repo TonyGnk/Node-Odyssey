@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/Public Search Bar/check_box_search.dart';
-import '../../Services & Providers/Public Search Bar/closed_search.dart';
-import '../../Services & Providers/Public Search Bar/sliders_and_options_bf.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
 
 List<List<Node>> stackDf = [];
 Set<int> visitedDf = {};

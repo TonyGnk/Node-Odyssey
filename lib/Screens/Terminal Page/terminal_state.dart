@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/constants.dart';
+import '../../Services/constants.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 import 'terminal_providers.dart';

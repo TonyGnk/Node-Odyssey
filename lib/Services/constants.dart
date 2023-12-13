@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
-import '../Algorithms/Best First/algorithm_bsf.dart';
-import '../Algorithms/Breadth First/bf_algorithm_step.dart';
-import '../Algorithms/Breadth First/bf_algorithm_terminal.dart';
+import '../Algorithms/Best First/bst_algorithm.dart';
+import '../Algorithms/Best First/bst_terminal.dart';
+import '../Algorithms/Breadth First/bf_step.dart';
+import '../Algorithms/Breadth First/bf_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/df_algorithm.dart';
-import '../Algorithms/Depth First/df_algorithm_step.dart';
-import '../Algorithms/Depth First/df_algorithm_terminal.dart';
+import '../Algorithms/Depth First/df_step.dart';
+import '../Algorithms/Depth First/df_terminal.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
@@ -22,7 +23,7 @@ List<Node>? startAlgorithmTerminal(
   } else if (type == AlgorithmType.df) {
     return runDepthTerminal();
   } else if (type == AlgorithmType.bestf) {
-    return runBSFTerminal(request);
+    return runBestTerminal(request);
   } else {
     return null;
   }
@@ -35,7 +36,7 @@ Future<List<Node>?> startAlgorithm(
   } else if (currentAlgorithm == AlgorithmType.df) {
     return runDepth(ref);
   } else if (currentAlgorithm == AlgorithmType.bestf) {
-    return runBSFGui(ref, request);
+    return runBest(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
     return runAStarGui(ref, request);
   } else {

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../Services & Providers/constants.dart';
+import '../Services/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
 import '../UI/Screens/About/about_main.dart';
 import '../UI/Screens/About/about_state.dart';

@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/Public Search Bar/Search Call/submit_function.dart';
-import '../../Services & Providers/six_calculations.dart';
-import 'algorithm_bsf.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/six_calculations.dart';
+import 'bst_algorithm.dart';
 import 'async_bfs.dart';
 
 List<Node>? runBSFAsyncStep(WidgetRef ref, RunningRequest request) {

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/Public Search Bar/check_box_search.dart';
-import '../../Services & Providers/Public Search Bar/closed_search.dart';
-import '../../Services & Providers/Public Search Bar/sliders_and_options_bf.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
 
 Future<List<Node>?> runDepth(WidgetRef ref) async {
   int start = int.parse(inputController.text);
@@ -17,7 +17,6 @@ Future<List<Node>?> runDepth(WidgetRef ref) async {
   visited.add(start);
 
   while (stack.isNotEmpty) {
-    await Future.delayed(Duration(milliseconds: searchSpeed));
     int counter = 0;
 
     List<Node> currentPath = stack.removeLast();
@@ -54,6 +53,7 @@ Future<List<Node>?> runDepth(WidgetRef ref) async {
       }
       counter++;
     }
+    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
   return null;

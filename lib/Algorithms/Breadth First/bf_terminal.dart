@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/six_calculations.dart';
 
 List<Node>? runBreadthTerminal(RunningRequest request) {
   int start = request.startValue;
@@ -17,9 +17,7 @@ List<Node>? runBreadthTerminal(RunningRequest request) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    if (current.value == end) {
-      return currentPath;
-    }
+    if (current.value == end) return currentPath;
 
     for (CalculationType type in CalculationType.values) {
       int newValue = getNewValue(current.value, type);

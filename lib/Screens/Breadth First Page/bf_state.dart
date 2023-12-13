@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/constants.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/constants.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 

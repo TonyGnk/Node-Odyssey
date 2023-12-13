@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/constants.dart';
-import '../../Services & Providers/public_left_column.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/constants.dart';
+import '../../Services/public_left_column.dart';
+import '../../Services/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import 'terminal_providers.dart';
 

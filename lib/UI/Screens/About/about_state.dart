@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Screens/screen_list.dart';
-import '../../../Services & Providers/constants.dart';
+import '../../../Services/constants.dart';
 import '../../Routed Screen/app_bar.dart';
 import '../../Routed Screen/info_icon.dart';
 

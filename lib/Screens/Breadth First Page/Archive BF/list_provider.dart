@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services & Providers/six_calculations.dart';
+import '../../../Services/six_calculations.dart';
 
 final stopTimerProvider = StateProvider<bool>(
   (ref) => false,

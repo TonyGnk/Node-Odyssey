@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/constants.dart';
+import '../../Services/constants.dart';
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 

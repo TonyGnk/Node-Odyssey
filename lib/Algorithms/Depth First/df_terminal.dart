@@ -1,6 +1,6 @@
-import '../../Services & Providers/Public Search Bar/closed_search.dart';
-import '../../Services & Providers/Public Search Bar/sliders_and_options_bf.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
 
 List<Node>? runDepthTerminal() {
   int start = int.parse(inputController.text);

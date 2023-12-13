@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../Services & Providers/six_calculations.dart';
-import '../../../Services & Providers/tracking_container.dart';
+import '../../../Services/six_calculations.dart';
+import '../../../Services/tracking_container.dart';
 import '../Result Panel BF/result_box_bf.dart';
 
 final resultPanelList = StateProvider<List<ResultBoxBf>>(

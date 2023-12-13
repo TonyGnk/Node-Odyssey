@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Arc/Tree Widgets/providers_tree.dart';
+import '../../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Public Tracking Area/public_result.dart';
 import '../../constants.dart';
@@ -19,11 +21,14 @@ clearGUI(WidgetRef ref) {
   ref.read(resListProvider.notifier).state.clear();
   //Clear Tracking Panel
   ref.read(trackingListProvider.notifier).state.clear();
+  //Clear Tree
+  clearLeafs(ref);
 }
 
 updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
   ref.watch(trackingListProvider).addTile(node.value, node.operation, ref);
   addTrackingContainer(ref, node.value, end);
+  ref.read(throneProvider.notifier).state = node.value;
 }
 
 prepareProvidersForTracking(WidgetRef ref) {

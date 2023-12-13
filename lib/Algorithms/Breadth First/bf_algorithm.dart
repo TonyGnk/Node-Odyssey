@@ -1,11 +1,11 @@
 import 'dart:collection';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services & Providers/Public Search Bar/check_box_search.dart';
-import '../../Services & Providers/Public Search Bar/closed_search.dart';
-import '../../Services & Providers/Public Search Bar/sliders_and_options_bf.dart';
-import '../../Services & Providers/six_calculations.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
 
 Future<List<Node>?> runBreadth(WidgetRef ref) async {
   int start = int.parse(inputController.text);
@@ -18,16 +18,12 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
   visited.add(start);
 
   while (queue.isNotEmpty) {
-    await Future.delayed(Duration(milliseconds: searchSpeed));
-
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
     updateChartAndTrackingPanel(ref, current, end);
 
-    if (current.value == end) {
-      return currentPath;
-    }
+    if (current.value == end) return currentPath;
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
@@ -47,6 +43,7 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
         }
       }
     }
+    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
   return null;

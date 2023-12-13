@@ -25,9 +25,7 @@ onButtonPressed(WidgetRef ref) async {
   ref.read(isAlgorithmEndProvider.notifier).state = true;
 
   //Add the solution to the Result Panel
-  if (solution != null) {
-    addResultPanelList(ref, solution);
-  }
+  if (solution != null) addResultPanelList(ref, solution);
 
   //Reset the inputs
   saveInputsForResults(ref, solution!.length, solution.last.cost);

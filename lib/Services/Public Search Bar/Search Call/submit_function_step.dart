@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Breadth First/bf_algorithm_step.dart';
+import '../../../Algorithms/Breadth First/bf_step.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
