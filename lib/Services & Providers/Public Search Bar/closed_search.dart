@@ -73,15 +73,11 @@ showOptionsButton() => Consumer(
               : const Icon(Icons.tune_outlined),
           onPressed: () {
             makeContainerTaller
-                ? {
-                    ref.read(makeContainerTallerProvider.notifier).state =
-                        false,
-                    ref.read(heightSearchProvider.notifier).state = 50
-                  }
+                ? ref.read(makeContainerTallerProvider.notifier).state = false
                 : moreOptionsFun(ref);
             showTheExtraOptions
                 ? ref.read(showTheExtraOptionsProvider.notifier).state = false
-                : ref.read(heightSearchProvider.notifier).state = 291;
+                : null;
           },
         );
       },
