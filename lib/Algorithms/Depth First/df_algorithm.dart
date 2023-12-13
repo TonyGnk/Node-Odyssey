@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services & Providers/Public Search Bar/Search Call/call_helper.dart';
@@ -7,20 +6,21 @@ import '../../Services & Providers/Public Search Bar/closed_search.dart';
 import '../../Services & Providers/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services & Providers/six_calculations.dart';
 
-Future<List<Node>?> runBreadth(WidgetRef ref) async {
+Future<List<Node>?> runDepth(WidgetRef ref) async {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
 
-  ListQueue<List<Node>> queue = ListQueue();
+  List<List<Node>> stack = [];
   Set<int> visited = {};
 
-  queue.add([Node(start, 0, 'Initial Value')]);
+  stack.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
-  while (queue.isNotEmpty) {
+  while (stack.isNotEmpty) {
     await Future.delayed(Duration(milliseconds: searchSpeed));
+    int counter = 0;
 
-    List<Node> currentPath = queue.removeFirst();
+    List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
 
     updateChartAndTrackingPanel(ref, current, end);
@@ -29,10 +29,14 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
       return currentPath;
     }
 
+    // Calculate all the possible
     for (CalculationType type in CalculationType.values) {
+      //If the operation is enabled
       if (enabledOperations[type]!) {
         int newValue = getNewValue(current.value, type);
+        // If the new value is allowed from the rules
         if (isAllowed(newValue, current.value, type)) {
+          // If the new value is not visited
           if (!visited.contains(newValue) || avoidVisitedIsDisable) {
             Node newNode = getNewNode(
               current.value,
@@ -41,11 +45,14 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
               type,
             );
             List<Node> newPath = List.from(currentPath)..add(newNode);
-            queue.add(newPath);
-            visited.add(newNode.value);
+            stack.insert(stack.length - counter, newPath);
+            if (counter == 0) {
+              visited.add(newNode.value);
+            }
           }
         }
       }
+      counter++;
     }
   }
 

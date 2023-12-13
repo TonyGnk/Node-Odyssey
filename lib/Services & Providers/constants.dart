@@ -4,7 +4,9 @@ import '../Algorithms/Best First/algorithm_bsf.dart';
 import '../Algorithms/Breadth First/bf_algorithm_step.dart';
 import '../Algorithms/Breadth First/bf_algorithm_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
-import '../Algorithms/Depth First/algorithm_df.dart';
+import '../Algorithms/Depth First/df_algorithm.dart';
+import '../Algorithms/Depth First/df_algorithm_step.dart';
+import '../Algorithms/Depth First/df_algorithm_terminal.dart';
 import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
@@ -18,7 +20,7 @@ List<Node>? startAlgorithmTerminal(
   if (type == AlgorithmType.bf) {
     return runBreadthTerminal(request);
   } else if (type == AlgorithmType.df) {
-    return runDFGuiTerminal(request);
+    return runDepthTerminal();
   } else if (type == AlgorithmType.bestf) {
     return runBSFTerminal(request);
   } else {
@@ -29,9 +31,9 @@ List<Node>? startAlgorithmTerminal(
 Future<List<Node>?> startAlgorithm(
     WidgetRef ref, RunningRequest request) async {
   if (currentAlgorithm == AlgorithmType.bf) {
-    return runBreadthTotal(ref);
+    return runBreadth(ref);
   } else if (currentAlgorithm == AlgorithmType.df) {
-    return runDFGui(ref, request);
+    return runDepth(ref);
   } else if (currentAlgorithm == AlgorithmType.bestf) {
     return runBSFGui(ref, request);
   } else if (currentAlgorithm == AlgorithmType.astar) {
@@ -40,10 +42,13 @@ Future<List<Node>?> startAlgorithm(
     return null;
   }
 }
+//TODO : Reset switcher to true when buttonState
 
 List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
   if (currentAlgorithm == AlgorithmType.bf) {
     return runBreadthFirstStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.df) {
+    return runDepthFirstStep(ref);
   } else {
     return null;
   }
@@ -52,6 +57,8 @@ List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
 List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
   if (currentAlgorithm == AlgorithmType.bf) {
     return runBreadthStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.df) {
+    return runDepthStep(ref);
   } else {
     return null;
   }
@@ -60,6 +67,8 @@ List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
 List<Node>? startAlgorithmToEnd(WidgetRef ref, RunningRequest request) {
   if (currentAlgorithm == AlgorithmType.bf) {
     return runBreadthToEnd(ref);
+  } else if (currentAlgorithm == AlgorithmType.df) {
+    return runDepthToEnd(ref);
   } else {
     return null;
   }
