@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services & Providers/Public Search Bar/closed_search.dart';
-import '../../../Services & Providers/tracking_container.dart';
+import '../Public Search Bar/closed_search.dart';
 import '../public_left_column.dart';
+import '../tracking_container.dart';
 
 Widget trackingStage() => Consumer(
       builder: (context, ref, _) {
