@@ -99,3 +99,28 @@ customSwitch() => Consumer(
         );
       },
     );
+
+final enableTimer = StateProvider<bool>((ref) => true);
+int timeLimit = 6; //TODO
+
+timerSwitch() => Consumer(
+      builder: (context, ref, _) {
+        final timer = ref.watch(enableTimer);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              //Stops the algorithm search after 60 seconds
+              Expanded(child: fontText('Time limit to 60 seconds ', 15)),
+              Switch(
+                value: timer,
+                onChanged: (newValue) {
+                  ref.read(enableTimer.notifier).state = newValue;
+                  timeLimit = newValue ? 60 : 600;
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );

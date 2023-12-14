@@ -26,7 +26,7 @@ publicSearchBar(bool compareMode) => Consumer(builder: (context, ref, _) {
 findHeight(bool moreOptions, bool stepMode, bool compareMode) {
   if (stepMode) return 106.0;
   if (compareMode && moreOptions) return 215.0;
-  if (moreOptions) return 291.0;
+  if (moreOptions) return 331.0;
   return 50.0;
 }
 
@@ -62,6 +62,7 @@ Widget extraOptions(bool compareMode) => Column(
         rowOfChecks(),
         const SizedBox(height: 2),
         customSwitch(),
+        timerSwitch(),
         !compareMode ? stepRow() : const SizedBox(),
       ],
     );

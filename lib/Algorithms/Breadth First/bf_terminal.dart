@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:collection';
 
 import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 
 List<Node>? runBreadthTerminal() {
@@ -13,11 +15,20 @@ List<Node>? runBreadthTerminal() {
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
+  Timer? timer;
+  timer = Timer(Duration(seconds: timeLimit), () {
+    queue.clear();
+    timer?.cancel();
+  });
+
   while (queue.isNotEmpty) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    if (current.value == end) return currentPath;
+    if (current.value == end) {
+      timer.cancel();
+      return currentPath;
+    }
 
     for (CalculationType type in CalculationType.values) {
       int newValue = getNewValue(current.value, type);
@@ -37,5 +48,6 @@ List<Node>? runBreadthTerminal() {
     }
   }
 
+  timer.cancel();
   return null;
 }

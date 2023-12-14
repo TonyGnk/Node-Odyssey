@@ -51,67 +51,6 @@ class TrackingList extends StatelessWidget {
   }
 }
 
-class TrackingTiles2 extends StatefulWidget {
-  const TrackingTiles2({
-    super.key,
-    this.value = 0,
-    this.operation = '',
-  });
-
-  final int value;
-  final String operation;
-
-  @override
-  State<TrackingTiles2> createState() => _TrackingTilesState();
-}
-
-class _TrackingTilesState extends State<TrackingTiles2> {
-  bool _isHovering = false;
-
-  @override
-  Widget build(BuildContext context) => MouseRegion(
-        onHover: (event) => setState(() => _isHovering = true),
-        onExit: (event) => setState(() => _isHovering = false),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
-            color: _isHovering
-                ? Theme.of(context).colorScheme.secondary.withOpacity(0.4)
-                : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-          ),
-          margin: const EdgeInsets.all(5),
-          clipBehavior: Clip.antiAlias,
-          child: Row(
-            children: [
-              Expanded(
-                child: Text('  ${widget.operation}'),
-              ),
-              Container(
-                width: 165,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(cornerSize),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    getPreviousValue(widget.value, widget.operation) +
-                        (' 🡢 ') +
-                        widget.value.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-}
-
 class TrackingTiles {
   TrackingTiles(this.value, this.operation);
 
@@ -124,7 +63,7 @@ class TrackingTiles {
           borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
         ),
-        margin: const EdgeInsets.only(top: 5, bottom: 5),
+        margin: const EdgeInsets.only(top: 4, bottom: 4),
         clipBehavior: Clip.antiAlias,
         child: Row(
           children: [
@@ -132,7 +71,7 @@ class TrackingTiles {
               child: Text('  $operation'),
             ),
             Container(
-              width: 175,
+              width: 195,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
@@ -146,8 +85,9 @@ class TrackingTiles {
                       (operation == 'Initial Value' ? '' : ' 🡢 ') +
                       value.toString(),
                   style: const TextStyle(
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Play',
                   ),
                 ),
               ),

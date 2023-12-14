@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
@@ -17,13 +18,23 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
+  Timer? timer;
+  timer = Timer(Duration(seconds: timeLimit), () {
+    queue.clear();
+    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+    timer?.cancel();
+  });
+
   while (queue.isNotEmpty) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
     updateChartAndTrackingPanel(ref, current, end);
 
-    if (current.value == end) return currentPath;
+    if (current.value == end) {
+      timer.cancel();
+      return currentPath;
+    }
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
@@ -46,5 +57,6 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
     await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
+  timer.cancel();
   return null;
 }

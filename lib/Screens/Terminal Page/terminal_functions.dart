@@ -33,7 +33,12 @@ analyzeTheText(WidgetRef ref) {
   List<Node>? solution = startAlgorithmTerminal(type);
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
-  newResult(ref, solution);
+  if (solution != null) newResult(ref, solution);
+  if (solution == null) {
+    ref.read(terminalContentProvider.notifier).state +=
+        '\nNo Solution Found!\n';
+    return;
+  }
 }
 
 AlgorithmType findType(String algorithm) {
