@@ -11,14 +11,14 @@ List<Node>? runBreadthTerminal() {
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
 
-  queue.add([Node(start, 0, 'Αρχική Τιμή')]);
+  queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
   while (queue.isNotEmpty) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    if (current.value == end) return currentPath;
+    if (current.value == end) currentPath;
 
     for (CalculationType type in CalculationType.values) {
       int newValue = getNewValue(current.value, type);

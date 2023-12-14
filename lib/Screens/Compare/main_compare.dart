@@ -12,6 +12,7 @@ import '../../Services/public_left_column.dart';
 import '../../Services/six_calculations.dart';
 import '../Breadth First Page/Archive BF/list_provider.dart';
 import '../Breadth First Page/Archive BF/result_providers.dart';
+import 'helper_compare.dart';
 import 'state_compare.dart';
 
 class Compare extends ConsumerStatefulWidget {
@@ -55,23 +56,11 @@ class _TerminalSideState extends ConsumerState<Compare> {
 rowComp(BuildContext context) => Row(
       children: [
         const Expanded(child: SizedBox()),
-        Expanded(flex: 3, child: breadthCompare(context)),
+        Expanded(flex: 3, child: compareItem(context, AlgorithmType.breadth)),
         const SizedBox(width: 8),
-        Expanded(flex: 3, child: breadthCompare(context)),
+        Expanded(flex: 3, child: compareItem(context, AlgorithmType.depth)),
         const SizedBox(width: 8),
-        Expanded(flex: 3, child: breadthCompare(context)),
-        const SizedBox(width: 8),
-        Expanded(flex: 3, child: breadthCompare(context)),
+        Expanded(flex: 3, child: compareItem(context, AlgorithmType.best)),
         const Expanded(child: SizedBox()),
       ],
-    );
-
-breadthCompare(BuildContext context) => templateContainer(
-      context,
-      const SizedBox(
-        //height: 100,
-        child: Center(
-          child: Text('dd'),
-        ),
-      ),
     );
