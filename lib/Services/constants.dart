@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Best First/async_bfs.dart';
@@ -97,3 +98,11 @@ Duration basicDuration4 = Duration(
 Duration basicDuration5 = Duration(
   milliseconds: basicDuration.inMilliseconds + 500,
 );
+
+centerAppBarText(String text) => Text(
+      text,
+      style: const TextStyle(
+        fontSize: 27,
+        fontFamily: 'Play',
+      ),
+    );

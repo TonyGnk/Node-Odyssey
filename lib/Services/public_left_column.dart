@@ -13,7 +13,7 @@ Widget publicLeftColumn() => animatedLeftColumn(
         width: 330,
         child: Column(
           children: [
-            publicSearchBar(),
+            publicSearchBar(false),
             const SizedBox(height: 10),
             Expanded(child: trackingArea()),
           ],

@@ -17,8 +17,7 @@ void dfReturn(WidgetRef ref) {
 
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.depthFirstAlg;
-  ref.read(appBarPreviousScreen.notifier).state =
-      ScreenDestination.algorithmsGUI;
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.buttons;
 
   updateAppBarItems(ref, true);
 }

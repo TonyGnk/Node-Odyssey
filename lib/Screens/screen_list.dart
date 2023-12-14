@@ -26,7 +26,7 @@ enum ScreenDestination {
   home,
   terminal,
   breadthFirstAlg,
-  algorithmsGUI,
+  buttons,
   depthFirstAlg,
   bestFirstAlg,
   aStarAlg,
@@ -43,7 +43,7 @@ go(WidgetRef ref, ScreenDestination destination) {
       homeGo(ref, destination);
     case ScreenDestination.terminal:
       terminalGo(ref, destination);
-    case ScreenDestination.algorithmsGUI:
+    case ScreenDestination.buttons:
       buttonGo(ref, destination);
     case ScreenDestination.breadthFirstAlg:
       bfGo(ref, destination);
@@ -74,7 +74,7 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const Home();
     case ScreenDestination.terminal:
       return const TerminalSide();
-    case ScreenDestination.algorithmsGUI:
+    case ScreenDestination.buttons:
       return const AlgorithmsGUIBody();
     case ScreenDestination.breadthFirstAlg:
       return const BreadthFirstAlg();
@@ -102,7 +102,7 @@ callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
       homeReturn(ref);
     case ScreenDestination.terminal:
       terminalReturn(ref);
-    case ScreenDestination.algorithmsGUI:
+    case ScreenDestination.buttons:
       buttonReturn(ref);
     case ScreenDestination.breadthFirstAlg:
       bfReturn(ref);

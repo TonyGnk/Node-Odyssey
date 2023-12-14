@@ -32,7 +32,7 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
               fontFamily: 'Play',
             ),
           ),
-          const SizedBox(height: 46),
+          const SizedBox(height: 40),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(5),

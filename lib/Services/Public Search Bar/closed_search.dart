@@ -10,7 +10,7 @@ import 'step_search.dart';
 //Bool provider
 final stepModeProvider = StateProvider<bool>((ref) => false);
 
-closedSearch(BuildContext context) => Consumer(
+closedSearch() => Consumer(
       builder: (context, WidgetRef ref, __) {
         final stepMode = ref.watch(stepModeProvider);
         return stepMode ? stepColumn() : row(context);

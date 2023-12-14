@@ -10,21 +10,22 @@ import 'sliders_and_options_bf.dart';
 final makeContainerTallerProvider = StateProvider<bool>((ref) => false);
 final showTheExtraOptionsProvider = StateProvider<bool>((ref) => false);
 
-publicSearchBar() => Consumer(builder: (context, ref, _) {
+publicSearchBar(bool compareMode) => Consumer(builder: (context, ref, _) {
       final moreOptions = ref.watch(makeContainerTallerProvider);
       final stepMode = ref.watch(stepModeProvider);
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 200),
-        height: findHeight(moreOptions, stepMode),
+        height: findHeight(moreOptions, stepMode, compareMode),
         padding: const EdgeInsets.all(4),
         decoration: decoration(context),
-        child: mainSearchBar(context),
+        child: mainSearchBar(compareMode),
       );
     });
 
-findHeight(bool moreOptions, bool stepMode) {
+findHeight(bool moreOptions, bool stepMode, bool compareMode) {
   if (stepMode) return 106.0;
+  if (compareMode && moreOptions) return 215.0;
   if (moreOptions) return 291.0;
   return 50.0;
 }
@@ -38,30 +39,30 @@ decoration(BuildContext context) => BoxDecoration(
       ),
     );
 
-mainSearchBar(BuildContext context) => Column(
-      children: [closedSearch(context), extraOptionsBuilder()],
+mainSearchBar(bool compareMode) => Column(
+      children: [closedSearch(), extraOptionsBuilder(compareMode)],
     );
 
-Widget extraOptionsBuilder() => Consumer(
+Widget extraOptionsBuilder(bool compareMode) => Consumer(
       builder: (context, ref, _) {
         final moreOptions2 = ref.watch(showTheExtraOptionsProvider);
         return AnimatedOpacity(
           opacity: moreOptions2 ? 1.0 : 0.0,
           duration: const Duration(milliseconds: 600),
-          child: moreOptions2 ? extraOptions() : const SizedBox(),
+          child: moreOptions2 ? extraOptions(compareMode) : const SizedBox(),
         );
       },
     );
 
-Widget extraOptions() => Column(
+Widget extraOptions(bool compareMode) => Column(
       children: [
         const SizedBox(height: 12),
-        segmentedSpeed(),
-        const SizedBox(height: 8),
+        !compareMode ? segmentedSpeed() : const SizedBox(),
+        !compareMode ? const SizedBox(height: 8) : const SizedBox(),
         rowOfChecks(),
         const SizedBox(height: 2),
         customSwitch(),
-        stepRow(),
+        !compareMode ? stepRow() : const SizedBox(),
       ],
     );
 

@@ -92,7 +92,7 @@ rowOfButtons() => Consumer(
             child: ModeButtons(
               label: 'GUI',
               icon: Icons.desktop_windows_outlined,
-              onTap: () => homeGo(ref, ScreenDestination.algorithmsGUI),
+              onTap: () => homeGo(ref, ScreenDestination.buttons),
             ),
           ),
         ],

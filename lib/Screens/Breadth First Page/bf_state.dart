@@ -15,8 +15,7 @@ void bfReturn(WidgetRef ref) {
   currentAlgorithm = AlgorithmType.breadth;
   ref.read(appBarCurrentScreen.notifier).state =
       ScreenDestination.breadthFirstAlg;
-  ref.read(appBarPreviousScreen.notifier).state =
-      ScreenDestination.algorithmsGUI;
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.buttons;
 
   updateAppBarItems(ref, true);
 }

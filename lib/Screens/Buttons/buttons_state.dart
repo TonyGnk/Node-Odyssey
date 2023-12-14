@@ -21,8 +21,7 @@ void buttonGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void buttonReturn(WidgetRef ref) {
-  ref.read(appBarCurrentScreen.notifier).state =
-      ScreenDestination.algorithmsGUI;
+  ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.buttons;
   ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
   updateAppBarBackButton(ref, true);
 

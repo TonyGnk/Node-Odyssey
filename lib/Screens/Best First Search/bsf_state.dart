@@ -15,8 +15,7 @@ void bsfReturn(WidgetRef ref) {
   currentAlgorithm = AlgorithmType.best;
 
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.bestFirstAlg;
-  ref.read(appBarPreviousScreen.notifier).state =
-      ScreenDestination.algorithmsGUI;
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.buttons;
 
   updateAppBarItems(ref, true);
 }

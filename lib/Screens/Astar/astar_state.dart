@@ -15,8 +15,7 @@ void asfReturn(WidgetRef ref) {
   currentAlgorithm = AlgorithmType.astar;
 
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.aStarAlg;
-  ref.read(appBarPreviousScreen.notifier).state =
-      ScreenDestination.algorithmsGUI;
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.buttons;
 
   updateAppBarItems(ref, true);
 }
