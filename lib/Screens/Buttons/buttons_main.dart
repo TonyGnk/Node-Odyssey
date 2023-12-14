@@ -67,7 +67,7 @@ class _TerminalSideState extends ConsumerState<AlgorithmsGUIBody> {
           dfButton,
           bestButton,
           aStarButton,
-          bestButton,
+          compareButton,
         ],
       );
 }

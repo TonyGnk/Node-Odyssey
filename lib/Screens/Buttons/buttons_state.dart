@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services/Public Search Bar/Search Call/submit_function.dart';
-import '../../Services/Public Search Bar/Search Call/submit_function_step.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/main_search.dart';
 import '../../Services/constants.dart';

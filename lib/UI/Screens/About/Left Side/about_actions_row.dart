@@ -100,22 +100,23 @@ snackBar(
           color: Theme.of(context).colorScheme.onBackground,
         ),
       ),
-      action: SnackBarAction(
-        textColor: Theme.of(context).colorScheme.onBackground,
-        label: 'Update',
-        onPressed: () async {
-          if (await canLaunchUrl(updateLink)) {
-            await launchUrl(updateLink);
-          } else {
-            throw 'Could not launch $updateLink';
-          }
-        },
-      ),
-      //round corners
+      action: showAction
+          ? SnackBarAction(
+              textColor: Theme.of(context).colorScheme.onBackground,
+              label: 'Update',
+              onPressed: () async {
+                if (await canLaunchUrl(updateLink)) {
+                  await launchUrl(updateLink);
+                } else {
+                  throw 'Could not launch $updateLink';
+                }
+              },
+            )
+          : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(cornerSize),
       ),
-      showCloseIcon: true,
+      showCloseIcon: false,
       closeIconColor: Theme.of(context).colorScheme.onBackground,
       backgroundColor: Theme.of(context).shadowColor,
     );

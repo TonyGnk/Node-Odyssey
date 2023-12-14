@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Screens/Best First Search/bsf_state.dart';
 import 'Public Search Bar/main_search.dart';
 import 'Public Tracking Area/public_result.dart';
 import 'Public Tracking Area/public_tracking_stage.dart';
 import 'Public Tracking Area/public_welcome.dart';
 import 'constants.dart';
 
-Widget publicLeftColumn() => SizedBox(
-      width: 330,
-      child: Column(
-        children: [
-          publicSearchBar(),
-          const SizedBox(height: 10),
-          Expanded(child: trackingArea()),
-        ],
+Widget publicLeftColumn() => animatedLeftColumn(
+      SizedBox(
+        width: 330,
+        child: Column(
+          children: [
+            publicSearchBar(),
+            const SizedBox(height: 10),
+            Expanded(child: trackingArea()),
+          ],
+        ),
       ),
     );
 

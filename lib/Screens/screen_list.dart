@@ -14,6 +14,7 @@ import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/bf_main.dart';
 import 'Buttons/buttons_main.dart';
 import 'Buttons/buttons_state.dart';
+import 'Compare/main_compare.dart';
 import 'Depth First Page/df_state.dart';
 import 'Depth First Page/main_df.dart';
 import 'Home/home_state.dart';
@@ -31,6 +32,7 @@ enum ScreenDestination {
   aStarAlg,
   settings,
   about,
+  compare,
 }
 
 //Create the go function with ref and a destination. Reads switch appBarCurrentScreen if is ScreenDestination.terminal call terminalGo etc.
@@ -86,6 +88,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const Settings();
     case ScreenDestination.about:
       return const AboutScreen();
+    case ScreenDestination.compare:
+      return const Compare();
     default:
       return const Home();
   }

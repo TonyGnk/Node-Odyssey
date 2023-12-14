@@ -6,12 +6,12 @@ import '../../Services/constants.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
 
-void bsfGo(WidgetRef ref, ScreenDestination destination) {
+void compareGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
   goTo(ref, destination);
 }
 
-void bsfReturn(WidgetRef ref) {
+void compareReturn(WidgetRef ref) {
   currentAlgorithm = AlgorithmType.best;
 
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.bestFirstAlg;

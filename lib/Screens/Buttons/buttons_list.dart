@@ -63,3 +63,14 @@ const aStarButton = ButtonTemplate(
   icon: Icons.star_border_outlined,
   screenDestination: ScreenDestination.aStarAlg,
 );
+
+//Compare button going to compare screen. Compare every algorithm with each other.
+const compareButton = ButtonTemplate(
+  title: 'Compare',
+  //Ας κερδίσει ο καλύτερος
+  slogan: 'Let the best one win!',
+  description:
+      'Check and compare algorithms to find the best fit for your needs',
+  icon: Icons.compare_arrows_outlined,
+  screenDestination: ScreenDestination.compare,
+);
