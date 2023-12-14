@@ -9,6 +9,8 @@ import '../../Arc/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/Search Call/submit_function.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/node.dart';
 import '../../Services/six_calculations.dart';
 import 'bst_algorithm.dart';
@@ -44,10 +46,9 @@ final currentProvider = StateProvider<Node>((ref) => Node(0, 0, ''));
 
 final isFoundProvider = StateProvider<bool>((ref) => false);
 
-List<Node>? runBSFAsync(WidgetRef ref, RunningRequest request) {
-  int start = request.startValue;
-  int end = request.targetValue;
-  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
+List<Node>? runBSFAsync(WidgetRef ref) {
+  int start = int.parse(inputController.text);
+  int end = int.parse(targetController.text);
 
   ref.read(queueProvider.notifier).state = ListQueue();
   //ListQueue<List<Node>> queue = ListQueue();

@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Arc/container_tree.dart';
 import '../../../Services/constants.dart';
 import '../../../Services/tracking_container.dart';
+import '../../Best First Search/bsf_state.dart';
 import '../Archive BF/list_provider.dart';
 
 final outercontroller = ScrollController();
@@ -19,13 +20,15 @@ Widget containerZ() => Consumer(
         final boxList = ref.watch(chartColumnsProvider);
         // ignore: unused_local_variable
         final resultPanelListUpdater = ref.watch(trackUpdater);
-        return chartContainer(
-          context,
-          Row(
-            children: [
-              chartLabelsColumn(context),
-              Expanded(child: chartLister(boxList)),
-            ],
+        return animatedLeftColumn(
+          chartContainer(
+            context,
+            Row(
+              children: [
+                chartLabelsColumn(context),
+                Expanded(child: chartLister(boxList)),
+              ],
+            ),
           ),
         );
       },

@@ -2,15 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Arc/Tree Widgets/providers_tree.dart';
 import '../../Arc/Tree Widgets/tree_helpler.dart';
-import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
 import 'bst_algorithm.dart';
 import 'async_bfs.dart';
 
-List<Node>? runBSFAsyncStep(WidgetRef ref, RunningRequest request) {
-  int end = request.targetValue;
-  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
+List<Node>? runBSFAsyncStep(WidgetRef ref) {
+  int end = int.parse(targetController.text);
 
   Map map = findSmallest(ref.read(treeListProvider.notifier).state,
       ref.read(treeListSmallProvider.notifier).state, end);

@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/constants.dart';
 import '../../Services/public_left_column.dart';
 import '../../Services/six_calculations.dart';
-import '../Breadth First Page/Archive BF/list_provider.dart';
 import 'terminal_providers.dart';
 
 analyzeTheText(WidgetRef ref) {
@@ -24,16 +25,12 @@ analyzeTheText(WidgetRef ref) {
 
   int startValue = int.parse(words[2]);
   int targetValue = int.parse(words[3]);
-
-  //ref.watch(runningRequestProvider.notifier).state =
-  RunningRequest request = RunningRequest(
-    startValue: startValue,
-    targetValue: targetValue,
-  );
+  inputController = TextEditingController(text: startValue.toString());
+  targetController = TextEditingController(text: targetValue.toString());
 
   //Start the selected algorithm
   ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
-  List<Node>? solution = startAlgorithmTerminal(type, request);
+  List<Node>? solution = startAlgorithmTerminal(type);
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   newResult(ref, solution);
@@ -82,6 +79,6 @@ addTheLastResult(WidgetRef ref, List<Node> solution) {
   for (int i = 1; i < solution.length; i++) {
     node = solution[i];
     ref.read(terminalContentProvider.notifier).state +=
-        '\n${node.operation} -> ${node.value}';
+        '\n${node.operation} ${node.value}';
   }
 }

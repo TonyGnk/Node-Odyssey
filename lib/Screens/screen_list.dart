@@ -16,7 +16,7 @@ import 'Buttons/buttons_main.dart';
 import 'Buttons/state_button.dart';
 import 'Compare/main_compare.dart';
 import 'Compare/state_compare.dart';
-import 'Depth First Page/df_state.dart';
+import 'Depth First Page/state_df.dart';
 import 'Depth First Page/main_df.dart';
 import 'Home/home_state.dart';
 import 'Terminal Page/main_terminal.dart';

@@ -11,7 +11,6 @@ import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/df_algorithm.dart';
 import '../Algorithms/Depth First/df_step.dart';
 import '../Algorithms/Depth First/df_terminal.dart';
-import '../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
 
@@ -19,7 +18,7 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal(AlgorithmType type, RunningRequest request) {
+List<Node>? startAlgorithmTerminal(AlgorithmType type) {
   if (type == AlgorithmType.breadth) {
     return runBreadthTerminal();
   } else if (type == AlgorithmType.depth) {
@@ -31,8 +30,7 @@ List<Node>? startAlgorithmTerminal(AlgorithmType type, RunningRequest request) {
   }
 }
 
-Future<List<Node>?> startAlgorithm(
-    WidgetRef ref, RunningRequest request) async {
+Future<List<Node>?> startAlgorithm(WidgetRef ref) async {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadth(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
@@ -40,38 +38,37 @@ Future<List<Node>?> startAlgorithm(
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBest(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runAStarGui(ref, request);
+    return runAStarGui(ref);
   } else {
     return null;
   }
 }
-//TODO : Reset switcher to true when buttonState
 
-List<Node>? startAlgorithmFirstStep(WidgetRef ref, RunningRequest request) {
+List<Node>? startAlgorithmFirstStep(WidgetRef ref) {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthFirstStep(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthFirstStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsync(ref, request);
+    return runBSFAsync(ref);
   } else {
     return null;
   }
 }
 
-List<Node>? startAlgorithmStep(WidgetRef ref, RunningRequest request) {
+List<Node>? startAlgorithmStep(WidgetRef ref) {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthStep(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsyncStep(ref, request);
+    return runBSFAsyncStep(ref);
   } else {
     return null;
   }
 }
 
-List<Node>? startAlgorithmToEnd(WidgetRef ref, RunningRequest request) {
+List<Node>? startAlgorithmToEnd(WidgetRef ref) {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthToEnd(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {

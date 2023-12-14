@@ -2,21 +2,22 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
-import '../../Services/Public Search Bar/Search Call/submit_function.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 
-Future<List<Node>?> runAStarGui(WidgetRef ref, RunningRequest request) async {
-  int start = request.startValue;
-  int end = request.targetValue;
-  Map<CalculationType, bool> enabledOperations = request.enabledOperations;
+Future<List<Node>?> runAStarGui(WidgetRef ref) async {
+  int start = int.parse(inputController.text);
+
+  int end = int.parse(targetController.text);
 
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
   List<Node> compare = [];
 
-  queue.add([Node(start, 0, 'Αρχική Τιμή')]);
+  queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
   while (queue.isNotEmpty) {
@@ -68,7 +69,7 @@ Future<List<Node>?> runAStarGui(WidgetRef ref, RunningRequest request) async {
       compare.removeAt(minIndex);
     }
 
-    //await Future.delayed(const Duration(milliseconds: 2500));
+    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
   return null;
@@ -116,9 +117,9 @@ getPosition(type) {
   }
 }
 
-List<Node>? runAStarTerminal(RunningRequest request) {
-  int start = request.startValue;
-  int end = request.targetValue;
+List<Node>? runAStarTerminal() {
+  int start = int.parse(inputController.text);
+  int end = int.parse(targetController.text);
 
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
