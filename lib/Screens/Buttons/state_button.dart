@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/Public Search Bar/Search Call/call_compare.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/main_search.dart';
@@ -32,6 +33,7 @@ void buttonReturn(WidgetRef ref) {
   resetControllers();
   ref.read(runOnceProvider.notifier).state = false;
   updateAppBarItems(ref, true);
+  resetCompareResults(ref);
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
@@ -46,3 +48,10 @@ animatedColumn(Widget child) => Consumer(
         child: child,
       ),
     );
+
+resetCompareResults(WidgetRef ref) {
+  ref.read(breadthSolution.notifier).state = CompareSolution();
+  ref.read(depthSolution.notifier).state = CompareSolution();
+  ref.read(bestSolution.notifier).state = CompareSolution();
+  ref.read(aStarSolution.notifier).state = CompareSolution();
+}

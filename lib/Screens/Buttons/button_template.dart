@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/constants.dart';
 import '../screen_list.dart';
-import 'buttons_state.dart';
+import 'state_button.dart';
 
 class ButtonTemplate extends ConsumerStatefulWidget {
   const ButtonTemplate({

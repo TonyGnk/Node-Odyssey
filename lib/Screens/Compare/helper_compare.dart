@@ -74,14 +74,14 @@ itemContent(AlgorithmType type) =>
                       compareText(count),
                       const Icon(
                         Icons.bar_chart_outlined,
-                        size: 38,
+                        size: 34,
                       ),
                       const SizedBox(width: 20),
                       compareText(cost),
                       const Icon(
                         Icons.bolt_outlined,
                         color: Colors.orange,
-                        size: 38,
+                        size: 34,
                       ),
                     ],
                   )

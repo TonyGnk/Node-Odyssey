@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'buttons_list.dart';
-import 'buttons_state.dart';
+import 'state_button.dart';
 
 class AlgorithmsGUIBody extends ConsumerStatefulWidget {
   const AlgorithmsGUIBody({super.key});

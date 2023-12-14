@@ -13,7 +13,7 @@ import 'Best First Search/bsf_main.dart';
 import 'Breadth First Page/bf_state.dart';
 import 'Breadth First Page/bf_main.dart';
 import 'Buttons/buttons_main.dart';
-import 'Buttons/buttons_state.dart';
+import 'Buttons/state_button.dart';
 import 'Compare/main_compare.dart';
 import 'Compare/state_compare.dart';
 import 'Depth First Page/df_state.dart';
