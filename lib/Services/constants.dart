@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Astar/star_terminal.dart';
 import '../Algorithms/Best First/bst_step.dart';
-import '../Algorithms/Best First/async_bfs_2.dart';
+import '../Algorithms/Best First/bst_step_helper.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_terminal.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
@@ -53,7 +53,7 @@ List<Node>? startAlgorithmFirstStep(WidgetRef ref) {
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthFirstStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsync(ref);
+    return runBestFirstStep(ref);
   } else {
     return null;
   }
@@ -65,7 +65,7 @@ List<Node>? startAlgorithmStep(WidgetRef ref) {
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsyncStep(ref);
+    return runBestStep(ref);
   } else {
     return null;
   }
@@ -76,6 +76,8 @@ List<Node>? startAlgorithmToEnd(WidgetRef ref) {
     return runBreadthToEnd(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthToEnd(ref);
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBestToEnd(ref);
   } else {
     return null;
   }

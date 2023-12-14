@@ -99,7 +99,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
       }
     }
     setLeafs(treeList, ref);
-    Map map = findSmallest(treeList, treeListSmall, end);
+    Map map = findSmallest(treeList, end);
     int rightNodePosition = map['minListIndex'];
     int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
 
@@ -130,13 +130,15 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
   return null;
 }
 
-findSmallest(List<List<int?>> treeList, List<int?> treeListSmall, int target) {
+findSmallest(List<List<int?>> treeList, int target) {
   int? minValue;
   int? minListIndex;
   int? minValueIndex;
-
+  print(treeList);
   for (int i = 0; i < treeList.length; i++) {
+    print("__");
     for (int j = 0; j < treeList[i].length; j++) {
+      print(treeList[i][j]);
       if (treeList[i][j] != null) {
         int temp = (target - treeList[i][j]!).abs();
         if (minValue == null || temp < minValue) {

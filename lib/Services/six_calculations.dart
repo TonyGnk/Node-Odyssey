@@ -60,7 +60,7 @@ bool isAllowed(int newValue, int? value, CalculationType type) {
   }
 }
 
-positionToType(int pos) {
+positionToType(int? pos) {
   switch (pos) {
     case 0:
       return CalculationType.addition;

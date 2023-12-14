@@ -20,7 +20,7 @@ colCompareItem(AlgorithmType type) => Row(
         compareText(findName(type)),
         const Expanded(child: SizedBox()),
         SizedBox(
-          width: 200,
+          width: 220,
           child: itemContent(type),
         ),
         const SizedBox(width: 10),

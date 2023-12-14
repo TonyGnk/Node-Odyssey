@@ -9,6 +9,7 @@ import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
 import 'bst_algorithm.dart';
+import 'bst_step_helper.dart';
 
 ListQueue<List<Node>> queueBsf = ListQueue();
 Set<int> visitedBsf = {};
@@ -23,21 +24,11 @@ List<List<int?>> treeListBsf = [
 List<int?> treeListSmallBsf = [null, null, null, null, null, null];
 List<Node> currentPathBsf = [];
 Node currentBsf = Node(0, 0, '');
-bool isFound = false;
+bool foundedBsf = false;
 
-List<Node>? runBSFAsync(WidgetRef ref) {
+List<Node>? runBestFirstStep(WidgetRef ref) {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
-
-  queueBsf = ListQueue();
-  visitedBsf = {};
-  clearLeafs(ref);
-
-  isFound = false;
-
-  queueBsf.add([Node(start, 0, 'Αρχική Τιμή')]);
-  visitedBsf.add(start);
-
   treeListBsf = [
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -46,8 +37,14 @@ List<Node>? runBSFAsync(WidgetRef ref) {
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
   ];
-
   treeListSmallBsf = [null, null, null, null, null, null];
+  queueBsf = ListQueue();
+  visitedBsf = {};
+  clearLeafs(ref);
+  foundedBsf = false;
+
+  queueBsf.add([Node(start, 0, 'Initial Value')]);
+  visitedBsf.add(start);
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
@@ -59,7 +56,6 @@ List<Node>? runBSFAsync(WidgetRef ref) {
       }
     }
   }
-
   setKingLeafs(treeListSmallBsf, ref);
 
   currentPathBsf = queueBsf.removeFirst();
@@ -83,6 +79,7 @@ List<Node>? runBSFAsync(WidgetRef ref) {
         );
         List<Node> newPath = List.from(currentPathBsf)..add(rightNode);
         queueBsf.add(newPath);
+        return newPath;
       }
     }
   }
@@ -106,6 +103,10 @@ List<Node>? runBSFAsync(WidgetRef ref) {
     }
   }
   setLeafs(treeListBsf, ref);
+
+  Map map = findSmallest(treeListBsf, end);
+  rightNodePosition = map['minListIndex'];
+  rightNodeValue = treeListSmallBsf[map['minListIndex']] ?? 0;
 
   return null;
 }

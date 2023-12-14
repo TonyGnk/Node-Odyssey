@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:collection';
 
 import '../../Services/Public Search Bar/closed_search.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Best First/bst_step.dart';
-import '../../Algorithms/Best First/async_bfs_2.dart';
+import '../../Algorithms/Best First/bst_step_helper.dart';
 import '../../Services/Tree Widgets/main_tree.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/public_left_column.dart';
@@ -53,7 +53,7 @@ button1() => Consumer(
 
           //Start the selected algorithm
           ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
-          List<Node>? solution = runBSFAsync(ref);
+          List<Node>? solution = runBestFirstStep(ref);
         },
         child: const Text('Έναρξη σε Βήματα'),
       ),
@@ -62,7 +62,7 @@ button1() => Consumer(
 button2() => Consumer(
       builder: (context, ref, _) => TextButton(
         onPressed: () {
-          List<Node>? solution = runBSFAsyncStep(ref);
+          List<Node>? solution = runBestStep(ref);
           if (solution != null) {
             ref.read(isAlgorithmEndProvider.notifier).state = true;
             addResultPanelList(ref, solution);
