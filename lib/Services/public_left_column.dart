@@ -26,7 +26,7 @@ Widget trackingArea() => Consumer(
         final isAlgorithmEnd = ref.watch(isAlgorithmEndProvider);
         final runOnce = ref.watch(runOnceProvider);
         final isOnTracking = ref.watch(isOnTrackingProvider);
-        return containerAll(
+        return templateContainer(
             context, returnType(isAlgorithmEnd, runOnce, isOnTracking));
       },
     );
@@ -62,7 +62,7 @@ container(Color color, Color borderColor, Widget child) => Container(
       child: child,
     );
 
-containerAll(BuildContext context, Widget child) => Container(
+templateContainer(BuildContext context, Widget child) => Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),

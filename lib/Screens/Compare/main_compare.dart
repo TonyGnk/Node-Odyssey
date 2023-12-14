@@ -31,21 +31,47 @@ class _TerminalSideState extends ConsumerState<Compare> {
   }
 
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(BuildContext context) => Column(
+        children: [
+          centerAppBarText('Compare Algorithms'),
+          const SizedBox(height: 40),
+          row(),
+          const SizedBox(height: 10),
+          Expanded(child: rowComp(context)),
+          const SizedBox(height: 18),
+        ],
+      );
+
+  row() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Expanded(child: SizedBox()),
-          Expanded(flex: 2, child: col()),
+          SizedBox(width: 400, child: publicSearchBar(true)),
           const Expanded(child: SizedBox()),
         ],
       );
 }
 
-col() => Column(
+rowComp(BuildContext context) => Row(
       children: [
-        centerAppBarText('Compare Algorithms'),
-        const SizedBox(height: 40),
-        publicSearchBar(true),
+        const Expanded(child: SizedBox()),
+        Expanded(flex: 3, child: breadthCompare(context)),
+        const SizedBox(width: 8),
+        Expanded(flex: 3, child: breadthCompare(context)),
+        const SizedBox(width: 8),
+        Expanded(flex: 3, child: breadthCompare(context)),
+        const SizedBox(width: 8),
+        Expanded(flex: 3, child: breadthCompare(context)),
         const Expanded(child: SizedBox()),
       ],
+    );
+
+breadthCompare(BuildContext context) => templateContainer(
+      context,
+      const SizedBox(
+        //height: 100,
+        child: Center(
+          child: Text('dd'),
+        ),
+      ),
     );

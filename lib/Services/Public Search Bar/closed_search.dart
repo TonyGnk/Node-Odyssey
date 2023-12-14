@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants.dart';
+import 'Search Call/call_compare.dart';
 import 'main_search.dart';
 import 'Search Call/submit_function.dart';
 import 'step_search.dart';
@@ -10,22 +11,22 @@ import 'step_search.dart';
 //Bool provider
 final stepModeProvider = StateProvider<bool>((ref) => false);
 
-closedSearch() => Consumer(
+closedSearch(bool compareMode) => Consumer(
       builder: (context, WidgetRef ref, __) {
         final stepMode = ref.watch(stepModeProvider);
-        return stepMode ? stepColumn() : row(context);
+        return stepMode ? stepColumn() : row(context, compareMode);
       },
     );
 
-row(BuildContext context) => Row(
+row(BuildContext context, bool compareMode) => Row(
       children: [
         inPutFieldBf(context, inputController, 'Initial Value'),
         const SizedBox(width: 6),
         inPutFieldBf(context, targetController, 'Target Value'),
         const SizedBox(width: 6),
-        showOptionsButton(),
-        const SizedBox(width: 3),
-        submitButton(),
+        !compareMode ? showOptionsButton() : const SizedBox(),
+        !compareMode ? const SizedBox(width: 3) : const SizedBox(),
+        !compareMode ? submitButton() : submitButtonCompare()
       ],
     );
 
@@ -101,5 +102,28 @@ Widget submitButton() => Consumer(
         style: modernButtonStyle(context),
         icon: const Icon(Icons.auto_awesome_outlined),
         onPressed: () => onButtonPressed(ref),
+      ),
+    );
+
+Widget submitButtonCompare() => Consumer(
+      builder: (context, WidgetRef ref, __) => Center(
+        child: FilledButton.icon(
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all<Size>(
+              const Size(130, 40),
+            ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(cornerSize - 1),
+              ),
+            ),
+          ),
+          icon: const Icon(Icons.compare_arrows_outlined),
+          onPressed: () => onButtonCompare(ref),
+          label: const Text(
+            'Compare',
+            style: TextStyle(fontFamily: 'Play'),
+          ),
+        ),
       ),
     );

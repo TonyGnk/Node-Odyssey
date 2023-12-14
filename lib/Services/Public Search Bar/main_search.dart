@@ -40,7 +40,7 @@ decoration(BuildContext context) => BoxDecoration(
     );
 
 mainSearchBar(bool compareMode) => Column(
-      children: [closedSearch(), extraOptionsBuilder(compareMode)],
+      children: [closedSearch(compareMode), extraOptionsBuilder(compareMode)],
     );
 
 Widget extraOptionsBuilder(bool compareMode) => Consumer(
