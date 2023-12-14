@@ -31,21 +31,21 @@ class _TerminalSideState extends ConsumerState<Compare> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          centerAppBarText('Compare Algorithms'),
-          const SizedBox(height: 40),
-          row(),
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
+          Expanded(flex: 2, child: col()),
+          const Expanded(child: SizedBox()),
         ],
       );
 }
 
-row() => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+col() => Column(
       children: [
-        const Expanded(flex: 1, child: SizedBox()),
-        Expanded(flex: 2, child: publicSearchBar(true)),
-        const Expanded(flex: 1, child: SizedBox()),
+        centerAppBarText('Compare Algorithms'),
+        const SizedBox(height: 40),
+        publicSearchBar(true),
+        const Expanded(child: SizedBox()),
       ],
     );

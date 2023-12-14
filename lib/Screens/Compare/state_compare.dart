@@ -15,4 +15,6 @@ void compareReturn(WidgetRef ref) {
   updateAppBarItems(ref, true);
 }
 
-updateAppBarItems(WidgetRef ref, bool isReturn) {}
+updateAppBarItems(WidgetRef ref, bool isReturn) {
+//  updateAppBarLabel(ref, 'Best First Algorithm', isReturn);
+}

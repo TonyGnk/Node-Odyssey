@@ -15,10 +15,11 @@ import 'Breadth First Page/bf_main.dart';
 import 'Buttons/buttons_main.dart';
 import 'Buttons/buttons_state.dart';
 import 'Compare/main_compare.dart';
+import 'Compare/state_compare.dart';
 import 'Depth First Page/df_state.dart';
 import 'Depth First Page/main_df.dart';
 import 'Home/home_state.dart';
-import 'Terminal Page/terminal_side.dart';
+import 'Terminal Page/main_terminal.dart';
 import 'Home/home_main.dart';
 import 'Terminal Page/terminal_state.dart';
 
@@ -57,6 +58,8 @@ go(WidgetRef ref, ScreenDestination destination) {
       aboutGo(ref, destination);
     case ScreenDestination.settings:
       settingsGo(ref, destination);
+    case ScreenDestination.compare:
+      compareGo(ref, destination);
     default:
       homeGo(ref, destination);
   }
@@ -95,24 +98,24 @@ getCurrentScreen(ScreenDestination currentScreen) {
   }
 }
 
-//Maybe useless
-callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
-  switch (goTo) {
-    case ScreenDestination.home:
-      homeReturn(ref);
-    case ScreenDestination.terminal:
-      terminalReturn(ref);
-    case ScreenDestination.buttons:
-      buttonReturn(ref);
-    case ScreenDestination.breadthFirstAlg:
-      bfReturn(ref);
-    case ScreenDestination.depthFirstAlg:
-      dfReturn(ref);
-    case ScreenDestination.bestFirstAlg:
-      bsfReturn(ref);
-    case ScreenDestination.aStarAlg:
-      asfReturn(ref);
-    default:
-      homeReturn(ref);
-  }
-}
+// //Maybe useless
+// callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
+//   switch (goTo) {
+//     case ScreenDestination.home:
+//       homeReturn(ref);
+//     case ScreenDestination.terminal:
+//       terminalReturn(ref);
+//     case ScreenDestination.buttons:
+//       buttonReturn(ref);
+//     case ScreenDestination.breadthFirstAlg:
+//       bfReturn(ref);
+//     case ScreenDestination.depthFirstAlg:
+//       dfReturn(ref);
+//     case ScreenDestination.bestFirstAlg:
+//       bsfReturn(ref);
+//     case ScreenDestination.aStarAlg:
+//       asfReturn(ref);
+//     default:
+//       homeReturn(ref);
+//   }
+// }

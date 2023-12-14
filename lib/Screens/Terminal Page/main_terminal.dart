@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/constants.dart';
 import 'terminal_providers.dart';
 import 'terminal_functions.dart';
 import 'terminal_state.dart';
@@ -28,22 +29,14 @@ class _TerminalSideState extends ConsumerState<TerminalSide> {
         child: animatedColumn(
           Column(
             children: [
-              terminalTitle(),
-              const SizedBox(height: 16),
+              centerAppBarText('Terminal'),
+              const SizedBox(height: 40),
               Expanded(child: textFieldContainer()),
             ],
           ),
         ),
       );
 }
-
-terminalTitle() => const Text(
-      'Terminal',
-      style: TextStyle(
-        fontSize: 26,
-        fontFamily: 'AdventoPro',
-      ),
-    );
 
 textFieldContainer() => Consumer(
       builder: (context, WidgetRef ref, __) => DecoratedBox(

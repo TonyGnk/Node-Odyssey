@@ -47,6 +47,7 @@ returnType(bool isAlgorithmEnd, bool hasAlgorithmRunOnce, bool isOnTracking) {
   }
 }
 
+//TODO delete
 container(Color color, Color borderColor, Widget child) => Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),
