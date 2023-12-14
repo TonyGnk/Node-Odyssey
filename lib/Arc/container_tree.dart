@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Services/Tree Widgets/main_tree.dart';
 import '../Services/Tree Widgets/providers_tree.dart';
+import '../Services/constants.dart';
 
 class Leaf extends ConsumerWidget {
   const Leaf({
@@ -18,7 +19,8 @@ class Leaf extends ConsumerWidget {
       flex: (nodeWidth * 2 + gapWidth).toInt(),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        decoration: tag != null ? decoration() : decorationNull(),
+        margin: const EdgeInsets.all(0.7),
+        decoration: tag != null ? decoration(context) : decorationNull(context),
         child: Center(
           child: Text(
             tag != null ? tag.toString() : '',
@@ -34,11 +36,15 @@ class Leaf extends ConsumerWidget {
   }
 }
 
-decoration() => const BoxDecoration(
-      color: Colors.yellow,
-      // shape: BoxShape.circle,
+decoration(BuildContext context) => BoxDecoration(
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+      borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
     );
-decorationNull() => BoxDecoration(
-      color: Colors.yellow.withOpacity(0.2),
-      // shape: BoxShape.circle,
+decorationNull(BuildContext context) => BoxDecoration(
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
+      borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+      border: Border.all(
+        width: 1,
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+      ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Arc/container_tree.dart';
 import 'main_tree.dart';
@@ -13,21 +14,28 @@ cleanTreeBox(double width) => Expanded(
           ),
     );
 
-borderTree() => Expanded(
-      flex: gapWidth.toInt(),
-      child: Container(
-        //width: gapWidth,
-        //height: 30,
-        color: Colors.white,
+borderTree() => Consumer(
+      builder: (context, ref, _) => Expanded(
+        flex: gapWidth.toInt(),
+        child: Container(
+          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9),
+        ),
       ),
     );
 
-cleanTreeBoxTop(double width) => Expanded(
-      flex: width.toInt(),
-      child: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.white, width: 1),
+cleanTreeBoxTop(double width) => Consumer(
+      builder: (context, ref, _) => Expanded(
+        flex: width.toInt(),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onBackground
+                      .withOpacity(0.9),
+                  width: 1),
+            ),
           ),
         ),
       ),

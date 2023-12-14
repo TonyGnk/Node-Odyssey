@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Screens/Best First Search/bsf_state.dart';
 import '../../Screens/Breadth First Page/Chart BF/chart_bf.dart';
 import 'tree1.dart';
 import 'tree10.dart';
@@ -15,9 +16,11 @@ class TreeContainer extends StatelessWidget {
   const TreeContainer({super.key});
 
   @override
-  Widget build(BuildContext context) => chartContainer(
-        context,
-        const NewLeaf(),
+  Widget build(BuildContext context) => animatedLeftColumn(
+        chartContainer(
+          context,
+          const NewLeaf(),
+        ),
       );
 }
 
