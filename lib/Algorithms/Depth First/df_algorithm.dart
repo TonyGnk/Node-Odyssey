@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
@@ -16,6 +18,13 @@ Future<List<Node>?> runDepth(WidgetRef ref) async {
   stack.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
+  Timer? timer;
+  timer = Timer(Duration(seconds: timeLimit), () {
+    stack.clear();
+    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+    timer?.cancel();
+  });
+
   while (stack.isNotEmpty) {
     int counter = 0;
 
@@ -25,6 +34,7 @@ Future<List<Node>?> runDepth(WidgetRef ref) async {
     updateChartAndTrackingPanel(ref, current, end);
 
     if (current.value == end) {
+      timer.cancel();
       return currentPath;
     }
 
@@ -56,5 +66,6 @@ Future<List<Node>?> runDepth(WidgetRef ref) async {
     await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
+  timer.cancel();
   return null;
 }

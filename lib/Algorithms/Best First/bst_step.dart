@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Tree Widgets/providers_tree.dart';
@@ -7,26 +9,35 @@ import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
 import 'bst_algorithm.dart';
-import 'bst_step.dart';
 
-List<Node>? runBSFAsyncStep(WidgetRef ref) {
+ListQueue<List<Node>> queueBsf = ListQueue();
+Set<int> visitedBsf = {};
+List<List<int?>> treeListBsf = [
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+];
+List<int?> treeListSmallBsf = [null, null, null, null, null, null];
+List<Node> currentPathBsf = [];
+Node currentBsf = Node(0, 0, '');
+bool isFound = false;
+
+List<Node>? runBSFAsync(WidgetRef ref) {
+  int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
 
-  Map map = findSmallest(treeListBsf, treeListSmallBsf, end);
-  int rightNodePosition = map['minListIndex'];
-  int rightNodeValue = treeListSmallBsf[map['minListIndex']] ?? 0;
+  queueBsf = ListQueue();
+  visitedBsf = {};
+  clearLeafs(ref);
 
-  Node rightNode = getNewNode(
-    currentBsf.value,
-    currentBsf.cost,
-    rightNodeValue,
-    positionToType(rightNodePosition),
-  );
-  List<Node> newPath = List.from(currentPathBsf)..add(rightNode);
-  queueBsf.add(newPath);
-  visitedBsf.add(rightNode.value);
+  isFound = false;
 
-  treeListSmallBsf = treeListBsf[rightNodePosition];
+  queueBsf.add([Node(start, 0, 'Αρχική Τιμή')]);
+  visitedBsf.add(start);
+
   treeListBsf = [
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -36,16 +47,27 @@ List<Node>? runBSFAsyncStep(WidgetRef ref) {
     [null, null, null, null, null, null],
   ];
 
-  //
+  treeListSmallBsf = [null, null, null, null, null, null];
+
+  for (CalculationType type in CalculationType.values) {
+    if (enabledOperations[type]!) {
+      int newValue = getNewValue(start, type);
+      if (isAllowed(newValue, start, type)) {
+        if (!visitedBsf.contains(newValue)) {
+          treeListSmallBsf[getPosition(type)] = newValue;
+        }
+      }
+    }
+  }
+
+  setKingLeafs(treeListSmallBsf, ref);
+
   currentPathBsf = queueBsf.removeFirst();
   currentBsf = currentPathBsf.last;
 
   ref.read(throneProvider.notifier).state = currentBsf.value;
   updateChartAndTrackingPanel(ref, currentBsf, end);
-  setKingLeafs(treeListSmallBsf, ref);
 
-  //
-  print(currentBsf.value == end);
   if (currentBsf.value == end) {
     return currentPathBsf;
   }
@@ -61,13 +83,9 @@ List<Node>? runBSFAsyncStep(WidgetRef ref) {
         );
         List<Node> newPath = List.from(currentPathBsf)..add(rightNode);
         queueBsf.add(newPath);
-        isFound = true;
       }
     }
   }
-  if (isFound) return null;
-
-  //
 
   for (int i = 0; i < treeListSmallBsf.length; i++) {
     if (treeListSmallBsf[i] == null) {
@@ -89,6 +107,5 @@ List<Node>? runBSFAsyncStep(WidgetRef ref) {
   }
   setLeafs(treeListBsf, ref);
 
-  //
   return null;
 }

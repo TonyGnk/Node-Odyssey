@@ -101,9 +101,15 @@ List<Node>? runDepthStep(WidgetRef ref) {
 
 List<Node>? runDepthToEnd(WidgetRef ref) {
   int end = int.parse(targetController.text);
+  DateTime startTime = DateTime.now();
 
   while (stackDf.isNotEmpty) {
     int counter = 0;
+
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      stackDf.clear();
+      break;
+    }
 
     List<Node> currentPath = stackDf.removeLast();
     Node current = currentPath.last;

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:collection';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,23 +84,20 @@ List<Node>? runBreadthStep(WidgetRef ref) {
 
 List<Node>? runBreadthToEnd(WidgetRef ref) {
   int end = int.parse(targetController.text);
-
-  Timer? timer;
-  timer = Timer(Duration(seconds: timeLimit), () {
-    queueBf.clear();
-    timer?.cancel();
-  });
+  DateTime startTime = DateTime.now();
 
   while (queueBf.isNotEmpty) {
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      queueBf.clear();
+      break;
+    }
+
     List<Node> currentPath = queueBf.removeFirst();
     Node current = currentPath.last;
 
     updateChartAndTrackingPanel(ref, current, end);
 
-    if (current.value == end) {
-      timer.cancel();
-      return currentPath;
-    }
+    if (current.value == end) return currentPath;
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
@@ -122,6 +118,5 @@ List<Node>? runBreadthToEnd(WidgetRef ref) {
       }
     }
   }
-  timer.cancel();
   return null;
 }

@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:collection';
 
 import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../Astar/algorithm_astar.dart';
@@ -24,6 +26,7 @@ List<Node>? runBestTerminal() {
 
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
+  DateTime startTime = DateTime.now();
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
@@ -37,6 +40,11 @@ List<Node>? runBestTerminal() {
   }
 
   while (queue.isNotEmpty) {
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      queue.clear();
+      break;
+    }
+
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 

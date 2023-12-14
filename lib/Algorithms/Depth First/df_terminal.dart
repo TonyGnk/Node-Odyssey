@@ -9,11 +9,17 @@ List<Node>? runDepthTerminal() {
   List<List<Node>> stack = [];
   Set<int> visited = {};
 
-  stack.add([Node(start, 0, 'Αρχική Τιμή')]);
+  stack.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
+  DateTime startTime = DateTime.now();
 
   while (stack.isNotEmpty) {
     int counter = 0;
+
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      stack.clear();
+      break;
+    }
 
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Astar/star_terminal.dart';
-import '../Algorithms/Best First/async_bfs.dart';
+import '../Algorithms/Best First/bst_step.dart';
 import '../Algorithms/Best First/async_bfs_2.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_terminal.dart';

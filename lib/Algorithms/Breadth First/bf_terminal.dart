@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:collection';
 
 import '../../Services/Public Search Bar/closed_search.dart';
@@ -14,19 +13,18 @@ List<Node>? runBreadthTerminal() {
 
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
-
-  Timer? timer;
-  timer = Timer(Duration(seconds: timeLimit), () {
-    queue.clear();
-    timer?.cancel();
-  });
+  DateTime startTime = DateTime.now();
 
   while (queue.isNotEmpty) {
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      queue.clear();
+      break;
+    }
+
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
     if (current.value == end) {
-      timer.cancel();
       return currentPath;
     }
 
@@ -48,6 +46,5 @@ List<Node>? runBreadthTerminal() {
     }
   }
 
-  timer.cancel();
   return null;
 }

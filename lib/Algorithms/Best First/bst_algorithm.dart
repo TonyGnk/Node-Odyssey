@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +30,13 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
+  Timer? timer;
+  timer = Timer(Duration(seconds: timeLimit), () {
+    queue.clear();
+    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+    timer?.cancel();
+  });
+
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
       int newValue = getNewValue(start, type);
@@ -48,7 +56,10 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
     updateChartAndTrackingPanel(ref, current, end);
 
     //Check For Solution itself
-    if (current.value == end) return currentPath;
+    if (current.value == end) {
+      timer.cancel();
+      return currentPath;
+    }
 
     //Check For Solution in First Children
     for (int i = 0; i < treeListSmall.length; i++) {
@@ -115,6 +126,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
     await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
+  timer.cancel();
   return null;
 }
 
