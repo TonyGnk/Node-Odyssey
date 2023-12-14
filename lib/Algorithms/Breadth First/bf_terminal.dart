@@ -18,7 +18,7 @@ List<Node>? runBreadthTerminal() {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    if (current.value == end) currentPath;
+    if (current.value == end) return currentPath;
 
     for (CalculationType type in CalculationType.values) {
       int newValue = getNewValue(current.value, type);

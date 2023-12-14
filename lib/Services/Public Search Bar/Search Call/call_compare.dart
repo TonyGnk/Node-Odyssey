@@ -53,7 +53,7 @@ onButtonCompare(WidgetRef ref) async {
 }
 
 final isBreadthCompareRuns = StateProvider<bool>((ref) => false);
-final isDepthCompareRuns = StateProvider<bool>((ref) => true);
+final isDepthCompareRuns = StateProvider<bool>((ref) => false);
 final isBestCompareRuns = StateProvider<bool>((ref) => false);
 final isAStarCompareRuns = StateProvider<bool>((ref) => false);
 
