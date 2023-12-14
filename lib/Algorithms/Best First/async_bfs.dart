@@ -4,8 +4,8 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Arc/Tree Widgets/providers_tree.dart';
-import '../../Arc/Tree Widgets/tree_helpler.dart';
+import '../../Services/Tree Widgets/providers_tree.dart';
+import '../../Services/Tree Widgets/tree_helpler.dart';
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/Search Call/submit_function.dart';

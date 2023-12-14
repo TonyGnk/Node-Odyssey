@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Arc/Tree Widgets/providers_tree.dart';
-import '../../../Arc/Tree Widgets/tree_helpler.dart';
+import '../../Tree Widgets/providers_tree.dart';
+import '../../Tree Widgets/tree_helpler.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Public Tracking Area/public_result.dart';
 import '../../constants.dart';

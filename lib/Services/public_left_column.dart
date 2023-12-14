@@ -47,21 +47,6 @@ returnType(bool isAlgorithmEnd, bool hasAlgorithmRunOnce, bool isOnTracking) {
   }
 }
 
-//TODO delete
-container(Color color, Color borderColor, Widget child) => Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(cornerSize),
-        color: color,
-        border: Border.all(
-          width: 1,
-          color: borderColor.withOpacity(0),
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      clipBehavior: Clip.antiAlias,
-      child: child,
-    );
-
 templateContainer(BuildContext context, Widget child) => Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(cornerSize),

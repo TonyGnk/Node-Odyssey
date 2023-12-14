@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Screens/Breadth First Page/Chart BF/chart_bf.dart';
 import 'tree1.dart';
 import 'tree10.dart';
 import 'tree4.dart';
@@ -14,7 +15,10 @@ class TreeContainer extends StatelessWidget {
   const TreeContainer({super.key});
 
   @override
-  Widget build(BuildContext context) => const NewLeaf();
+  Widget build(BuildContext context) => chartContainer(
+        context,
+        const NewLeaf(),
+      );
 }
 
 class NewLeaf extends StatelessWidget {

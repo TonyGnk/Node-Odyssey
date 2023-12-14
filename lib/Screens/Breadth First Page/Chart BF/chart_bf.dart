@@ -36,14 +36,14 @@ Widget containerZ() => Consumer(
 
 Widget chartContainer(BuildContext context, Widget child) => Container(
       decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(cornerSize),
-          ),
+        borderRadius: BorderRadius.circular(cornerSize),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+        border: Border.all(
+          width: 1,
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-          border: Border.all(
-            width: 1,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-          )),
+        ),
+      ),
+      padding: const EdgeInsets.all(2),
       clipBehavior: Clip.antiAlias,
       child: child,
     );
