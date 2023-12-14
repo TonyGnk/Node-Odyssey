@@ -21,7 +21,7 @@ import 'Depth First Page/main_df.dart';
 import 'Home/home_state.dart';
 import 'Terminal Page/main_terminal.dart';
 import 'Home/home_main.dart';
-import 'Terminal Page/terminal_state.dart';
+import 'Terminal Page/state_terminal.dart';
 
 enum ScreenDestination {
   home,
@@ -97,25 +97,3 @@ getCurrentScreen(ScreenDestination currentScreen) {
       return const Home();
   }
 }
-
-// //Maybe useless
-// callReturnOfScreen(WidgetRef ref, ScreenDestination goTo) {
-//   switch (goTo) {
-//     case ScreenDestination.home:
-//       homeReturn(ref);
-//     case ScreenDestination.terminal:
-//       terminalReturn(ref);
-//     case ScreenDestination.buttons:
-//       buttonReturn(ref);
-//     case ScreenDestination.breadthFirstAlg:
-//       bfReturn(ref);
-//     case ScreenDestination.depthFirstAlg:
-//       dfReturn(ref);
-//     case ScreenDestination.bestFirstAlg:
-//       bsfReturn(ref);
-//     case ScreenDestination.aStarAlg:
-//       asfReturn(ref);
-//     default:
-//       homeReturn(ref);
-//   }
-// }

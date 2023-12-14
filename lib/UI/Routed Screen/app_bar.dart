@@ -91,12 +91,12 @@ boxDecoration(BuildContext context) => BoxDecoration(
 appBarIcon(
   Icon icon,
   void Function() onPressed, [
-  String s = '',
+  String tooltip = '',
   Icon? selectedIcon,
   bool? isSelected,
 ]) =>
     IconButton(
-      tooltip: s != '' ? s : null,
+      tooltip: tooltip != '' ? tooltip : null,
       selectedIcon: selectedIcon,
       isSelected: isSelected,
       style: ButtonStyle(

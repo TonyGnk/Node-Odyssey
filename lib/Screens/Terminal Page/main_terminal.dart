@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services/constants.dart';
 import 'terminal_providers.dart';
 import 'terminal_functions.dart';
-import 'terminal_state.dart';
+import 'state_terminal.dart';
 
 class TerminalSide extends ConsumerStatefulWidget {
   const TerminalSide({super.key});

@@ -47,4 +47,4 @@ restartTerminalButton(WidgetRef ref) =>
     appBarIcon(const Icon(Icons.restart_alt_outlined), () {
       ref.read(terminalContentProvider.notifier).state = windowsText;
       myFocusNode.requestFocus();
-    });
+    }, 'Reset Terminal');
