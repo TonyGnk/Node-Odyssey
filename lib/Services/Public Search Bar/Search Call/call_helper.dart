@@ -11,6 +11,7 @@ import '../../../Screens/Breadth First Page/Archive BF/list_provider.dart';
 import '../../tracking_container.dart';
 import '../closed_search.dart';
 import '../main_search.dart';
+import 'call_compare.dart';
 
 AlgorithmType currentAlgorithm = AlgorithmType.breadth;
 
@@ -23,6 +24,13 @@ clearGUI(WidgetRef ref) {
   ref.read(trackingListProvider.notifier).state.clear();
   //Clear Tree
   clearLeafs(ref);
+}
+
+clearGUICompare(WidgetRef ref) {
+  ref.read(breadthSolution.notifier).state = CompareSolution();
+  ref.read(depthSolution.notifier).state = CompareSolution();
+  ref.read(bestSolution.notifier).state = CompareSolution();
+  ref.read(aStarSolution.notifier).state = CompareSolution();
 }
 
 updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {

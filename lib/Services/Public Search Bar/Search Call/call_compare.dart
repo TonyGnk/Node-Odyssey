@@ -1,48 +1,71 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
-import '../../constants.dart';
-import '../../public_left_column.dart';
+import '../../../Algorithms/Best First/bst_terminal.dart';
+import '../../../Algorithms/Breadth First/bf_terminal.dart';
+import '../../../Algorithms/Depth First/df_terminal.dart';
 import '../../six_calculations.dart';
-import '../../../Screens/Breadth First Page/Archive BF/list_provider.dart';
-import '../check_box_search.dart';
-import '../closed_search.dart';
-import '../main_search.dart';
 import 'call_helper.dart';
 
 onButtonCompare(WidgetRef ref) async {
-  //Clear Tracking Panel, Result Panel and Chart
-  clearGUI(ref);
+  //Clear Previous Compare
+  clearGUICompare(ref);
 
-  //Collect all the data from the UI
-  //ref.watch(runningRequestProvider.notifier).state = saveRequest(ref);
-  RunningRequest request = saveRequest(ref);
+  List<Node>? solution;
 
-  //Start the selected algorithm
-  prepareProvidersForTracking(ref);
-  ref.read(isAlgorithmEndProvider.notifier).state = false;
-  List<Node>? solution = await startAlgorithm(ref, request);
-  ref.read(isAlgorithmEndProvider.notifier).state = true;
+  //Compare the Breadth
+  ref.read(isBreadthCompareRuns.notifier).state = true;
+  solution = runBreadthTerminal();
+  ref.read(isBreadthCompareRuns.notifier).state = false;
+  if (solution != null) {
+    ref.read(breadthSolution.notifier).state =
+        CompareSolution(solution.last.cost, solution.length);
+  }
 
-  //Add the solution to the Result Panel
-  if (solution != null) addResultPanelList(ref, solution);
+  //Compare the Depth
+  ref.read(isDepthCompareRuns.notifier).state = true;
+  solution = runDepthTerminal();
+  ref.read(isDepthCompareRuns.notifier).state = false;
+  if (solution != null) {
+    ref.read(depthSolution.notifier).state =
+        CompareSolution(solution.last.cost, solution.length);
+  }
+
+  //Compare the Best
+  ref.read(isBestCompareRuns.notifier).state = true;
+  solution = runBestTerminal();
+  ref.read(isBestCompareRuns.notifier).state = false;
+  if (solution != null) {
+    ref.read(bestSolution.notifier).state =
+        CompareSolution(solution.last.cost, solution.length);
+  }
 
   //Reset the inputs
   saveInputsForResults(ref, solution!.length, solution.last.cost);
-  resetControllers();
 }
 
-saveRequest(WidgetRef ref) => RunningRequest(
-      //
-      startValue: int.parse(inputController.text),
-      targetValue: int.parse(targetController.text),
-      speed: 2,
-      enabledOperations: {
-        CalculationType.addition: ref.watch(checkPlusOneProvider),
-        CalculationType.subtraction: ref.watch(checkMinusOneProvider),
-        CalculationType.multiplication: ref.watch(checkDoubleProvider),
-        CalculationType.division: ref.watch(checkHalfProvider),
-        CalculationType.exponential: ref.watch(checkRootProvider),
-        CalculationType.square: ref.watch(checkSquareProvider),
-      },
-    );
+final isBreadthCompareRuns = StateProvider<bool>((ref) => false);
+final isDepthCompareRuns = StateProvider<bool>((ref) => false);
+final isBestCompareRuns = StateProvider<bool>((ref) => false);
+final isAStarCompareRuns = StateProvider<bool>((ref) => false);
+
+final breadthSolution = StateProvider<CompareSolution>(
+  (ref) => CompareSolution(),
+);
+
+final depthSolution = StateProvider<CompareSolution>(
+  (ref) => CompareSolution(),
+);
+
+final bestSolution = StateProvider<CompareSolution>(
+  (ref) => CompareSolution(),
+);
+
+final aStarSolution = StateProvider<CompareSolution>(
+  (ref) => CompareSolution(),
+);
+
+class CompareSolution {
+  CompareSolution([this.cost, this.length]);
+  final int? cost;
+  final int? length;
+}

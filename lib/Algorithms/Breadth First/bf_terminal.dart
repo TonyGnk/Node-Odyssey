@@ -1,11 +1,12 @@
 import 'dart:collection';
 
 import '../../Screens/Breadth First Page/Archive BF/list_provider.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
 
-List<Node>? runBreadthTerminal(RunningRequest request) {
-  int start = request.startValue;
-  int end = request.targetValue;
+List<Node>? runBreadthTerminal() {
+  int start = int.parse(inputController.text);
+  int end = int.parse(targetController.text);
 
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};

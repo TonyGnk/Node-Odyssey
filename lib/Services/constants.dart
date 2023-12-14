@@ -19,14 +19,13 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal(
-    WidgetRef ref, AlgorithmType type, RunningRequest request) {
+List<Node>? startAlgorithmTerminal(AlgorithmType type, RunningRequest request) {
   if (type == AlgorithmType.breadth) {
-    return runBreadthTerminal(request);
+    return runBreadthTerminal();
   } else if (type == AlgorithmType.depth) {
     return runDepthTerminal();
   } else if (type == AlgorithmType.best) {
-    return runBestTerminal(request);
+    return runBestTerminal();
   } else {
     return null;
   }
