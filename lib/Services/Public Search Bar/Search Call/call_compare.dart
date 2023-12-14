@@ -2,6 +2,8 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Astar/algorithm_astar.dart';
+import '../../../Algorithms/Astar/star_terminal.dart';
 import '../../../Algorithms/Best First/bst_terminal.dart';
 import '../../../Algorithms/Breadth First/bf_terminal.dart';
 import '../../../Algorithms/Depth First/df_terminal.dart';
@@ -54,6 +56,20 @@ onButtonCompare(WidgetRef ref) async {
           solution.last.cost.toString(), solution.length.toString());
       print(
           'Solution of Best: Cost:${solution.last.cost} Count:${solution.length}');
+    }
+  }
+
+  //Compare the Astar
+  if (ref.read(enableAStarCompare.notifier).state) {
+    ref.read(isAStarCompareRuns.notifier).state = true;
+    await Future.delayed(const Duration(milliseconds: 400));
+    solution = runAStarTerminal();
+    ref.read(isAStarCompareRuns.notifier).state = false;
+    if (solution != null) {
+      ref.read(aStarSolution.notifier).state = CompareSolution(
+          solution.last.cost.toString(), solution.length.toString());
+      print(
+          'Solution of AStar: Cost:${solution.last.cost} Count:${solution.length}');
     }
   }
 }

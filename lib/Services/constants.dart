@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
+import '../Algorithms/Astar/star_terminal.dart';
 import '../Algorithms/Best First/async_bfs.dart';
 import '../Algorithms/Best First/async_bfs_2.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
@@ -25,6 +26,8 @@ List<Node>? startAlgorithmTerminal(AlgorithmType type) {
     return runDepthTerminal();
   } else if (type == AlgorithmType.best) {
     return runBestTerminal();
+  } else if (type == AlgorithmType.astar) {
+    return runAStarTerminal();
   } else {
     return null;
   }
