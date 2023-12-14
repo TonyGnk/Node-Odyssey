@@ -101,7 +101,12 @@ Widget submitButton() => Consumer(
       builder: (context, WidgetRef ref, __) => IconButton.filled(
         style: modernButtonStyle(context),
         icon: const Icon(Icons.auto_awesome_outlined),
-        onPressed: () => onButtonPressed(ref),
+        onPressed: () {
+          if (inputController.text.isNotEmpty &&
+              targetController.text.isNotEmpty) {
+            onButtonPressed(ref);
+          }
+        },
       ),
     );
 

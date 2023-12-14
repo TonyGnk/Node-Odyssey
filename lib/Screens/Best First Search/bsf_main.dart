@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Algorithms/Best First/async_bfs.dart';
 import '../../Algorithms/Best First/async_bfs_2.dart';
-import '../../Arc/Tree Widgets/new_tree.dart';
+import '../../Arc/Tree Widgets/tree_container.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/public_left_column.dart';
 import '../../Services/six_calculations.dart';
@@ -34,7 +34,7 @@ class _TerminalSideState extends ConsumerState<BestFirstAlg> {
           const SizedBox(width: 10),
           const Expanded(
             flex: 14, //14
-            child: NewTree(),
+            child: TreeContainer(),
           ),
         ],
       );

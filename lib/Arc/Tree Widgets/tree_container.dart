@@ -10,14 +10,11 @@ import 'tree_helpler.dart';
 const double nodeWidth = 20;
 const double gapWidth = 1;
 
-class NewTree extends StatelessWidget {
-  const NewTree({super.key});
+class TreeContainer extends StatelessWidget {
+  const TreeContainer({super.key});
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-        duration: const Duration(seconds: 1),
-        child: const NewLeaf(),
-      );
+  Widget build(BuildContext context) => const NewLeaf();
 }
 
 class NewLeaf extends StatelessWidget {
