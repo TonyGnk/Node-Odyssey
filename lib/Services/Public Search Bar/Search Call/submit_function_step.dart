@@ -35,7 +35,7 @@ onButtonPressedFirst(WidgetRef ref) {
     ref.read(stepModeProvider.notifier).state = false;
     addResultPanelList(ref, solution);
     saveInputsForResults(ref, solution.length, solution.last.cost);
-    resetControllers();
+    resetControllers(ref);
   }
 }
 
@@ -50,7 +50,7 @@ onButtonPressedStep(WidgetRef ref, bool toEnd) {
     addResultPanelList(ref, solution);
     closeTheExtraOptions(ref);
     saveInputsForResults(ref, solution.length, solution.last.cost);
-    resetControllers();
+    resetControllers(ref);
   }
 }
 

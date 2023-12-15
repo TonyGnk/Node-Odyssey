@@ -36,5 +36,5 @@ onButtonPressed(WidgetRef ref) async {
   if (solution == null) ref.read(isAlgorithmEndProvider.notifier).state = false;
 
   //Reset the inputs
-  resetControllers();
+  resetControllers(ref);
 }
