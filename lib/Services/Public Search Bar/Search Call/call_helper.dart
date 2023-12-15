@@ -4,6 +4,7 @@ import '../../Tree Widgets/providers_tree.dart';
 import '../../Tree Widgets/tree_helpler.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../Public Tracking Area/public_result.dart';
+import '../../Tree Widgets/tree_star.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
 import '../../six_calculations.dart';
@@ -48,7 +49,9 @@ updateTracking(WidgetRef ref, RunningStyle style, [Node? current]) {
         .state
         .addTile(current.value, current.operation, ref);
     addTrackingContainer(ref, current.value);
-    ref.read(throneProvider.notifier).state = current.value;
+    if (currentAlgorithm == AlgorithmType.astar) {
+      starTree(ref, current);
+    }
   }
 }
 

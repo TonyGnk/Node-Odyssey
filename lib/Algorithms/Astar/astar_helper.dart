@@ -27,10 +27,7 @@ List<Node> reconstructPath(Node end) {
     path.add(currentNode);
     currentNode = currentNode.parent!;
   }
-  print('path: ');
-  //Print the total cost and the count of nodes
-  print('Total Cost: ${path.last.cost}');
-  print('Total Nodes: ${path.length}');
+
   return path;
 }
 
@@ -50,20 +47,46 @@ Node getNewNodeZ(
         current,
       );
     case CalculationType.subtraction:
-      return Node(newValue, cost + 2, getCalculationTypeMap()[type]!, current);
+      return Node(
+        newValue,
+        cost + 2,
+        getCalculationTypeMap()[type]!,
+        current,
+      );
     case CalculationType.multiplication:
-      return Node(newValue, cost + (value / 2).ceil() + 1,
-          getCalculationTypeMap()[type]!, current);
+      return Node(
+        newValue,
+        cost + (value / 2).ceil() + 1,
+        getCalculationTypeMap()[type]!,
+        current,
+      );
     case CalculationType.division:
-      return Node(newValue, cost + (value / 4).ceil() + 1,
-          getCalculationTypeMap()[type]!, current);
+      return Node(
+        newValue,
+        cost + (value / 4).ceil() + 1,
+        getCalculationTypeMap()[type]!,
+        current,
+      );
     case CalculationType.exponential:
-      return Node(newValue, cost + ((value * value - value) ~/ 4 + 1).toInt(),
-          getCalculationTypeMap()[type]!, current);
+      return Node(
+        newValue,
+        cost + ((value * value - value) ~/ 4 + 1).toInt(),
+        getCalculationTypeMap()[type]!,
+        current,
+      );
     case CalculationType.square:
-      return Node(newValue, cost + (value - newValue.toInt()) ~/ 4 + 1,
-          getCalculationTypeMap()[type]!, current);
+      return Node(
+        newValue,
+        cost + (value - newValue.toInt()) ~/ 4 + 1,
+        getCalculationTypeMap()[type]!,
+        current,
+      );
     default:
-      return Node(newValue, cost, '', current);
+      return Node(
+        newValue,
+        cost,
+        '',
+        current,
+      );
   }
 }

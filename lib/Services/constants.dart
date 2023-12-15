@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/astar_algorithm.dart';
-import '../Algorithms/Astar/star_terminal.dart';
+import '../Algorithms/Astar/astar_steps.dart';
 import '../Algorithms/Best First/bst_instant.dart';
 import '../Algorithms/Best First/bst_step.dart';
 import '../Algorithms/Best First/bst_step_helper.dart';
@@ -23,7 +23,7 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal() {
+List<Node>? startAlgorithmTerminal(WidgetRef ref) {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthTerminal();
   } else if (currentAlgorithm == AlgorithmType.depth) {
@@ -31,7 +31,7 @@ List<Node>? startAlgorithmTerminal() {
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestTerminal();
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runAStarTerminal();
+    return runStar(ref, RunningStyle.terminal);
   } else {
     return null;
   }
@@ -72,6 +72,8 @@ List<Node>? startAlgorithmFirstStep(WidgetRef ref) {
     return runDepthFirstStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestFirstStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarFirstStep(ref, RunningStyle.step);
   } else {
     return null;
   }
@@ -84,6 +86,8 @@ List<Node>? startAlgorithmStep(WidgetRef ref) {
     return runDepthStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarStep(ref, RunningStyle.step);
   } else {
     return null;
   }
@@ -96,6 +100,8 @@ List<Node>? startAlgorithmToEnd(WidgetRef ref) {
     return runDepthToEnd(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestToEnd(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarToEnd(ref, RunningStyle.step);
   } else {
     return null;
   }

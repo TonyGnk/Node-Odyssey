@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Astar/astar_algorithm.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
@@ -30,10 +29,12 @@ onButtonPressed(WidgetRef ref) async {
   //
 
   //Add the solution to the Result Panel
-  if (solution != null) addResultPanelList(ref, solution);
+  if (solution != null) {
+    addResultPanelList(ref, solution);
+    saveInputsForResults(ref, solution.length, solution.last.cost);
+  }
   if (solution == null) ref.read(isAlgorithmEndProvider.notifier).state = false;
 
   //Reset the inputs
-  saveInputsForResults(ref, solution!.length, solution.last.cost);
   resetControllers();
 }
