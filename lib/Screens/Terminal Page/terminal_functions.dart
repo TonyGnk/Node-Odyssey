@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/constants.dart';
 import '../../Services/public_left_column.dart';
@@ -21,7 +22,7 @@ analyzeTheText(WidgetRef ref) {
   }
 
   //Get the algorithmType
-  AlgorithmType type = findType(words[1]);
+  currentAlgorithm = findType(words[1]);
 
   int startValue = int.parse(words[2]);
   int targetValue = int.parse(words[3]);
@@ -30,7 +31,7 @@ analyzeTheText(WidgetRef ref) {
 
   //Start the selected algorithm
   ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
-  List<Node>? solution = startAlgorithmTerminal(type);
+  List<Node>? solution = startAlgorithmTerminal();
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   if (solution != null) newResult(ref, solution);

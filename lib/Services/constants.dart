@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/algorithm_astar.dart';
 import '../Algorithms/Astar/star_terminal.dart';
+import '../Algorithms/Best First/bst_instant.dart';
 import '../Algorithms/Best First/bst_step.dart';
 import '../Algorithms/Best First/bst_step_helper.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_terminal.dart';
+import '../Algorithms/Best First/bst_to_end.dart';
+import '../Algorithms/Breadth First/bf_instant.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
 import '../Algorithms/Breadth First/bf_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/df_algorithm.dart';
+import '../Algorithms/Depth First/df_instant.dart';
 import '../Algorithms/Depth First/df_step.dart';
 import '../Algorithms/Depth First/df_terminal.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
@@ -19,14 +23,28 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal(AlgorithmType type) {
-  if (type == AlgorithmType.breadth) {
+List<Node>? startAlgorithmTerminal() {
+  if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthTerminal();
-  } else if (type == AlgorithmType.depth) {
+  } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthTerminal();
-  } else if (type == AlgorithmType.best) {
+  } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestTerminal();
-  } else if (type == AlgorithmType.astar) {
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runAStarTerminal();
+  } else {
+    return null;
+  }
+}
+
+List<Node>? startAlgorithmInstant(WidgetRef ref) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
+    return runBreadthInstant(ref);
+  } else if (currentAlgorithm == AlgorithmType.depth) {
+    return runDepthInstant();
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBestInstant(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
     return runAStarTerminal();
   } else {
     return null;

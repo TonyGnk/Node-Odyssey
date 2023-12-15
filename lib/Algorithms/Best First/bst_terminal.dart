@@ -10,6 +10,7 @@ List<Node>? runBestTerminal() {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
 
+  DateTime startTime = DateTime.now();
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
   List<List<int?>> treeList = [
@@ -25,7 +26,6 @@ List<Node>? runBestTerminal() {
 
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
-  DateTime startTime = DateTime.now();
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {

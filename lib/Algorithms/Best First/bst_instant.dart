@@ -1,19 +1,20 @@
-import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/Tree Widgets/tree_helpler.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
-import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
+import 'bst_algorithm.dart';
 
-Future<List<Node>?> runBest(WidgetRef ref) async {
+List<Node>? runBestInstant(WidgetRef ref) {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
 
+  DateTime startTime = DateTime.now();
   ListQueue<List<Node>> queue = ListQueue();
   Set<int> visited = {};
   List<List<int?>> treeList = [
@@ -30,13 +31,6 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
   queue.add([Node(start, 0, 'Initial Value')]);
   visited.add(start);
 
-  Timer? timer;
-  timer = Timer(Duration(seconds: timeLimit), () {
-    queue.clear();
-    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
-    timer?.cancel();
-  });
-
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
       int newValue = getNewValue(start, type);
@@ -49,6 +43,12 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
   }
 
   while (queue.isNotEmpty) {
+    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
+      queue.clear();
+      updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+      break;
+    }
+
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
@@ -57,7 +57,6 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
 
     //Check For Solution itself
     if (current.value == end) {
-      timer.cancel();
       return currentPath;
     }
 
@@ -79,6 +78,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
     }
     if (founded) continue;
 
+    //Open the Grand Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] == null) {
         treeList[i] = [null, null, null, null, null, null];
@@ -122,56 +122,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
       [null, null, null, null, null, null],
       [null, null, null, null, null, null],
     ];
-    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
-  timer.cancel();
   return null;
-}
-
-findSmallest(List<List<int?>> treeList, int target) {
-  int? minValue;
-  int? minListIndex;
-  int? minValueIndex;
-
-  for (int i = 0; i < treeList.length; i++) {
-    for (int j = 0; j < treeList[i].length; j++) {
-      if (treeList[i][j] != null) {
-        int temp = (target - treeList[i][j]!).abs();
-        if (minValue == null || temp < minValue) {
-          minValue = temp;
-          minListIndex = i;
-          minValueIndex = j;
-        }
-        if (temp < minValue) {
-          minValue = temp;
-          minListIndex = i;
-          minValueIndex = j;
-        }
-      }
-    }
-  }
-
-  return {
-    'minListIndex': minListIndex,
-    'minValueIndex': minValueIndex,
-  };
-}
-
-//switch (type) if addition then 0 if subtraction then 1 etc
-getPosition(type) {
-  switch (type) {
-    case CalculationType.addition:
-      return 0;
-    case CalculationType.subtraction:
-      return 1;
-    case CalculationType.multiplication:
-      return 2;
-    case CalculationType.division:
-      return 3;
-    case CalculationType.exponential:
-      return 4;
-    case CalculationType.square:
-      return 5;
-  }
 }

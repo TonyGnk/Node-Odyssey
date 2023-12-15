@@ -5,16 +5,23 @@ import '../../constants.dart';
 import '../../public_left_column.dart';
 import '../../six_calculations.dart';
 import '../main_search.dart';
+import '../sliders_and_options_bf.dart';
 import 'call_helper.dart';
 
 onButtonPressed(WidgetRef ref) async {
   //Clear Tracking Panel, Result Panel and Chart
   clearGUI(ref);
 
+  List<Node>? solution;
+
   //Start the selected algorithm
   prepareProvidersForTracking(ref);
   ref.read(isAlgorithmEndProvider.notifier).state = false;
-  List<Node>? solution = await startAlgorithm(ref);
+  if (searchSpeed == 0) {
+    solution = startAlgorithmInstant(ref);
+  } else {
+    solution = await startAlgorithm(ref);
+  }
   ref.read(isAlgorithmEndProvider.notifier).state = true;
 
   //Add the solution to the Result Panel
