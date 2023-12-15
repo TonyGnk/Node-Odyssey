@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Algorithms/Astar/astar_algorithm.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
 import '../../constants.dart';
 import '../../public_left_column.dart';
@@ -9,6 +10,8 @@ import '../sliders_and_options_bf.dart';
 import 'call_helper.dart';
 
 onButtonPressed(WidgetRef ref) async {
+  await Future.delayed(const Duration(milliseconds: 300));
+
   //Clear Tracking Panel, Result Panel and Chart
   clearGUI(ref);
 
@@ -23,6 +26,8 @@ onButtonPressed(WidgetRef ref) async {
     solution = await startAlgorithm(ref);
   }
   ref.read(isAlgorithmEndProvider.notifier).state = true;
+
+  //
 
   //Add the solution to the Result Panel
   if (solution != null) addResultPanelList(ref, solution);

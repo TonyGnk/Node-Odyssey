@@ -31,9 +31,7 @@ List<Node>? runDepthInstant(WidgetRef ref) {
 
     updateChartAndTrackingPanel(ref, current, end);
 
-    if (current.value == end) {
-      return currentPath;
-    }
+    if (current.value == end) return currentPath;
 
     // Calculate all the possible
     for (CalculationType type in CalculationType.values) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../Algorithms/Astar/algorithm_astar.dart';
+import '../Algorithms/Astar/astar_algorithm.dart';
 import '../Algorithms/Astar/star_terminal.dart';
 import '../Algorithms/Best First/bst_instant.dart';
 import '../Algorithms/Best First/bst_step.dart';
@@ -59,7 +59,7 @@ Future<List<Node>?> startAlgorithm(WidgetRef ref) async {
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBest(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runAStarGui(ref);
+    return runStar();
   } else {
     return null;
   }

@@ -1,50 +1,42 @@
-import 'dart:collection';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
+import 'astar_helper.dart';
 
-List<Node>? runBreadthInstant(WidgetRef ref) {
+List<Node> runStar() {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
-
-  ListQueue<List<Node>> queue = ListQueue();
-  Set<int> visited = {};
-
-  queue.add([Node(start, 0, 'Initial Value')]);
-  visited.add(start);
   DateTime startTime = DateTime.now();
 
-  while (queue.isNotEmpty) {
+  Set<int> visited = {start};
+  PriorityQueue queue = PriorityQueue([Node(start, 0, 'Initial Value')]);
+
+  while (!queue.isEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
       queue.clear();
-      updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+
       break;
     }
 
-    List<Node> currentPath = queue.removeFirst();
-    Node current = currentPath.last;
+    Node current = queue.removeFirst();
 
-    if (current.value == end) return currentPath;
-
-    updateChartAndTrackingPanel(ref, current, end);
+    if (current.value == end) return reconstructPath(current);
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
         int newValue = getNewValue(current.value, type);
         if (isAllowed(newValue, current.value, type)) {
-          if (!visited.contains(newValue) || avoidVisitedIsDisable) {
-            Node newNode = getNewNode(
+          if (!visited.contains(newValue)) {
+            Node newNode = getNewNodeZ(
+              current,
               current.value,
               current.cost,
               newValue,
               type,
             );
-            List<Node> newPath = List.from(currentPath)..add(newNode);
-            queue.add(newPath);
+            newNode.setDistance(end);
+            queue.add(newNode);
             visited.add(newNode.value);
           }
         }
@@ -52,5 +44,5 @@ List<Node>? runBreadthInstant(WidgetRef ref) {
     }
   }
 
-  return null;
+  return [];
 }

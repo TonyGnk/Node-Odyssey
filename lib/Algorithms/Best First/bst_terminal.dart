@@ -4,7 +4,7 @@ import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
-import '../Astar/algorithm_astar.dart';
+import 'bst_algorithm.dart';
 
 List<Node>? runBestTerminal() {
   int start = int.parse(inputController.text);
@@ -87,7 +87,7 @@ List<Node>? runBestTerminal() {
         treeList[i] = temp;
       }
     }
-    Map map = findSmallest(treeList, treeListSmall, end);
+    Map map = findSmallest(treeList, end);
     int rightNodePosition = map['minListIndex'];
     int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
 

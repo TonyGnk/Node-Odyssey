@@ -2,7 +2,6 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Algorithms/Astar/algorithm_astar.dart';
 import '../../../Algorithms/Astar/star_terminal.dart';
 import '../../../Algorithms/Best First/bst_terminal.dart';
 import '../../../Algorithms/Breadth First/bf_terminal.dart';

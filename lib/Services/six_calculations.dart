@@ -1,12 +1,13 @@
 import 'dart:math';
 
 class Node {
-  Node(this.value, this.cost, this.operation);
+  Node(this.value, this.cost, this.operation, [this.parent]);
 
   late int value;
   late int cost;
   late String operation;
   late int distance;
+  late Node? parent;
 
   setDistance(int target) {
     distance = (target - value).abs();
