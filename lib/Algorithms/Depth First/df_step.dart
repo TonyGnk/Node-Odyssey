@@ -19,7 +19,7 @@ List<Node>? runDepthFirstStep(WidgetRef ref) {
   List<Node> currentPath = stackDf.removeLast();
   Node current = currentPath.last;
 
-  updateChartAndTrackingPanel(ref, current, end);
+  updateGraphicalContent(ref, current, end);
 
   if (current.value == end) {
     return currentPath;
@@ -62,7 +62,7 @@ List<Node>? runDepthStep(WidgetRef ref) {
   List<Node> currentPath = stackDf.removeLast();
   Node current = currentPath.last;
 
-  updateChartAndTrackingPanel(ref, current, end);
+  updateGraphicalContent(ref, current, end);
 
   if (current.value == end) {
     return currentPath;
@@ -114,7 +114,7 @@ List<Node>? runDepthToEnd(WidgetRef ref) {
     List<Node> currentPath = stackDf.removeLast();
     Node current = currentPath.last;
 
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     if (current.value == end) {
       return currentPath;

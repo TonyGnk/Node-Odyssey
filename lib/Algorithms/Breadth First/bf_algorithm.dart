@@ -21,7 +21,7 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
   Timer? timer;
   timer = Timer(Duration(seconds: timeLimit), () {
     queue.clear();
-    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+    updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
     timer?.cancel();
   });
 
@@ -29,7 +29,7 @@ Future<List<Node>?> runBreadth(WidgetRef ref) async {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     if (current.value == end) {
       timer.cancel();

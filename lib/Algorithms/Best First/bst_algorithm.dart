@@ -33,7 +33,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
   Timer? timer;
   timer = Timer(Duration(seconds: timeLimit), () {
     queue.clear();
-    updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+    updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
     timer?.cancel();
   });
 
@@ -53,7 +53,7 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
     Node current = currentPath.last;
 
     setKingLeafs(treeListSmall, ref);
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     //Check For Solution itself
     if (current.value == end) {

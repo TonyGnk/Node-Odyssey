@@ -21,7 +21,7 @@ clearGUI(WidgetRef ref) {
   //Clear Result Panel
   ref.read(resListProvider.notifier).state.clear();
   //Clear Tracking Panel
-  ref.read(trackingListProvider.notifier).state.clear();
+  ref.read(trackingProvider.notifier).state.clear();
   //Clear Tree
   clearLeafs(ref);
 }
@@ -33,10 +33,23 @@ clearGUICompare(WidgetRef ref) {
   ref.read(aStarSolution.notifier).state = CompareSolution();
 }
 
-updateChartAndTrackingPanel(WidgetRef ref, Node node, int end) {
-  ref.watch(trackingListProvider).addTile(node.value, node.operation, ref);
-  addTrackingContainer(ref, node.value, end);
+updateGraphicalContent(WidgetRef ref, Node node, int end) {
+  ref.watch(trackingProvider).addTile(node.value, node.operation, ref);
+  addTrackingContainer(ref, node.value);
   ref.read(throneProvider.notifier).state = node.value;
+}
+
+updateTracking(WidgetRef ref, RunningStyle style, [Node? current]) {
+  if (current == null) ref.watch(trackingProvider).addTile(0, 'Time Out', ref);
+
+  if (style != RunningStyle.terminal && current != null) {
+    ref
+        .read(trackingProvider.notifier)
+        .state
+        .addTile(current.value, current.operation, ref);
+    addTrackingContainer(ref, current.value);
+    ref.read(throneProvider.notifier).state = current.value;
+  }
 }
 
 prepareProvidersForTracking(WidgetRef ref) {

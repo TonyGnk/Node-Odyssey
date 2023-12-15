@@ -21,7 +21,7 @@ List<Node>? runBreadthInstant(WidgetRef ref) {
   while (queue.isNotEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
       queue.clear();
-      updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+      updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
       break;
     }
 
@@ -30,7 +30,7 @@ List<Node>? runBreadthInstant(WidgetRef ref) {
 
     if (current.value == end) return currentPath;
 
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {

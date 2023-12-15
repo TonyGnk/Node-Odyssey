@@ -27,7 +27,7 @@ List<Node> reconstructPath(Node end) {
     path.add(currentNode);
     currentNode = currentNode.parent!;
   }
-
+  print('path: ');
   //Print the total cost and the count of nodes
   print('Total Cost: ${path.last.cost}');
   print('Total Nodes: ${path.length}');

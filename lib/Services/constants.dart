@@ -45,7 +45,7 @@ List<Node>? startAlgorithmInstant(WidgetRef ref) {
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestInstant(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runAStarTerminal();
+    return runStar(ref, RunningStyle.instant);
   } else {
     return null;
   }
@@ -59,7 +59,7 @@ Future<List<Node>?> startAlgorithm(WidgetRef ref) async {
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBest(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runStar();
+    return runStarAsync(ref, RunningStyle.normal);
   } else {
     return null;
   }

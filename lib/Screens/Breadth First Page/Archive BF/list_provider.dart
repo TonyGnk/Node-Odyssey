@@ -15,7 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// This function adds a container in column list
 /// Every container had a given a height witch is a BigInt. Maybe is number 1 maybe 10^9
-void addTrackingContainer(WidgetRef ref, int height, int target) {
+void addTrackingContainer(WidgetRef ref, int height) {
   double logOfWidth;
   ref.read(chartColumnsProvider.notifier).state.length == 2300
       ? ref.read(chartColumnsProvider.notifier).state.clear()

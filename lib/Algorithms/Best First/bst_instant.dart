@@ -45,7 +45,7 @@ List<Node>? runBestInstant(WidgetRef ref) {
   while (queue.isNotEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
       queue.clear();
-      updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+      updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
       break;
     }
 
@@ -53,7 +53,7 @@ List<Node>? runBestInstant(WidgetRef ref) {
     Node current = currentPath.last;
 
     setKingLeafs(treeListSmall, ref);
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     //Check For Solution itself
     if (current.value == end) {

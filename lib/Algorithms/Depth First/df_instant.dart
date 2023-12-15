@@ -20,7 +20,7 @@ List<Node>? runDepthInstant(WidgetRef ref) {
   while (stack.isNotEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
       stack.clear();
-      updateChartAndTrackingPanel(ref, Node(0, 0, 'Time Out'), end);
+      updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
       break;
     }
 
@@ -29,7 +29,7 @@ List<Node>? runDepthInstant(WidgetRef ref) {
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
 
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end);
 
     if (current.value == end) return currentPath;
 

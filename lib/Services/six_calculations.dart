@@ -3,11 +3,11 @@ import 'dart:math';
 class Node {
   Node(this.value, this.cost, this.operation, [this.parent]);
 
-  late int value;
-  late int cost;
-  late String operation;
+  final int value;
+  final int cost;
+  final String operation;
   late int distance;
-  late Node? parent;
+  final Node? parent;
 
   setDistance(int target) {
     distance = (target - value).abs();
@@ -22,6 +22,8 @@ enum CalculationType {
   exponential,
   square,
 }
+
+enum RunningStyle { instant, terminal, step, normal }
 
 getNewValue(int? value, CalculationType type) {
   if (value == null) return 0;

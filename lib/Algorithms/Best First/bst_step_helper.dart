@@ -40,7 +40,7 @@ List<Node>? runBestStep(WidgetRef ref) {
   if (currentBsf.value == end) return currentPathBsf;
 
   ref.read(throneProvider.notifier).state = currentBsf.value;
-  updateChartAndTrackingPanel(ref, currentBsf, end);
+  updateGraphicalContent(ref, currentBsf, end);
   for (int i = 0; i < treeListSmallBsf.length; i++) {
     if (treeListSmallBsf[i] != null) {
       if (treeListSmallBsf[i] == end) {

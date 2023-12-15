@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'constants.dart';
 
-final trackingListProvider = StateProvider<TrackingList>(
+final trackingProvider = StateProvider<TrackingList>(
   (ref) => TrackingList(),
 );
 
 //clear the tracking list
 void clearTrackingList(WidgetRef ref) {
-  ref.read(trackingListProvider.notifier).state.clear();
+  ref.read(trackingProvider.notifier).state.clear();
 }
 
 class TrackingList extends StatelessWidget {
