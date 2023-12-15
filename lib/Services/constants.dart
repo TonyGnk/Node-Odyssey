@@ -41,7 +41,7 @@ List<Node>? startAlgorithmInstant(WidgetRef ref) {
   if (currentAlgorithm == AlgorithmType.breadth) {
     return runBreadthInstant(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
-    return runDepthInstant();
+    return runDepthInstant(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
     return runBestInstant(ref);
   } else if (currentAlgorithm == AlgorithmType.astar) {
