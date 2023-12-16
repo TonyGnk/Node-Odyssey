@@ -26,7 +26,7 @@ void addText(String text, WidgetRef ref) {
 
 String system32Text = 'C:\\Windows\\System32>';
 
-final terminalContentProvider = StateProvider<String>(
+final terminalOutput = StateProvider<String>(
   (ref) => windowsText,
 );
 

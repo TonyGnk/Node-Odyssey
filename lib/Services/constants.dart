@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../Algorithms/Astar/algorithm_astar.dart';
-import '../Algorithms/Astar/star_terminal.dart';
-import '../Algorithms/Best First/async_bfs.dart';
-import '../Algorithms/Best First/async_bfs_2.dart';
+import '../Algorithms/Astar/astar_algorithm.dart';
+import '../Algorithms/Astar/astar_steps.dart';
 import '../Algorithms/Best First/bst_algorithm.dart';
-import '../Algorithms/Best First/bst_terminal.dart';
+import '../Algorithms/Best First/bst_step.dart';
+import '../Algorithms/Best First/bst_step_helper.dart';
+import '../Algorithms/Best First/bst_algorithm_async.dart';
+import '../Algorithms/Best First/bst_to_end.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
-import '../Algorithms/Breadth First/bf_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/df_algorithm.dart';
 import '../Algorithms/Depth First/df_step.dart';
-import '../Algorithms/Depth First/df_terminal.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
 
@@ -19,31 +18,31 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal(AlgorithmType type) {
-  if (type == AlgorithmType.breadth) {
-    return runBreadthTerminal();
-  } else if (type == AlgorithmType.depth) {
-    return runDepthTerminal();
-  } else if (type == AlgorithmType.best) {
-    return runBestTerminal();
-  } else if (type == AlgorithmType.astar) {
-    return runAStarTerminal();
+List<Node> startAlgorithm(WidgetRef ref, RunningStyle style) {
+  if (currentAlgorithm == AlgorithmType.breadth) {
+    return runBreadth(ref, style);
+  } else if (currentAlgorithm == AlgorithmType.depth) {
+    return runDepth(ref, style);
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBest(ref, style);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStar(ref, RunningStyle.instant);
   } else {
-    return null;
+    return [];
   }
 }
 
-Future<List<Node>?> startAlgorithm(WidgetRef ref) async {
+Future<List<Node>> startSearchAsync(WidgetRef ref, RunningStyle style) async {
   if (currentAlgorithm == AlgorithmType.breadth) {
-    return runBreadth(ref);
+    return runBreadthAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.depth) {
-    return runDepth(ref);
+    return runDepthAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBest(ref);
+    return runBestAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runAStarGui(ref);
+    return runStarAsync(ref, style);
   } else {
-    return null;
+    return [];
   }
 }
 
@@ -53,7 +52,9 @@ List<Node>? startAlgorithmFirstStep(WidgetRef ref) {
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthFirstStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsync(ref);
+    return runBestFirstStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarFirstStep(ref, RunningStyle.step);
   } else {
     return null;
   }
@@ -65,7 +66,9 @@ List<Node>? startAlgorithmStep(WidgetRef ref) {
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthStep(ref);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBSFAsyncStep(ref);
+    return runBestStep(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarStep(ref, RunningStyle.step);
   } else {
     return null;
   }
@@ -76,6 +79,10 @@ List<Node>? startAlgorithmToEnd(WidgetRef ref) {
     return runBreadthToEnd(ref);
   } else if (currentAlgorithm == AlgorithmType.depth) {
     return runDepthToEnd(ref);
+  } else if (currentAlgorithm == AlgorithmType.best) {
+    return runBestToEnd(ref);
+  } else if (currentAlgorithm == AlgorithmType.astar) {
+    return runStarToEnd(ref, RunningStyle.step);
   } else {
     return null;
   }

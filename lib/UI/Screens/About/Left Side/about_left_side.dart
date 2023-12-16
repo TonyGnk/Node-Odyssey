@@ -24,7 +24,12 @@ leftColumnAbout(String? version) => Column(
         headerText(aboutText[3], AboutTextSize.medium),
         const SizedBox(height: 10),
         headerText(aboutText[4], AboutTextSize.small),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
+        headerText(aboutText[5], AboutTextSize.small),
+        const SizedBox(height: 10),
+        headerText(aboutText[6], AboutTextSize.small),
+        const SizedBox(height: 10),
+        headerText(aboutText[7], AboutTextSize.small),
         actionsRow(version ?? ''),
       ],
     );

@@ -1,29 +1,28 @@
+import 'dart:async';
 import 'dart:collection';
 
-import '../../Services/Public Search Bar/closed_search.dart';
-import '../../Services/six_calculations.dart';
-import '../../Services/Public Search Bar/check_box_search.dart';
-import '../Astar/algorithm_astar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-List<Node>? runBestTerminal() {
+import '../../Services/Tree Widgets/tree_helpler.dart';
+import '../../Services/Public Search Bar/Search Call/call_helper.dart';
+import '../../Services/Public Search Bar/check_box_search.dart';
+import '../../Services/Public Search Bar/closed_search.dart';
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
+import '../../Services/six_calculations.dart';
+import 'bst_step_helper.dart';
+
+Future<List<Node>> runBestAsync(WidgetRef ref, RunningStyle style) async {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
+  DateTime startTime = DateTime.now();
 
   ListQueue<List<Node>> queue = ListQueue();
-  Set<int> visited = {};
-  List<List<int?>> treeList = [
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-  ];
-  List<int?> treeListSmall = [null, null, null, null, null, null];
+  List<List<int?>> treeList = List.filled(6, List<int?>.filled(6, null));
+  List<int?> treeListSmall = List.filled(6, null);
   bool founded = false;
 
   queue.add([Node(start, 0, 'Initial Value')]);
-  visited.add(start);
+  Set<int> visited = {start};
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
@@ -36,14 +35,16 @@ List<Node>? runBestTerminal() {
     }
   }
 
-  while (queue.isNotEmpty) {
+  while (queue.isNotEmpty &&
+      DateTime.now().difference(startTime).inSeconds < timeLimit) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
-    //Check For Solution itself
+    setKingLeafs(treeListSmall, ref);
+    updateGraphicalContent(ref, current, end, visited.length);
+
     if (current.value == end) return currentPath;
 
-    //Check For Solution in First Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] != null) {
         if (treeListSmall[i] == end) {
@@ -61,7 +62,6 @@ List<Node>? runBestTerminal() {
     }
     if (founded) continue;
 
-    //Open the Grand Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] == null) {
         treeList[i] = [null, null, null, null, null, null];
@@ -80,7 +80,8 @@ List<Node>? runBestTerminal() {
         treeList[i] = temp;
       }
     }
-    Map map = findSmallest(treeList, treeListSmall, end);
+    setLeafs(treeList, ref);
+    Map map = findSmallest(treeList, end);
     int rightNodePosition = map['minListIndex'];
     int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
 
@@ -94,17 +95,11 @@ List<Node>? runBestTerminal() {
     queue.add(newPath);
     visited.add(rightNode.value);
 
-    //Update the list small. Store the list of the smallest value in a variable
     treeListSmall = treeList[rightNodePosition];
-    treeList = [
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-    ];
+    treeList = List.filled(6, List<int?>.filled(6, null));
+
+    await Future.delayed(Duration(milliseconds: searchSpeed));
   }
 
-  return null;
+  return [];
 }

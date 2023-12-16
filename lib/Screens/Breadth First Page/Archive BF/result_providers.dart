@@ -15,7 +15,7 @@ void addResultPanelList(
   if (solution == null) {
     ref.read(resListProvider.notifier).state.addTile(
           0,
-          'Δεν υπάρχει λύση',
+          'No Solution',
           ref,
         );
   } else {

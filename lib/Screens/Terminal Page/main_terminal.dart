@@ -32,6 +32,8 @@ class _TerminalSideState extends ConsumerState<TerminalSide> {
               centerAppBarText('Terminal'),
               const SizedBox(height: 40),
               Expanded(child: textFieldContainer()),
+              const SizedBox(height: 10),
+              informationBox(),
             ],
           ),
         ),
@@ -59,7 +61,7 @@ boxDecoration(BuildContext context) => BoxDecoration(
     );
 
 contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
-      final terminalContent = ref.watch(terminalContentProvider);
+      final terminalContent = ref.watch(terminalOutput);
       return ListView(
         dragStartBehavior: DragStartBehavior.down,
         children: [
@@ -98,3 +100,57 @@ onSubmittedTextField(WidgetRef ref, String value) async {
   analyzeTheText(ref);
   addText(value, ref);
 }
+
+informationBox() => Consumer(
+      builder: (context, WidgetRef ref, __) => Container(
+        height: 42,
+        decoration: boxDecoration(context),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: SelectionArea(
+            child: Row(
+              children: [
+                const SizedBox(width: 10),
+                //Icon info
+                Icon(
+                  Icons.help_outline_outlined,
+                  color: Theme.of(context).colorScheme.onBackground,
+                  size: 22,
+                ),
+                const SizedBox(width: 10),
+                //Text info
+                // ignore: prefer_const_constructors
+
+                const Text(
+                  'Try to run ',
+                  style: TextStyle(fontSize: 14, fontFamily: 'Play'),
+                ),
+
+                Text(
+                  'breadth 10 150',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Play',
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const Text(
+                  ' or ',
+                  style: TextStyle(fontSize: 14, fontFamily: 'Play'),
+                ),
+                Text(
+                  'register.exe depth 5 30',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Play',
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );

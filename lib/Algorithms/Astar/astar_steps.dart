@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
@@ -6,40 +5,39 @@ import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
+import 'astar_helper.dart';
 
-ListQueue<List<Node>> queueBf = ListQueue();
-Set<int> visitedBf = {};
+Set<int> visited = {};
+PriorityQueue queue = PriorityQueue();
 
-List<Node>? runBreadthFirstStep(WidgetRef ref) {
+List<Node>? runStarFirstStep(WidgetRef ref, RunningStyle style) {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
 
-  queueBf.add([Node(start, 0, 'Initial Value')]);
-  visitedBf.add(start);
+  visited = {start};
+  queue = PriorityQueue([Node(start, 0, 'Initial Value')]);
 
-  List<Node> currentPath = queueBf.removeFirst();
-  Node current = currentPath.last;
+  Node current = queue.removeFirst();
 
-  updateGraphicalContent(ref, current, end, visitedBf.length);
+  updateGraphicalContent(ref, current, end, visited.length);
 
-  if (current.value == end) {
-    return currentPath;
-  }
+  if (current.value == end) return reconstructPath(current);
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
       int newValue = getNewValue(current.value, type);
       if (isAllowed(newValue, current.value, type)) {
-        if (!visitedBf.contains(newValue) || avoidVisitedIsDisable) {
-          Node newNode = getNewNode(
+        if (!visited.contains(newValue)) {
+          Node newNode = getNewNodeZ(
+            current,
             current.value,
             current.cost,
             newValue,
             type,
           );
-          List<Node> newPath = List.from(currentPath)..add(newNode);
-          queueBf.add(newPath);
-          visitedBf.add(newNode.value);
+          newNode.setDistance(end);
+          queue.add(newNode);
+          visited.add(newNode.value);
         }
       }
     }
@@ -48,32 +46,29 @@ List<Node>? runBreadthFirstStep(WidgetRef ref) {
   return null;
 }
 
-List<Node>? runBreadthStep(WidgetRef ref) {
+List<Node>? runStarStep(WidgetRef ref, RunningStyle style) {
   int end = int.parse(targetController.text);
 
-  List<Node> currentPath = queueBf.removeFirst();
-  Node current = currentPath.last;
+  Node current = queue.removeFirst();
+  updateGraphicalContent(ref, current, end, visited.length);
 
-  updateGraphicalContent(ref, current, end, visitedBf.length);
-
-  if (current.value == end) {
-    return currentPath;
-  }
+  if (current.value == end) return reconstructPath(current);
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
       int newValue = getNewValue(current.value, type);
       if (isAllowed(newValue, current.value, type)) {
-        if (!visitedBf.contains(newValue) || avoidVisitedIsDisable) {
-          Node newNode = getNewNode(
+        if (!visited.contains(newValue)) {
+          Node newNode = getNewNodeZ(
+            current,
             current.value,
             current.cost,
             newValue,
             type,
           );
-          List<Node> newPath = List.from(currentPath)..add(newNode);
-          queueBf.add(newPath);
-          visitedBf.add(newNode.value);
+          newNode.setDistance(end);
+          queue.add(newNode);
+          visited.add(newNode.value);
         }
       }
     }
@@ -82,41 +77,42 @@ List<Node>? runBreadthStep(WidgetRef ref) {
   return null;
 }
 
-List<Node>? runBreadthToEnd(WidgetRef ref) {
+List<Node> runStarToEnd(WidgetRef ref, RunningStyle style) {
   int end = int.parse(targetController.text);
   DateTime startTime = DateTime.now();
 
-  while (queueBf.isNotEmpty) {
+  while (!queue.isEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
-      queueBf.clear();
+      queue.clear();
+      updateTracking(ref, style);
       break;
     }
 
-    List<Node> currentPath = queueBf.removeFirst();
-    Node current = currentPath.last;
+    Node current = queue.removeFirst();
+    updateTracking(ref, style, current);
 
-    updateGraphicalContent(ref, current, end, visitedBf.length);
-
-    if (current.value == end) return currentPath;
+    if (current.value == end) return reconstructPath(current);
 
     for (CalculationType type in CalculationType.values) {
       if (enabledOperations[type]!) {
         int newValue = getNewValue(current.value, type);
         if (isAllowed(newValue, current.value, type)) {
-          if (!visitedBf.contains(newValue) || avoidVisitedIsDisable) {
-            Node newNode = getNewNode(
+          if (!visited.contains(newValue)) {
+            Node newNode = getNewNodeZ(
+              current,
               current.value,
               current.cost,
               newValue,
               type,
             );
-            List<Node> newPath = List.from(currentPath)..add(newNode);
-            queueBf.add(newPath);
-            visitedBf.add(newNode.value);
+            newNode.setDistance(end);
+            queue.add(newNode);
+            visited.add(newNode.value);
           }
         }
       }
     }
   }
-  return null;
+
+  return [];
 }

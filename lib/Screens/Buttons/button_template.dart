@@ -103,7 +103,7 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           Icon(
             widget.icon,
             size: 60,
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ],
       );

@@ -30,7 +30,7 @@ void buttonReturn(WidgetRef ref) {
   clearSaved(ref);
   closeTheExtraOptions(ref);
   ref.read(stepModeProvider.notifier).state = false;
-  resetControllers();
+  resetControllers(ref);
   ref.read(runOnceProvider.notifier).state = false;
   updateAppBarItems(ref, true);
   resetCompareResults(ref);

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/Breadth First Page/Archive BF/result_providers.dart';
+import '../Public Search Bar/Search Call/call_helper.dart';
 import '../public_left_column.dart';
+import '../tracking_container.dart';
 
 Widget resultPanel() => Consumer(builder: (context, ref, _) {
       // ignore: unused_local_variable
@@ -46,7 +48,11 @@ Widget resultsAppBar(
           icon: const Icon(Icons.insights_outlined),
         ),
         IconButton(
-          onPressed: () => ref.read(runOnceProvider.notifier).state = false,
+          onPressed: () {
+            ref.read(runOnceProvider.notifier).state = false;
+            clearGUI(ref);
+            addTrackingContainerRolling(ref);
+          },
           icon: const Icon(Icons.close),
         ),
       ],

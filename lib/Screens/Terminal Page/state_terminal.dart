@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../Services/constants.dart';
 import '../../UI/Routed Screen/app_bar.dart';
@@ -23,7 +24,7 @@ terminalReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
 
   //Set Functioning stuff
-  myFocusNode.requestFocus();
+  UniversalPlatform.isWeb ? null : myFocusNode.requestFocus();
 
   updateAppBarItems(ref, true);
 }
@@ -45,6 +46,6 @@ animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
 
 restartTerminalButton(WidgetRef ref) =>
     appBarIcon(const Icon(Icons.restart_alt_outlined), () {
-      ref.read(terminalContentProvider.notifier).state = windowsText;
-      myFocusNode.requestFocus();
+      ref.read(terminalOutput.notifier).state = windowsText;
+      UniversalPlatform.isWeb ? null : myFocusNode.requestFocus();
     }, 'Reset Terminal');

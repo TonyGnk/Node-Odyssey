@@ -287,6 +287,7 @@ class _Label extends StatelessWidget {
                 ),
               ),
               alignment: Alignment.bottomCenter,
+              // ignore: deprecated_member_use_from_same_package
               child: item.title ?? Text(item.label!),
             ),
           ),

@@ -1,0 +1,10 @@
+9, 126
+Double 4 2
+Square 16 6
+Decrease 15 8
+Double 30 17
+Decrease 29 19
+Double 58 35
+Double 116 65
+Double 232 124
+Decrease 231 126

@@ -6,7 +6,7 @@ import '../../../Services/tracking_container.dart';
 
 Widget trackingStage(BuildContext context) => Consumer(
       builder: (context, ref, _) {
-        final trackingList = ref.watch(trackingListProvider);
+        final trackingList = ref.watch(trackingProvider);
         // ignore: unused_local_variable
         final updater = ref.watch(trackUpdater);
         return Column(

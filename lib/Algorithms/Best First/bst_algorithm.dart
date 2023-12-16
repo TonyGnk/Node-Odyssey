@@ -2,32 +2,26 @@ import 'dart:collection';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/Tree Widgets/tree_helpler.dart';
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
-import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
+import 'bst_step_helper.dart';
 
-Future<List<Node>?> runBest(WidgetRef ref) async {
+List<Node> runBest(WidgetRef ref, RunningStyle style) {
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
+  DateTime startTime = DateTime.now();
 
   ListQueue<List<Node>> queue = ListQueue();
-  Set<int> visited = {};
-  List<List<int?>> treeList = [
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-  ];
-  List<int?> treeListSmall = [null, null, null, null, null, null];
+  List<List<int?>> treeList = List.filled(6, List<int?>.filled(6, null));
+  List<int?> treeListSmall = List.filled(6, null);
   bool founded = false;
 
   queue.add([Node(start, 0, 'Initial Value')]);
-  visited.add(start);
+  Set<int> visited = {start};
 
   for (CalculationType type in CalculationType.values) {
     if (enabledOperations[type]!) {
@@ -40,17 +34,16 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
     }
   }
 
-  while (queue.isNotEmpty) {
+  while (queue.isNotEmpty &&
+      DateTime.now().difference(startTime).inSeconds < timeLimit) {
     List<Node> currentPath = queue.removeFirst();
     Node current = currentPath.last;
 
     setKingLeafs(treeListSmall, ref);
-    updateChartAndTrackingPanel(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
-    //Check For Solution itself
     if (current.value == end) return currentPath;
 
-    //Check For Solution in First Children
     for (int i = 0; i < treeListSmall.length; i++) {
       if (treeListSmall[i] != null) {
         if (treeListSmall[i] == end) {
@@ -60,20 +53,27 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
             treeListSmall[i] ?? 0,
             positionToType(i),
           );
+          // Δημιουργία νέου μονοπατιού και προσθήκη του νέου κόμβου
           List<Node> newPath = List.from(currentPath)..add(rightNode);
+          // Προσθήκη του νέου μονοπατιού στην ουρά
           queue.add(newPath);
+          // Ορίζουμε ότι βρήκαμε τον τελικό κόμβο
           founded = true;
         }
       }
     }
+    // Εάν βρήκαμε τον τελικό κόμβο, συνεχίζουμε στην επόμενη επανάληψη
     if (founded) continue;
 
-    //Open the Grand Children
     for (int i = 0; i < treeListSmall.length; i++) {
+      // Εάν η τιμή στη θέση i είναι null
       if (treeListSmall[i] == null) {
-        treeList[i] = [null, null, null, null, null, null];
+        // Ορίζουμε τη λίστα στη θέση i ως null
+        treeList[i] = List.filled(6, null);
       } else {
-        List<int?> temp = [null, null, null, null, null, null];
+        // Δημιουργία προσωρινής λίστας
+        List<int?> temp = List.filled(6, null);
+        // Διατρέχουμε όλους τους δυνατούς τύπους υπολογισμών
         for (CalculationType type in CalculationType.values) {
           if (enabledOperations[type]!) {
             int newValue = getNewValue(treeListSmall[i], type);
@@ -84,78 +84,35 @@ Future<List<Node>?> runBest(WidgetRef ref) async {
             }
           }
         }
+        // Ορίζουμε τη λίστα στη θέση i ως την προσωρινή λίστα
         treeList[i] = temp;
       }
     }
+    // Βρίσκουμε τον κόμβο με την ελάχιστη τιμή
     setLeafs(treeList, ref);
-    Map map = findSmallest(treeList, treeListSmall, end);
+    Map map = findSmallest(treeList, end);
     int rightNodePosition = map['minListIndex'];
     int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
 
+    // Δημιουργία νέου κόμβου
     Node rightNode = getNewNode(
       current.value,
       current.cost,
       rightNodeValue,
       positionToType(rightNodePosition),
     );
+    // Δημιουργία νέου μονοπατιού και προσθήκη του νέου κόμβου
     List<Node> newPath = List.from(currentPath)..add(rightNode);
+    // Προσθήκη του νέου μονοπατιού στην ουρά
     queue.add(newPath);
+    // Προσθήκη της τιμής του νέου κόμβου στη λίστα των επισκεπτόμενων
     visited.add(rightNode.value);
 
-    //Update the list small. Store the list of the smallest value in a variable
+    // Ενημέρωση της λίστας με τις μικρότερες τιμές
     treeListSmall = treeList[rightNodePosition];
-    treeList = [
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-    ];
-    await Future.delayed(Duration(milliseconds: searchSpeed));
+    // Επαναφορά της λίστας του δέντρου
+    treeList = List.filled(6, List<int?>.filled(6, null));
   }
 
-  return null;
-}
-
-findSmallest(List<List<int?>> treeList, List<int?> treeListSmall, int target) {
-  int? minValue;
-  int? minListIndex;
-  int? minValueIndex;
-
-  for (int i = 0; i < treeList.length; i++) {
-    for (int j = 0; j < treeList[i].length; j++) {
-      if (treeList[i][j] != null) {
-        int temp = (target - treeList[i][j]!).abs();
-        if (minValue == null || temp < minValue) {
-          minValue = temp;
-          minListIndex = i;
-          minValueIndex = j;
-        }
-      }
-    }
-  }
-
-  return {
-    'minListIndex': minListIndex,
-    'minValueIndex': minValueIndex,
-  };
-}
-
-//switch (type) if addition then 0 if subtraction then 1 etc
-getPosition(type) {
-  switch (type) {
-    case CalculationType.addition:
-      return 0;
-    case CalculationType.subtraction:
-      return 1;
-    case CalculationType.multiplication:
-      return 2;
-    case CalculationType.division:
-      return 3;
-    case CalculationType.exponential:
-      return 4;
-    case CalculationType.square:
-      return 5;
-  }
+  return [];
 }

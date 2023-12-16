@@ -38,12 +38,12 @@ final isCanceled = StateProvider<bool>((ref) => false);
 
 updateColors(WidgetRef ref) async {
   Random random = Random();
-  int randomRed = random.nextInt(60);
-  int randomGreen = random.nextInt(60);
-  int randomBlue = random.nextInt(50);
+  int randomRed = random.nextInt(30);
+  //int randomGreen = random.nextInt(30);
+  int randomBlue = random.nextInt(30);
   Color newColor = Color.fromRGBO(
     17 + randomRed,
-    87 + randomGreen,
+    100,
     204 + randomBlue,
     ref.read(isCanceled.notifier).state ? 0 : 0.5,
   );
@@ -74,3 +74,6 @@ hideColors(WidgetRef ref) async {
     ref.read(glassColor2.notifier).state = Color.fromRGBO(32, 102, 224, 0);
   });
 }
+
+//provider  bool
+final hideBackground = StateProvider<bool>((ref) => false);

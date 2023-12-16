@@ -1,12 +1,13 @@
 import 'dart:math';
 
 class Node {
-  Node(this.value, this.cost, this.operation);
+  Node(this.value, this.cost, this.operation, [this.parent]);
 
-  late int value;
-  late int cost;
-  late String operation;
+  final int value;
+  final int cost;
+  final String operation;
   late int distance;
+  final Node? parent;
 
   setDistance(int target) {
     distance = (target - value).abs();
@@ -22,7 +23,12 @@ enum CalculationType {
   square,
 }
 
-getNewValue(int? value, CalculationType type) {
+enum RunningStyle { instant, terminal, step, normal }
+
+getNewValue(
+  int? value,
+  CalculationType type,
+) {
   if (value == null) return 0;
   switch (type) {
     case CalculationType.addition:
@@ -42,13 +48,17 @@ getNewValue(int? value, CalculationType type) {
   }
 }
 
-bool isAllowed(int newValue, int? value, CalculationType type) {
+isAllowed(
+  int newValue,
+  int? value,
+  CalculationType type,
+) {
   if (value == null) return false;
   switch (type) {
     case CalculationType.addition:
       return newValue < pow(10, 9);
     case CalculationType.subtraction:
-      return newValue >= 0; // The = is not in the assignment
+      return newValue >= 0;
     case CalculationType.multiplication:
       return newValue / 2 > 0 && newValue < pow(10, 9);
     case CalculationType.division:
@@ -60,7 +70,7 @@ bool isAllowed(int newValue, int? value, CalculationType type) {
   }
 }
 
-positionToType(int pos) {
+positionToType(int? pos) {
   switch (pos) {
     case 0:
       return CalculationType.addition;
@@ -79,51 +89,55 @@ positionToType(int pos) {
   }
 }
 
-Node getNewNode(int value, int cost, int newValue, CalculationType type) {
+Node getNewNode(
+  int value,
+  int cost,
+  int newValue,
+  CalculationType type,
+) {
   switch (type) {
     case CalculationType.addition:
       return Node(
         newValue,
         cost + 2,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     case CalculationType.subtraction:
       return Node(
         newValue,
         cost + 2,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     case CalculationType.multiplication:
       return Node(
         newValue,
         cost + (value / 2).ceil() + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     case CalculationType.division:
       return Node(
         newValue,
         cost + (value / 4).ceil() + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     case CalculationType.exponential:
       return Node(
         newValue,
         cost + ((value * value - value) ~/ 4 + 1).toInt(),
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     case CalculationType.square:
       return Node(
         newValue,
         cost + (value - newValue.toInt()) ~/ 4 + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
       );
     default:
       return Node(newValue, cost, '');
   }
 }
 
-//Create map. First is Calculation Type, second is the String 'Ρίζα, Τετράγωνο, Πολ/σιασμός επί 2, Διαίρεση με 2, Πρόσθεση κατά 1, Αφαίρεση κατά 1' etc
-Map<CalculationType, String> getCalculationTypeMap() => {
+Map<CalculationType, String> getCalculationName() => {
       CalculationType.addition: 'Increase',
       CalculationType.subtraction: 'Decrease',
       CalculationType.multiplication: 'Double',

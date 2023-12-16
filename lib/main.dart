@@ -11,19 +11,19 @@ void main() async {
   if (!UniversalPlatform.isWeb) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      fullScreen: false,
+      //     fullScreen: false,
       title: 'Node Odyssey',
       size: Size(1050, 660), //1050-660
-      center: false,
+      //     center: false,
       backgroundColor: Colors.transparent,
-      skipTaskbar: false,
+      //     skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
-      windowButtonVisibility: false,
+      //     windowButtonVisibility: false,
     );
 
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
+    windowManager.waitUntilReadyToShow(windowOptions, () {
+      //     await windowManager.show();
+      //     await windowManager.focus();
     });
   }
 

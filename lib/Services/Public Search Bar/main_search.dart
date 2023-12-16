@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Tree Widgets/providers_tree.dart';
+import '../Tree Widgets/tree_helpler.dart';
+import '../Tree Widgets/tree_star.dart';
 import '../constants.dart';
 import 'Search Call/submit_function_step.dart';
 import 'check_box_search.dart';
@@ -26,7 +29,7 @@ publicSearchBar(bool compareMode) => Consumer(builder: (context, ref, _) {
 findHeight(bool moreOptions, bool stepMode, bool compareMode) {
   if (stepMode) return 106.0;
   if (compareMode && moreOptions) return 215.0;
-  if (moreOptions) return 291.0;
+  if (moreOptions) return 331.0;
   return 50.0;
 }
 
@@ -62,13 +65,17 @@ Widget extraOptions(bool compareMode) => Column(
         rowOfChecks(),
         const SizedBox(height: 2),
         customSwitch(),
+        timerSwitch(),
         !compareMode ? stepRow() : const SizedBox(),
       ],
     );
 
-void resetControllers() {
+void resetControllers(WidgetRef ref) {
   inputController.clear();
   targetController.clear();
+  clearLeafs(ref);
+  clearKings(ref);
+  ref.read(throneProvider.notifier).state = null;
 }
 
 stepRow() => Consumer(
