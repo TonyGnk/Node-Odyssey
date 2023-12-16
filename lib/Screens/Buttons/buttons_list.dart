@@ -38,7 +38,7 @@ const bfButton = ButtonTemplate(
 );
 
 const dfButton = ButtonTemplate(
-  title: 'Depth First', //TODO
+  title: 'Depth First',
   slogan: 'Go Deep!',
   description:
       'Delve deep into possibilities, prioritizing depth for efficient solving',

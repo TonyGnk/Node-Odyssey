@@ -19,14 +19,13 @@ class BackgroundWall extends ConsumerStatefulWidget {
 }
 
 class _BackgroundWallState extends ConsumerState<BackgroundWall> {
-  late Timer timer;
-
   //Every 30 sec change the color
   _BackgroundWallState() {
     timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       updateColors(ref);
     });
   }
+  late Timer timer;
 
   @override
   void initState() {
@@ -78,7 +77,6 @@ class _BackgroundWallState extends ConsumerState<BackgroundWall> {
   blueBall() {
     final color1 = ref.watch(glassColor1);
     final color2 = ref.watch(glassColor2);
-    final duration = ref.watch(durationProvider);
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       height: 400 * MediaQuery.of(context).size.height / 620,
