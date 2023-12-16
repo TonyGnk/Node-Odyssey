@@ -22,7 +22,6 @@
 		"**/linux": true,
 		"**/android": true,
 		//hide readme
-		"**/README.md": true,
 		// hide .vscode
 		"**/.vscode": true,
 		//hide analysis_options.yaml

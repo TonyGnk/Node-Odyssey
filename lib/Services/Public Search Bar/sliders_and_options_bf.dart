@@ -101,7 +101,7 @@ customSwitch() => Consumer(
     );
 
 final enableTimer = StateProvider<bool>((ref) => true);
-int timeLimit = 6; //TODO to 55
+int timeLimit = 55;
 
 timerSwitch() => Consumer(
       builder: (context, ref, _) {
