@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Services/Public Search Bar/closed_search.dart';
 import '../../../Services/Tree Widgets/container_tree.dart';
 import '../../../Services/constants.dart';
 import '../../../Services/tracking_container.dart';
@@ -26,7 +27,7 @@ Widget containerZ() => Consumer(
             Row(
               children: [
                 chartLabelsColumn(context),
-                Expanded(child: chartLister(boxList)),
+                Expanded(child: stack(boxList)),
               ],
             ),
           ),
@@ -47,6 +48,46 @@ Widget chartContainer(BuildContext context, Widget child) => Container(
       clipBehavior: Clip.antiAlias,
       child: child,
     );
+
+Stack stack(List<Column> boxList) => Stack(
+      children: [
+        chartLister(boxList),
+        indicator(),
+      ],
+    );
+
+//Provider int
+final targetProvider = StateProvider<int>((ref) => 0);
+
+indicator() => Consumer(builder: (context, ref, _) {
+      final targetController = ref.watch(targetProvider);
+      return Column(
+        children: [
+          Expanded(
+            flex: 1000 - findFlex2(targetController),
+            child: Container(),
+          ),
+          Container(
+            height: 0.6,
+            color: Colors.orange.withOpacity(0.8),
+          ),
+          Expanded(
+            flex: findFlex2(targetController),
+            child: Container(),
+          ),
+        ],
+      );
+    });
+
+//Find flex1 function with given width
+int findFlex2(int width) {
+  double logOfWidth = log(width + 1);
+  logOfWidth = logOfWidth / log(1.0219);
+  double doubleFlex2 = logOfWidth / 9.565920679129044;
+  doubleFlex2 = doubleFlex2 * 10;
+  int flex2 = doubleFlex2.toInt();
+  return flex2;
+}
 
 Widget chartLister(List<Column> boxList) => Listener(
       onPointerSignal: (event) {
