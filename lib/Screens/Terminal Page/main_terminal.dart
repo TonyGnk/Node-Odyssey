@@ -1,11 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/constants.dart';
-import '../screen_list.dart';
 import 'terminal_providers.dart';
 import 'terminal_functions.dart';
 import 'state_terminal.dart';
