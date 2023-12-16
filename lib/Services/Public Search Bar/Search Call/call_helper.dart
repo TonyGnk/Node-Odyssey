@@ -49,9 +49,9 @@ updateTracking(WidgetRef ref, RunningStyle style, [Node? current]) {
         .state
         .addTile(current.value, current.operation, ref);
     addTrackingContainer(ref, current.value);
-    if (currentAlgorithm == AlgorithmType.astar) {
-      starTree(ref, current);
-    }
+    // if (currentAlgorithm == AlgorithmType.astar) {
+    //   starTree(ref, current);
+    // }
   }
 }
 
