@@ -24,7 +24,7 @@ List<Node> runStar(WidgetRef ref, RunningStyle style) {
     // Αφαίρεση του πρώτου κόμβου από την ουρά
     Node current = queue.removeFirst();
     // Ενημέρωση του γραφικού περιεχομένου
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
     // Εάν ο τρέχων κόμβος είναι ο τελικός, επιστροφή της διαδρομής
     if (current.value == end) return reconstructPath(current);
@@ -71,7 +71,7 @@ Future<List<Node>> runStarAsync(WidgetRef ref, RunningStyle style) async {
   while (!queue.isEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
     Node current = queue.removeFirst();
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
     if (current.value == end) return reconstructPath(current);
 

@@ -33,7 +33,7 @@ List<Node> runDepth(WidgetRef ref, RunningStyle style) {
     Node current = currentPath.last;
 
     // Ενημέρωση του γραφικού περιεχομένου
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
     // Έλεγχος αν έχουμε φτάσει στον τελικό κόμβο
     if (current.value == end) return currentPath;
@@ -89,7 +89,7 @@ Future<List<Node>> runDepthAsync(WidgetRef ref, RunningStyle style) async {
     List<Node> currentPath = stack.removeLast();
     Node current = currentPath.last;
 
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
     if (current.value == end) return currentPath;
 

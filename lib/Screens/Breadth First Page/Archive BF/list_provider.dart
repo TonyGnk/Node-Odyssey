@@ -56,8 +56,3 @@ Widget simpleContainer(BuildContext context) => Container(
 final chartColumnsProvider = StateProvider<List<Column>>(
   (ref) => [],
 );
-
-//function for clearing trackingBox
-// void clearCharts(WidgetRef ref) {
-//   ref.read(chartColumnsProvider.notifier).state.clear();
-// }

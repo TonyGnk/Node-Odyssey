@@ -20,7 +20,7 @@ List<Node>? runBreadthFirstStep(WidgetRef ref) {
   List<Node> currentPath = queueBf.removeFirst();
   Node current = currentPath.last;
 
-  updateGraphicalContent(ref, current, end);
+  updateGraphicalContent(ref, current, end, visitedBf.length);
 
   if (current.value == end) {
     return currentPath;
@@ -54,7 +54,7 @@ List<Node>? runBreadthStep(WidgetRef ref) {
   List<Node> currentPath = queueBf.removeFirst();
   Node current = currentPath.last;
 
-  updateGraphicalContent(ref, current, end);
+  updateGraphicalContent(ref, current, end, visitedBf.length);
 
   if (current.value == end) {
     return currentPath;
@@ -95,7 +95,7 @@ List<Node>? runBreadthToEnd(WidgetRef ref) {
     List<Node> currentPath = queueBf.removeFirst();
     Node current = currentPath.last;
 
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visitedBf.length);
 
     if (current.value == end) return currentPath;
 

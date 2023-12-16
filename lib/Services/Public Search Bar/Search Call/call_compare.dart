@@ -24,7 +24,7 @@ onButtonCompare(WidgetRef ref) async {
     ref.read(isBreadthCompareRuns.notifier).state = false;
     if (solution.isNotEmpty) {
       ref.read(breadthSolution.notifier).state = CompareSolution(
-          solution.last.cost.toString(), solution.length.toString());
+          solution.last.cost.toString(), (solution.length - 1).toString());
       print(
           'Solution of Breadth: Cost:${solution.last.cost} Count:${solution.length}');
     }
@@ -38,7 +38,7 @@ onButtonCompare(WidgetRef ref) async {
     ref.read(isDepthCompareRuns.notifier).state = false;
     if (solution.isNotEmpty) {
       ref.read(depthSolution.notifier).state = CompareSolution(
-          solution.last.cost.toString(), solution.length.toString());
+          solution.last.cost.toString(), (solution.length - 1).toString());
       print(
           'Solution of Depth: Cost:${solution.last.cost} Count:${solution.length}');
     }
@@ -52,7 +52,7 @@ onButtonCompare(WidgetRef ref) async {
     ref.read(isBestCompareRuns.notifier).state = false;
     if (solution.isNotEmpty) {
       ref.read(bestSolution.notifier).state = CompareSolution(
-          solution.last.cost.toString(), solution.length.toString());
+          solution.last.cost.toString(), (solution.length - 1).toString());
       print(
           'Solution of Best: Cost:${solution.last.cost} Count:${solution.length}');
     }

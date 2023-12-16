@@ -36,7 +36,6 @@ List<Node>? runBestToEnd(WidgetRef ref) {
   while (queueBsf.isNotEmpty) {
     if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
       queueBsf.clear();
-      updateGraphicalContent(ref, Node(0, 0, 'Time Out'), end);
       break;
     }
 
@@ -44,7 +43,7 @@ List<Node>? runBestToEnd(WidgetRef ref) {
     Node current = currentPath.last;
 
     setKingLeafs(treeListSmallBsf, ref);
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visitedBsf.length);
 
     //Check For Solution itself
     if (current.value == end) {

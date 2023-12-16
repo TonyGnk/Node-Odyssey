@@ -40,7 +40,7 @@ List<Node> runBest(WidgetRef ref, RunningStyle style) {
     Node current = currentPath.last;
 
     setKingLeafs(treeListSmall, ref);
-    updateGraphicalContent(ref, current, end);
+    updateGraphicalContent(ref, current, end, visited.length);
 
     if (current.value == end) return currentPath;
 

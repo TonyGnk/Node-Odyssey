@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Screens/Breadth First Page/Chart BF/chart_bf.dart';
+import '../../Public Tracking Area/public_tracking_stage.dart';
 import '../../Tree Widgets/providers_tree.dart';
 import '../../Tree Widgets/tree_helpler.dart';
 import '../../../Screens/Breadth First Page/Archive BF/result_providers.dart';
@@ -37,11 +38,12 @@ clearGUICompare(WidgetRef ref) {
   ref.read(aStarSolution.notifier).state = CompareSolution();
 }
 
-updateGraphicalContent(WidgetRef ref, Node node, int end) {
+updateGraphicalContent(WidgetRef ref, Node node, int end, int visited) {
   ref.read(targetProvider.notifier).state = end;
   ref.watch(trackingProvider).addTile(node.value, node.operation, ref);
   addTrackingContainer(ref, node.value);
   ref.read(throneProvider.notifier).state = node.value;
+  ref.read(visitedLength.notifier).state = visited;
 }
 
 updateTracking(WidgetRef ref, RunningStyle style, [Node? current]) {

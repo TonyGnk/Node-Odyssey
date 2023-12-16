@@ -19,7 +19,7 @@ List<Node>? runStarFirstStep(WidgetRef ref, RunningStyle style) {
 
   Node current = queue.removeFirst();
 
-  updateGraphicalContent(ref, current, end);
+  updateGraphicalContent(ref, current, end, visited.length);
 
   if (current.value == end) return reconstructPath(current);
 
@@ -50,7 +50,7 @@ List<Node>? runStarStep(WidgetRef ref, RunningStyle style) {
   int end = int.parse(targetController.text);
 
   Node current = queue.removeFirst();
-  updateGraphicalContent(ref, current, end);
+  updateGraphicalContent(ref, current, end, visited.length);
 
   if (current.value == end) return reconstructPath(current);
 

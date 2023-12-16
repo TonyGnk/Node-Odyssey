@@ -61,7 +61,7 @@ List<Node>? runBestFirstStep(WidgetRef ref) {
   currentBsf = currentPathBsf.last;
 
   ref.read(throneProvider.notifier).state = currentBsf.value;
-  updateGraphicalContent(ref, currentBsf, end);
+  updateGraphicalContent(ref, currentBsf, end, visitedBsf.length);
 
   if (currentBsf.value == end) {
     return currentPathBsf;
