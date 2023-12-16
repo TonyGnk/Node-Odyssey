@@ -46,6 +46,6 @@ animatedColumn(Widget child) => Consumer(builder: (context, ref, _) {
 
 restartTerminalButton(WidgetRef ref) =>
     appBarIcon(const Icon(Icons.restart_alt_outlined), () {
-      ref.read(terminalContentProvider.notifier).state = windowsText;
+      ref.read(terminalOutput.notifier).state = windowsText;
       UniversalPlatform.isWeb ? null : myFocusNode.requestFocus();
     }, 'Reset Terminal');

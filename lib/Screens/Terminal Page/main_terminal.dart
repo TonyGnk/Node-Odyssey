@@ -61,7 +61,7 @@ boxDecoration(BuildContext context) => BoxDecoration(
     );
 
 contentOfTerminal() => Consumer(builder: (context, WidgetRef ref, __) {
-      final terminalContent = ref.watch(terminalContentProvider);
+      final terminalContent = ref.watch(terminalOutput);
       return ListView(
         dragStartBehavior: DragStartBehavior.down,
         children: [

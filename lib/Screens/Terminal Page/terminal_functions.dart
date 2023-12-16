@@ -15,17 +15,18 @@ analyzeTheText(WidgetRef ref) {
   //Split the text into words and Remove the System32
   List<String> words = text.text.split(' ');
   if (words[0] == system32Text) words.removeAt(0);
+  if (words[0] == 'register.exe') words.removeAt(0);
 
-  if (words.length < 4) {
+  if (words.length < 3) {
     myFocusNode.requestFocus();
     return;
   }
 
   //Get the algorithmType
-  currentAlgorithm = findType(words[1]);
+  currentAlgorithm = findType(words[0]);
 
-  int startValue = int.parse(words[2]);
-  int targetValue = int.parse(words[3]);
+  int startValue = int.parse(words[1]);
+  int targetValue = int.parse(words[2]);
   inputController = TextEditingController(text: startValue.toString());
   targetController = TextEditingController(text: targetValue.toString());
 
@@ -34,12 +35,12 @@ analyzeTheText(WidgetRef ref) {
   List<Node>? solution = startAlgorithm(ref, RunningStyle.terminal);
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
-  if (solution != null) newResult(ref, solution);
-  if (solution == null) {
-    //TODO
-    ref.read(terminalContentProvider.notifier).state +=
-        '\nNo Solution Found!\n';
-    return;
+  if (solution.isNotEmpty) {
+    newResult(ref, solution);
+    myFocusNode.requestFocus();
+  } else {
+    ref.read(terminalOutput.notifier).state += '\nTime Out!\n';
+    myFocusNode.requestFocus();
   }
 }
 
@@ -60,14 +61,13 @@ AlgorithmType findType(String algorithm) {
 
 newResult(WidgetRef ref, List<Node>? solution) {
   if (solution == null) {
-    ref.read(terminalContentProvider.notifier).state +=
-        '\nNo Solution Found!\n';
+    ref.read(terminalOutput.notifier).state += '\nNo Solution Found!\n';
     return;
   }
 
   //Add the used textField to terminal content
   final text = ref.watch(controllerProvider);
-  ref.read(terminalContentProvider.notifier).state += '\n${text.text}\n';
+  ref.read(terminalOutput.notifier).state += '\n${text.text}\n';
 
   addTheLastResult(ref, solution);
   myFocusNode.requestFocus();
@@ -79,13 +79,12 @@ addTheLastResult(WidgetRef ref, List<Node> solution) {
   int totalCost = solution.last.cost;
 
   //Show the number of nodes and total cost
-  ref.read(terminalContentProvider.notifier).state +=
-      '$nodeCounter, $totalCost';
+  ref.read(terminalOutput.notifier).state += '$nodeCounter, $totalCost';
 
   Node node;
   for (int i = 1; i < solution.length; i++) {
     node = solution[i];
-    ref.read(terminalContentProvider.notifier).state +=
+    ref.read(terminalOutput.notifier).state +=
         '\n${node.operation} ${node.value}';
   }
 }
