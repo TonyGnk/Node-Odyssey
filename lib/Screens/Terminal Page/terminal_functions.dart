@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +38,9 @@ analyzeTheText(WidgetRef ref) {
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   if (solution.isNotEmpty) {
+    writeToFile(solution, 'solution.txt');
     newResult(ref, solution);
+
     myFocusNode.requestFocus();
   } else {
     ref.read(terminalOutput.notifier).state += '\nTime Out!\n';
@@ -57,6 +61,20 @@ AlgorithmType findType(String algorithm) {
     default:
       return AlgorithmType.breadth;
   }
+}
+
+void writeToFile(List<Node> dataList, String path) async {
+  final file = File(path);
+  // Write the file
+  //For every node write the operation and the value
+  String data = '';
+  //Add node count and cost of last
+  data += '${dataList.length - 1}, ${dataList.last.cost}\n';
+  for (int i = 1; i < dataList.length; i++) {
+    data +=
+        '${dataList[i].operation} ${dataList[i].value} ${dataList[i].cost}\n';
+  }
+  await file.writeAsString(data);
 }
 
 newResult(WidgetRef ref, List<Node>? solution) {
