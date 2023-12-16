@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/Tree Widgets/main_tree.dart';
 import '../../Services/public_left_column.dart';
 import '../Breadth First Page/Chart BF/chart_bf.dart';
 import 'astar_state.dart';
