@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
@@ -40,6 +41,12 @@ analyzeTheText(WidgetRef ref) {
   if (solution.isNotEmpty) {
     writeToFile(solution, 'solution.txt');
     newResult(ref, solution);
+    //If universal platform!=web
+    if (!UniversalPlatform.isWeb) {
+      ScaffoldMessenger.of(ref.context).showSnackBar(
+        snackBarText(ref.context, 'The solution is saved in solution.txt'),
+      );
+    }
 
     myFocusNode.requestFocus();
   } else {
@@ -106,3 +113,23 @@ addTheLastResult(WidgetRef ref, List<Node> solution) {
         '\n${node.operation} ${node.value}';
   }
 }
+
+snackBarText(
+  BuildContext context,
+  String message,
+) =>
+    SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontFamily: 'Play',
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cornerSize),
+      ),
+      showCloseIcon: false,
+      closeIconColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).shadowColor,
+    );

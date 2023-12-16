@@ -120,3 +120,23 @@ snackBar(
       closeIconColor: Theme.of(context).colorScheme.onBackground,
       backgroundColor: Theme.of(context).shadowColor,
     );
+
+snackBarText(
+  BuildContext context,
+  String message,
+) =>
+    SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontFamily: 'Play',
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cornerSize),
+      ),
+      showCloseIcon: false,
+      closeIconColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).shadowColor,
+    );
