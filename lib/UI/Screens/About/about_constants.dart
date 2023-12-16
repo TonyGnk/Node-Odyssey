@@ -19,13 +19,13 @@ const String githubApiUrl =
 final codeUrl = Uri(
   scheme: 'https',
   host: 'github.com',
-  path: 'TonyGnk/algorithms',
+  path: 'TonyGnk/Node-Odyssey',
 );
 
 final webUrl = Uri(
   scheme: 'https',
   host: 'tonygnk.github.io',
-  path: 'algorithms',
+  path: 'Node-Odyssey',
 );
 
 final flutterUrl = Uri(
