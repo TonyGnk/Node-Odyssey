@@ -40,7 +40,7 @@ final tonyGnkUrl = Uri(
 );
 
 const aboutText = [
-  'Node Odyssey',
+  'Node Odyssey', //TODO change that
   'Overview',
   'This Flutter app is designed to tackle problems through advanced algorithms, employing techniques like Breadth-First Search, Depth-First Search, Best First, and A*. It provides a versatile solution by taking a starting value, a target value, and allowing users to select the algorithm that best suits their needs.',
   'Functionality',

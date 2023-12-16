@@ -12,6 +12,7 @@ final opacityHomeState = StateProvider<double>((ref) => 0);
 final scaleHomeState = StateProvider<double>((ref) => 0.9);
 
 homeGo(WidgetRef ref, ScreenDestination destination) {
+  ref.read(hideBackground.notifier).state = true;
   updateAppBarItems(ref, false);
   hideColors(ref);
 
@@ -19,6 +20,7 @@ homeGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 homeReturn(WidgetRef ref) {
+  ref.read(hideBackground.notifier).state = false;
   ref.read(appBarPreviousScreen.notifier).state =
       ref.read(appBarCurrentScreen.notifier).state;
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.home;
