@@ -24,7 +24,10 @@ clearGUI(WidgetRef ref) {
   //Clear Tracking Panel
   ref.read(trackingProvider.notifier).state.clear();
   //Clear Tree
+  ref.read(targetProvider.notifier).state = 0;
+  ref.read(resultPanelList.notifier).state.clear();
   clearLeafs(ref);
+  addTrackingContainerRolling(ref);
 }
 
 clearGUICompare(WidgetRef ref) {

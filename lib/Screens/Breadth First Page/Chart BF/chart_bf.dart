@@ -65,15 +65,17 @@ indicator() => Consumer(builder: (context, ref, _) {
         children: [
           Expanded(
             flex: 1000 - findFlex2(targetController),
-            child: Container(),
+            child: SizedBox(),
           ),
           Container(
             height: 0.6,
-            color: Colors.orange.withOpacity(0.8),
+            color: targetController != 0
+                ? Colors.orange.withOpacity(0.8)
+                : Colors.transparent,
           ),
           Expanded(
             flex: findFlex2(targetController),
-            child: Container(),
+            child: SizedBox(),
           ),
         ],
       );

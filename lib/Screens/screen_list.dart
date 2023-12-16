@@ -12,7 +12,7 @@ import 'Best First Search/bsf_state.dart';
 import 'Best First Search/bsf_main.dart';
 import 'Breadth First Page/state_breadth.dart';
 import 'Breadth First Page/main_breadth.dart';
-import 'Buttons/buttons_main.dart';
+import 'Buttons/main_button.dart';
 import 'Buttons/state_button.dart';
 import 'Compare/main_compare.dart';
 import 'Compare/state_compare.dart';
