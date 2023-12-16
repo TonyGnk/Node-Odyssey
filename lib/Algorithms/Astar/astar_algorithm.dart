@@ -18,7 +18,7 @@ List<Node> runStar(WidgetRef ref, RunningStyle style) {
   while (!queue.isEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
     Node current = queue.removeFirst();
-    updateTracking(ref, style, current);
+    updateGraphicalContent(ref, current, end);
 
     if (current.value == end) return reconstructPath(current);
 
@@ -57,7 +57,7 @@ Future<List<Node>> runStarAsync(WidgetRef ref, RunningStyle style) async {
   while (!queue.isEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
     Node current = queue.removeFirst();
-    updateTracking(ref, style, current);
+    updateGraphicalContent(ref, current, end);
 
     if (current.value == end) return reconstructPath(current);
 

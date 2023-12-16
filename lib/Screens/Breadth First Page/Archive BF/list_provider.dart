@@ -35,7 +35,7 @@ void addTrackingContainer(WidgetRef ref, int height) {
             child: Tooltip(
               preferBelow: false,
               message: '$height',
-              child: simpleContainer(),
+              child: simpleContainer(ref.context),
             ),
           )
         ]),
@@ -43,11 +43,11 @@ void addTrackingContainer(WidgetRef ref, int height) {
 }
 
 //
-Widget simpleContainer() => Container(
+Widget simpleContainer(BuildContext context) => Container(
       width: 10,
       margin: const EdgeInsets.all(0.2),
       decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.7),
+        color: Theme.of(context).colorScheme.primary.withBlue(250),
       ),
     );
 

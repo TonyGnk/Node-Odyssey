@@ -21,9 +21,9 @@ starTree(WidgetRef ref, Node current) {
         setLeafs(ref, current, true);
         leafsDone = true;
       } else {
-        ref.read(throneProvider.notifier).state = current.value;
-        clearKings(ref);
-        clearLeafs(ref);
+        // ref.read(throneProvider.notifier).state = current.value;
+        // clearKings(ref);
+        // clearLeafs(ref);
         kingsDone = false;
         leafsDone = false;
       }

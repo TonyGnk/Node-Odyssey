@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/Tree Widgets/main_tree.dart';
 import '../../Services/public_left_column.dart';
+import '../Breadth First Page/Chart BF/chart_bf.dart';
 import 'astar_state.dart';
 
 class AStarAlg extends ConsumerStatefulWidget {
@@ -27,9 +28,9 @@ class _TerminalSideState extends ConsumerState<AStarAlg> {
         children: [
           publicLeftColumn(),
           const SizedBox(width: 10),
-          const Expanded(
+          Expanded(
             flex: 14, //14
-            child: TreeContainer(),
+            child: containerZ(),
           ),
           //containerZ(),  ),
         ],
