@@ -1,7 +1,7 @@
 name: algorithms
 description: A new Flutter project.
 
-version: 0.9.9+5
+version: 1.0.0+6
 
 environment:
     sdk: ">=3.1.2 <4.0.0"

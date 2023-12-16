@@ -38,9 +38,9 @@ final isCanceled = StateProvider<bool>((ref) => false);
 
 updateColors(WidgetRef ref) async {
   Random random = Random();
-  int randomRed = random.nextInt(60);
+  int randomRed = random.nextInt(30);
   //int randomGreen = random.nextInt(30);
-  int randomBlue = random.nextInt(60);
+  int randomBlue = random.nextInt(30);
   Color newColor = Color.fromRGBO(
     17 + randomRed,
     100,
