@@ -21,7 +21,7 @@ void main() async {
       //     windowButtonVisibility: false,
     );
 
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
+    windowManager.waitUntilReadyToShow(windowOptions, () {
       //     await windowManager.show();
       //     await windowManager.focus();
     });
