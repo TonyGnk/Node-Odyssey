@@ -3,8 +3,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Algorithms/Astar/astar_algorithm.dart';
+import '../../../Algorithms/Best First/bst_algorithm.dart';
 import '../../../Algorithms/Best First/bst_terminal.dart';
+import '../../../Algorithms/Breadth First/bf_algorithm.dart';
 import '../../../Algorithms/Breadth First/bf_terminal.dart';
+import '../../../Algorithms/Depth First/df_algorithm.dart';
 import '../../../Algorithms/Depth First/df_terminal.dart';
 import '../../../Screens/Compare/helper_compare.dart';
 import '../../six_calculations.dart';
@@ -20,9 +23,9 @@ onButtonCompare(WidgetRef ref) async {
   if (ref.read(enableBreadthCompare.notifier).state) {
     ref.read(isBreadthCompareRuns.notifier).state = true;
     await Future.delayed(const Duration(milliseconds: 400));
-    solution = runBreadthTerminal();
+    solution = runBreadth(ref, RunningStyle.terminal);
     ref.read(isBreadthCompareRuns.notifier).state = false;
-    if (solution != null) {
+    if (solution.isNotEmpty) {
       ref.read(breadthSolution.notifier).state = CompareSolution(
           solution.last.cost.toString(), solution.length.toString());
       print(
@@ -34,9 +37,9 @@ onButtonCompare(WidgetRef ref) async {
   if (ref.read(enableDepthCompare.notifier).state) {
     ref.read(isDepthCompareRuns.notifier).state = true;
     await Future.delayed(const Duration(milliseconds: 400));
-    solution = runDepthTerminal();
+    solution = runDepth(ref, RunningStyle.terminal);
     ref.read(isDepthCompareRuns.notifier).state = false;
-    if (solution != null) {
+    if (solution.isNotEmpty) {
       ref.read(depthSolution.notifier).state = CompareSolution(
           solution.last.cost.toString(), solution.length.toString());
       print(
@@ -48,9 +51,9 @@ onButtonCompare(WidgetRef ref) async {
   if (ref.read(enableBestCompare.notifier).state) {
     ref.read(isBestCompareRuns.notifier).state = true;
     await Future.delayed(const Duration(milliseconds: 400));
-    solution = runBestTerminal();
+    solution = runBest(ref, RunningStyle.terminal);
     ref.read(isBestCompareRuns.notifier).state = false;
-    if (solution != null) {
+    if (solution.isNotEmpty) {
       ref.read(bestSolution.notifier).state = CompareSolution(
           solution.last.cost.toString(), solution.length.toString());
       print(
@@ -64,10 +67,12 @@ onButtonCompare(WidgetRef ref) async {
     await Future.delayed(const Duration(milliseconds: 400));
     solution = runStar(ref, RunningStyle.terminal);
     ref.read(isAStarCompareRuns.notifier).state = false;
-    ref.read(aStarSolution.notifier).state = CompareSolution(
-        solution.last.cost.toString(), solution.length.toString());
-    print(
-        'Solution of AStar: Cost:${solution.last.cost} Count:${solution.length}');
+    if (solution.isNotEmpty) {
+      ref.read(aStarSolution.notifier).state = CompareSolution(
+          solution.last.cost.toString(), solution.length.toString());
+      print(
+          'Solution of AStar: Cost:${solution.last.cost} Count:${solution.length}');
+    }
   }
 }
 

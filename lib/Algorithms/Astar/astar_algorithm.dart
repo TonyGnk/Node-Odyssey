@@ -15,13 +15,8 @@ List<Node> runStar(WidgetRef ref, RunningStyle style) {
   Set<int> visited = {start};
   PriorityQueue queue = PriorityQueue([Node(start, 0, 'Initial Value')]);
 
-  while (!queue.isEmpty) {
-    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
-      queue.clear();
-      updateTracking(ref, style);
-      break;
-    }
-
+  while (!queue.isEmpty &&
+      DateTime.now().difference(startTime).inSeconds < timeLimit) {
     Node current = queue.removeFirst();
     updateTracking(ref, style, current);
 
@@ -59,13 +54,8 @@ Future<List<Node>> runStarAsync(WidgetRef ref, RunningStyle style) async {
   Set<int> visited = {start};
   PriorityQueue queue = PriorityQueue([Node(start, 0, 'Initial Value')]);
 
-  while (!queue.isEmpty) {
-    if (DateTime.now().difference(startTime).inSeconds >= timeLimit) {
-      queue.clear();
-      updateTracking(ref, style);
-      break;
-    }
-
+  while (!queue.isEmpty &&
+      DateTime.now().difference(startTime).inSeconds < timeLimit) {
     Node current = queue.removeFirst();
     updateTracking(ref, style, current);
 

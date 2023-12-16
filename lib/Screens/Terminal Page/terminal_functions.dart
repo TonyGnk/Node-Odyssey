@@ -31,7 +31,7 @@ analyzeTheText(WidgetRef ref) {
 
   //Start the selected algorithm
   ref.read(isAlgorithmEndProvider.notifier).state = false; //Started
-  List<Node>? solution = startAlgorithmTerminal(ref);
+  List<Node>? solution = startAlgorithm(ref, RunningStyle.terminal);
   ref.read(isAlgorithmEndProvider.notifier).state = true; //Finished
 
   if (solution != null) newResult(ref, solution);

@@ -6,7 +6,7 @@ import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
-import 'bst_algorithm.dart';
+import 'bst_algorithm_async.dart';
 import 'bst_step.dart';
 
 int rightNodePosition = 0;
@@ -84,4 +84,51 @@ List<Node>? runBestStep(WidgetRef ref) {
   rightNodeValue = treeListSmallBsf[map['minListIndex']] ?? 0;
 
   return null;
+}
+
+findSmallest(List<List<int?>> treeList, int target) {
+  int? minValue;
+  int? minListIndex;
+  int? minValueIndex;
+
+  for (int i = 0; i < treeList.length; i++) {
+    for (int j = 0; j < treeList[i].length; j++) {
+      if (treeList[i][j] != null) {
+        int temp = (target - treeList[i][j]!).abs();
+        if (minValue == null || temp < minValue) {
+          minValue = temp;
+          minListIndex = i;
+          minValueIndex = j;
+        }
+        if (temp < minValue) {
+          minValue = temp;
+          minListIndex = i;
+          minValueIndex = j;
+        }
+      }
+    }
+  }
+
+  return {
+    'minListIndex': minListIndex,
+    'minValueIndex': minValueIndex,
+  };
+}
+
+//switch (type) if addition then 0 if subtraction then 1 etc
+getPosition(type) {
+  switch (type) {
+    case CalculationType.addition:
+      return 0;
+    case CalculationType.subtraction:
+      return 1;
+    case CalculationType.multiplication:
+      return 2;
+    case CalculationType.division:
+      return 3;
+    case CalculationType.exponential:
+      return 4;
+    case CalculationType.square:
+      return 5;
+  }
 }

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Algorithms/Astar/astar_algorithm.dart';
 import '../Algorithms/Astar/astar_steps.dart';
-import '../Algorithms/Best First/bst_instant.dart';
+import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_step.dart';
 import '../Algorithms/Best First/bst_step_helper.dart';
-import '../Algorithms/Best First/bst_algorithm.dart';
+import '../Algorithms/Best First/bst_algorithm_async.dart';
 import '../Algorithms/Best First/bst_terminal.dart';
 import '../Algorithms/Best First/bst_to_end.dart';
-import '../Algorithms/Breadth First/bf_instant.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
 import '../Algorithms/Breadth First/bf_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
@@ -23,45 +22,31 @@ const double cornerSize = 16;
 
 enum AlgorithmType { breadth, depth, best, astar }
 
-List<Node>? startAlgorithmTerminal(WidgetRef ref) {
+List<Node> startAlgorithm(WidgetRef ref, RunningStyle style) {
   if (currentAlgorithm == AlgorithmType.breadth) {
-    return runBreadthTerminal();
+    return runBreadth(ref, style);
   } else if (currentAlgorithm == AlgorithmType.depth) {
-    return runDepthTerminal();
+    return runDepth(ref, style);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBestTerminal();
-  } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runStar(ref, RunningStyle.terminal);
-  } else {
-    return null;
-  }
-}
-
-List<Node>? startAlgorithmInstant(WidgetRef ref) {
-  if (currentAlgorithm == AlgorithmType.breadth) {
-    return runBreadthInstant(ref);
-  } else if (currentAlgorithm == AlgorithmType.depth) {
-    return runDepthInstant(ref);
-  } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBestInstant(ref);
+    return runBest(ref, style);
   } else if (currentAlgorithm == AlgorithmType.astar) {
     return runStar(ref, RunningStyle.instant);
   } else {
-    return null;
+    return [];
   }
 }
 
-Future<List<Node>?> startAlgorithm(WidgetRef ref) async {
+Future<List<Node>> startSearchAsync(WidgetRef ref, RunningStyle style) async {
   if (currentAlgorithm == AlgorithmType.breadth) {
-    return runBreadth(ref);
+    return runBreadthAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.depth) {
-    return runDepth(ref);
+    return runDepthAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.best) {
-    return runBest(ref);
+    return runBestAsync(ref, style);
   } else if (currentAlgorithm == AlgorithmType.astar) {
-    return runStarAsync(ref, RunningStyle.normal);
+    return runStarAsync(ref, style);
   } else {
-    return null;
+    return [];
   }
 }
 

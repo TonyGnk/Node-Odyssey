@@ -6,7 +6,6 @@ import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/Tree Widgets/tree_helpler.dart';
 import '../../Services/six_calculations.dart';
-import 'bst_algorithm.dart';
 import 'bst_step.dart';
 import 'bst_step_helper.dart';
 

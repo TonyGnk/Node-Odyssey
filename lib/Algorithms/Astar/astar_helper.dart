@@ -8,7 +8,8 @@ class PriorityQueue {
   void add(Node node) {
     _nodes.add(node);
     //Sort the list based on the cost + distance
-    _nodes.sort((a, b) => (a.cost + a.distance).compareTo(b.cost + b.distance));
+    _nodes.sort(
+        (a, b) => (a.cost * 3 + a.distance).compareTo(b.cost * 3 + b.distance));
   }
 
   Node removeFirst() => _nodes.removeAt(0);
@@ -27,6 +28,9 @@ List<Node> reconstructPath(Node end) {
     path.add(currentNode);
     currentNode = currentNode.parent!;
   }
+
+  //Before return the path, flip it
+  path = path.reversed.toList();
 
   return path;
 }

@@ -20,20 +20,22 @@ onButtonPressed(WidgetRef ref) async {
   prepareProvidersForTracking(ref);
   ref.read(isAlgorithmEndProvider.notifier).state = false;
   if (searchSpeed == 0) {
-    solution = startAlgorithmInstant(ref);
+    solution = startAlgorithm(ref, RunningStyle.instant);
   } else {
-    solution = await startAlgorithm(ref);
+    solution = await startSearchAsync(ref, RunningStyle.normal);
   }
   ref.read(isAlgorithmEndProvider.notifier).state = true;
 
   //
 
   //Add the solution to the Result Panel
-  if (solution != null) {
+  if (solution.isNotEmpty) {
     addResultPanelList(ref, solution);
     saveInputsForResults(ref, solution.length, solution.last.cost);
+  } else {
+    addResultPanelList(ref, [Node(0, 0, 'Time Out')]);
+    saveInputsForResults(ref, 1, 0);
   }
-  if (solution == null) ref.read(isAlgorithmEndProvider.notifier).state = false;
 
   //Reset the inputs
   resetControllers(ref);

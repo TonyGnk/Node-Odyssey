@@ -8,7 +8,6 @@ import '../../Services/Public Search Bar/Search Call/call_helper.dart';
 import '../../Services/Public Search Bar/check_box_search.dart';
 import '../../Services/Public Search Bar/closed_search.dart';
 import '../../Services/six_calculations.dart';
-import 'bst_algorithm.dart';
 import 'bst_step_helper.dart';
 
 ListQueue<List<Node>> queueBsf = ListQueue();
