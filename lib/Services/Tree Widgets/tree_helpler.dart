@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Arc/container_tree.dart';
+import 'container_tree.dart';
 import 'main_tree.dart';
 import 'providers_tree.dart';
 
