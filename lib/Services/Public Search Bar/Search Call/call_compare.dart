@@ -4,11 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Algorithms/Astar/astar_algorithm.dart';
 import '../../../Algorithms/Best First/bst_algorithm.dart';
-import '../../../Algorithms/Best First/bst_terminal.dart';
 import '../../../Algorithms/Breadth First/bf_algorithm.dart';
-import '../../../Algorithms/Breadth First/bf_terminal.dart';
 import '../../../Algorithms/Depth First/df_algorithm.dart';
-import '../../../Algorithms/Depth First/df_terminal.dart';
 import '../../../Screens/Compare/helper_compare.dart';
 import '../../six_calculations.dart';
 import 'call_helper.dart';

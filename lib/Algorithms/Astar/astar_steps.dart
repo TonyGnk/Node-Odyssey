@@ -28,7 +28,6 @@ List<Node>? runStarFirstStep(WidgetRef ref, RunningStyle style) {
       int newValue = getNewValue(current.value, type);
       if (isAllowed(newValue, current.value, type)) {
         if (!visited.contains(newValue)) {
-          print('1');
           Node newNode = getNewNodeZ(
             current,
             current.value,

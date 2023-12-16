@@ -6,15 +6,11 @@ import '../Algorithms/Best First/bst_algorithm.dart';
 import '../Algorithms/Best First/bst_step.dart';
 import '../Algorithms/Best First/bst_step_helper.dart';
 import '../Algorithms/Best First/bst_algorithm_async.dart';
-import '../Algorithms/Best First/bst_terminal.dart';
 import '../Algorithms/Best First/bst_to_end.dart';
 import '../Algorithms/Breadth First/bf_step.dart';
-import '../Algorithms/Breadth First/bf_terminal.dart';
 import '../Algorithms/Breadth First/bf_algorithm.dart';
 import '../Algorithms/Depth First/df_algorithm.dart';
-import '../Algorithms/Depth First/df_instant.dart';
 import '../Algorithms/Depth First/df_step.dart';
-import '../Algorithms/Depth First/df_terminal.dart';
 import 'Public Search Bar/Search Call/call_helper.dart';
 import 'six_calculations.dart';
 

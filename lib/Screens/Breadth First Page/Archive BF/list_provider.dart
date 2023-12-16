@@ -92,7 +92,7 @@ void addTrackingContainer2(WidgetRef ref, int width, int target) {
   ref.read(chartColumnsProvider.notifier).state.clear();
 
   double logOfWidth = log(width + 1);
-  double logOfTarget = log(target + 1);
+  double logOfTarget = log(target + 1); //TODO
   logOfWidth = logOfWidth / log(1.02);
   print(logOfWidth);
 

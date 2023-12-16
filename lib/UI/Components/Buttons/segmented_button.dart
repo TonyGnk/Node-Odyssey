@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _AdaptSegmentedButtonsState extends State<AdaptSegmentedButtons> {
   @override
   void initState() {
     super.initState();
-    setUiTheme();
+    unawaited(setUiTheme());
   }
 
   Future<void> setUiTheme() async {

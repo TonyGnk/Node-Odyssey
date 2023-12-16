@@ -36,6 +36,7 @@ analyzeTheText(WidgetRef ref) {
 
   if (solution != null) newResult(ref, solution);
   if (solution == null) {
+    //TODO
     ref.read(terminalContentProvider.notifier).state +=
         '\nNo Solution Found!\n';
     return;

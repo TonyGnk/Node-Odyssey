@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onChanged;
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomTextFieldState createState() => _CustomTextFieldState();
 }
 
