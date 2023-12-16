@@ -8,24 +8,36 @@ import '../../Services/six_calculations.dart';
 import 'astar_helper.dart';
 
 List<Node> runStar(WidgetRef ref, RunningStyle style) {
+  // Αρχικοποίηση των αρχικών και τελικών τιμών
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
+  // Αρχικοποίηση του χρόνου έναρξης
   DateTime startTime = DateTime.now();
 
+  // Δημιουργία ενός συνόλου για την αποθήκευση των επισκεπτόμενων κόμβων
   Set<int> visited = {start};
+  // Δημιουργία μιας ουράς προτεραιότητας για την αποθήκευση των κόμβων προς επίσκεψη
   PriorityQueue queue = PriorityQueue([Node(start, 0, 'Initial Value')]);
 
   while (!queue.isEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
+    // Αφαίρεση του πρώτου κόμβου από την ουρά
     Node current = queue.removeFirst();
+    // Ενημέρωση του γραφικού περιεχομένου
     updateGraphicalContent(ref, current, end);
 
+    // Εάν ο τρέχων κόμβος είναι ο τελικός, επιστροφή της διαδρομής
     if (current.value == end) return reconstructPath(current);
 
+    // Διατρέχουμε όλους τους δυνατούς τύπους υπολογισμών
     for (CalculationType type in CalculationType.values) {
+      // Εάν η λειτουργία είναι ενεργοποιημένη
       if (enabledOperations[type]!) {
+        // Υπολογίζουμε τη νέα τιμή
         int newValue = getNewValue(current.value, type);
+        // Εάν η νέα τιμή είναι επιτρεπτή
         if (isAllowed(newValue, current.value, type)) {
+          // Εάν ο κόμβος δεν έχει επισκεφτεί
           if (!visited.contains(newValue)) {
             Node newNode = getNewNodeZ(
               current,
@@ -34,15 +46,17 @@ List<Node> runStar(WidgetRef ref, RunningStyle style) {
               newValue,
               type,
             );
+            // Ορίζουμε την απόσταση του νέου κόμβου από τον τελικό κόμβο
             newNode.setDistance(end);
+            // Προσθήκη του νέου κόμβου στην ουρά
             queue.add(newNode);
+            // Προσθήκη της τιμής του νέου κόμβου στη λίστα των επισκεπτόμενων
             visited.add(newNode.value);
           }
         }
       }
     }
   }
-
   return [];
 }
 

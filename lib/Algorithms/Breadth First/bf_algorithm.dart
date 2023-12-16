@@ -9,27 +9,41 @@ import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 
 List<Node> runBreadth(WidgetRef ref, RunningStyle style) {
+  // Αρχικοποίηση των αρχικών και τελικών τιμών
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
+  // Αρχικοποίηση του χρόνου έναρξης
   DateTime startTime = DateTime.now();
 
+  // Δημιουργία ουράς για την αποθήκευση των μονοπατιών
   ListQueue<List<Node>> queue = ListQueue();
   queue.add([Node(start, 0, 'Initial Value')]);
+  // Δημιουργία συνόλου για την αποθήκευση των επισκεπτόμενων κόμβων
   Set<int> visited = {start};
 
+  // Όσο η ουρά δεν είναι άδεια και ξεπεράσαμε το χρονικό όριο
   while (queue.isNotEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
+    // Αφαίρεση του πρώτου μονοπατιού από την ουρά
     List<Node> currentPath = queue.removeFirst();
+    // Λήψη του τελευταίου κόμβου του μονοπατιού
     Node current = currentPath.last;
 
+    // Ενημέρωση του γραφικού περιεχομένου
     updateGraphicalContent(ref, current, end);
 
+    // Έλεγχος αν έχουμε φτάσει στον τελικό κόμβο
     if (current.value == end) return currentPath;
 
+    // Διατρέχουμε όλους τους δυνατούς τύπους υπολογισμών
     for (CalculationType type in CalculationType.values) {
+      // Εάν η λειτουργία είναι ενεργοποιημένη
       if (enabledOperations[type]!) {
+        // Υπολογίζουμε τη τιμή του υποψήφιου κόμβου
         int newValue = getNewValue(current.value, type);
+        // Εάν η νέα τιμή είναι επιτρεπτή
         if (isAllowed(newValue, current.value, type)) {
+          // Εάν ο κόμβος δεν έχει επισκεφτεί ή αν η επίσκεψη είναι απενεργοποιημένη
           if (!visited.contains(newValue) || avoidVisitedIsDisable) {
             Node newNode = getNewNode(
               current.value,
@@ -37,7 +51,9 @@ List<Node> runBreadth(WidgetRef ref, RunningStyle style) {
               newValue,
               type,
             );
+            // Δημιουργούμε ένα νέο μονοπάτι προσθέτοντας τον νέο κόμβο
             List<Node> newPath = List.from(currentPath)..add(newNode);
+            // Προσθέτουμε το νέο μονοπάτι στην ουρά
             queue.add(newPath);
             visited.add(newNode.value);
           }
@@ -45,7 +61,6 @@ List<Node> runBreadth(WidgetRef ref, RunningStyle style) {
       }
     }
   }
-
   return [];
 }
 

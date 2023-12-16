@@ -7,7 +7,6 @@ class PriorityQueue {
 
   void add(Node node) {
     _nodes.add(node);
-    //Sort the list based on the cost + distance
     _nodes.sort(
         (a, b) => (a.cost * 3 + a.distance).compareTo(b.cost * 3 + b.distance));
   }
@@ -47,42 +46,42 @@ Node getNewNodeZ(
       return Node(
         newValue,
         cost + 2,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     case CalculationType.subtraction:
       return Node(
         newValue,
         cost + 2,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     case CalculationType.multiplication:
       return Node(
         newValue,
         cost + (value / 2).ceil() + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     case CalculationType.division:
       return Node(
         newValue,
         cost + (value / 4).ceil() + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     case CalculationType.exponential:
       return Node(
         newValue,
         cost + ((value * value - value) ~/ 4 + 1).toInt(),
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     case CalculationType.square:
       return Node(
         newValue,
         cost + (value - newValue.toInt()) ~/ 4 + 1,
-        getCalculationTypeMap()[type]!,
+        getCalculationName()[type]!,
         current,
       );
     default:

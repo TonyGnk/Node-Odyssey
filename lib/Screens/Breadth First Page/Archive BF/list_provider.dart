@@ -47,7 +47,7 @@ Widget simpleContainer(BuildContext context) => Container(
       width: 10,
       margin: const EdgeInsets.all(0.2),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withBlue(250),
+        color: const Color.fromARGB(255, 0, 81, 233).withOpacity(0.6),
       ),
     );
 

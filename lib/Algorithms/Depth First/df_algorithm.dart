@@ -9,34 +9,44 @@ import '../../Services/Public Search Bar/sliders_and_options_bf.dart';
 import '../../Services/six_calculations.dart';
 
 List<Node> runDepth(WidgetRef ref, RunningStyle style) {
+  // Αρχικοποίηση των αρχικών και τελικών τιμών
   int start = int.parse(inputController.text);
   int end = int.parse(targetController.text);
+  // Αρχικοποίηση του χρόνου έναρξης
   DateTime startTime = DateTime.now();
 
+  // Δημιουργία στοίβας και συνόλου για την αποθήκευση των μονοπατιών
   List<List<Node>> stack = [
     [Node(start, 0, 'Initial Value')]
   ];
   Set<int> visited = {start};
 
+  // Όσο η ουρά δεν είναι άδεια και ξεπεράσαμε το χρονικό όριο
   while (stack.isNotEmpty &&
       DateTime.now().difference(startTime).inSeconds < timeLimit) {
+    // Αρχικοποίηση του μετρητή
     int counter = 0;
 
+    // Αφαίρεση του τελευταίου μονοπατιού από τη στοίβα
     List<Node> currentPath = stack.removeLast();
+    // Λήψη του τελευταίου κόμβου του μονοπατιού
     Node current = currentPath.last;
 
+    // Ενημέρωση του γραφικού περιεχομένου
     updateGraphicalContent(ref, current, end);
 
+    // Έλεγχος αν έχουμε φτάσει στον τελικό κόμβο
     if (current.value == end) return currentPath;
 
-    // Calculate all the possible
+    // Διατρέχουμε όλους τους δυνατούς τύπους υπολογισμών
     for (CalculationType type in CalculationType.values) {
-      //If the operation is enabled
+      // Εάν η λειτουργία είναι ενεργοποιημένη
       if (enabledOperations[type]!) {
+        // Υπολογίζουμε τη νέα τιμή
         int newValue = getNewValue(current.value, type);
-        // If the new value is allowed from the rules
+        // Εάν η νέα τιμή είναι επιτρεπτή
         if (isAllowed(newValue, current.value, type)) {
-          // If the new value is not visited
+          // Εάν ο κόμβος δεν έχει επισκεφτεί ή αν η επίσκεψη είναι απενεργοποιημένη
           if (!visited.contains(newValue) || avoidVisitedIsDisable) {
             Node newNode = getNewNode(
               current.value,
@@ -44,7 +54,10 @@ List<Node> runDepth(WidgetRef ref, RunningStyle style) {
               newValue,
               type,
             );
+            // Δημιουργούμε ένα νέο μονοπάτι προσθέτοντας τον νέο κόμβο
             List<Node> newPath = List.from(currentPath)..add(newNode);
+            // Εισάγουμε το νέο μονοπάτι στη στοίβα.
+            // Οι νεότεροι κόμβοι προστίθονται πιο κοντά στο τέλος της στοίβας
             stack.insert(stack.length - counter, newPath);
             if (counter == 0) {
               visited.add(newNode.value);
@@ -52,10 +65,10 @@ List<Node> runDepth(WidgetRef ref, RunningStyle style) {
           }
         }
       }
+      // Αύξηση του μετρητή
       counter++;
     }
   }
-
   return [];
 }
 

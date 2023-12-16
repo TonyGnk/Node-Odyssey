@@ -53,19 +53,27 @@ List<Node> runBest(WidgetRef ref, RunningStyle style) {
             treeListSmall[i] ?? 0,
             positionToType(i),
           );
+          // Δημιουργία νέου μονοπατιού και προσθήκη του νέου κόμβου
           List<Node> newPath = List.from(currentPath)..add(rightNode);
+          // Προσθήκη του νέου μονοπατιού στην ουρά
           queue.add(newPath);
+          // Ορίζουμε ότι βρήκαμε τον τελικό κόμβο
           founded = true;
         }
       }
     }
+    // Εάν βρήκαμε τον τελικό κόμβο, συνεχίζουμε στην επόμενη επανάληψη
     if (founded) continue;
 
     for (int i = 0; i < treeListSmall.length; i++) {
+      // Εάν η τιμή στη θέση i είναι null
       if (treeListSmall[i] == null) {
-        treeList[i] = [null, null, null, null, null, null];
+        // Ορίζουμε τη λίστα στη θέση i ως null
+        treeList[i] = List.filled(6, null);
       } else {
-        List<int?> temp = [null, null, null, null, null, null];
+        // Δημιουργία προσωρινής λίστας
+        List<int?> temp = List.filled(6, null);
+        // Διατρέχουμε όλους τους δυνατούς τύπους υπολογισμών
         for (CalculationType type in CalculationType.values) {
           if (enabledOperations[type]!) {
             int newValue = getNewValue(treeListSmall[i], type);
@@ -76,25 +84,33 @@ List<Node> runBest(WidgetRef ref, RunningStyle style) {
             }
           }
         }
+        // Ορίζουμε τη λίστα στη θέση i ως την προσωρινή λίστα
         treeList[i] = temp;
       }
     }
+    // Βρίσκουμε τον κόμβο με την ελάχιστη τιμή
     setLeafs(treeList, ref);
     Map map = findSmallest(treeList, end);
     int rightNodePosition = map['minListIndex'];
     int rightNodeValue = treeListSmall[map['minListIndex']] ?? 0;
 
+    // Δημιουργία νέου κόμβου
     Node rightNode = getNewNode(
       current.value,
       current.cost,
       rightNodeValue,
       positionToType(rightNodePosition),
     );
+    // Δημιουργία νέου μονοπατιού και προσθήκη του νέου κόμβου
     List<Node> newPath = List.from(currentPath)..add(rightNode);
+    // Προσθήκη του νέου μονοπατιού στην ουρά
     queue.add(newPath);
+    // Προσθήκη της τιμής του νέου κόμβου στη λίστα των επισκεπτόμενων
     visited.add(rightNode.value);
 
+    // Ενημέρωση της λίστας με τις μικρότερες τιμές
     treeListSmall = treeList[rightNodePosition];
+    // Επαναφορά της λίστας του δέντρου
     treeList = List.filled(6, List<int?>.filled(6, null));
   }
 
